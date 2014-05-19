@@ -26,12 +26,12 @@ def create_staff(username=None, email=None, password='password', first_name='', 
     return staff
 
 
-def create_people(username=None, first_name='', last_name='', occupation='', description='', homepage_url=''):
+def create_people(permalink=None, first_name='', last_name='', occupation='', description='', homepage_url=''):
 
-    username = username or randstr()
+    permalink = permalink or randstr()
 
     people = People.objects.create(
-        username = username,
+        permalink = permalink,
         first_name  = first_name,
         last_name = last_name,
         occupation = occupation,
