@@ -1,5 +1,5 @@
 """
-Django settings for liedetector project.
+Django settings for polygraph project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/
@@ -55,9 +55,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'liedetector.urls'
+ROOT_URLCONF = 'polygraph.urls'
 
-WSGI_APPLICATION = 'liedetector.wsgi.application'
+WSGI_APPLICATION = 'polygraph.wsgi.application'
 
 
 TEMPLATE_DIRS = (
@@ -74,7 +74,7 @@ TEMPLATE_DIRS = (
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'liedetector',
+        'NAME': 'polygraph',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': '',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
