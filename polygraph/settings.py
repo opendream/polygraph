@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'ckeditor',
 
     # Project
+    'account',
     'domain',
 )
 
@@ -110,8 +111,15 @@ STATICFILES_DIRS = (
     os.path.join(BASE_PATH, 'static'),
 )
 
-AUTH_USER_MODEL = 'domain.Staff'
+AUTH_USER_MODEL = 'account.Staff'
 
+AUTHENTICATION_BACKENDS = (
+    'account.backends.EmailOrUsernameModelBackend',
+    'django.contrib.auth.backends.ModelBackend'
+)
+
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/account/login/'
 
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 

@@ -1,0 +1,25 @@
+{% extends 'base_single.html' %}
+
+{% block base_content %}
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="controls">
+                <label for="id_email" class="hide">Email</label>
+                {{ form.email }}
+                <div class="errors span3">{{ form.email.errors }}</div>
+            </div>
+
+            <div class="controls">
+                <label for="id_password" class="hide">Password</label>
+                {{ form.password }}
+                <div class="errors span3">{{ form.password.errors }}</div>
+            </div>
+
+            <div class="action">
+                <button class="btn btn-submit" type="submit" name="submitLogin">Login</button>
+            </div>
+        </form>
+
+{% endblock %}

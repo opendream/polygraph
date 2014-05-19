@@ -1,4 +1,5 @@
-from domain.models import Staff, People
+from domain.models import People
+from account.models import Staff
 
 from uuid import uuid1
 

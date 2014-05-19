@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+    <head>
+    	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Fixed me Title</title>
+
+        {% block css %}{% endblock %}
+        {% block js %}{% endblock %}
+    </head>
+    <body>
+
+        <header>
+            <nav>
+                <ul>
+                    <li>Fix me Menu Item 1</li>
+                    <li>Fix me Menu Item 2</li>
+                    <li>Fix me Menu Item 3</li>
+                </ul>
+            </nav>
+        </header>
+
+        {% block base_content %}{% endblock %}
+
+        <footer>
+		    <p>Fix mr Footer</p>
+	    </footer>
+
+    </body>
+</html>
