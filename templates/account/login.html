@@ -2,24 +2,30 @@
 
 {% block base_content %}
 
-        <form method="post">
+
+        <form class="form-signin" role="form" method="post">
+
             {% csrf_token %}
             {{ form.non_field_errors }}
-            <div class="controls">
-                <label for="id_email" class="hide">Email</label>
-                {{ form.email }}
-                <div class="errors span3">{{ form.email.errors }}</div>
-            </div>
+
+            <h2 class="form-signin-heading">Please log in</h2>
 
             <div class="controls">
-                <label for="id_password" class="hide">Password</label>
-                {{ form.password }}
-                <div class="errors span3">{{ form.password.errors }}</div>
+                <input name="email" type="email" class="form-control" placeholder="Email address or Username" required autofocus>
+                <div class="errors">{{ form.email.errors }}</div>
+
+            </div>
+            <div class="controls">
+                <input name="password" type="password" class="form-control" placeholder="Password" required>
+                <div class="errors">{{ form.password.errors }}</div>
             </div>
 
-            <div class="action">
-                <button class="btn btn-submit" type="submit" name="submitLogin">Login</button>
-            </div>
+            <label class="checkbox">
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
         </form>
+
 
 {% endblock %}
