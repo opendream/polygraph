@@ -1,11 +1,12 @@
 from django import forms
 from django.contrib.auth import authenticate
+from django.contrib.auth.forms import PasswordResetForm
 from django.utils.translation import ugettext_lazy as _
 
 
 class EmailAuthenticationForm(forms.Form):
-    email = forms.CharField(widget=forms.TextInput(attrs={'placeholder': _('Email or Username')}))
-    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': _('Password')}))
+    email = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput())
 
     def __init__(self, request=None, *args, **kwargs):
         """
@@ -28,7 +29,7 @@ class EmailAuthenticationForm(forms.Form):
             if self.user_cache is None:
                 raise forms.ValidationError(_('Please, enter correct email/username and password'))
             elif not self.user_cache.is_active:
-                raise forms.ValidationError(_('This account dose not activate'))
+                raise forms.ValidationError(_('This account not activated'))
 
         return self.cleaned_data
 
@@ -40,3 +41,7 @@ class EmailAuthenticationForm(forms.Form):
 
     def get_user(self):
         return self.user_cache
+
+
+class ResetPasswordForm(PasswordResetForm):
+    email = forms.EmailField(max_length=75)

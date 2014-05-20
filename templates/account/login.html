@@ -1,6 +1,7 @@
 {% extends 'base_single.html' %}
+{% load i18n %}
 
-{% block base_content %}
+{% block content %}
 
 
         <form class="form-signin" role="form" method="post">
@@ -8,24 +9,26 @@
             {% csrf_token %}
             {{ form.non_field_errors }}
 
-            <h2 class="form-signin-heading">Please log in</h2>
+            <h2 class="form-signin-heading">{% trans "Please log in" %}</h2>
 
             <div class="controls">
-                <input name="email" type="email" class="form-control first" placeholder="Email address or Username" required autofocus>
+                <input name="email" type="email" class="form-control first" placeholder="{% trans "Email address or Username" %}" required autofocus>
                 <div class="errors">{{ form.email.errors }}</div>
 
             </div>
 
             <div class="controls">
-                <input name="password" type="password" class="form-control last" placeholder="Password" required>
+                <input name="password" type="password" class="form-control last" placeholder="{% trans "Password" %}" required>
                 <div class="errors">{{ form.password.errors }}</div>
             </div>
 
             <label class="checkbox">
-                <input type="checkbox" value="remember-me"> Remember me
+                <input type="checkbox" name="remember_me" value="1"> {% trans "Remember me" %}
             </label>
 
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">{% trans "Log in" %}</button>
+
+            <a href="{% url 'account_reset_password' %}">{% trans "Forgot password ?" %}</a>
         </form>
 
 
