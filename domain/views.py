@@ -1,6 +1,6 @@
-from django.http import HttpResponse
+from django.shortcuts import render
 
 
 def domain_home(request):
 
-    return HttpResponse('Hello Home')
+    return render(request, 'domain/domain_home.html', {})
