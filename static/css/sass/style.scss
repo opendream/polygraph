@@ -104,7 +104,6 @@ body {
 			}
 		}
 	}
-
 }
 .btn-primary {
 	color: #FFF;
@@ -124,6 +123,10 @@ section.container { min-height: 1000px; }
 }
 
 .navbar-header h1 {margin: 0;}
+
+.form-account {
+	
+}
 .form-signin {
   max-width: 500px;
   padding: 15px;
@@ -164,13 +167,23 @@ input + .errors{
 }
 
 footer {
-	.container-fluid { max-width: 1170px; }
 	background-color: #cd5e26;
 	* {color: #FFF; line-height: 60px;}
+	.container-fluid { max-width: 1170px; }
 	.footer-logo { font-size: 30px; }
 	.footer-menu {
 		div {
+			text-align: right;
 			a:hover { color: #4C0000; }
+		}
+	}
+}
+@media (max-width: 767px) {
+	footer {
+		.footer-menu {
+			div {
+				text-align: left;
+			}
 		}
 	}
 }

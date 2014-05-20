@@ -163,52 +163,52 @@ body {
     background-color: #ff9933;
   }
 }
-/* line 109, ../sass/style.scss */
+/* line 108, ../sass/style.scss */
 .btn-primary {
   color: #FFF;
   background-color: #fe6625;
   border-color: #fe6625;
 }
-/* line 113, ../sass/style.scss */
+/* line 112, ../sass/style.scss */
 .btn-primary:hover {
   background-color: #cd5e26;
   border-color: #cd5e26;
 }
 
-/* line 119, ../sass/style.scss */
+/* line 118, ../sass/style.scss */
 section.container {
   min-height: 1000px;
 }
 
-/* line 122, ../sass/style.scss */
+/* line 121, ../sass/style.scss */
 .navbar {
   background-color: #cd5e26;
 }
 
-/* line 126, ../sass/style.scss */
+/* line 125, ../sass/style.scss */
 .navbar-header h1 {
   margin: 0;
 }
 
-/* line 127, ../sass/style.scss */
+/* line 130, ../sass/style.scss */
 .form-signin {
   max-width: 500px;
   padding: 15px;
   margin: 0 auto;
 }
 
-/* line 133, ../sass/style.scss */
+/* line 136, ../sass/style.scss */
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
   margin-bottom: 10px;
 }
 
-/* line 136, ../sass/style.scss */
+/* line 139, ../sass/style.scss */
 .form-signin .checkbox {
   font-weight: normal;
 }
 
-/* line 139, ../sass/style.scss */
+/* line 142, ../sass/style.scss */
 .form-signin .form-control {
   position: relative;
   height: auto;
@@ -219,49 +219,60 @@ section.container {
   font-size: 16px;
 }
 
-/* line 148, ../sass/style.scss */
+/* line 151, ../sass/style.scss */
 .form-signin .form-control:focus {
   z-index: 2;
 }
 
-/* line 151, ../sass/style.scss */
+/* line 154, ../sass/style.scss */
 input.first {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 
-/* line 156, ../sass/style.scss */
+/* line 159, ../sass/style.scss */
 input.middle {
   margin-bottom: -1px;
   border-radius: 0;
 }
 
-/* line 161, ../sass/style.scss */
+/* line 164, ../sass/style.scss */
 input.last,
 input + .errors {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
 
-/* line 166, ../sass/style.scss */
+/* line 169, ../sass/style.scss */
 footer {
   background-color: #cd5e26;
 }
-/* line 167, ../sass/style.scss */
-footer .container-fluid {
-  max-width: 1170px;
-}
-/* line 169, ../sass/style.scss */
+/* line 171, ../sass/style.scss */
 footer * {
   color: #FFF;
   line-height: 60px;
 }
-/* line 170, ../sass/style.scss */
+/* line 172, ../sass/style.scss */
+footer .container-fluid {
+  max-width: 1170px;
+}
+/* line 173, ../sass/style.scss */
 footer .footer-logo {
   font-size: 30px;
 }
-/* line 173, ../sass/style.scss */
+/* line 175, ../sass/style.scss */
+footer .footer-menu div {
+  text-align: right;
+}
+/* line 177, ../sass/style.scss */
 footer .footer-menu div a:hover {
   color: #4C0000;
+}
+
+@media (max-width: 767px) {
+  /* line 184, ../sass/style.scss */
+  footer .footer-menu div {
+    text-align: left;
+  }
 }
