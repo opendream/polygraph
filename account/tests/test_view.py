@@ -33,7 +33,7 @@ class TestLogin(TestCase):
             'password': 'password',
         }
         response = self.client.post(reverse('account_login'), params, follow=True)
-        print self.client.session
+
         self.assertIn('_auth_user_id', self.client.session)
         self.assertRedirects(response, reverse('domain_home'))
         self.client.logout()
