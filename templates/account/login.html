@@ -15,7 +15,7 @@
     {% endif %}
 
     <div class="controls">
-        <input name="email" type="text" class="form-control first" placeholder="{% trans "Email address or Username" %}" required autofocus>
+        <input name="email" type="text" class="form-control first" placeholder="{% trans "Email address or Username" %}" value="{{ form.email.value|default_if_none:"" }}" autofocus>
         {% if form.email.errors %}
         <div class="errors alert alert-danger">{{ form.email.errors }}</div>
         {% endif %}
@@ -30,7 +30,7 @@
     </div>
 
     <label class="checkbox">
-        <input type="checkbox" name="remember_me" value="1"> {% trans "Remember me" %}
+        <input type="checkbox" name="remember_me"{% if form.remember_me.value %} checked{%  endif %}> {% trans "Remember me" %}
     </label>
 
     <div class="form-action">

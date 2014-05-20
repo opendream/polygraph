@@ -1,5 +1,6 @@
 from django.contrib.auth.views import login, password_reset, password_reset_done
 from django.core.urlresolvers import reverse
+from django.http import HttpResponse
 from django.shortcuts import redirect
 from account.forms import EmailAuthenticationForm, ResetPasswordForm
 
