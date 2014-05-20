@@ -15,6 +15,12 @@
         <link href="{{ STATIC_URL }}css/stylesheets/style.css" rel="stylesheet">
         {% block css %}{% endblock %}
 
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="{{ STATIC_URL }}libs/html5shiv/html5shiv.js"></script>
+            <script src="{{ STATIC_URL }}libs/respond.js/respond.min.js"></script>
+        <![endif]-->
+
         <script src="{{ STATIC_URL }}libs/jquery/jquery.min.js"></script>
         <script src="{{ STATIC_URL }}libs/bootstrap/js/bootstrap.min.js"></script>
 
@@ -38,23 +44,6 @@
                         <h1><a class="navbar-brand" href="#">[Polygraph]<span>by thaipublica</span></a></h1>
                     </div>
                     <div class="navbar-collapse collapse" style="height: 1px;">
-<!--                         <ul class="nav navbar-nav">
-                            <li class="active"><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
-                                    <li class="divider"></li>
-                                    <li class="dropdown-header">Nav header</li>
-                                    <li><a href="#">Separated link</a></li>
-                                    <li><a href="#">One more separated link</a></li>
-                                </ul>
-                            </li>
-                        </ul> -->
                         <ul class="nav navbar-nav navbar-right">
                             <li class="active"><a href="./">Home</a></li>
                             <li><a href="../navbar-static-top/">Statement</a></li>

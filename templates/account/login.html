@@ -1,35 +1,42 @@
 {% extends 'base_single.html' %}
 {% load i18n %}
 
+{% block content_class %} content-thin{% endblock %}
+
 {% block content %}
 
+<h1>Please log in</h1>
+<form class="form-signin" role="form" method="post">
 
-        <form class="form-signin" role="form" method="post">
+    {% csrf_token %}
 
-            {% csrf_token %}
-            {{ form.non_field_errors }}
+    {% if form.non_field_errors %}
+    <div class="errors alert alert-danger">{{ form.non_field_errors }}</div>
+    {% endif %}
 
-            <h2 class="form-signin-heading">{% trans "Please log in" %}</h2>
+    <div class="controls">
+        <input name="email" type="email" class="form-control first" placeholder="{% trans "Email address or Username" %}" required autofocus>
+        {% if form.email.errors %}
+        <div class="errors alert alert-danger">{{ form.email.errors }}</div>
+        {% endif %}
 
-            <div class="controls">
-                <input name="email" type="email" class="form-control first" placeholder="{% trans "Email address or Username" %}" required autofocus>
-                <div class="errors">{{ form.email.errors }}</div>
+    </div>
 
-            </div>
+    <div class="controls">
+        <input name="password" type="password" class="form-control last" placeholder="{% trans "Password" %}" required>
+        {% if form.password.errors %}
+        <div class="errors alert alert-danger">{{ form.password.errors }}</div>
+        {% endif %}
+    </div>
 
-            <div class="controls">
-                <input name="password" type="password" class="form-control last" placeholder="{% trans "Password" %}" required>
-                <div class="errors">{{ form.password.errors }}</div>
-            </div>
+    <label class="checkbox">
+        <input type="checkbox" name="remember_me" value="1"> {% trans "Remember me" %}
+    </label>
 
-            <label class="checkbox">
-                <input type="checkbox" name="remember_me" value="1"> {% trans "Remember me" %}
-            </label>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">{% trans "Log in" %}</button>
 
-            <button class="btn btn-lg btn-primary btn-block" type="submit">{% trans "Log in" %}</button>
-
-            <a href="{% url 'account_reset_password' %}">{% trans "Forgot password ?" %}</a>
-        </form>
+    <a href="{% url 'account_reset_password' %}">{% trans "Forgot password ?" %}</a>
+</form>
 
 
 {% endblock %}

@@ -4,9 +4,10 @@ p {
 }
 
 body {
-  padding-top: 40px;
+  padding-top: 60px;
   background-color: #E5E5E5;
 }
+.container { margin-bottom: 30px; }
 
 .navbar-default {
 	background-color: #cd5e26;
@@ -25,7 +26,7 @@ body {
 		}
 	}
 	.navbar-collapse {border: none;}
-	.navbar-header h1 a {
+	.navbar-header a {
 		color: #FFF; 
 		font-size: inherit;
 		&:hover { color: #FFF; }
@@ -103,7 +104,6 @@ body {
 			}
 		}
 	}
-
 }
 .btn-primary {
 	color: #FFF;
@@ -123,6 +123,10 @@ section.container { min-height: 1000px; }
 }
 
 .navbar-header h1 {margin: 0;}
+
+.form-account {
+	
+}
 .form-signin {
   max-width: 500px;
   padding: 15px;
@@ -147,30 +151,39 @@ section.container { min-height: 1000px; }
 .form-signin .form-control:focus {
   z-index: 2;
 }
-.form-signin input.first {
+input.first {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
-.form-signin input.middle {
+input.middle {
   margin-bottom: -1px;
   border-radius: 0;
 }
-.form-signin input.last {
-  margin-bottom: 10px;
+input.last,
+input + .errors{
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
 
 footer {
-	.container-fluid { max-width: 1170px; }
 	background-color: #cd5e26;
-	// height: 60px;
 	* {color: #FFF; line-height: 60px;}
+	.container-fluid { max-width: 1170px; }
 	.footer-logo { font-size: 30px; }
 	.footer-menu {
 		div {
+			text-align: right;
 			a:hover { color: #4C0000; }
+		}
+	}
+}
+@media (max-width: 767px) {
+	footer {
+		.footer-menu {
+			div {
+				text-align: left;
+			}
 		}
 	}
 }
