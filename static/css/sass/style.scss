@@ -8,6 +8,11 @@ body {
   background-color: #E5E5E5;
 }
 .container { margin-bottom: 30px; }
+.content-thin {
+  	max-width: 500px;
+  	padding: 15px;
+  	margin: 0 auto;
+}
 
 .navbar-default {
 	background-color: #cd5e26;
@@ -117,38 +122,33 @@ body {
 
 section.container { min-height: 1000px; }
 
-
 .navbar {
     background-color: #cd5e26;
 }
 
 .navbar-header h1 {margin: 0;}
 
-.content-thin {
-  	max-width: 500px;
-  	padding: 15px;
-  	margin: 0 auto;
-}
-
 .form-action {
+	margin-top: 10px;
   	margin-bottom: 10px;
 }
-.form-normal .checkbox {
-	font-weight: normal;
+
+.form-normal {
+	.checkbox {
+		font-weight: normal;
+	}
+	.form-control {
+	  position: relative;
+	  height: auto;
+	  -webkit-box-sizing: border-box;
+	     -moz-box-sizing: border-box;
+	          box-sizing: border-box;
+	  padding: 10px;
+	  font-size: 16px;
+	  &:focus { z-index: 2; }
+	}
 }
 
-.form-normal .form-control {
-  position: relative;
-  height: auto;
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
-  padding: 10px;
-  font-size: 16px;
-}
-.form-normal .form-control:focus {
-  z-index: 2;
-}
 input.first {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
