@@ -1,3 +1,5 @@
+@import "compass/css3/box-sizing";
+
 h1, h2, h3, h4, h5, h6,
 p {
 	color: #333;
@@ -113,14 +115,13 @@ body {
 .btn-primary {
 	color: #FFF;
 	background-color: #fe6625;
-	border-color: #fe6625;
+	border: none;
 	&:hover { 
 		background-color: #cd5e26;
-		border-color: #cd5e26;
 	}
 }
 
-section.container { min-height: 1000px; }
+section.container { min-height: 500px; }
 
 .navbar {
     background-color: #cd5e26;
@@ -140,9 +141,7 @@ section.container { min-height: 1000px; }
 	.form-control {
 	  position: relative;
 	  height: auto;
-	  -webkit-box-sizing: border-box;
-	     -moz-box-sizing: border-box;
-	          box-sizing: border-box;
+	  @include box-sizing(border-box);
 	  padding: 10px;
 	  font-size: 16px;
 	  &:focus { z-index: 2; }
