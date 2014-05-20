@@ -4,9 +4,10 @@ p {
 }
 
 body {
-  padding-top: 40px;
+  padding-top: 60px;
   background-color: #E5E5E5;
 }
+.container { margin-bottom: 30px; }
 
 .navbar-default {
 	background-color: #cd5e26;
@@ -165,7 +166,6 @@ input + .errors{
 footer {
 	.container-fluid { max-width: 1170px; }
 	background-color: #cd5e26;
-	// height: 60px;
 	* {color: #FFF; line-height: 60px;}
 	.footer-logo { font-size: 30px; }
 	.footer-menu {
