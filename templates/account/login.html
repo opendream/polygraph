@@ -15,7 +15,7 @@
     {% endif %}
 
     <div class="controls">
-        <input name="email" type="email" class="form-control first" placeholder="{% trans "Email address or Username" %}" required autofocus>
+        <input name="email" type="text" class="form-control first" placeholder="{% trans "Email address or Username" %}" required autofocus>
         {% if form.email.errors %}
         <div class="errors alert alert-danger">{{ form.email.errors }}</div>
         {% endif %}
