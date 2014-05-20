@@ -1,18 +1,33 @@
 @import "compass/css3/box-sizing";
+@import "compass/css3/border-radius";
 
-$color1 : #cd5e26; // base orange
-$color2 : #ff9933; // hover orange
-$color3 : #a34b21; // border orange
-$color4 : #fe6625; // bright orange
-$color5 : #4C0000; // text hover
-$color6 : #7f5d3d; // text brown
-$color7 : #333333; // text normal
-
+$base_orange : #cd5e26; // base orange
+$hover_orange : #ff9933; // hover orange
+$border_orange : #a34b21; // border orange
+$bright_orange : #fe6625; // bright orange
+$soft_orange : #ffc092;
+$text_hover : #4C0000; // text hover (dark brown)
+$text_brown : #7f5d3d; // text brown
+$text_normal : #333333; // text normal
+$block_border : #CCCCCC;
 
 h1, h2, h3, h4, h5, h6,
 p {
-	color: #333;
+	color: $text_normal;
 }
+
+a,
+a:hover { color: $text_brown; }
+a:hover { text-decoration: underline; }
+
+.hide-text {
+	position: absolute;
+	text-indent: -999em;
+	height: 0;
+	overflow: hidden;
+}
+
+.text-large { font-size: 40px; font-weight: bold; color: $bright_orange; }
 
 body {
   padding-top: 60px;
@@ -26,11 +41,11 @@ body {
 }
 
 .navbar-default {
-	background-color: #cd5e26;
+	background-color: $base_orange;
 	height: 61px;
 	.navbar-toggle {
 		border: none;
-		&:hover { background-color: #ff9933; }
+		&:hover { background-color: $hover_orange; }
 		.icon-bar { 
 			background-color: #FFF;
 			width: 30px;
@@ -46,26 +61,26 @@ body {
 		span { font-size: 14px; margin-left: 1em; line-height: 1em; }
 	}
 	.navbar-nav {
-		border-left: 1px solid #a34b21;
+		border-left: 1px solid $border_orange;
 		&.navbar-right:last-child {	margin-right: 0;}
 		&>li { position: relative; }
 		&>li>a {
 			color: #FFF;
-			border-right: 1px solid #a34b21;
+			border-right: 1px solid $border_orange;
 			padding-top: 20px;
 			padding-bottom: 20px;
 			font-weight: bold;
-			&:hover { color: #4C0000; }			
+			&:hover { color: $text_hover; }			
 		}
 
 		&>.active>a,
 		&>.active>a:hover {
-			color: #4C0000;
-			background-color: #ff9933;
+			color: $text_hover;
+			background-color: $hover_orange;
 		}
 
 		&>li.active:after {
-			border-color: #ff9933 #ff9933 transparent transparent ;
+			border-color: $hover_orange $hover_orange transparent transparent ;
 			border-width: 10px;
 			border-style: solid;
 			content: "";
@@ -85,16 +100,16 @@ body {
 			border: none;
 			&.navbar-right:last-child {margin-right: -15px;}
 			&>li>a {
-				color: #4C0000;
-				background-color: #ff9933;
+				color: $text_hover;
+				background-color: $hover_orange;
 				border-bottom: 1px solid #d3722b;
 				border-right: none;
-				&:hover { background-color: #cd5e26; }
+				&:hover { background-color: $base_orange; }
 			}
 			&>.active>a,
 			&>.active>a:hover {
-				color: #4C0000;
-				background-color: #cd5e26;
+				color: $text_hover;
+				background-color: $base_orange;
 			}
 			&>li.active:after {
 				display: none;
@@ -107,29 +122,32 @@ body {
 				border-bottom: none;
 				padding-top: 10px;
 				padding-bottom: 10px;
-				&:hover { background-color: #ff9933; text-decoration: underline;}
+				&:hover { 
+					background-color: $hover_orange;
+					text-decoration: underline;
+				}
 			}
 			&>.active>a,
 			&>.active>a:hover {
 				text-decoration: underline;
-				background-color: #ff9933;
+				background-color: $hover_orange;
 			}
 		}
 	}
 }
 .btn-primary {
 	color: #FFF;
-	background-color: #fe6625;
+	background-color: $bright_orange;
 	border: none;
 	&:hover { 
-		background-color: #cd5e26;
+		background-color: $base_orange;
 	}
 }
 
 section.container { min-height: 500px; }
 
 .navbar {
-    background-color: #cd5e26;
+    background-color: $base_orange;
 }
 
 .navbar-header h1 {margin: 0;}
@@ -168,9 +186,114 @@ input + .errors{
   border-top-right-radius: 0;
 }
 
+// 
+// List in block style
+// 
 .block {
 	background-color: #FFF;
+	@include border-radius(5px);
+	border: 1px solid $block_border;
+	.block-content {
+		padding: 20px;
+	}
+	ul.block-content {
+		list-style: none;
+		padding: 20px 20px 0 20px;
+		li {
+			.item-inner {
+				overflow: hidden;
+				padding: 10px 0;
+				border-bottom: 1px dotted #333333;
+				.left {padding-right: 10px;}
+				.right {padding-left: 0;}
+			}
+			&.first .item-inner{ padding-top: 0; }
+			&.last .item-inner { border: none; }
+		}
+	}
 }
+@media (max-width: 600px) {
+	.item { 
+		width: 100%;
+	}	
+}
+// ---------------------------
+
+.summary h3 {margin-top: 10px; margin-bottom: 15px;}
+.amount {
+	height: 10px;
+	background-color: $bright_orange;
+	@include border-radius(5px);
+}
+.amount-num {
+	text-align: center;
+	padding-left: 0;
+	margin-top: 20px;
+	span { display: block; line-height: 35px;}
+}
+
+.highlight-statement {
+	border-bottom: 3px solid #ffb07d;
+	position: relative;
+	.triangle {
+		width: 25px;
+		height: 25px;
+		position: absolute;
+		bottom: -25px;
+		left: 60px;
+		z-index: 2;
+		background: url(../images/triangle.png) no-repeat 0 0;
+	}
+}
+blockquote {
+	position: relative;
+	display: block;
+	border-left: 0;
+	padding: 20px 25px 0 25px;
+	&:before,
+	&:after {
+		width: 23px;
+		height: 18px;
+		background: url(../images/quote.png) transparent no-repeat 0 0;
+		position: absolute;
+	}
+	&:before {
+		top: 0; left: 0;
+	}
+	&:after {
+		background-position: -23px 0;
+		bottom: 0; right: 0;
+	}
+}
+.who-said {
+	position: relative;
+	overflow: hidden;
+	background-color: $soft_orange;
+	&.block-content { padding: 15px 20px; }
+	.people-profile { 
+		overflow: hidden;
+		padding-top: 20px;
+		padding-bottom: 20px;
+		img { float: left; margin-right: 10px; }
+		h4 { margin-top: 30px; }
+	}
+	.meter {
+		text-align: right;
+	}
+}
+@media (max-width: 600px) {
+	.who-said {
+		.people-profile { 
+			width: 100%;
+			padding-bottom: 30px;
+		}
+		.meter {
+			width: 100%;
+			text-align: left;
+		}
+	}	
+}
+
 h2 .dialog-ic {
 	position: relative;
 	display: block;
@@ -178,9 +301,9 @@ h2 .dialog-ic {
 	margin-right: 0.5em;
 	width: 40px; 
 	height: 25px;
-	background-color: #fe6625;
+	background-color: $bright_orange;
 	&:after {
-		border-color: #fe6625 #fe6625 transparent transparent ;
+		border-color: $bright_orange $bright_orange transparent transparent ;
 		border-width: 5px;
 		border-style: solid;
 		content: "";
@@ -192,13 +315,13 @@ h2 .dialog-ic {
 }
 
 footer {
-	background-color: #cd5e26;
+	background-color: $base_orange;
 	* {color: #FFF; line-height: 60px;}
 	.footer-logo { font-size: 30px; }
 	.footer-menu {
 		div {
 			text-align: right;
-			a:hover { color: #4C0000; }
+			a:hover { color: $text_hover; }
 		}
 	}
 }
