@@ -39,16 +39,16 @@ body {
   border: none;
 }
 /* line 28, ../sass/style.scss */
-.navbar-default .navbar-header h1 a {
+.navbar-default .navbar-header a {
   color: #FFF;
   font-size: inherit;
 }
 /* line 31, ../sass/style.scss */
-.navbar-default .navbar-header h1 a:hover {
+.navbar-default .navbar-header a:hover {
   color: #FFF;
 }
 /* line 32, ../sass/style.scss */
-.navbar-default .navbar-header h1 a span {
+.navbar-default .navbar-header a span {
   font-size: 14px;
   margin-left: 1em;
   line-height: 1em;
@@ -220,21 +220,21 @@ section.container {
 }
 
 /* line 150, ../sass/style.scss */
-.form-signin input.first {
+input.first {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 
 /* line 155, ../sass/style.scss */
-.form-signin input.middle {
+input.middle {
   margin-bottom: -1px;
   border-radius: 0;
 }
 
-/* line 159, ../sass/style.scss */
-.form-signin input.last {
-  margin-bottom: 10px;
+/* line 160, ../sass/style.scss */
+input.last,
+input + .errors {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }

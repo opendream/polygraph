@@ -6,19 +6,25 @@
         <form class="form-signin" role="form" method="post">
 
             {% csrf_token %}
-            {{ form.non_field_errors }}
 
-            <h2 class="form-signin-heading">Please log in</h2>
+            <h1 class="form-signin-heading">Please log in</h1>
+            {% if form.non_field_errors %}
+            <div class="errors alert alert-danger">{{ form.non_field_errors }}</div>
+            {% endif %}
 
             <div class="controls">
-                <input name="email" type="email" class="form-control first" placeholder="Email address or Username" required autofocus>
-                <div class="errors">{{ form.email.errors }}</div>
+                <input name="email" type="text" class="form-control first" placeholder="Email address or Username" required autofocus>
+                {% if form.email.errors %}
+                <div class="errors alert alert-danger">{{ form.email.errors }}</div>
+                {% endif %}
 
             </div>
 
             <div class="controls">
                 <input name="password" type="password" class="form-control last" placeholder="Password" required>
-                <div class="errors">{{ form.password.errors }}</div>
+                {% if form.password.errors %}
+                <div class="errors alert alert-danger">{{ form.password.errors }}</div>
+                {% endif %}
             </div>
 
             <label class="checkbox">
