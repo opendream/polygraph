@@ -1,6 +1,5 @@
-# -*- encoding: utf-8 -*-
 from django.core.urlresolvers import reverse
-
+from django.utils.translation import ugettext_lazy as _
 from django.test import TestCase
 
 from common import factory
@@ -27,7 +26,7 @@ class TestLogin(TestCase):
         self.assertContains(response, 'name="email"')
         self.assertContains(response, 'name="password"')
 
-    def test_post_login(self):
+    def test_post_login_with_email(self):
         params = {
             'email': self.staff.email,
             'password': 'password',
@@ -38,11 +37,56 @@ class TestLogin(TestCase):
         self.assertRedirects(response, reverse('domain_home'))
         self.client.logout()
 
-    '''
+    def test_post_login_with_username(self):
+        params = {
+            'email': self.staff.username,
+            'password': 'password',
+        }
+        response = self.client.post(reverse('account_login'), params, follow=True)
+
+        self.assertIn('_auth_user_id', self.client.session)
+        self.assertRedirects(response, reverse('domain_home'))
+        self.client.logout()
+
+    def test_post_login_invalid(self):
+        # invalid username
+        params = {
+            'email': '%s.invalid' % self.staff.username,
+            'password': 'password',
+        }
+        response = self.client.post(reverse('account_login'), params)
+
+        self.assertContains(response, _('Please, enter correct email/username and password'))
+        self.assertNotIn('_auth_user_id', self.client.session)
+
+        # invalid password
+        params = {
+            'email': self.staff.username,
+            'password': 'password.invalid',
+        }
+        response = self.client.post(reverse('account_login'), params)
+
+        self.assertContains(response, _('Please, enter correct email/username and password'))
+        self.assertNotIn('_auth_user_id', self.client.session)
+
+        # invalid active
+        self.staff.is_active = False
+        self.staff.save()
+
+        params = {
+            'email': self.staff.username,
+            'password': 'password',
+        }
+        response = self.client.post(reverse('account_login'), params)
+
+        self.assertContains(response, _('This account dose not activate'))
+        self.assertNotIn('_auth_user_id', self.client.session)
+
+
+
     def test_logout(self):
-        self.client.login(email=self.taeyeon.email, password='password')
+        self.client.login(email=self.staff.email, password='password')
         response = self.client.get(reverse('account_logout'))
         self.assertIsNone(self.client.session.get('_auth_user_id'))
         self.assertRedirects(response, reverse('account_login'))
         self.client.logout()
-    '''
