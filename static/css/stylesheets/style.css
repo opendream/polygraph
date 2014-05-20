@@ -1,66 +1,267 @@
-/*
-Syntax error: Invalid CSS after "...und-color: #FFF": expected ";", was ":"
-        on line 167 of /Users/Dew/Works/polygraph/static/css/sass/style.scss
+/* line 4, ../sass/style.scss */
+h1, h2, h3, h4, h5, h6,
+p {
+  color: #333;
+}
 
-Backtrace:
-/Users/Dew/Works/polygraph/static/css/sass/style.scss:167
-/Library/Ruby/Gems/2.0.0/gems/sass-3.2.19/lib/sass/scss/parser.rb:1147:in `expected'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.2.19/lib/sass/scss/parser.rb:1085:in `expected'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.2.19/lib/sass/scss/parser.rb:1080:in `tok!'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.2.19/lib/sass/scss/parser.rb:586:in `block in declaration_or_ruleset'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.2.19/lib/sass/scss/parser.rb:1123:in `call'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.2.19/lib/sass/scss/parser.rb:1123:in `rethrow'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.2.19/lib/sass/scss/parser.rb:592:in `declaration_or_ruleset'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.2.19/lib/sass/scss/parser.rb:554:in `block_child'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.2.19/lib/sass/scss/parser.rb:543:in `block_contents'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.2.19/lib/sass/scss/parser.rb:535:in `block'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.2.19/lib/sass/scss/parser.rb:529:in `ruleset'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.2.19/lib/sass/scss/parser.rb:553:in `block_child'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.2.19/lib/sass/scss/parser.rb:546:in `block_contents'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.2.19/lib/sass/scss/parser.rb:82:in `stylesheet'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.2.19/lib/sass/scss/parser.rb:27:in `parse'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.2.19/lib/sass/engine.rb:342:in `_to_tree'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.2.19/lib/sass/engine.rb:315:in `_render'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.2.19/lib/sass/engine.rb:262:in `render'
-/Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/lib/compass/compiler.rb:139:in `block (2 levels) in compile'
-/Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/lib/compass/compiler.rb:126:in `timed'
-/Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/lib/compass/compiler.rb:138:in `block in compile'
-/Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/lib/compass/logger.rb:45:in `red'
-/Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/lib/compass/compiler.rb:137:in `compile'
-/Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/lib/compass/compiler.rb:118:in `compile_if_required'
-/Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/lib/compass/compiler.rb:103:in `block (2 levels) in run'
-/Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/lib/compass/compiler.rb:101:in `each'
-/Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/lib/compass/compiler.rb:101:in `block in run'
-/Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/lib/compass/compiler.rb:126:in `timed'
-/Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/lib/compass/compiler.rb:100:in `run'
-/Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/lib/compass/commands/watch_project.rb:147:in `recompile'
-/Library/Ruby/Gems/2.0.0/gems/fssm-0.2.10/lib/fssm/path.rb:73:in `call'
-/Library/Ruby/Gems/2.0.0/gems/fssm-0.2.10/lib/fssm/path.rb:73:in `run_callback'
-/Library/Ruby/Gems/2.0.0/gems/fssm-0.2.10/lib/fssm/path.rb:55:in `callback_action'
-/Library/Ruby/Gems/2.0.0/gems/fssm-0.2.10/lib/fssm/path.rb:35:in `update'
-/Library/Ruby/Gems/2.0.0/gems/fssm-0.2.10/lib/fssm/state/directory.rb:39:in `block in modified'
-/Library/Ruby/Gems/2.0.0/gems/fssm-0.2.10/lib/fssm/state/directory.rb:37:in `each'
-/Library/Ruby/Gems/2.0.0/gems/fssm-0.2.10/lib/fssm/state/directory.rb:37:in `modified'
-/Library/Ruby/Gems/2.0.0/gems/fssm-0.2.10/lib/fssm/state/directory.rb:18:in `refresh'
-/Library/Ruby/Gems/2.0.0/gems/fssm-0.2.10/lib/fssm/backends/polling.rb:17:in `block (2 levels) in run'
-/Library/Ruby/Gems/2.0.0/gems/fssm-0.2.10/lib/fssm/backends/polling.rb:17:in `each'
-/Library/Ruby/Gems/2.0.0/gems/fssm-0.2.10/lib/fssm/backends/polling.rb:17:in `block in run'
-/Library/Ruby/Gems/2.0.0/gems/fssm-0.2.10/lib/fssm/backends/polling.rb:15:in `loop'
-/Library/Ruby/Gems/2.0.0/gems/fssm-0.2.10/lib/fssm/backends/polling.rb:15:in `run'
-/Library/Ruby/Gems/2.0.0/gems/fssm-0.2.10/lib/fssm/monitor.rb:26:in `run'
-/Library/Ruby/Gems/2.0.0/gems/fssm-0.2.10/lib/fssm.rb:70:in `monitor'
-/Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/lib/compass/commands/watch_project.rb:87:in `perform'
-/Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/lib/compass/commands/base.rb:18:in `execute'
-/Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/lib/compass/commands/project_base.rb:19:in `execute'
-/Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/lib/compass/exec/sub_command_ui.rb:43:in `perform!'
-/Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/lib/compass/exec/sub_command_ui.rb:15:in `run!'
-/Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/bin/compass:30:in `block in <top (required)>'
-/Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/bin/compass:44:in `call'
-/Library/Ruby/Gems/2.0.0/gems/compass-0.12.6/bin/compass:44:in `<top (required)>'
-/usr/bin/compass:23:in `load'
-/usr/bin/compass:23:in `<main>'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Syntax error: Invalid CSS after \"...und-color: #FFF\": expected \";\", was \":\"\A         on line 167 of /Users/Dew/Works/polygraph/static/css/sass/style.scss"; }
+/* line 8, ../sass/style.scss */
+body {
+  padding-top: 60px;
+  background-color: #E5E5E5;
+}
+
+/* line 12, ../sass/style.scss */
+.container {
+  margin-bottom: 30px;
+}
+
+/* line 13, ../sass/style.scss */
+.content-thin {
+  max-width: 500px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+/* line 19, ../sass/style.scss */
+.navbar-default {
+  background-color: #cd5e26;
+  height: 61px;
+}
+/* line 25, ../sass/style.scss */
+.navbar-default .navbar-toggle {
+  border: none;
+}
+/* line 27, ../sass/style.scss */
+.navbar-default .navbar-toggle:hover {
+  background-color: #ff9933;
+}
+/* line 28, ../sass/style.scss */
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #FFF;
+  width: 30px;
+  height: 5px;
+  border-radius: 5px;
+}
+/* line 35, ../sass/style.scss */
+.navbar-default .navbar-collapse {
+  border: none;
+}
+/* line 36, ../sass/style.scss */
+.navbar-default .navbar-header a {
+  color: #FFF;
+  font-size: inherit;
+}
+/* line 39, ../sass/style.scss */
+.navbar-default .navbar-header a:hover {
+  color: #FFF;
+}
+/* line 40, ../sass/style.scss */
+.navbar-default .navbar-header a span {
+  font-size: 14px;
+  margin-left: 1em;
+  line-height: 1em;
+}
+/* line 42, ../sass/style.scss */
+.navbar-default .navbar-nav {
+  margin: 0;
+  border-left: 1px solid #a34b21;
+}
+/* line 46, ../sass/style.scss */
+.navbar-default .navbar-nav.navbar-right:last-child {
+  margin-right: 0;
+}
+/* line 47, ../sass/style.scss */
+.navbar-default .navbar-nav > li {
+  position: relative;
+}
+/* line 48, ../sass/style.scss */
+.navbar-default .navbar-nav > li > a {
+  color: #FFF;
+  border-right: 1px solid #a34b21;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-weight: bold;
+}
+/* line 54, ../sass/style.scss */
+.navbar-default .navbar-nav > li > a:hover {
+  color: #4C0000;
+}
+/* line 58, ../sass/style.scss */
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover {
+  color: #4C0000;
+  background-color: #ff9933;
+}
+/* line 63, ../sass/style.scss */
+.navbar-default .navbar-nav > li.active:after {
+  border-color: #ff9933 #ff9933 transparent transparent;
+  border-width: 10px;
+  border-style: solid;
+  content: "";
+  display: inline-block;
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  margin-left: -10px;
+}
+/* line 75, ../sass/style.scss */
+.navbar-default .sec-menu {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  /* line 78, ../sass/style.scss */
+  .navbar-default {
+    padding-bottom: 5em;
+  }
+  /* line 80, ../sass/style.scss */
+  .navbar-default .navbar-nav {
+    border: none;
+  }
+  /* line 82, ../sass/style.scss */
+  .navbar-default .navbar-nav.navbar-right:last-child {
+    margin-right: -15px;
+  }
+  /* line 83, ../sass/style.scss */
+  .navbar-default .navbar-nav > li > a {
+    color: #4C0000;
+    background-color: #ff9933;
+    border-bottom: 1px solid #d3722b;
+    border-right: none;
+  }
+  /* line 88, ../sass/style.scss */
+  .navbar-default .navbar-nav > li > a:hover {
+    background-color: #cd5e26;
+  }
+  /* line 91, ../sass/style.scss */
+  .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover {
+    color: #4C0000;
+    background-color: #cd5e26;
+  }
+  /* line 95, ../sass/style.scss */
+  .navbar-default .navbar-nav > li.active:after {
+    display: none;
+  }
+  /* line 99, ../sass/style.scss */
+  .navbar-default .navbar-collapse {
+    max-height: 100%;
+  }
+  /* line 100, ../sass/style.scss */
+  .navbar-default .sec-menu {
+    display: block;
+  }
+  /* line 102, ../sass/style.scss */
+  .navbar-default .sec-menu > li > a {
+    border-bottom: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  /* line 106, ../sass/style.scss */
+  .navbar-default .sec-menu > li > a:hover {
+    background-color: #ff9933;
+    text-decoration: underline;
+  }
+  /* line 109, ../sass/style.scss */
+  .navbar-default .sec-menu > .active > a, .navbar-default .sec-menu > .active > a:hover {
+    text-decoration: underline;
+    background-color: #ff9933;
+  }
+}
+/* line 116, ../sass/style.scss */
+.btn-primary {
+  color: #FFF;
+  background-color: #fe6625;
+  border: none;
+}
+/* line 120, ../sass/style.scss */
+.btn-primary:hover {
+  background-color: #cd5e26;
+}
+
+/* line 125, ../sass/style.scss */
+section.container {
+  min-height: 500px;
+}
+
+/* line 127, ../sass/style.scss */
+.navbar {
+  background-color: #cd5e26;
+}
+
+/* line 131, ../sass/style.scss */
+.navbar-header h1 {
+  margin: 0;
+}
+
+/* line 133, ../sass/style.scss */
+.form-action {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* line 139, ../sass/style.scss */
+.form-normal .checkbox {
+  font-weight: normal;
+}
+/* line 142, ../sass/style.scss */
+.form-normal .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+/* line 148, ../sass/style.scss */
+.form-normal .form-control:focus {
+  z-index: 2;
+}
+
+/* line 152, ../sass/style.scss */
+input.first {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+/* line 157, ../sass/style.scss */
+input.middle {
+  margin-bottom: -1px;
+  border-radius: 0;
+}
+
+/* line 162, ../sass/style.scss */
+input.last,
+input + .errors {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+/* line 171, ../sass/style.scss */
+footer {
+  background-color: #cd5e26;
+}
+/* line 173, ../sass/style.scss */
+footer * {
+  color: #FFF;
+  line-height: 60px;
+}
+/* line 175, ../sass/style.scss */
+footer .footer-logo {
+  font-size: 30px;
+}
+/* line 177, ../sass/style.scss */
+footer .footer-menu div {
+  text-align: right;
+}
+/* line 179, ../sass/style.scss */
+footer .footer-menu div a:hover {
+  color: #4C0000;
+}
+
+@media (max-width: 767px) {
+  /* line 186, ../sass/style.scss */
+  footer .footer-menu div {
+    text-align: left;
+  }
+}

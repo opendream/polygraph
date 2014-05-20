@@ -19,9 +19,9 @@ body {
 .navbar-default {
 	background-color: #cd5e26;
 	height: 61px;
-	.container-fluid {
-		max-width: 1170px;
-	}
+	// .container-fluid {
+	// 	max-width: 1170px;
+	// }
 	.navbar-toggle {
 		border: none;
 		&:hover { background-color: #ff9933; }
@@ -40,7 +40,8 @@ body {
 		span { font-size: 14px; margin-left: 1em; line-height: 1em; }
 	}
 	.navbar-nav { 
-		margin: 0 -15px;
+		// margin: 0 -15px;
+		margin: 0;
 		border-left: 1px solid #a34b21;
 		&.navbar-right:last-child {	margin-right: 0;}
 		&>li { position: relative; }
@@ -163,14 +164,14 @@ input + .errors{
   border-top-right-radius: 0;
 }
 
-.block {
-	background-color: #FFF;
-}
+// .block {
+// 	background-color: #FFF;
+// }
 
 footer {
 	background-color: #cd5e26;
 	* {color: #FFF; line-height: 60px;}
-	.container-fluid { max-width: 1170px; }
+	// .container-fluid { max-width: 1170px; }
 	.footer-logo { font-size: 30px; }
 	.footer-menu {
 		div {
