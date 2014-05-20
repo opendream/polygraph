@@ -124,22 +124,20 @@ section.container { min-height: 1000px; }
 
 .navbar-header h1 {margin: 0;}
 
-.form-account {
-	
+.content-thin {
+  	max-width: 500px;
+  	padding: 15px;
+  	margin: 0 auto;
 }
-.form-signin {
-  max-width: 500px;
-  padding: 15px;
-  margin: 0 auto;
+
+.form-action {
+  	margin-bottom: 10px;
 }
-.form-signin .form-signin-heading,
-.form-signin .checkbox {
-  margin-bottom: 10px;
+.form-normal .checkbox {
+	font-weight: normal;
 }
-.form-signin .checkbox {
-  font-weight: normal;
-}
-.form-signin .form-control {
+
+.form-normal .form-control {
   position: relative;
   height: auto;
   -webkit-box-sizing: border-box;
@@ -148,7 +146,7 @@ section.container { min-height: 1000px; }
   padding: 10px;
   font-size: 16px;
 }
-.form-signin .form-control:focus {
+.form-normal .form-control:focus {
   z-index: 2;
 }
 input.first {

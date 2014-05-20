@@ -6,7 +6,7 @@
 {% block content %}
 
 <h1>Please log in</h1>
-<form class="form-signin" role="form" method="post">
+<form class="form-normal" role="form" method="post">
 
     {% csrf_token %}
 
@@ -33,7 +33,9 @@
         <input type="checkbox" name="remember_me" value="1"> {% trans "Remember me" %}
     </label>
 
-    <button class="btn btn-lg btn-primary btn-block" type="submit">{% trans "Log in" %}</button>
+    <div class="form-action">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">{% trans "Log in" %}</button>
+    </div>
 
     <a href="{% url 'account_reset_password' %}">{% trans "Forgot password ?" %}</a>
 </form>

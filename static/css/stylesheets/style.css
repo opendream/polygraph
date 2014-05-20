@@ -190,26 +190,25 @@ section.container {
   margin: 0;
 }
 
-/* line 130, ../sass/style.scss */
-.form-signin {
+/* line 127, ../sass/style.scss */
+.content-thin {
   max-width: 500px;
   padding: 15px;
   margin: 0 auto;
 }
 
-/* line 136, ../sass/style.scss */
-.form-signin .form-signin-heading,
-.form-signin .checkbox {
+/* line 133, ../sass/style.scss */
+.form-action {
   margin-bottom: 10px;
 }
 
-/* line 139, ../sass/style.scss */
-.form-signin .checkbox {
+/* line 136, ../sass/style.scss */
+.form-normal .checkbox {
   font-weight: normal;
 }
 
-/* line 142, ../sass/style.scss */
-.form-signin .form-control {
+/* line 140, ../sass/style.scss */
+.form-normal .form-control {
   position: relative;
   height: auto;
   -webkit-box-sizing: border-box;
@@ -219,59 +218,59 @@ section.container {
   font-size: 16px;
 }
 
-/* line 151, ../sass/style.scss */
-.form-signin .form-control:focus {
+/* line 149, ../sass/style.scss */
+.form-normal .form-control:focus {
   z-index: 2;
 }
 
-/* line 154, ../sass/style.scss */
+/* line 152, ../sass/style.scss */
 input.first {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 
-/* line 159, ../sass/style.scss */
+/* line 157, ../sass/style.scss */
 input.middle {
   margin-bottom: -1px;
   border-radius: 0;
 }
 
-/* line 164, ../sass/style.scss */
+/* line 162, ../sass/style.scss */
 input.last,
 input + .errors {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
 
-/* line 169, ../sass/style.scss */
+/* line 167, ../sass/style.scss */
 footer {
   background-color: #cd5e26;
 }
-/* line 171, ../sass/style.scss */
+/* line 169, ../sass/style.scss */
 footer * {
   color: #FFF;
   line-height: 60px;
 }
-/* line 172, ../sass/style.scss */
+/* line 170, ../sass/style.scss */
 footer .container-fluid {
   max-width: 1170px;
 }
-/* line 173, ../sass/style.scss */
+/* line 171, ../sass/style.scss */
 footer .footer-logo {
   font-size: 30px;
 }
-/* line 175, ../sass/style.scss */
+/* line 173, ../sass/style.scss */
 footer .footer-menu div {
   text-align: right;
 }
-/* line 177, ../sass/style.scss */
+/* line 175, ../sass/style.scss */
 footer .footer-menu div a:hover {
   color: #4C0000;
 }
 
 @media (max-width: 767px) {
-  /* line 184, ../sass/style.scss */
+  /* line 182, ../sass/style.scss */
   footer .footer-menu div {
     text-align: left;
   }
