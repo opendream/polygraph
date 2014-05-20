@@ -90,3 +90,37 @@ class TestLogin(TestCase):
         self.assertIsNone(self.client.session.get('_auth_user_id'))
         self.assertRedirects(response, reverse('account_login'))
         self.client.logout()
+
+
+class TestResetPassword(TestCase):
+
+    def setUp(self):
+        self.staff = factory.create_staff('crosalot', 'crosalot@gmail.com', 'password')
+
+    def test_anonymous_user_can_access_forget_password_page(self):
+        response = self.client.get(reverse('account_reset_password'), follow=True)
+        self.assertEqual(200, response.status_code)
+        self.assertTemplateUsed(response, 'account/password_reset_form.html')
+
+    def test_authenticated_user_cannot_access_forget_password_page(self):
+        self.client.login(username=self.staff.username, password='password')
+        response = self.client.get(reverse('account_reset_password'), follow=True)
+        self.assertEqual(403, response.status_code)
+
+    def test_forget_password_page_context(self):
+        response = self.client.get(reverse('account_reset_password'), follow=True)
+        self.assertContains(response, 'name="email"')
+
+    def test_anonymous_user_can_request_password(self):
+        params = {
+            'email': self.staff.email,
+        }
+        response = self.client.post(reverse('account_reset_password'), params, follow=True)
+        self.assertRedirects(response, reverse('account_reset_password_done'))
+
+    def test_request_password_with_invalid_email(self):
+        params = {
+            'email': 'invalid@gmail.com',
+        }
+        response = self.client.post(reverse('account_reset_password'), params, follow=True)
+        self.assertFormError(response, 'form', 'email', [_('Your email address not registered')])

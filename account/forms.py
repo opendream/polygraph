@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.forms import PasswordResetForm
 from django.utils.translation import ugettext_lazy as _
 
@@ -7,6 +7,8 @@ from django.utils.translation import ugettext_lazy as _
 class EmailAuthenticationForm(forms.Form):
     email = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput())
+
+    remember_me = forms.NullBooleanField()
 
     def __init__(self, request=None, *args, **kwargs):
         """
@@ -22,6 +24,7 @@ class EmailAuthenticationForm(forms.Form):
     def clean(self):
         email = self.cleaned_data.get('email')
         password = self.cleaned_data.get('password')
+
 
         if email and password:
             self.user_cache = authenticate(username=email, password=password)
@@ -45,3 +48,19 @@ class EmailAuthenticationForm(forms.Form):
 
 class ResetPasswordForm(PasswordResetForm):
     email = forms.EmailField(max_length=75)
+
+    def clean_email(self):
+
+        email = self.cleaned_data.get('email')
+
+        UserModel = get_user_model()
+
+        try:
+            UserModel.objects.get(email=email)
+        except UserModel.DoesNotExist:
+            raise forms.ValidationError(_('Your email address not registered'))
+
+        return self.cleaned_data
+
+
+
