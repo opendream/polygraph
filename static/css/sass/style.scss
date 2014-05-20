@@ -1,5 +1,14 @@
 @import "compass/css3/box-sizing";
 
+$color1 : #cd5e26; // base orange
+$color2 : #ff9933; // hover orange
+$color3 : #a34b21; // border orange
+$color4 : #fe6625; // bright orange
+$color5 : #4C0000; // text hover
+$color6 : #7f5d3d; // text brown
+$color7 : #333333; // text normal
+
+
 h1, h2, h3, h4, h5, h6,
 p {
 	color: #333;
@@ -19,9 +28,6 @@ body {
 .navbar-default {
 	background-color: #cd5e26;
 	height: 61px;
-	// .container-fluid {
-	// 	max-width: 1170px;
-	// }
 	.navbar-toggle {
 		border: none;
 		&:hover { background-color: #ff9933; }
@@ -39,9 +45,7 @@ body {
 		&:hover { color: #FFF; }
 		span { font-size: 14px; margin-left: 1em; line-height: 1em; }
 	}
-	.navbar-nav { 
-		// margin: 0 -15px;
-		margin: 0;
+	.navbar-nav {
 		border-left: 1px solid #a34b21;
 		&.navbar-right:last-child {	margin-right: 0;}
 		&>li { position: relative; }
@@ -164,14 +168,32 @@ input + .errors{
   border-top-right-radius: 0;
 }
 
-// .block {
-// 	background-color: #FFF;
-// }
+.block {
+	background-color: #FFF;
+}
+h2 .dialog-ic {
+	position: relative;
+	display: block;
+	float: left;
+	margin-right: 0.5em;
+	width: 40px; 
+	height: 25px;
+	background-color: #fe6625;
+	&:after {
+		border-color: #fe6625 #fe6625 transparent transparent ;
+		border-width: 5px;
+		border-style: solid;
+		content: "";
+		display: inline-block;
+		position: absolute;
+		bottom: -10px;
+		left: 50%;	
+	}
+}
 
 footer {
 	background-color: #cd5e26;
 	* {color: #FFF; line-height: 60px;}
-	// .container-fluid { max-width: 1170px; }
 	.footer-logo { font-size: 30px; }
 	.footer-menu {
 		div {
