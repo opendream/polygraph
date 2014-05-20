@@ -11,12 +11,13 @@
             <h2 class="form-signin-heading">Please log in</h2>
 
             <div class="controls">
-                <input name="email" type="email" class="form-control" placeholder="Email address or Username" required autofocus>
+                <input name="email" type="email" class="form-control first" placeholder="Email address or Username" required autofocus>
                 <div class="errors">{{ form.email.errors }}</div>
 
             </div>
+
             <div class="controls">
-                <input name="password" type="password" class="form-control" placeholder="Password" required>
+                <input name="password" type="password" class="form-control last" placeholder="Password" required>
                 <div class="errors">{{ form.password.errors }}</div>
             </div>
 

@@ -15,38 +15,58 @@ body {
   background-color: #cd5e26;
   height: 61px;
 }
-/* line 15, ../sass/style.scss */
+/* line 14, ../sass/style.scss */
 .navbar-default .container-fluid {
   max-width: 1170px;
 }
-/* line 18, ../sass/style.scss */
+/* line 17, ../sass/style.scss */
+.navbar-default .navbar-toggle {
+  border: none;
+}
+/* line 19, ../sass/style.scss */
+.navbar-default .navbar-toggle:hover {
+  background-color: #ff9933;
+}
+/* line 20, ../sass/style.scss */
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #FFF;
+  width: 30px;
+  height: 5px;
+  border-radius: 5px;
+}
+/* line 27, ../sass/style.scss */
+.navbar-default .navbar-collapse {
+  border: none;
+}
+/* line 28, ../sass/style.scss */
 .navbar-default .navbar-header h1 a {
   color: #FFF;
   font-size: inherit;
 }
-/* line 21, ../sass/style.scss */
+/* line 31, ../sass/style.scss */
 .navbar-default .navbar-header h1 a:hover {
   color: #FFF;
 }
-/* line 22, ../sass/style.scss */
+/* line 32, ../sass/style.scss */
 .navbar-default .navbar-header h1 a span {
   font-size: 14px;
   margin-left: 1em;
   line-height: 1em;
 }
-/* line 24, ../sass/style.scss */
+/* line 34, ../sass/style.scss */
 .navbar-default .navbar-nav {
+  margin: 0 -15px;
   border-left: 1px solid #a34b21;
 }
-/* line 26, ../sass/style.scss */
+/* line 37, ../sass/style.scss */
 .navbar-default .navbar-nav.navbar-right:last-child {
   margin-right: 0;
 }
-/* line 28, ../sass/style.scss */
+/* line 38, ../sass/style.scss */
 .navbar-default .navbar-nav > li {
   position: relative;
 }
-/* line 29, ../sass/style.scss */
+/* line 39, ../sass/style.scss */
 .navbar-default .navbar-nav > li > a {
   color: #FFF;
   border-right: 1px solid #a34b21;
@@ -54,18 +74,17 @@ body {
   padding-bottom: 20px;
   font-weight: bold;
 }
-/* line 35, ../sass/style.scss */
+/* line 45, ../sass/style.scss */
 .navbar-default .navbar-nav > li > a:hover {
   color: #4C0000;
 }
-/* line 38, ../sass/style.scss */
-.navbar-default .navbar-nav > .active > a,
-.navbar-default .navbar-nav > .active > a:hover {
+/* line 49, ../sass/style.scss */
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover {
   color: #4C0000;
   background-color: #ff9933;
 }
-/* line 42, ../sass/style.scss */
-.navbar-default .navbar-nav > .active:after {
+/* line 54, ../sass/style.scss */
+.navbar-default .navbar-nav > li.active:after {
   border-color: #ff9933 #ff9933 transparent transparent;
   border-width: 10px;
   border-style: solid;
@@ -76,53 +95,115 @@ body {
   left: 50%;
   margin-left: -10px;
 }
+/* line 66, ../sass/style.scss */
+.navbar-default .sec-menu {
+  display: none;
+}
 
-/* line 55, ../sass/style.scss */
+@media (max-width: 767px) {
+  /* line 69, ../sass/style.scss */
+  .navbar-default {
+    padding-bottom: 5em;
+  }
+  /* line 71, ../sass/style.scss */
+  .navbar-default .navbar-nav {
+    border: none;
+  }
+  /* line 73, ../sass/style.scss */
+  .navbar-default .navbar-nav.navbar-right:last-child {
+    margin-right: -15px;
+  }
+  /* line 74, ../sass/style.scss */
+  .navbar-default .navbar-nav > li > a {
+    color: #4C0000;
+    background-color: #ff9933;
+    border-bottom: 1px solid #d3722b;
+    border-right: none;
+  }
+  /* line 79, ../sass/style.scss */
+  .navbar-default .navbar-nav > li > a:hover {
+    background-color: #cd5e26;
+  }
+  /* line 82, ../sass/style.scss */
+  .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover {
+    color: #4C0000;
+    background-color: #cd5e26;
+  }
+  /* line 86, ../sass/style.scss */
+  .navbar-default .navbar-nav > li.active:after {
+    display: none;
+  }
+  /* line 90, ../sass/style.scss */
+  .navbar-default .navbar-collapse {
+    max-height: 100%;
+  }
+  /* line 91, ../sass/style.scss */
+  .navbar-default .sec-menu {
+    display: block;
+  }
+  /* line 93, ../sass/style.scss */
+  .navbar-default .sec-menu > li > a {
+    border-bottom: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  /* line 97, ../sass/style.scss */
+  .navbar-default .sec-menu > li > a:hover {
+    background-color: #ff9933;
+    text-decoration: underline;
+  }
+  /* line 100, ../sass/style.scss */
+  .navbar-default .sec-menu > .active > a, .navbar-default .sec-menu > .active > a:hover {
+    text-decoration: underline;
+    background-color: #ff9933;
+  }
+}
+/* line 108, ../sass/style.scss */
 .btn-primary {
   color: #FFF;
   background-color: #fe6625;
   border-color: #fe6625;
 }
-/* line 59, ../sass/style.scss */
+/* line 112, ../sass/style.scss */
 .btn-primary:hover {
   background-color: #cd5e26;
   border-color: #cd5e26;
 }
 
-/* line 65, ../sass/style.scss */
+/* line 118, ../sass/style.scss */
 section.container {
   min-height: 1000px;
 }
 
-/* line 68, ../sass/style.scss */
+/* line 121, ../sass/style.scss */
 .navbar {
   background-color: #cd5e26;
 }
 
-/* line 72, ../sass/style.scss */
+/* line 125, ../sass/style.scss */
 .navbar-header h1 {
   margin: 0;
 }
 
-/* line 73, ../sass/style.scss */
+/* line 126, ../sass/style.scss */
 .form-signin {
   max-width: 500px;
   padding: 15px;
   margin: 0 auto;
 }
 
-/* line 79, ../sass/style.scss */
+/* line 132, ../sass/style.scss */
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
   margin-bottom: 10px;
 }
 
-/* line 82, ../sass/style.scss */
+/* line 135, ../sass/style.scss */
 .form-signin .checkbox {
   font-weight: normal;
 }
 
-/* line 85, ../sass/style.scss */
+/* line 138, ../sass/style.scss */
 .form-signin .form-control {
   position: relative;
   height: auto;
@@ -133,43 +214,49 @@ section.container {
   font-size: 16px;
 }
 
-/* line 94, ../sass/style.scss */
+/* line 147, ../sass/style.scss */
 .form-signin .form-control:focus {
   z-index: 2;
 }
 
-/* line 97, ../sass/style.scss */
-.form-signin input[type="email"] {
+/* line 150, ../sass/style.scss */
+.form-signin input.first {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 
-/* line 102, ../sass/style.scss */
-.form-signin input[type="password"] {
+/* line 155, ../sass/style.scss */
+.form-signin input.middle {
+  margin-bottom: -1px;
+  border-radius: 0;
+}
+
+/* line 159, ../sass/style.scss */
+.form-signin input.last {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
 
-/* line 108, ../sass/style.scss */
+/* line 165, ../sass/style.scss */
 footer {
   background-color: #cd5e26;
 }
-/* line 109, ../sass/style.scss */
+/* line 166, ../sass/style.scss */
 footer .container-fluid {
   max-width: 1170px;
 }
-/* line 112, ../sass/style.scss */
+/* line 169, ../sass/style.scss */
 footer * {
   color: #FFF;
   line-height: 60px;
 }
-/* line 113, ../sass/style.scss */
+/* line 170, ../sass/style.scss */
 footer .footer-logo {
   font-size: 30px;
 }
-/* line 116, ../sass/style.scss */
+/* line 173, ../sass/style.scss */
 footer .footer-menu div a:hover {
   color: #4C0000;
 }
