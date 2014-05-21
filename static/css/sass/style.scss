@@ -20,19 +20,32 @@ a,
 a:hover { color: $text_brown; }
 a:hover { text-decoration: underline; }
 
-.hide-text {
-	position: absolute;
-	text-indent: -999em;
-	height: 0;
-	overflow: hidden;
-}
-
 .text-large { font-size: 40px; font-weight: bold; color: $bright_orange; }
+
+.btn-primary {
+	color: #FFF;
+	background-color: $bright_orange;
+	border: none;
+	&:hover { 
+		background-color: $base_orange;
+	}
+}
+.btn-link {
+	color: $text_normal;
+	background-color: $soft_orange;
+	&:hover {
+		color: $text_normal;
+		background-color: $soft_orange;
+	}
+}
 
 body {
   padding-top: 60px;
   background-color: #E5E5E5;
 }
+
+.region {margin-bottom: 30px;}
+
 .container { margin-bottom: 30px; }
 .content-thin {
   	max-width: 500px;
@@ -91,7 +104,6 @@ body {
 			margin-left: -10px;			
 		}
 	}
-	.sec-menu { display: none; }
 }
 @media (max-width: 767px) {
 	.navbar-default {
@@ -117,7 +129,6 @@ body {
 		}
 		.navbar-collapse { max-height: 100%; }
 		.sec-menu {
-			display: block;
 			&>li>a {
 				border-bottom: none;
 				padding-top: 10px;
@@ -133,14 +144,6 @@ body {
 				background-color: $hover_orange;
 			}
 		}
-	}
-}
-.btn-primary {
-	color: #FFF;
-	background-color: $bright_orange;
-	border: none;
-	&:hover { 
-		background-color: $base_orange;
 	}
 }
 
@@ -190,6 +193,7 @@ input + .errors{
 // List in block style
 // 
 .block {
+	overflow: hidden;
 	background-color: #FFF;
 	@include border-radius(5px);
 	border: 1px solid $block_border;
@@ -198,37 +202,68 @@ input + .errors{
 	}
 	ul.block-content {
 		list-style: none;
-		padding: 20px 20px 0 20px;
+		padding: 10px 20px 0 20px;
 		li {
 			.item-inner {
 				overflow: hidden;
 				padding: 10px 0;
+				margin: 0;
 				border-bottom: 1px dotted #333333;
-				.left {padding-right: 10px;}
-				.right {padding-left: 0;}
+				.left {padding-right: 0;padding-left: 0; }
+				.right {padding-right: 0;}
 			}
-			&.first .item-inner{ padding-top: 0; }
-			&.last .item-inner { border: none; }
 		}
 	}
+	&.block-bg-transparent {
+		background-color: transparent;
+		border: 5px dashed $base_orange;
+		@include border-radius(0);
+	}
 }
-@media (max-width: 600px) {
+// @media (max-width: 992px) {
+// 	.item { 
+// 		.item-inner {
+// 			margin: 0;
+// 			.left {padding-left: 0;}
+// 			.amount-num {padding-right: 0;}
+// 		}
+// 	}	
+// }
+@media (max-width: 640px) {
 	.item { 
 		width: 100%;
+		.item-inner { 
+			min-height: 111px;
+			.left { position: absolute; }
+			.right {
+				padding-left: 90px;
+				width: 100%;
+			}
+		}
 	}	
 }
 // ---------------------------
 
-.summary h3 {margin-top: 10px; margin-bottom: 15px;}
+.summary h3 {
+	.left { 
+		img {max-width: 80px; width: 100%;}
+	}
+}
 .amount {
 	height: 10px;
 	background-color: $bright_orange;
 	@include border-radius(5px);
 }
+.amount-wrapper {
+	padding-right: 80px;
+}
 .amount-num {
+	position: absolute;
+	top: 25%;
+	right: 0;
+	width: 70px;
 	text-align: center;
 	padding-left: 0;
-	margin-top: 20px;
 	span { display: block; line-height: 35px;}
 }
 

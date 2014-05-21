@@ -3,15 +3,15 @@
 
 {% block content %}
 
-<div class="row">
-	<article class="col-md-8" >
+<div class="region row">
+	<section class="col-md-8" >
 		<header>
 			<h2><span class="dialog-ic"></span>Hilight statement</h2>
 		</header>
-		<div class="block">
+		<article class="block">
 			<section class="highlight-statement block-content">
 				<header>
-					<h3 class="hide-text">statement</h3>
+					<h3 class="hidden">statement</h3>
 				</header>
 				<blockquote>
 					เป้าหมายสูงสุดของโครงการรับจำนำข้าว มิใช่คะแนนนิยมของรัฐบาล แต่คือการยกระดับและรักษาความมั่นคงของรายได้ 				เพื่อชีวิตความเป็นอยู่ที่ดีขึ้นของชาวนา เพื่ออนาคตที่ดีกว่าของลูกหลาน และเพื่อให้อาชีพปลูกข้าวให้คนกิน 				หมายถึงปลูกอนาคตตัวเองลงบนผืนแผ่นดิน โดยไม่กระทบกับวินัยทางการเงินของประเทศ
@@ -20,7 +20,7 @@
 			</section>
 			<section class="who-said block-content">
 				<header>
-					<h3 class="hide-text">Who's said??</h3>
+					<h3 class="hidden">Who's said??</h3>
 				</header>
 				<div class="people-profile col-lg-6 col-xs-6">
 					<img src="/static/css/images/people-1.png" alt="yinglak avatar" />
@@ -28,13 +28,13 @@
 					<p>นายกรัฐมนตรี</p>
 				</div>
 				<div class="meter col-lg-6 col-xs-6">
-					<h4 class="hide-text">false</h4>
+					<h4 class="hidden">false</h4>
 					<img src="/static/css/images/false-md.png" alt="false image medium" />
 				</div>
 			</section>
-		</div>
-	</article>
-	<article class="col-md-4 summary">
+		</article>
+	</section >
+	<section class="col-md-4 summary">
 		<header>
 			<h2>Summary</h2>
 		</header>
@@ -42,79 +42,92 @@
 			<ul class="block-content row">
 				<li class="item col-md-12 col-xs-6 first">
 					<div class="item-inner row">
-						<div class="col-md-4 col-xs-4 left">
+						<div class="col-md-3 col-xs-3 left">
 							<img src="/static/css/images/true-sm.png" alt="true image small" />
 						</div>
-						<div class="col-md-8 col-xs-8 right">
-							<div class="row">
-								<div class="col-md-8 col-xs-8">
-									<h3>true</h3>
-									<div class="amount-bar"><div class="amount"></div></div>
-								</div>
-								<div class="col-md-4 col-xs-4 amount-num">
-									<span class="text-large">6</span>คำพูด
-								</div>
+						<div class="col-md-9 col-xs-9 right">
+							<div class="amount-wrapper">
+								<h3>true</h3>
+								<div class="amount-bar"><div class="amount"></div></div>
+							</div>
+							<div class="amount-num">
+								<span class="text-large">6</span>คำพูด
 							</div>
 						</div>
 					</div>
 				</li>
 				<li class="item col-md-12 col-xs-6">
 					<div class="item-inner row">
-						<div class="col-md-4 left">
+						<div class="col-md-3 col-xs-3 left">
 							<img src="/static/css/images/false-sm.png" alt="false image small" />
 						</div>
-						<div class="col-md-8 right">
-							<div class="row">
-								<div class="col-md-8">
-									<h3>false</h3>
-									<div class="amount-bar"><div class="amount"></div></div>
-								</div>
-								<div class="col-md-4 amount-num">
-									<span class="text-large">85</span>คำพูด
-								</div>
+						<div class="col-md-9 col-xs-9 right">
+							<div class="amount-wrapper">
+								<h3>false</h3>
+								<div class="amount-bar"><div class="amount"></div></div>
+							</div>
+							<div class="amount-num">
+								<span class="text-large">85</span>คำพูด
 							</div>
 						</div>
 					</div>
 				</li>
 				<li class="item col-md-12 col-xs-6">
 					<div class="item-inner row">
-						<div class="col-md-4 left">
+						<div class="col-md-3 col-xs-3 left">
 							<img src="/static/css/images/tricky-sm.png" alt="tricky image small" />
 						</div>
-						<div class="col-md-8 right">
-							<div class="row">
-								<div class="col-md-8">
-									<h3>tricky</h3>
-									<div class="amount-bar"><div class="amount"></div></div>
-								</div>
-								<div class="col-md-4 amount-num">
-									<span class="text-large">105</span>คำพูด
-								</div>
+						<div class="col-md-9 col-xs-9 right">
+							<div class="amount-wrapper">
+								<h3>tricky</h3>
+								<div class="amount-bar"><div class="amount"></div></div>
+							</div>
+							<div class="amount-num">
+								<span class="text-large">105</span>คำพูด
 							</div>
 						</div>
 					</div>
 				</li>
 				<li class="item col-md-12 col-xs-6 last">
 					<div class="item-inner row">
-						<div class="col-md-4 left">
+						<div class="col-md-3 col-xs-3 left">
 							<img src="/static/css//images/cant-prove-sm.png" alt="can not prove image small" />
 						</div>
-						<div class="col-md-8 right">
-							<div class="row">
-								<div class="col-md-8">
-									<h3>can't prove</h3>
-									<div class="amount-bar"><div class="amount"></div></div>
-								</div>
-								<div class="col-md-4 amount-num">
-									<span class="text-large">15</span>คำพูด
-								</div>
+						<div class="col-md-9 col-xs-9 right">
+							<div class="amount-wrapper">
+								<h3>can't prove</h3>
+								<div class="amount-bar"><div class="amount"></div></div>
+							</div>
+							<div class="amount-num">
+								<span class="text-large">15</span>คำพูด
 							</div>
 						</div>
 					</div>
 				</li>
 			</ul>
 		</div>
-	</article>
+	</section>
+</div>
+<div class="region row">
+	<section class="hilight-people col-lg-12">
+		<header>
+			<h2 class="hidden">Hilight People</h2>
+		</header>
+		<div class="block block-bg-transparent">
+			<div class="block-content">
+				<div class="left">
+					<img src="/static/css/images/people-2-lg.png" alt="chalerm yuubamroong" />
+				</div>
+				<div class="right">
+					<p class="lead">“ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอดี้ เอ็กซ์เพรสคาแร็คเตอร์ชะโนด ป่าไม้สวีท ระโงกอ่อนด้อยเทอร์โบบ็อกซ์ ฟลุก แทงโก้สะกอม”</p>
+					<a href="/people/1">รตอ. ดร.เฉลิม อยู่บำรุง</a>
+					<p>รัฐมนตรีว่าการกระทรวงแรงงาน</p>
+					<a href="/people/2" type="button" class="btn btn-default btn-link">ดู "คำพูด" ทั้งหมดของคนนี้ <span class="glyphicon glyphicon-chevron-right"></span>
+</a>
+				</div>
+			</div>
+		</div>
+	</section>
 </div>
 
 {% endblock %}
