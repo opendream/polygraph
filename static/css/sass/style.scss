@@ -43,7 +43,7 @@ a:hover { text-decoration: underline; }
 		background-color: $soft_orange;
 	}
 }
-@media (max-width: 639px) {
+@media (max-width: 640px) {
 	.hidden-640 { display: none !important; }
 }
 body {
@@ -399,6 +399,7 @@ blockquote {
 
 
 //############# Fixed width polygraph block front page
+.polygraph-list .statement-list { overflow: hidden; }
 @media (min-width: 769px) { 
 	.polygraph-list {
 		ul.item-list.ul-left { padding-right: 100px; }
