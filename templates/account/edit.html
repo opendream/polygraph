@@ -1,0 +1,54 @@
+{% extends 'base_single.html' %}
+{% load i18n %}
+
+{% block content %}
+<h1>{%  trans "Your profile settings" %}</h2>
+{% if reset_password %}
+<div class="alert">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>{% trans "Warinig" %}!</strong> {% trans "Please, change your password" %}
+</div>
+{% endif %}
+
+<form method="post" class="edit-profile-form" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    <div class="controls">
+        <label for="id_email">{% trans "Email" %}</label>
+        {{ user.email }}
+    </div>
+
+    <div class="controls">
+        <label for="id_first_name">{% trans "First name" %}</label>
+        {{ form.first_name }}
+        <div class="span3 errors">{{ form.first_name.errors }}</div>
+    </div>
+
+    <div class="controls">
+        <label for="id_last_name">{% trans "Last name" %}</label>
+        {{ form.last_name }}
+        <div class="span3 errors">{{ form.last_name.errors }}</div>
+    </div>
+
+    <div class="control-group{% if reset_password %} warning{% endif %}">
+
+        <div  class="controls">
+            <label for="id_password">{% trans "Password" %}</label>
+            {{ form.password }}
+            <div class="span3 errors">{{ form.password.errors }}</div>
+        </div>
+
+        <div class="controls">
+            <label for="id_password2">{% trans "Confirm password" %}</label>
+            {{ form.password2 }}
+            <div class="span3 errors">{{ form.password2.errors }}</div>
+        </div>
+    </div>
+
+    <div class="action">
+        <button class="btn btn-submit flat-btn btn btn-primary btn-submit_blue" type="submit" name="submitEditProfile">{% trans "Save" %}</button>
+        <a href="{% url 'domain_home' %}" class="btn btn-cancle flat-btn">{% trans "Cancel" %}</a>
+    </div>
+</form>
+{% endblock %}

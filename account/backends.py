@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 
 class EmailOrUsernameModelBackend(object):
-    def authenticate(self, username=None, password=None):
+    def authenticate(self, username=None, password=None, ignore_password=None):
 
         User = get_user_model()
 
@@ -11,7 +11,7 @@ class EmailOrUsernameModelBackend(object):
             kwargs = {'username': username}
         try:
             user = User.objects.get(**kwargs)
-            if user.check_password(password):
+            if ignore_password or user.check_password(password):
                 return user
         except User.DoesNotExist:
             return None
