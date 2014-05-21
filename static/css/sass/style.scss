@@ -21,6 +21,10 @@ a:hover { color: $text_brown; }
 a:hover { text-decoration: underline; }
 
 .text-large { font-size: 40px; font-weight: bold; color: $bright_orange; }
+.align-right { text-align: right; }
+@media (max-width: 768px) {
+	.align-right { text-align: left; }
+}
 
 .btn-primary {
 	color: #FFF;
@@ -316,6 +320,12 @@ blockquote {
 		text-align: right;
 	}
 }
+
+.hilight-people {
+	.left {position: absolute;}
+	.right {padding-left: 140px;}
+}
+
 @media (max-width: 600px) {
 	.who-said {
 		.people-profile { 
