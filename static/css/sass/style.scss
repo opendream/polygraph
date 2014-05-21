@@ -15,7 +15,7 @@ h1, h2, h3, h4, h5, h6,
 p {
 	color: $text_normal;
 }
-
+p.border-bt { padding-bottom: 20px; border-bottom: 2px solid $block_border; }
 .text-brown { color: $text_brown; }
 
 a,
@@ -31,12 +31,11 @@ a:hover { text-decoration: underline; }
 .btn-primary {
 	color: #FFF;
 	background-color: $bright_orange;
-	border: none;
 	&:hover { 
 		background-color: $base_orange;
 	}
 }
-.btn-link {
+.btn-color {
 	color: $text_normal;
 	background-color: $soft_orange;
 	&:hover {
@@ -44,9 +43,11 @@ a:hover { text-decoration: underline; }
 		background-color: $soft_orange;
 	}
 }
-
+@media (max-width: 639px) {
+	.hidden-640 { display: none !important; }
+}
 body {
-  padding-top: 60px;
+  padding-top: 100px;
   background-color: #E5E5E5;
 }
 
@@ -237,14 +238,10 @@ input + .errors{
 		padding: 20px;
 	}
 	ul.block-content {
-		list-style: none;
 		padding: 10px 20px 0 20px;
 		li {
 			.item-inner {
-				overflow: hidden;
-				padding: 10px 0;
 				margin: 0;
-				border-bottom: 1px dotted #333333;
 				.left {padding-right: 0;padding-left: 0; }
 				.right {padding-right: 0;}
 			}
@@ -256,7 +253,18 @@ input + .errors{
 		@include border-radius(0);
 	}
 }
-
+.item-list {
+	list-style: none;
+	padding-left: 0;
+	li {
+		.item-inner {
+			overflow: hidden;
+			padding: 10px 0;
+			// margin: 0;
+			border-bottom: 1px dotted #333333;
+		}
+	}
+}
 @media (max-width: 640px) {
 	.item { 
 		width: 100%;
@@ -363,8 +371,9 @@ blockquote {
 }
 
 .statement-list {
+	margin-bottom: 20px;
 	ul.block-content li .item-inner { 
-		border-bottom: 1px solid #EFEFEF !important;
+		border-bottom: 2px solid #EFEFEF !important;
 		padding: 30px 0;
 		position: relative;
 		p { margin-bottom: 30px; }
@@ -385,6 +394,33 @@ blockquote {
 		right: 0;
 		width: 120px;
 		img { height: 80px; }
+	}
+}
+
+
+//############# Fixed width polygraph block front page
+@media (min-width: 769px) { 
+	.polygraph-list {
+		ul.item-list.ul-left { padding-right: 100px; }
+		ul.item-list.ul-right { padding-left: 100px; }
+	}
+}
+@media (max-width: 768px) { 
+	.polygraph-list {
+		ul.item-list { padding-right: 180px; }
+	}
+}
+@media (max-width: 640px) { 
+	.polygraph-list {
+		ul.item-list { padding-right: 0; }
+	}
+}
+//####################################################
+
+.tag-list {
+	a {
+		margin-bottom: 10px;
+		margin-right: 10px;
 	}
 }
 
