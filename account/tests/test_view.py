@@ -1,4 +1,6 @@
+from django.contrib.auth.tokens import default_token_generator
 from django.core.urlresolvers import reverse
+from django.utils.http import int_to_base36
 from django.utils.translation import ugettext_lazy as _
 from django.test import TestCase
 
@@ -120,7 +122,27 @@ class TestResetPassword(TestCase):
 
     def test_request_password_with_invalid_email(self):
         params = {
+            'email': 'invalid',
+        }
+        response = self.client.post(reverse('account_reset_password'), params, follow=True)
+        self.assertFormError(response, 'form', 'email', [_('Enter a valid email address.')])
+
+    def test_request_password_with_email_that_not_in_system(self):
+        params = {
             'email': 'invalid@gmail.com',
         }
         response = self.client.post(reverse('account_reset_password'), params, follow=True)
-        self.assertFormError(response, 'form', 'email', [_('Your email address not registered')])
+        self.assertFormError(response, 'form', 'email', [_('Your email address is not registered.')])
+
+    def test_access_reset_password_confirm_form_link_in_email(self):
+        uid = int_to_base36(self.staff.id)
+        token = default_token_generator.make_token(self.staff)
+        response = self.client.get(reverse('account_reset_password_confirm', args=[uid, token, ]), follow=True)
+        self.assertRedirects(response, reverse('account_edit')+'?reset_password=True')
+        self.assertContains(response, _('Please, change your password'))
+
+    def test_invalid_uid_in_reset_password_confirm(self):
+        uid = '42'
+        token = '3ai-e84fa443f006ac46frvp'
+        response = self.client.get(reverse('account_reset_password_confirm', args=[uid, token, ]))
+        self.assertEqual(404, response.status_code)

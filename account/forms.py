@@ -58,9 +58,26 @@ class ResetPasswordForm(PasswordResetForm):
         try:
             UserModel.objects.get(email=email)
         except UserModel.DoesNotExist:
-            raise forms.ValidationError(_('Your email address not registered'))
+            raise forms.ValidationError(_('Your email address is not registered.'))
 
         return self.cleaned_data
 
 
+class AccountEditForm(forms.Form):
+    password    = forms.CharField(required=False,  max_length=128, widget=forms.PasswordInput())
+    password2   = forms.CharField(required=False,  max_length=128, widget=forms.PasswordInput())
+    first_name  = forms.CharField(max_length=30, widget=forms.TextInput())
+    last_name   = forms.CharField(max_length=30, widget=forms.TextInput())
 
+    def __init__(self, required_password=False, *args, **kwargs):
+        super(AccountEditForm, self).__init__(*args, **kwargs)
+        if required_password:
+            self.fields['password'].required = True
+            self.fields['password2'].required = True
+
+    def clean_password2(self):
+        password = self.cleaned_data.get('password', '')
+        password2 = self.cleaned_data['password2']
+        if password != password2:
+            raise forms.ValidationError(u'Password mismatch')
+        return password2
