@@ -16,6 +16,8 @@ p {
 	color: $text_normal;
 }
 
+.text-brown { color: $text_brown; }
+
 a,
 a:hover { color: $text_brown; }
 a:hover { text-decoration: underline; }
@@ -55,6 +57,36 @@ body {
   	max-width: 500px;
   	padding: 15px;
   	margin: 0 auto;
+}
+
+[class*="dialog-ic"] {
+	position: relative;
+	display: block;
+	float: left;
+	margin-right: 0.5em;
+	width: 40px; 
+	height: 25px;
+	&:after {
+		border-width: 5px;
+		border-style: solid;
+		content: "";
+		display: inline-block;
+		position: absolute;
+		bottom: -10px;
+		left: 50%;	
+	}
+}
+[class*="dialog-ic-color"] {
+	background-color: $bright_orange;
+	&:after {
+		border-color: $bright_orange $bright_orange transparent transparent;
+	}
+}
+[class*="dialog-ic-bw"] {
+	background-color: $block_border;
+	&:after {
+		border-color: $block_border $block_border transparent transparent;
+	}
 }
 
 .navbar-default {
@@ -224,15 +256,7 @@ input + .errors{
 		@include border-radius(0);
 	}
 }
-// @media (max-width: 992px) {
-// 	.item { 
-// 		.item-inner {
-// 			margin: 0;
-// 			.left {padding-left: 0;}
-// 			.amount-num {padding-right: 0;}
-// 		}
-// 	}	
-// }
+
 @media (max-width: 640px) {
 	.item { 
 		width: 100%;
@@ -244,9 +268,8 @@ input + .errors{
 				width: 100%;
 			}
 		}
-	}	
+	}
 }
-// ---------------------------
 
 .summary h3 {
 	.left { 
@@ -321,11 +344,6 @@ blockquote {
 	}
 }
 
-.hilight-people {
-	.left {position: absolute;}
-	.right {padding-left: 140px;}
-}
-
 @media (max-width: 600px) {
 	.who-said {
 		.people-profile { 
@@ -336,26 +354,37 @@ blockquote {
 			width: 100%;
 			text-align: left;
 		}
-	}	
+	}
 }
 
-h2 .dialog-ic {
-	position: relative;
-	display: block;
-	float: left;
-	margin-right: 0.5em;
-	width: 40px; 
-	height: 25px;
-	background-color: $bright_orange;
-	&:after {
-		border-color: $bright_orange $bright_orange transparent transparent ;
-		border-width: 5px;
-		border-style: solid;
-		content: "";
-		display: inline-block;
+.hilight-people {
+	.left { position: absolute; }
+	.right { padding-left: 140px; }
+}
+
+.statement-list {
+	ul.block-content li .item-inner { 
+		border-bottom: 1px solid #EFEFEF !important;
+		padding: 30px 0;
+		position: relative;
+		p { margin-bottom: 30px; }
+	}
+}
+.avatar {
+	img { float: left; margin-right: 10px; }
+}
+
+@media (max-width: 640px) { 
+	.statement-list ul.block-content li .item-inner>div:first-child { 
+		width: 100%;
+		.avatar { padding-right: 120px;}
+	}
+	.meter-md {
 		position: absolute;
-		bottom: -10px;
-		left: 50%;	
+		bottom: 15px;
+		right: 0;
+		width: 120px;
+		img { height: 80px; }
 	}
 }
 
