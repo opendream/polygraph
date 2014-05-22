@@ -45,6 +45,7 @@ a:hover { text-decoration: underline; }
 }
 @media (max-width: 640px) {
 	.hidden-640 { display: none !important; }
+	aside .item-list li { width: 100%; }
 }
 body {
   padding-top: 100px;
@@ -60,6 +61,7 @@ body {
   	padding: 15px;
   	margin: 0 auto;
 }
+
 .sidebar { margin-top: 6px; }
 .item-list {
 	.media {
