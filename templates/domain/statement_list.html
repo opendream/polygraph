@@ -4,17 +4,194 @@
 {% block title %}{% trans "Statement list" %}{% endblock %}
 
 {% block content %}
-    Content zone
+<!--     <div class="btn-group btn-group-custom">
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"> Source <span class="caret"></span></button>
+      <ul class="dropdown-menu pull-right" role="menu">
+        <li><a href="#">Source 1</a></li>
+        <li><a href="#">Source 2</a></li>
+        <li><a href="#">Source 3</a></li>
+        <li><a href="#">Source 4</a></li>
+        <li><a href="#">Source 5</a></li>
+      </ul>
+    </div> -->
+    <div class="block statement-list">
+        <ul class="block-content item-list">
+            <li class="item first">
+                <article class="item-inner">
+                    <div class="col-lg-8 col-md-7 col-sm-8 col-xs-7">
+                        <p class="text-brown"><a href="/people/3">“ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอดี้ เอ็กซ์เพรสคาแร็คเตอร์ชะโนด ป่าไม้สระโงกอ่อนด้อยเทอร์โบบ็อกซ์ ฟลุกแทงโก้สะกอม”</a></p>
+                        <div class="avatar">
+                            <img src="/static/css/images/people-3-sm.png" alt="suthep" />
+                            <a href="/people/3"><strong>สุเทพ เทือกสุบรรณ</strong></a>
+                        </div>
+                    </div>
+                    <div class="meter-md col-lg-4 col-md-5 col-sm-4 col-xs-5 text-right">
+                        <img src="/static/css/images/false-md.png" alt="false image medium" />
+                    </div>
+                </article>
+            </li>
+            <li class="item">
+                <article class="item-inner">
+                    <div class="col-lg-8 col-md-7 col-sm-8 col-xs-7">
+                        <p class="text-brown">“ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอดี้ เอ็กซ์เพรสคาแร็คเตอร์ชะโนด ป่าไม้สวีท ระโงกอ่อนด้อยเทอร์โบบ็อกซ์ ฟลุก แทงโก้สะ</p>
+                        <div class="avatar">
+                            <img src="/static/css/images/people-4-sm.png" alt="suthep" />
+                            <a href="/people/3"><strong>พ.ต.ท.ดร.ทักษิณ ชินวัตร</strong></a>
+                        </div>
+                    </div>
+                    <div class="meter-md col-lg-4 col-md-5 col-sm-4 col-xs-5 text-right">
+                        <img src="/static/css/images/cant-prove-md.png" alt="false image medium" />
+                    </div>
+                </article>
+            </li>
+            <li class="item">
+                <article class="item-inner">
+                    <div class="col-lg-8 col-md-7 col-sm-8 col-xs-7">
+                        <p class="text-brown">“ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอดี้ เอ็กซ์เพรสคาแร็คเตอร์ชะโนด ป่าไม้สวีท ระโงกอ่อนด้อยเทอร์โบบ็อกซ์ ฟลุก แทงโก้สะ/p>
+                        <div class="avatar">
+                            <img src="/static/css/images/people-5-sm.png" alt="suthep" />
+                            <a href="/people/3"><strong>ชูวิทย์ กมลวิศิษฏ์</strong></a>
+                        </div>
+                    </div>
+                    <div class="meter-md col-lg-4 col-md-5 col-sm-4 col-xs-5 text-right">
+                        <img src="/static/css/images/true-md.png" alt="false image medium" />
+                    </div>
+                </article>
+            </li>
+            <li class="item">
+                <article class="item-inner">
+                    <div class="col-lg-8 col-md-7 col-sm-8 col-xs-7">
+                        <p class="text-brown">“ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอดี้ เอ็กซ์เพรสคาแร็คเตอร์ชะโนด ป่าไม้สวีท ระโงกอ่อนด้อยเทอร์โบบ็อกซ์ ฟลุก แทงโก้สะ/p>
+                        <div class="avatar">
+                            <img src="/static/css/images/people-3-sm.png" alt="suthep" />
+                            <a href="/people/3"><strong>กำนันสุเทพ เทือกสุบรรณ</strong></a>
+                        </div>
+                    </div>
+                    <div class="meter-md col-lg-4 col-md-5 col-sm-4 col-xs-5 text-right">
+                        <img src="/static/css/images/cant-prove-md.png" alt="false image medium" />
+                    </div>
+                </article>
+            </li>
+            <li class="item last">
+                <article class="item-inner">
+                    <div class="col-lg-8 col-md-7 col-sm-8 col-xs-7">
+                        <p class="text-brown">“ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอดี้ เอ็กซ์เพรสคาแร็คเตอร์ชะโนด ป่าไม้สวีท ระโงกอ่อนด้อยเทอร์โบบ็อกซ์ ฟลุก แทงโก้สะ/p>
+                        <div class="avatar">
+                            <img src="/static/css/images/people-3-sm.png" alt="suthep" />
+                            <a href="/people/3"><strong>กำนันสุเทพ เทือกสุบรรณ</strong></a>
+                        </div>
+                    </div>
+                    <div class="meter-md col-lg-4 col-md-5 col-sm-4 col-xs-5 text-right">
+                        <img src="/static/css/images/false-md.png" alt="false image medium" />
+                    </div>
+                </article>
+            </li>
+            <li class="item first">
+                <article class="item-inner">
+                    <div class="col-lg-8 col-md-7 col-sm-8 col-xs-7">
+                        <p class="text-brown"><a href="/people/3">“ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอดี้ เอ็กซ์เพรสคาแร็คเตอร์ชะโนด ป่าไม้สระโงกอ่อนด้อยเทอร์โบบ็อกซ์ ฟลุกแทงโก้สะกอม”</a></p>
+                        <div class="avatar">
+                            <img src="/static/css/images/people-3-sm.png" alt="suthep" />
+                            <a href="/people/3"><strong>สุเทพ เทือกสุบรรณ</strong></a>
+                        </div>
+                    </div>
+                    <div class="meter-md col-lg-4 col-md-5 col-sm-4 col-xs-5 text-right">
+                        <img src="/static/css/images/false-md.png" alt="false image medium" />
+                    </div>
+                </article>
+            </li>
+            <li class="item">
+                <article class="item-inner">
+                    <div class="col-lg-8 col-md-7 col-sm-8 col-xs-7">
+                        <p class="text-brown">“ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอดี้ เอ็กซ์เพรสคาแร็คเตอร์ชะโนด ป่าไม้สวีท ระโงกอ่อนด้อยเทอร์โบบ็อกซ์ ฟลุก แทงโก้สะ/p>
+                        <div class="avatar">
+                            <img src="/static/css/images/people-4-sm.png" alt="suthep" />
+                            <a href="/people/3"><strong>พ.ต.ท.ดร.ทักษิณ ชินวัตร</strong></a>
+                        </div>
+                    </div>
+                    <div class="meter-md col-lg-4 col-md-5 col-sm-4 col-xs-5 text-right">
+                        <img src="/static/css/images/cant-prove-md.png" alt="false image medium" />
+                    </div>
+                </article>
+            </li>
+            <li class="item">
+                <article class="item-inner">
+                    <div class="col-lg-8 col-md-7 col-sm-8 col-xs-7">
+                        <p class="text-brown">“ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอดี้ เอ็กซ์เพรสคาแร็คเตอร์ชะโนด ป่าไม้สวีท ระโงกอ่อนด้อยเทอร์โบบ็อกซ์ ฟลุก แทงโก้สะ/p>
+                        <div class="avatar">
+                            <img src="/static/css/images/people-5-sm.png" alt="suthep" />
+                            <a href="/people/3"><strong>ชูวิทย์ กมลวิศิษฏ์</strong></a>
+                        </div>
+                    </div>
+                    <div class="meter-md col-lg-4 col-md-5 col-sm-4 col-xs-5 text-right">
+                        <img src="/static/css/images/true-md.png" alt="false image medium" />
+                    </div>
+                </article>
+            </li>
+            <li class="item">
+                <article class="item-inner">
+                    <div class="col-lg-8 col-md-7 col-sm-8 col-xs-7">
+                        <p class="text-brown">“ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอดี้ เอ็กซ์เพรสคาแร็คเตอร์ชะโนด ป่าไม้สวีท ระโงกอ่อนด้อยเทอร์โบบ็อกซ์ ฟลุก แทงโก้สะ/p>
+                        <div class="avatar">
+                            <img src="/static/css/images/people-3-sm.png" alt="suthep" />
+                            <a href="/people/3"><strong>กำนันสุเทพ เทือกสุบรรณ</strong></a>
+                        </div>
+                    </div>
+                    <div class="meter-md col-lg-4 col-md-5 col-sm-4 col-xs-5 text-right">
+                        <img src="/static/css/images/cant-prove-md.png" alt="false image medium" />
+                    </div>
+                </article>
+            </li>
+            <li class="item last">
+                <article class="item-inner">
+                    <div class="col-lg-8 col-md-7 col-sm-8 col-xs-7">
+                        <p class="text-brown">“ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอดี้ เอ็กซ์เพรสคาแร็คเตอร์ชะโนด ป่าไม้สวีท ระโงกอ่อนด้อยเทอร์โบบ็อกซ์ ฟลุก แทงโก้สะ/p>
+                        <div class="avatar">
+                            <img src="/static/css/images/people-3-sm.png" alt="suthep" />
+                            <a href="/people/3"><strong>กำนันสุเทพ เทือกสุบรรณ</strong></a>
+                        </div>
+                    </div>
+                    <div class="meter-md col-lg-4 col-md-5 col-sm-4 col-xs-5 text-right">
+                        <img src="/static/css/images/false-md.png" alt="false image medium" />
+                    </div>
+                </article>
+            </li>
+        </ul>
+    </div>
+    <ul class="pagination">
+        <li><a href="#">&laquo;</a></li>
+        <li><a href="#">‹</a></li>
+        <li class="active"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">›</a></li>
+        <li><a href="#">&raquo;</a></li>
+    </ul>
+
 {% endblock %}
 
 {% block sidebar %}
 
-    <section class="block">
+    <section>
         <header>
             <h2>Block title 1</h2>
         </header>
-        <div>
-            Block content
+        <div class="tag-list">
+            <a href="/" type="button" class="btn btn-default"><strong>จำนำข้าว</strong></a>
+            <a href="/" type="button" class="btn btn-default"><strong>รฟม.</strong></a>
+            <a href="/" type="button" class="btn btn-default"><strong>ธกส.</strong></a>
+            <a href="/" type="button" class="btn btn-default"><strong>สหยูเนี่ยน</strong></a>
+            <a href="/" type="button" class="btn btn-default"><strong>รถไฟความเร้วสูง</strong></a>
+            <a href="/" type="button" class="btn btn-default"><strong>จำนำข้าว</strong></a>
+            <a href="/" type="button" class="btn btn-default"><strong>รฟม.</strong></a>
+            <a href="/" type="button" class="btn btn-default"><strong>ธกส.</strong></a> 
+            <a href="/" type="button" class="btn btn-default"><strong>สหยูเนี่ยน</strong></a>
+            <a href="/" type="button" class="btn btn-default"><strong>รถไฟความเร้วสูง</strong></a>
+            <a href="/" type="button" class="btn btn-default"><strong>จำนำข้าว</strong></a>
+            <a href="/" type="button" class="btn btn-default"><strong>รฟม.</strong></a>
+            <a href="/" type="button" class="btn btn-default"><strong>ธกส.</strong></a> 
         </div>
     </section>
 

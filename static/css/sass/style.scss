@@ -54,10 +54,24 @@ body {
 .region {margin-bottom: 30px;}
 
 .container { margin-bottom: 30px; }
+.content-inner { position: relative; }
 .content-thin {
   	max-width: 500px;
   	padding: 15px;
   	margin: 0 auto;
+}
+.sidebar {
+
+}
+
+.pagination {
+	margin-top: 0;
+	&>li>a { color: $text_normal; }
+	li.active a,
+	li.active a:hover { 
+		border-color: $block_border;
+		background-color: $base_orange;
+	}
 }
 
 [class*="dialog-ic"] {
@@ -461,6 +475,15 @@ blockquote {
 	}
 }
 //####################################################
+
+.btn-group-custom {
+	position: absolute;
+	top: -45px;
+	right: 0;
+	.btn {
+		@include border-radius(0);
+	} 
+}
 
 .tag-list {
 	a {
