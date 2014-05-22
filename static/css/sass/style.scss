@@ -397,9 +397,53 @@ blockquote {
 	}
 }
 
+.nav-color {
+	padding-top: 15px;
+	li {
+		padding: 0 10px; margin: 0;
+		text-align: center;
+		&:after {
+			content: "•";
+			position: absolute;
+			top: 0.8em;
+			right: -3px;
+		}
+		.caret {
+			border-top: none;
+			border-bottom: 12px solid #FFF;
+			border-right: 12px solid transparent;
+			border-left: 12px solid transparent;
+			margin-bottom: -8px;
+		}
+		&:last-child {
+			&:after { display: none; }
+		}
+	}
+	li a {
+		@include border-radius(20px);
+		background-color: transparent;
+		&:hover {
+			background-color: $soft_orange;
+			color: $text_brown;
+		}
+	}
+	li.active a {
+		background-color: $bright_orange;
+		color: #FFFFFF;
+		&:hover {
+			background-color: $soft_orange;
+			color: $text_brown;
+		}
+	}
+}
+
+.polygraph-list {
+	&>header { position: relative; z-index: 2; }
+	&>article { position: relative; z-index: 1; }
+	.statement-list { overflow: hidden; }
+}
 
 //############# Fixed width polygraph block front page
-.polygraph-list .statement-list { overflow: hidden; }
 @media (min-width: 769px) { 
 	.polygraph-list {
 		ul.item-list.ul-left { padding-right: 100px; }
