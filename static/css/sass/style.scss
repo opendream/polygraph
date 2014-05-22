@@ -60,8 +60,15 @@ body {
   	padding: 15px;
   	margin: 0 auto;
 }
-.sidebar {
-
+.sidebar { margin-top: 6px; }
+.item-list {
+	.media {
+		padding: 0 10px;
+		margin-top: 0;
+		img { margin-right: 10px; }
+		.media-heading { margin-top: 15px; }
+		&:last-child .item-inner { border-bottom: 0; }
+	}
 }
 
 .pagination {
@@ -200,9 +207,7 @@ body {
 
 section.container { min-height: 500px; }
 
-.navbar {
-    background-color: $base_orange;
-}
+.navbar { background-color: $base_orange; }
 
 .navbar-header h1 {margin: 0;}
 
@@ -212,9 +217,7 @@ section.container { min-height: 500px; }
 }
 
 .form-normal {
-	.checkbox {
-		font-weight: normal;
-	}
+	.checkbox { font-weight: normal; }
 	.form-control {
 	  position: relative;
 	  height: auto;
@@ -274,7 +277,6 @@ input + .errors{
 		.item-inner {
 			overflow: hidden;
 			padding: 10px 0;
-			// margin: 0;
 			border-bottom: 1px dotted #333333;
 		}
 	}
@@ -295,7 +297,7 @@ input + .errors{
 
 .summary h3 {
 	.left { 
-		img {max-width: 80px; width: 100%;}
+		img { max-width: 80px; width: 100%; }
 	}
 }
 .amount {
