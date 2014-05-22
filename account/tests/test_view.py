@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 from django.utils.http import int_to_base36
 from django.utils.translation import ugettext_lazy as _
 from django.test import TestCase
+from account.models import Staff
 
 from common import factory
 
@@ -146,3 +147,98 @@ class TestResetPassword(TestCase):
         token = '3ai-e84fa443f006ac46frvp'
         response = self.client.get(reverse('account_reset_password_confirm', args=[uid, token, ]))
         self.assertEqual(404, response.status_code)
+
+
+
+class TestEditProfile(TestCase):
+
+    def setUp(self):
+        self.staff1 = factory.create_staff('crosalot', 'crosalot@kmail.com', 'password', ' Crosalot', 'Opendream ', 'Developer', 'Opensource', 'http://opendream.co.th')
+        self.staff2 = factory.create_staff('panudate', 'panudate@kmail.com', 'password', ' Panudate', 'Vasinwattana', 'Tester', 'Unittest', 'http://opendream.in.th')
+
+    def test_get_edit_profile_page(self):
+        response = self.client.get(reverse('account_edit'))
+        self.assertRedirects(response, '%s?next=%s' % (reverse('account_login'), reverse('account_edit')))
+
+        self.client.login(username=self.staff1.username, password='password')
+        response = self.client.get(reverse('account_edit'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'account/edit.html')
+        self.client.logout()
+
+        self.client.login(username=self.staff2.username, password='password')
+        response = self.client.get(reverse('account_edit'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'account/edit.html')
+        self.client.logout()
+
+    def test_edit_profile_context(self):
+        self.client.login(username=self.staff1, password='password')
+        response = self.client.get(reverse('account_edit'))
+
+        self.assertContains(response, 'name="username"')
+        self.assertContains(response, 'name="email"')
+        self.assertContains(response, 'name="password"')
+        self.assertContains(response, 'name="password2"')
+        self.assertContains(response, 'name="first_name"')
+        self.assertContains(response, 'name="last_name"')
+        self.assertContains(response, 'name="occupation"')
+        self.assertContains(response, 'name="description"')
+        self.assertContains(response, 'name="homepage_url"')
+
+        self.assertContains(response, self.staff1.username)
+        self.assertContains(response, self.staff1.email)
+        self.assertContains(response, self.staff1.first_name)
+        self.assertContains(response, self.staff1.last_name)
+        self.assertContains(response, self.staff1.occupation)
+        self.assertContains(response, self.staff1.description)
+        self.assertContains(response, self.staff1.homepage_url)
+        self.assertNotContains(response, self.staff1.password)
+
+        self.client.logout()
+
+        self.client.login(username=self.staff2, password='password')
+        response = self.client.get(reverse('account_edit'))
+        self.assertContains(response, self.staff2.username)
+        self.assertContains(response, self.staff2.email)
+        self.assertContains(response, self.staff2.first_name)
+        self.assertContains(response, self.staff2.last_name)
+        self.assertContains(response, self.staff2.occupation)
+        self.assertContains(response, self.staff2.description)
+        self.assertContains(response, self.staff2.homepage_url)
+        self.assertNotContains(response, self.staff2.password)
+
+        self.client.logout()
+
+    def test_post_edit_profile_with_password(self):
+        params = {
+            'username': 'username.change',
+            'email': 'email.change@gmail.com',
+            'password': '1234',
+            'password2': '1234',
+            'first_name': 'first name change',
+            'last_name': 'last name change',
+            'occupation': 'occupation change',
+            'description': 'description change',
+            'homepage_url': 'http://homepage.url/change',
+        }
+        self.client.login(username=self.staff1.username, password='password')
+        response = self.client.post(reverse('account_edit'), params, follow=True)
+
+        self.assertContains(response, _('Your account profile has been updated'))
+        self.assertEqual(Staff.objects.filter(username=self.staff1.username).count(), 0)
+        self.assertEqual(Staff.objects.filter(email=self.staff1.email).count(), 0)
+
+        staff = Staff.objects.get(email="email.change@gmail.com")
+
+        self.assertEqual(staff.first_name, 'first name change')
+        self.assertEqual(staff.last_name, 'last name change')
+        self.assertEqual(staff.occupation, 'occupation change')
+        self.assertEqual(staff.description, 'description change')
+        self.assertEqual(staff.homepage_url, 'http://homepage.url/change')
+
+        self.client.logout()
+
+        self.client.login(username=staff.username, password='1234')
+        self.assertIn('_auth_user_id', self.client.session)
+        self.client.logout()
