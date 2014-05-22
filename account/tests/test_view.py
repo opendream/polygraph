@@ -226,10 +226,11 @@ class TestEditProfile(TestCase):
         response = self.client.post(reverse('account_edit'), params, follow=True)
 
         self.assertContains(response, _('Your account profile has been updated'))
-        self.assertEqual(Staff.objects.filter(username=self.staff.username).count(), 0)
-        self.assertEqual(Staff.objects.filter(email=self.staff.email).count(), 0)
+        self.assertEqual(Staff.objects.filter(username=self.staff1.username).count(), 0)
+        self.assertEqual(Staff.objects.filter(email=self.staff1.email).count(), 0)
 
         staff = Staff.objects.get(email="email.change@gmail.com")
+
         self.assertEqual(staff.first_name, 'first name change')
         self.assertEqual(staff.last_name, 'last name change')
         self.assertEqual(staff.occupation, 'occupation change')
@@ -238,5 +239,6 @@ class TestEditProfile(TestCase):
 
         self.client.logout()
 
-        self.client.login(username=self.staff.username, password='1234')
+        self.client.login(username=staff.username, password='1234')
+        self.assertIn('_auth_user_id', self.client.session)
         self.client.logout()

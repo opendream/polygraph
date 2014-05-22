@@ -66,7 +66,7 @@ class ResetPasswordForm(PasswordResetForm):
 
 class AccountEditForm(forms.Form):
 
-    username    = forms.CharField()
+    username    = forms.CharField(max_length=75)
     email       = forms.EmailField(max_length=75)
     password    = forms.CharField(required=False, max_length=128, widget=forms.PasswordInput())
     password2   = forms.CharField(required=False, max_length=128, widget=forms.PasswordInput())
@@ -74,7 +74,7 @@ class AccountEditForm(forms.Form):
     last_name   = forms.CharField(required=False, max_length=30, widget=forms.TextInput())
 
     occupation  = forms.CharField(required=False, max_length=128, widget=forms.TextInput())
-    description = forms.CharField(widget=CKEditorWidget(config_name='minimal'))
+    description = forms.CharField(required=False, widget=CKEditorWidget(config_name='minimal'))
     homepage_url = forms.CharField(required=False, max_length=255, widget=forms.TextInput())
 
     def __init__(self, required_password=False, *args, **kwargs):
