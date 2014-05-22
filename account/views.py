@@ -7,6 +7,8 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.utils.http import base36_to_int
+from django.utils.translation import ugettext_lazy as _
+
 from account.forms import EmailAuthenticationForm, ResetPasswordForm, AccountEditForm
 
 
@@ -65,24 +67,38 @@ def account_edit(request):
 
     required_password = request.GET.get('reset_password')
 
+    user = request.user
+
     if request.method == 'POST':
         form = AccountEditForm(required_password, request.POST)
         if form.is_valid():
-            request.user.first_name = form.cleaned_data['first_name']
-            request.user.last_name = form.cleaned_data['last_name']
+            user.username = form.cleaned_data['username']
+            user.email = form.cleaned_data['email']
+            user.first_name = form.cleaned_data['first_name']
+            user.last_name = form.cleaned_data['last_name']
+            user.occupation = form.cleaned_data['occupation']
+            user.description = form.cleaned_data['description']
+            user.homepage_url = form.cleaned_data['homepage_url']
+
 
             password = form.cleaned_data.get('password')
             if password:
-                request.user.set_password(password)
-            request.user.save()
+                user.set_password(password)
+            user.save()
 
-            messages.success(request, _('Your account profile has been updated.'))
+            messages.success(request, _('Your account profile has been updated'))
 
-            return redirect('domain_home')
+            return redirect('account_edit')
     else:
+
         form = AccountEditForm(required_password, initial={
-            'first_name': request.user.first_name,
-            'last_name': request.user.last_name,
+            'username': user.username,
+            'email': user.email,
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+            'occupation': user.occupation,
+            'description': user.description,
+            'homepage_url': user.homepage_url
         })
 
     return render(request, 'account/edit.html', {

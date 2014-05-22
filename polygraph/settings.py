@@ -131,11 +131,16 @@ CKEDITOR_CONFIGS = {
             ['Bold', 'Italic', 'Underline', 'Strike'],
             ['NumberedList', 'BulletedList'],
             ['Link', 'Unlink'],
-            ['Image', 'Table', 'Video'],
-            ['Source', 'Preview']
+            ['Image', 'Table'],
         ],
-        #'toolbar': 'full',
-        'extraPlugins': 'video,preview',
+        'width': 'auto',
+    },
+    'minimal': {
+        'toolbar': [
+            ['Bold', 'Italic'],
+            ['NumberedList', 'BulletedList'],
+        ],
+        'width': 'auto',
 
     },
 }

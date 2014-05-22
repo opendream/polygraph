@@ -1,3 +1,4 @@
+from ckeditor.widgets import CKEditorWidget
 from django import forms
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.forms import PasswordResetForm
@@ -64,10 +65,17 @@ class ResetPasswordForm(PasswordResetForm):
 
 
 class AccountEditForm(forms.Form):
-    password    = forms.CharField(required=False,  max_length=128, widget=forms.PasswordInput())
-    password2   = forms.CharField(required=False,  max_length=128, widget=forms.PasswordInput())
-    first_name  = forms.CharField(max_length=30, widget=forms.TextInput())
-    last_name   = forms.CharField(max_length=30, widget=forms.TextInput())
+
+    username    = forms.CharField()
+    email       = forms.EmailField(max_length=75)
+    password    = forms.CharField(required=False, max_length=128, widget=forms.PasswordInput())
+    password2   = forms.CharField(required=False, max_length=128, widget=forms.PasswordInput())
+    first_name  = forms.CharField(required=False, max_length=30, widget=forms.TextInput())
+    last_name   = forms.CharField(required=False, max_length=30, widget=forms.TextInput())
+
+    occupation  = forms.CharField(required=False, max_length=128, widget=forms.TextInput())
+    description = forms.CharField(widget=CKEditorWidget(config_name='minimal'))
+    homepage_url = forms.CharField(required=False, max_length=255, widget=forms.TextInput())
 
     def __init__(self, required_password=False, *args, **kwargs):
         super(AccountEditForm, self).__init__(*args, **kwargs)
@@ -75,9 +83,24 @@ class AccountEditForm(forms.Form):
             self.fields['password'].required = True
             self.fields['password2'].required = True
 
+    '''
+    def clean_username(self):
+        username = self.cleaned_data.get('username', '')
+        if get_user_model().objects.filter(username=username).count() > 0:
+            raise forms.ValidationError(_('This username is already in use'))
+        return username
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email', '')
+        if get_user_model().objects.filter(email=email).count() > 0:
+            raise forms.ValidationError(_('This email is already in use'))
+        return email
+
+    '''
+
     def clean_password2(self):
         password = self.cleaned_data.get('password', '')
         password2 = self.cleaned_data['password2']
         if password != password2:
-            raise forms.ValidationError(u'Password mismatch')
+            raise forms.ValidationError(_('Password mismatch'))
         return password2
