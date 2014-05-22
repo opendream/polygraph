@@ -1,11 +1,12 @@
 {% extends 'base_single.html' %}
 {% load i18n %}
 
+{% block title %}{% trans "Please log in" %}{% endblock %}
+
 {% block content_class %} content-thin{% endblock %}
 
 {% block content %}
 
-<h1>Please log in</h1>
 <form class="form-normal" role="form" method="post">
 
     {% csrf_token %}

@@ -4,7 +4,14 @@
 
 <div class="container">
     <div class="content-inner{% block content_class %}{% endblock %}">
-        {% block content %}{% endblock %}
+        <section>
+            <header>
+                <h1>{% block title %}{% endblock %}</h1>
+            </header>
+            <div class="section-content">
+                {% block content %}{% endblock %}
+            </div>
+        <section>
     </div>
 </div>
 

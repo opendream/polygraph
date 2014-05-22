@@ -6,9 +6,15 @@
     <div class="row">
 
         <section class="col-md-8">
+
+            <header>
+                <h1>{% block title %}{% endblock %}</h1>
+            </header>
+
             <div class="content-inner{% block content_class %}{% endblock %}">
                 {% block content %}{% endblock %}
             <div>
+
         </section>
 
         <aside class="col-md-4">

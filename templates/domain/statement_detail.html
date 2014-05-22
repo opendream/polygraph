@@ -1,2 +1,40 @@
 {% extends 'base_sidebar.html' %}
 {% load i18n %}
+
+{% block title %}{% trans "Statement detail" %}{% endblock %}
+
+{% block content %}
+    Content zone
+{% endblock %}
+
+{% block sidebar %}
+
+    <section class="block">
+        <header>
+            <h2>Block title 1</h2>
+        </header>
+        <div>
+            Block content
+        </div>
+    </section>
+
+    <section class="block">
+        <header>
+            <h2>Block title 2</h2>
+        </header>
+        <div>
+            Block content 2
+        </div>
+    </section>
+
+    <section class="block">
+        <header>
+            <h2>Block title 3</h2>
+        </header>
+        <div>
+            Block content 3
+        </div>
+    </section>
+
+
+{% endblock %}
