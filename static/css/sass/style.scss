@@ -15,6 +15,8 @@ h1, h2, h3, h4, h5, h6,
 p {
 	color: $text_normal;
 }
+p.border-bt { padding-bottom: 20px; border-bottom: 2px solid $block_border; }
+.text-brown { color: $text_brown; }
 
 a,
 a:hover { color: $text_brown; }
@@ -29,12 +31,11 @@ a:hover { text-decoration: underline; }
 .btn-primary {
 	color: #FFF;
 	background-color: $bright_orange;
-	border: none;
 	&:hover { 
 		background-color: $base_orange;
 	}
 }
-.btn-link {
+.btn-color {
 	color: $text_normal;
 	background-color: $soft_orange;
 	&:hover {
@@ -42,9 +43,11 @@ a:hover { text-decoration: underline; }
 		background-color: $soft_orange;
 	}
 }
-
+@media (max-width: 640px) {
+	.hidden-640 { display: none !important; }
+}
 body {
-  padding-top: 60px;
+  padding-top: 100px;
   background-color: #E5E5E5;
 }
 
@@ -55,6 +58,36 @@ body {
   	max-width: 500px;
   	padding: 15px;
   	margin: 0 auto;
+}
+
+[class*="dialog-ic"] {
+	position: relative;
+	display: block;
+	float: left;
+	margin-right: 0.5em;
+	width: 40px; 
+	height: 25px;
+	&:after {
+		border-width: 5px;
+		border-style: solid;
+		content: "";
+		display: inline-block;
+		position: absolute;
+		bottom: -10px;
+		left: 50%;	
+	}
+}
+[class*="dialog-ic-color"] {
+	background-color: $bright_orange;
+	&:after {
+		border-color: $bright_orange $bright_orange transparent transparent;
+	}
+}
+[class*="dialog-ic-bw"] {
+	background-color: $block_border;
+	&:after {
+		border-color: $block_border $block_border transparent transparent;
+	}
 }
 
 .navbar-default {
@@ -205,14 +238,10 @@ input + .errors{
 		padding: 20px;
 	}
 	ul.block-content {
-		list-style: none;
 		padding: 10px 20px 0 20px;
 		li {
 			.item-inner {
-				overflow: hidden;
-				padding: 10px 0;
 				margin: 0;
-				border-bottom: 1px dotted #333333;
 				.left {padding-right: 0;padding-left: 0; }
 				.right {padding-right: 0;}
 			}
@@ -224,15 +253,18 @@ input + .errors{
 		@include border-radius(0);
 	}
 }
-// @media (max-width: 992px) {
-// 	.item { 
-// 		.item-inner {
-// 			margin: 0;
-// 			.left {padding-left: 0;}
-// 			.amount-num {padding-right: 0;}
-// 		}
-// 	}	
-// }
+.item-list {
+	list-style: none;
+	padding-left: 0;
+	li {
+		.item-inner {
+			overflow: hidden;
+			padding: 10px 0;
+			// margin: 0;
+			border-bottom: 1px dotted #333333;
+		}
+	}
+}
 @media (max-width: 640px) {
 	.item { 
 		width: 100%;
@@ -244,9 +276,8 @@ input + .errors{
 				width: 100%;
 			}
 		}
-	}	
+	}
 }
-// ---------------------------
 
 .summary h3 {
 	.left { 
@@ -321,11 +352,6 @@ blockquote {
 	}
 }
 
-.hilight-people {
-	.left {position: absolute;}
-	.right {padding-left: 140px;}
-}
-
 @media (max-width: 600px) {
 	.who-said {
 		.people-profile { 
@@ -336,26 +362,110 @@ blockquote {
 			width: 100%;
 			text-align: left;
 		}
-	}	
+	}
 }
 
-h2 .dialog-ic {
-	position: relative;
-	display: block;
-	float: left;
-	margin-right: 0.5em;
-	width: 40px; 
-	height: 25px;
-	background-color: $bright_orange;
-	&:after {
-		border-color: $bright_orange $bright_orange transparent transparent ;
-		border-width: 5px;
-		border-style: solid;
-		content: "";
-		display: inline-block;
+.hilight-people {
+	.left { position: absolute; }
+	.right { padding-left: 140px; }
+}
+
+.statement-list {
+	margin-bottom: 20px;
+	ul.block-content li .item-inner { 
+		border-bottom: 2px solid #EFEFEF !important;
+		padding: 30px 0;
+		position: relative;
+		p { margin-bottom: 30px; }
+	}
+}
+.avatar {
+	img { float: left; margin-right: 10px; }
+}
+
+@media (max-width: 640px) { 
+	.statement-list ul.block-content li .item-inner>div:first-child { 
+		width: 100%;
+		.avatar { padding-right: 120px;}
+	}
+	.meter-md {
 		position: absolute;
-		bottom: -10px;
-		left: 50%;	
+		bottom: 15px;
+		right: 0;
+		width: 120px;
+		img { height: 80px; }
+	}
+}
+
+.nav-color {
+	padding-top: 15px;
+	li {
+		padding: 0 10px; margin: 0;
+		text-align: center;
+		&:after {
+			content: "•";
+			position: absolute;
+			top: 0.8em;
+			right: -3px;
+		}
+		.caret {
+			border-top: none;
+			border-bottom: 12px solid #FFF;
+			border-right: 12px solid transparent;
+			border-left: 12px solid transparent;
+			margin-bottom: -8px;
+		}
+		&:last-child {
+			&:after { display: none; }
+		}
+	}
+	li a {
+		@include border-radius(20px);
+		background-color: transparent;
+		&:hover {
+			background-color: $soft_orange;
+			color: $text_brown;
+		}
+	}
+	li.active a {
+		background-color: $bright_orange;
+		color: #FFFFFF;
+		&:hover {
+			background-color: $soft_orange;
+			color: $text_brown;
+		}
+	}
+}
+
+.polygraph-list {
+	&>header { position: relative; z-index: 2; }
+	&>article { position: relative; z-index: 1; }
+	.statement-list { overflow: hidden; }
+}
+
+//############# Fixed width polygraph block front page
+@media (min-width: 769px) { 
+	.polygraph-list {
+		ul.item-list.ul-left { padding-right: 100px; }
+		ul.item-list.ul-right { padding-left: 100px; }
+	}
+}
+@media (max-width: 768px) { 
+	.polygraph-list {
+		ul.item-list { padding-right: 180px; }
+	}
+}
+@media (max-width: 640px) { 
+	.polygraph-list {
+		ul.item-list { padding-right: 0; }
+	}
+}
+//####################################################
+
+.tag-list {
+	a {
+		margin-bottom: 10px;
+		margin-right: 10px;
 	}
 }
 
