@@ -4,10 +4,6 @@ from django import forms
 from django.core.validators import validate_slug
 from django.utils.translation import ugettext_lazy as _
 
-from domain.models import People
-
-import inspect
-
 class PermalinkForm(forms.Form):
 
     PERMALINK_FIELDS = ['permalink']
@@ -29,6 +25,7 @@ class PermalinkForm(forms.Form):
                 self._errors[field_name] = [_('This %s is already in use.') % field_name]
 
         return cleaned_data
+
 
 class PeopleEditForm(PermalinkForm):
 
