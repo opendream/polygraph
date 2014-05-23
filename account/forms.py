@@ -3,6 +3,7 @@ from django import forms
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.forms import PasswordResetForm
 from django.utils.translation import ugettext_lazy as _
+from domain.forms import PermalinkForm
 
 
 class EmailAuthenticationForm(forms.Form):
@@ -64,7 +65,7 @@ class ResetPasswordForm(PasswordResetForm):
         return email
 
 
-class AccountEditForm(forms.Form):
+class AccountEditForm(PermalinkForm):
 
     username    = forms.CharField(max_length=75)
     email       = forms.EmailField(max_length=75)
@@ -77,29 +78,14 @@ class AccountEditForm(forms.Form):
     description = forms.CharField(required=False, widget=CKEditorWidget(config_name='minimal'))
     homepage_url = forms.CharField(required=False, max_length=255, widget=forms.TextInput())
 
-    def __init__(self, required_password=False, request=None,  *args, **kwargs):
-        super(AccountEditForm, self).__init__(*args, **kwargs)
+    PERMALINK_FIELDS = ['username', 'email']
 
-        self.request = request
+    def __init__(self, inst=None, model=None, required_password=False, *args, **kwargs):
+        super(AccountEditForm, self).__init__(inst, model, *args, **kwargs)
 
         if required_password:
             self.fields['password'].required = True
             self.fields['password2'].required = True
-
-
-    def clean_username(self):
-        username = self.cleaned_data.get('username', '')
-
-        if get_user_model().objects.filter(username=username).exclude(id=self.request.user.id).count() > 0:
-            raise forms.ValidationError(_('This username is already in use.'))
-        return username
-
-    def clean_email(self):
-        email = self.cleaned_data.get('email', '')
-
-        if get_user_model().objects.filter(email=email).exclude(id=self.request.user.id).count() > 0:
-            raise forms.ValidationError(_('This email is already in use.'))
-        return email
 
     def clean_password2(self):
         password = self.cleaned_data.get('password', '')

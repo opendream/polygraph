@@ -6,7 +6,7 @@ from django.contrib.auth.views import login, password_reset, password_reset_done
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from django.utils.http import base36_to_int, urlsafe_base64_decode
+from django.utils.http import urlsafe_base64_decode
 from django.utils.translation import ugettext_lazy as _
 
 from account.forms import EmailAuthenticationForm, ResetPasswordForm, AccountEditForm
@@ -18,7 +18,7 @@ def account_login(request):
         request.session.set_expiry(0) # No unit test
 
     if request.user.is_authenticated():
-        return redirect('domain_home')
+        return redirect('home')
 
     return login(request, authentication_form=EmailAuthenticationForm,
         template_name='account/login.html')
@@ -68,9 +68,10 @@ def account_edit(request):
     required_password = request.GET.get('reset_password')
 
     user = request.user
+    UserModel = get_user_model()
 
     if request.method == 'POST':
-        form = AccountEditForm(required_password, request, request.POST)
+        form = AccountEditForm(request.user, UserModel, required_password, request.POST)
         if form.is_valid():
             user.username = form.cleaned_data['username']
             user.email = form.cleaned_data['email']
@@ -91,7 +92,7 @@ def account_edit(request):
             return redirect('account_edit')
     else:
 
-        form = AccountEditForm(required_password, request, initial={
+        form = AccountEditForm(request.user, UserModel, required_password, initial={
             'username': user.username,
             'email': user.email,
             'first_name': user.first_name,

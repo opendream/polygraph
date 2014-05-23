@@ -23,7 +23,7 @@ class TestLogin(TestCase):
         self.client.login(username=self.staff.username, password='password')
 
         response = self.client.get(reverse('account_login'), follow=True)
-        self.assertRedirects(response, reverse('domain_home'))
+        self.assertRedirects(response, reverse('home'))
         self.client.logout()
 
     def test_login_page_context(self):
@@ -39,7 +39,7 @@ class TestLogin(TestCase):
         response = self.client.post(reverse('account_login'), params, follow=True)
 
         self.assertIn('_auth_user_id', self.client.session)
-        self.assertRedirects(response, reverse('domain_home'))
+        self.assertRedirects(response, reverse('home'))
         self.client.logout()
 
     def test_post_login_with_username(self):
@@ -50,7 +50,7 @@ class TestLogin(TestCase):
         response = self.client.post(reverse('account_login'), params, follow=True)
 
         self.assertIn('_auth_user_id', self.client.session)
-        self.assertRedirects(response, reverse('domain_home'))
+        self.assertRedirects(response, reverse('home'))
         self.client.logout()
 
     def test_post_login_invalid(self):
