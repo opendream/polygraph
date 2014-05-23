@@ -383,6 +383,12 @@ blockquote {
 	}
 }
 
+.statement-meta {
+	border-bottom: 3px solid $block_border;
+	position: relative;	
+}
+.statement-desc { border: 5px dashed $soft_orange !important; }
+
 .hilight-people {
 	.left { position: absolute; }
 	.right { padding-left: 140px; }
