@@ -1,6 +1,8 @@
 from django.contrib.auth.tokens import default_token_generator
+from django.core import mail
 from django.core.urlresolvers import reverse
-from django.utils.http import int_to_base36
+from django.utils.encoding import force_bytes
+from django.utils.http import int_to_base36, urlsafe_base64_encode
 from django.utils.translation import ugettext_lazy as _
 from django.test import TestCase
 from account.models import Staff
@@ -21,7 +23,7 @@ class TestLogin(TestCase):
         self.client.login(username=self.staff.username, password='password')
 
         response = self.client.get(reverse('account_login'), follow=True)
-        self.assertRedirects(response, reverse('domain_home'))
+        self.assertRedirects(response, reverse('home'))
         self.client.logout()
 
     def test_login_page_context(self):
@@ -37,7 +39,7 @@ class TestLogin(TestCase):
         response = self.client.post(reverse('account_login'), params, follow=True)
 
         self.assertIn('_auth_user_id', self.client.session)
-        self.assertRedirects(response, reverse('domain_home'))
+        self.assertRedirects(response, reverse('home'))
         self.client.logout()
 
     def test_post_login_with_username(self):
@@ -48,7 +50,7 @@ class TestLogin(TestCase):
         response = self.client.post(reverse('account_login'), params, follow=True)
 
         self.assertIn('_auth_user_id', self.client.session)
-        self.assertRedirects(response, reverse('domain_home'))
+        self.assertRedirects(response, reverse('home'))
         self.client.logout()
 
     def test_post_login_invalid(self):
@@ -59,7 +61,7 @@ class TestLogin(TestCase):
         }
         response = self.client.post(reverse('account_login'), params)
 
-        self.assertContains(response, _('Please, enter correct email/username and password'))
+        self.assertContains(response, _('Please, enter correct email/username and password.'))
         self.assertNotIn('_auth_user_id', self.client.session)
 
         # invalid password
@@ -69,7 +71,7 @@ class TestLogin(TestCase):
         }
         response = self.client.post(reverse('account_login'), params)
 
-        self.assertContains(response, _('Please, enter correct email/username and password'))
+        self.assertContains(response, _('Please, enter correct email/username and password.'))
         self.assertNotIn('_auth_user_id', self.client.session)
 
         # invalid active
@@ -121,6 +123,14 @@ class TestResetPassword(TestCase):
         response = self.client.post(reverse('account_reset_password'), params, follow=True)
         self.assertRedirects(response, reverse('account_reset_password_done'))
 
+        uid = urlsafe_base64_encode(force_bytes(self.staff.id))
+        token = default_token_generator.make_token(self.staff)
+
+        self.assertEquals(len(mail.outbox), 1)
+        self.assertIn(_('Reset password on').encode('utf-8'), mail.outbox[0].subject)
+        self.assertIn(reverse('account_reset_password_confirm', args=[uid, token, ]), mail.outbox[0].body)
+
+
     def test_request_password_with_invalid_email(self):
         params = {
             'email': 'invalid',
@@ -136,14 +146,15 @@ class TestResetPassword(TestCase):
         self.assertFormError(response, 'form', 'email', [_('Your email address is not registered.')])
 
     def test_access_reset_password_confirm_form_link_in_email(self):
-        uid = int_to_base36(self.staff.id)
+        uid = urlsafe_base64_encode(force_bytes(self.staff.id))
+
         token = default_token_generator.make_token(self.staff)
         response = self.client.get(reverse('account_reset_password_confirm', args=[uid, token, ]), follow=True)
         self.assertRedirects(response, reverse('account_edit')+'?reset_password=True')
         self.assertContains(response, _('Please, change your password'))
 
     def test_invalid_uid_in_reset_password_confirm(self):
-        uid = '42'
+        uid = urlsafe_base64_encode(force_bytes(5))
         token = '3ai-e84fa443f006ac46frvp'
         response = self.client.get(reverse('account_reset_password_confirm', args=[uid, token, ]))
         self.assertEqual(404, response.status_code)
@@ -225,7 +236,7 @@ class TestEditProfile(TestCase):
         self.client.login(username=self.staff1.username, password='password')
         response = self.client.post(reverse('account_edit'), params, follow=True)
 
-        self.assertContains(response, _('Your account profile has been updated'))
+        self.assertContains(response, _('Your account profile has been updated.'))
         self.assertEqual(Staff.objects.filter(username=self.staff1.username).count(), 0)
         self.assertEqual(Staff.objects.filter(email=self.staff1.email).count(), 0)
 
@@ -242,3 +253,78 @@ class TestEditProfile(TestCase):
         self.client.login(username=staff.username, password='1234')
         self.assertIn('_auth_user_id', self.client.session)
         self.client.logout()
+
+    def test_post_edit_profile_without_password(self):
+
+        params = {
+            'username': 'username.change',
+            'email': 'email.change@gmail.com',
+            'first_name': 'first name change',
+            'last_name': 'last name change',
+            'occupation': 'occupation change',
+            'description': 'description change',
+            'homepage_url': 'http://homepage.url/change',
+        }
+        self.client.login(username=self.staff1.username, password='password')
+        response = self.client.post(reverse('account_edit'), params, follow=True)
+
+        staff = Staff.objects.get(email="email.change@gmail.com")
+        self.assertEqual(staff.first_name, 'first name change')
+        self.assertEqual(staff.last_name, 'last name change')
+        self.assertEqual(staff.occupation, 'occupation change')
+        self.assertEqual(staff.description, 'description change')
+        self.assertEqual(staff.homepage_url, 'http://homepage.url/change')
+        self.client.logout()
+
+        self.client.login(username=staff.username, password='password')
+        self.assertIn('_auth_user_id', self.client.session)
+        self.client.logout()
+
+    def test_post_edit_profile_invalid(self):
+        self.client.login(username=self.staff1.email, password='password')
+
+        params = {
+            'username': '',
+            'email': '',
+            'first_name': '',
+            'last_name': '',
+            'occupation': '',
+            'description': '',
+            'homepage_url': '',
+        }
+        response = self.client.post(reverse('account_edit'), params)
+        self.assertFormError(response, 'form', 'username', [_('This field is required.')])
+        self.assertFormError(response, 'form', 'email', [_('This field is required.')])
+
+        params = {
+            'password': 'q',
+            'password2': 'w',
+        }
+        response = self.client.post(reverse('account_edit'), params)
+        self.assertFormError(response, 'form', 'password2', [_('Password mismatch.')])
+
+        params = {
+            'username': self.staff2.username,
+            'email': self.staff2.email,
+            'first_name': '',
+            'last_name': '',
+            'occupation': '',
+            'description': '',
+            'homepage_url': '',
+        }
+        response = self.client.post(reverse('account_edit'), params)
+        self.assertFormError(response, 'form', 'username', [_('This username is already in use.')])
+        self.assertFormError(response, 'form', 'email', [_('This email is already in use.')])
+
+        self.client.logout()
+
+    def test_post_edit_profile_not_update(self):
+        self.client.login(username=self.staff1.email, password='password')
+
+        params = {
+            'username': self.staff1.username,
+            'email': self.staff1.email
+        }
+
+        response = self.client.post(reverse('account_edit'), params, follow=True)
+        self.assertContains(response, _('Your account profile has been updated.'))
