@@ -48,7 +48,7 @@ class EmailAuthenticationForm(forms.Form):
 
 
 class ResetPasswordForm(PasswordResetForm):
-    email = forms.EmailField(max_length=75)
+    #email = forms.EmailField(max_length=75)
 
     def clean_email(self):
 
@@ -61,7 +61,7 @@ class ResetPasswordForm(PasswordResetForm):
         except UserModel.DoesNotExist:
             raise forms.ValidationError(_('Your email address is not registered.'))
 
-        return self.cleaned_data
+        return email
 
 
 class AccountEditForm(forms.Form):

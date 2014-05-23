@@ -6,7 +6,7 @@ from django.contrib.auth.views import login, password_reset, password_reset_done
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from django.utils.http import base36_to_int
+from django.utils.http import base36_to_int, urlsafe_base64_decode
 from django.utils.translation import ugettext_lazy as _
 
 from account.forms import EmailAuthenticationForm, ResetPasswordForm, AccountEditForm
@@ -44,12 +44,12 @@ def account_reset_password_done(request):
     )
 
 
-def account_reset_password_confirm(request, uidb36=None, token=None, email_setting=False):
+def account_reset_password_confirm(request, uidb64=None, token=None, email_setting=False):
 
     UserModel = get_user_model()
 
     try:
-        uid_int = base36_to_int(uidb36)
+        uid_int = urlsafe_base64_decode(uidb64)
         user = UserModel.objects.get(id=uid_int)
     except (ValueError, UserModel.DoesNotExist):
         user = None
