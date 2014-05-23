@@ -70,7 +70,7 @@ def account_edit(request):
     user = request.user
 
     if request.method == 'POST':
-        form = AccountEditForm(required_password, request.POST)
+        form = AccountEditForm(required_password, request, request.POST)
         if form.is_valid():
             user.username = form.cleaned_data['username']
             user.email = form.cleaned_data['email']
@@ -86,12 +86,12 @@ def account_edit(request):
                 user.set_password(password)
             user.save()
 
-            messages.success(request, _('Your account profile has been updated'))
+            messages.success(request, _('Your account profile has been updated.'))
 
             return redirect('account_edit')
     else:
 
-        form = AccountEditForm(required_password, initial={
+        form = AccountEditForm(required_password, request, initial={
             'username': user.username,
             'email': user.email,
             'first_name': user.first_name,
