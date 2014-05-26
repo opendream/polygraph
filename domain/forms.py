@@ -1,4 +1,3 @@
-from functools import wraps
 from ckeditor.widgets import CKEditorWidget
 from django import forms
 from django.core.validators import validate_slug
