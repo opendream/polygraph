@@ -22,10 +22,17 @@ def statement_detail(request, statement_permalink):
 
 # Staff form ===========================================================================
 
-@login_required
-def people_edit(request, people_id=None):
 
-    people = get_object_or_404(People, pk=people_id)
+
+@login_required
+def people_create(request, people=None):
+
+    if not people:
+        people = People()
+        message_success = _('New %s has been created. View this %s <a href="%s">here</a>.') % (_('people'), _('people'), '#')
+    else:
+        message_success = _('Your settings has been updated.')
+
 
     if request.method == 'POST':
         form = PeopleEditForm(people, People, request.POST)
@@ -38,7 +45,7 @@ def people_edit(request, people_id=None):
             people.homepage_url = form.cleaned_data['homepage_url']
             people.save()
 
-            messages.success(request, _('Your settings has been updated.'))
+            messages.success(request, message_success)
 
             return redirect('people_edit', people.id)
     else:
@@ -52,6 +59,13 @@ def people_edit(request, people_id=None):
             'homepage_url': people.homepage_url
         })
 
-    return render(request, 'domain/people_edit.html', {
+    return render(request, 'domain/people_form.html', {
         'form': form
     })
+
+
+@login_required
+def people_edit(request, people_id=None):
+
+    people = get_object_or_404(People, pk=people_id)
+    return people_create(request, people)
