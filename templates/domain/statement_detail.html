@@ -4,6 +4,16 @@
 {% block title %}{% trans "Statement detail" %}{% endblock %}
 
 {% block content %}
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
     <article class="block">
         <section class="highlight-statement block-content">
@@ -31,9 +41,18 @@
         </section>
         <section class="statement-meta block-content">
             <header>
-                <h2 class="hidden">statement</h2>
+                <h3 class="hidden">statement meta</h3>
             </header>
-            <p>เป้าหมายสูงสุดของโครงการรับจำนำข้าว มิใช่คะแนนนิยมของรัฐบาล แต่คือการยกระดับและรักษาความมั่นคงของรายได้ เพื่อชีวิตความเป็นอยู่ที่ดีขึ้นข    เพื่ออนาคตที่ดีกว่าของลูกหลาน และเพื่อให้อาชีพปลูกข้าวให้คนกิน หมายถึงปลูกอนาคตตัวเองลงบนผืนแผ่นดิน โดยไม่กระทบกับวินัยทางการเงินของประเทศ</p>
+            <div class="submit">
+                <span><strong>ที่มา</strong> นสพ.​โพสต์ทูเดย์</span> |
+                <span> ฉบับวันที่ 17 พ.ค. 2557</span> |
+                <span> หน้า 14</span>
+            </div>
+            <div class="share-btn pull-left">
+                <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-type="button_count"></div>
+                <a href="https://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a>
+            </div>
+            <div class="views-count pull-right"><span>2,376</span> Views</div>
         </section>
         <section class="statement-detail block-content">
                 <header>
@@ -55,7 +74,9 @@
                             <time>17 May 2014</time>
                             <p>เป้าหมายสูงสุดของโครงการรับจำนำข้าว มิใช่คะแนนนิยมของรัฐบาล แต่คือการยกระดับและรักษาความมั่นคงของรายได้ เพื่อชีวิตความเป็นอยู่ที่ดีขึ้นข     เพื่ออนาคตที่ดีกว่าของลูกหลาน และเพื่อให้อาชีพปลูกข้าวให้คนกิน หมายถึงปลูกอนาคตตัวเองลงบนผืนแผ่นดิน โดยไม่กระทบกับวินัยทางการเงินของประเทศ</p>
                             <p>เป้าหมายสูงสุดของโครงการรับจำนำข้าว มิใช่คะแนนนิยมของรัฐบาล แต่คือการยกระดับและรักษาความมั่นคงของรายได้ เพื่อชีวิตความเป็นอยู่ที่ดีขึ้นข    เพื่ออนาคตที่ดีกว่าของลูกหลาน และเพื่อให้อาชีพปลูกข้าวให้คนกิน หมายถึงปลูกอนาคตตัวเองลงบนผืนแผ่นดิน โดยไม่กระทบกับวินัยทางการเงินของประเทศ</p>
-                            <h4>Update</h4>
+                        </section>
+                        <section>
+                            <header><h4>Update</h4></header>
                             <ul class="item-list">
                                 <li class="item">
                                     <div class="item-inner">
@@ -80,7 +101,7 @@
     </article>
     <section>
         <header>
-            <h2 class="hidden">Related</h2>
+            <h2>Related</h2>
         </header>
         <article class="col-md-6">
             <div>
@@ -188,6 +209,5 @@
             </ul>
         </div>
     </section>
-
 
 {% endblock %}
