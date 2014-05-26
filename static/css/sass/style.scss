@@ -385,9 +385,15 @@ blockquote {
 
 .statement-meta {
 	border-bottom: 3px solid $block_border;
-	position: relative;	
+	position: relative;
+	overflow: hidden;
+	.submit { margin-bottom: 30px; }
+	.fb-share-button { overflow: hidden; }
 }
-.statement-desc { border: 5px dashed $soft_orange !important; }
+.statement-desc {
+	border: 5px dashed $soft_orange !important;
+	.block-content>section { margin-bottom: 30px; }
+}
 
 .hilight-people {
 	.left { position: absolute; }
