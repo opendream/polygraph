@@ -11,6 +11,12 @@ $text_brown : #7f5d3d; // text brown
 $text_normal : #333333; // text normal
 $block_border : #CCCCCC;
 
+body {
+  padding-top: 100px;
+  background-color: #E5E5E5;
+  font-size: 16px;
+}
+
 h1, h2, h3, h4, h5, h6,
 p {
 	color: $text_normal;
@@ -47,10 +53,6 @@ a:hover { text-decoration: underline; }
 	.hidden-640 { display: none !important; }
 	aside .item-list li { width: 100%; }
 }
-body {
-  padding-top: 100px;
-  background-color: #E5E5E5;
-}
 
 .region {margin-bottom: 30px;}
 
@@ -63,7 +65,7 @@ body {
 }
 
 .sidebar { margin-top: 6px; }
-.item-list {
+.sidebar .item-list {
 	.media {
 		padding: 0 10px;
 		margin-top: 0;
@@ -71,6 +73,15 @@ body {
 		.media-heading { margin-top: 15px; }
 		&:last-child .item-inner { border-bottom: 0; }
 	}
+}
+
+.breadcrumb-wrapper,
+.breadcrumb {
+	margin-bottom: 0;
+}
+.breadcrumb {
+	padding: 0;
+	background-color: transparent;
 }
 
 .pagination {
@@ -207,8 +218,6 @@ body {
 	}
 }
 
-section.container { min-height: 500px; }
-
 .navbar { background-color: $base_orange; }
 
 .navbar-header h1 {margin: 0;}
@@ -271,7 +280,14 @@ input + .errors{
 		border: 5px dashed $base_orange;
 		@include border-radius(0);
 	}
+	&.block-bg-color {
+		background-color: $soft_orange;
+		border: none;
+		@include border-radius(0);		
+		padding: 20px;
+	}
 }
+
 .item-list {
 	list-style: none;
 	padding-left: 0;
@@ -369,7 +385,6 @@ blockquote {
 		text-align: right;
 	}
 }
-
 @media (max-width: 600px) {
 	.who-said {
 		.people-profile { 
@@ -384,15 +399,33 @@ blockquote {
 }
 
 .statement-meta {
-	border-bottom: 3px solid $block_border;
+	border-bottom: 2px solid #D8D8D8;
 	position: relative;
 	overflow: hidden;
 	.submit { margin-bottom: 30px; }
-	.fb-share-button { overflow: hidden; }
+	.fb-share-button {
+		overflow: hidden;
+		margin-right: 10px;
+	}
 }
 .statement-desc {
 	border: 5px dashed $soft_orange !important;
 	.block-content>section { margin-bottom: 30px; }
+}
+.related-statement {
+	.block { position: relative; overflow: visible; }
+	.block:after {
+		border-color: $soft_orange transparent transparent $soft_orange;
+		border-width: 8px 11px;
+		border-style: solid;
+		content: "";
+		display: inline-block;
+		position: absolute;
+		bottom: -15px;
+		left: 75px;
+		margin-left: -10px;			
+	}
+	.media { margin-top: 20px; }
 }
 
 .hilight-people {
@@ -406,7 +439,7 @@ blockquote {
 		border-bottom: 2px solid #EFEFEF !important;
 		padding: 30px 0;
 		position: relative;
-		p { margin-bottom: 30px; }
+		// p { margin-bottom: 30px; }
 	}
 }
 .avatar {
