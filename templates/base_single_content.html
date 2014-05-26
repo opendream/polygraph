@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block base_content %}
+
+<div class="container">
+
+    <div class="content-inner{% block content_class %}{% endblock %}">
+        <section>
+            <header>
+                <h1>{% block title %}{% endblock %}</h1>
+            </header>
+            <div class="section-content block">
+                <div class="block-content{% block block_content_class %}{% endblock %}">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
+        <section>
+    </div>
+</div>
+
+{% endblock %}
