@@ -413,6 +413,7 @@ blockquote {
 	.block-content>section { margin-bottom: 30px; }
 }
 .related-statement {
+	article { margin-bottom: 30px; }
 	.block { position: relative; overflow: visible; }
 	.block:after {
 		border-color: $soft_orange transparent transparent $soft_orange;
@@ -532,6 +533,11 @@ blockquote {
 	.btn {
 		@include border-radius(0);
 	} 
+}
+
+.about-statement {
+	h3 {  margin-top: 0; }
+	p { margin-bottom: 2em; }
 }
 
 .tag-list {
