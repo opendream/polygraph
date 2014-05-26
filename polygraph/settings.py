@@ -146,6 +146,7 @@ CKEDITOR_CONFIGS = {
 }
 
 ALLOWED_HOSTS = ['*']
+DEFAULT_FROM_EMAIL = 'Polygraph <no-reply@polygraph.dev>'
 
 # DEBUG MODE ##################################################################
 if DEBUG:
