@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
 from django.test import TestCase
 from django.db import IntegrityError, transaction
+from django.utils.translation import ugettext_lazy as _
 
 from common import factory
 
@@ -17,7 +18,8 @@ class TestPeople(TestCase):
         self.assertEqual(people1.homepage_url, 'http://dream.politic.com')
         self.assertEqual(people1.get_full_name(), 'Dream Politic')
         self.assertEqual(people1.get_short_name(), 'Dream.P')
-
+        self.assertEqual(people1.__unicode__(), 'dream.p')
+        self.assertEqual(people1.inst_name, _('People'))
 
         people2 = factory.create_people('open.p', 'Open', 'Politic', 'Minister', 'White shirt', 'http://open.politic.com')
         self.assertEqual(people2.first_name, 'Open')
@@ -28,7 +30,8 @@ class TestPeople(TestCase):
         self.assertEqual(people2.homepage_url, 'http://open.politic.com')
         self.assertEqual(people2.get_full_name(), 'Open Politic')
         self.assertEqual(people2.get_short_name(), 'Open.P')
-
+        self.assertEqual(people2.__unicode__(), 'open.p')
+        self.assertEqual(people2.inst_name, _('People'))
 
 
         try:

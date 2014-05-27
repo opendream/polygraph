@@ -59,7 +59,12 @@ a:hover { text-decoration: underline; }
 .container { margin-bottom: 30px; }
 .content-inner { position: relative; }
 .content-thin {
-  	max-width: 500px;
+  	max-width: 350px;
+  	padding: 15px;
+  	margin: 0 auto;
+}
+.content-smart {
+  	max-width: 800px;
   	padding: 15px;
   	margin: 0 auto;
 }
@@ -238,7 +243,12 @@ a:hover { text-decoration: underline; }
 	  &:focus { z-index: 2; }
 	}
 }
-
+form {
+  margin: 20px 0;
+}
+header {
+  overflow: hidden;
+}
 input.first {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;

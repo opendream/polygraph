@@ -1,0 +1,58 @@
+/*
+Syntax error: File to import not found or unreadable: compass/css3/box-sizing.
+              Load path: /Users/crosalot/Lab/polygraph/static/css/sass (DEPRECATED)
+        on line 1 of style.scss
+
+1: @import "compass/css3/box-sizing";
+2: @import "compass/css3/border-radius";
+3: 
+4: $base_orange : #cd5e26; // base orange
+5: $hover_orange : #ff9933; // hover orange
+6: $border_orange : #a34b21; // border orange
+
+Backtrace:
+style.scss:1
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/lib/sass/tree/import_node.rb:66:in `rescue in import'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/lib/sass/tree/import_node.rb:45:in `import'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/lib/sass/tree/import_node.rb:28:in `imported_file'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/lib/sass/tree/import_node.rb:37:in `css_import?'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/lib/sass/tree/visitors/perform.rb:283:in `visit_import'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/lib/sass/tree/visitors/perform.rb:152:in `block in visit'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/lib/sass/stack.rb:79:in `block in with_base'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/lib/sass/stack.rb:121:in `with_frame'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/lib/sass/stack.rb:79:in `with_base'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/lib/sass/tree/visitors/perform.rb:152:in `visit'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/lib/sass/tree/visitors/base.rb:52:in `map'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/lib/sass/tree/visitors/perform.rb:161:in `block in visit_children'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/lib/sass/tree/visitors/perform.rb:173:in `with_environment'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/lib/sass/tree/visitors/perform.rb:160:in `visit_children'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/lib/sass/tree/visitors/perform.rb:180:in `visit_root'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/lib/sass/tree/visitors/perform.rb:151:in `visit'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/lib/sass/tree/visitors/perform.rb:8:in `visit'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/lib/sass/tree/root_node.rb:36:in `css_tree'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/lib/sass/tree/root_node.rb:20:in `render'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/lib/sass/engine.rb:274:in `render'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/lib/sass/plugin/compiler.rb:414:in `update_stylesheet'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/lib/sass/plugin/compiler.rb:189:in `block in update_stylesheets'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/lib/sass/plugin/compiler.rb:186:in `each'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/lib/sass/plugin/compiler.rb:186:in `update_stylesheets'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/lib/sass/plugin.rb:82:in `update_stylesheets'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/lib/sass/exec.rb:489:in `watch_or_update'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/lib/sass/exec.rb:346:in `process_result'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/lib/sass/exec.rb:43:in `parse'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/lib/sass/exec.rb:22:in `parse!'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/gems/sass-3.3.4/bin/scss:13:in `<top (required)>'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/bin/scss:23:in `load'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/bin/scss:23:in `<main>'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/bin/ruby_executable_hooks:15:in `eval'
+/Users/crosalot/.rvm/gems/ruby-1.9.3-p362/bin/ruby_executable_hooks:15:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Syntax error: File to import not found or unreadable: compass/css3/box-sizing.\A               Load path: /Users/crosalot/Lab/polygraph/static/css/sass (DEPRECATED)\A         on line 1 of style.scss\A \A 1: @import \"compass/css3/box-sizing\";\A 2: @import \"compass/css3/border-radius\";\A 3: \A 4: $base_orange : #cd5e26; // base orange\A 5: $hover_orange : #ff9933; // hover orange\A 6: $border_orange : #a34b21; // border orange"; }

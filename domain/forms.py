@@ -25,6 +25,13 @@ class PermalinkForm(forms.Form):
 
         return cleaned_data
 
+    def is_new(self):
+
+        if self.inst and self.inst.id:
+            return False
+
+        return True
+
 
 class PeopleEditForm(PermalinkForm):
 

@@ -22,6 +22,7 @@ class TestEditPeople(TestCase):
         self.url1 = reverse('people_edit', args=[self.people1.id])
         self.url2 = reverse('people_edit', args=[self.people2.id])
         self.message_success = _('Your settings has been updated.')
+        self.title = _('People edit')
 
 
 
@@ -47,6 +48,7 @@ class TestEditPeople(TestCase):
         self.assertContains(response, 'name="occupation"')
         self.assertContains(response, 'name="description"')
         self.assertContains(response, 'name="homepage_url"')
+        self.assertContains(response, self.title)
 
         if not self.check_initial:
             return
@@ -158,3 +160,4 @@ class TestCreatePeople(TestEditPeople):
         self.url1 = reverse('people_create')
         self.url2 = reverse('people_create')
         self.message_success = _('New %s has been created. View this %s <a href="%s">here</a>.') % (_('people'), _('people'), '#')
+        self.title = _('People create')

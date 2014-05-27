@@ -69,3 +69,4 @@ def people_edit(request, people_id=None):
 
     people = get_object_or_404(People, pk=people_id)
     return people_create(request, people)
+

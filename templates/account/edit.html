@@ -1,9 +1,9 @@
 {% extends 'base_single.html' %}
 {% load i18n %}
 
-{% block title %}{% trans "Your profile settings" %}{% endblock %}
+{% block title %}{% trans "Profile settings" %}{% endblock %}
 
-{% block content_class %} content-thin{% endblock %}
+{% block content_class %} content-smart{% endblock %}
 
 {% block content %}
 {% if reset_password %}
@@ -25,8 +25,8 @@
     {% endif %}
 
     <div class="controls form-group">
-        <label for="id_username" class="col-sm-4 control-label">{% trans "Username" %}</label>
-        <div class="col-sm-8">
+        <label for="id_username" class="col-sm-3 control-label">{% trans "Username" %}</label>
+        <div class="col-sm-7">
             <input id="id_username" name="username" type="text" class="form-control" value="{{ form.username.value|default_if_none:"" }}" required>
             {% if form.username.errors %}
             <div class="errors alert alert-danger">{{ form.username.errors }}</div>
@@ -35,8 +35,8 @@
     </div>
 
     <div class="controls form-group">
-        <label for="id_email" class="col-sm-4 control-label">{% trans "Email" %}</label>
-        <div class="col-sm-8">
+        <label for="id_email" class="col-sm-3 control-label">{% trans "Email" %}</label>
+        <div class="col-sm-7">
             <input id="id_email" name="email" type="email" class="form-control" value="{{ form.email.value|default_if_none:"" }}" required>
             {% if form.email.errors %}
             <div class="errors alert alert-danger">{{ form.email.errors }}</div>
@@ -46,8 +46,8 @@
 
 
     <div class="controls form-group{% if reset_password %} has-warning has-feedback{% endif %}">
-        <label for="id_password" class="col-sm-4 control-label">{% trans "Password" %}</label>
-        <div class="col-sm-8">
+        <label for="id_password" class="col-sm-3 control-label">{% trans "Password" %}</label>
+        <div class="col-sm-7">
             <input id="id_password" name="password" type="password" class="form-control" value=""{% if reset_password %} required{% endif %}>
             {% if reset_password %}
             <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
@@ -59,8 +59,8 @@
     </div>
 
     <div class="controls form-group{% if reset_password %} has-warning has-feedback{% endif %}">
-        <label for="id_password2" class="col-sm-4 control-label">{% trans "Confirm password" %}</label>
-        <div class="col-sm-8">
+        <label for="id_password2" class="col-sm-3 control-label">{% trans "Confirm password" %}</label>
+        <div class="col-sm-7">
             <input id="id_password2" name="password2" type="password" class="form-control" value=""{% if reset_password %} required{% endif %}>
             {% if reset_password %}
             <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
@@ -72,8 +72,8 @@
     </div>
 
     <div class="controls form-group">
-        <label for="id_first_name" class="col-sm-4 control-label">{% trans "First name" %}</label>
-        <div class="col-sm-8">
+        <label for="id_first_name" class="col-sm-3 control-label">{% trans "First name" %}</label>
+        <div class="col-sm-7">
             <input id="id_first_name" name="first_name" type="text" class="form-control" value="{{ form.first_name.value|default_if_none:"" }}">
             {% if form.first_name.errors %}
             <div class="errors alert alert-danger">{{ form.first_name.errors }}</div>
@@ -82,8 +82,8 @@
     </div>
 
     <div class="controls form-group">
-        <label for="id_last_name" class="col-sm-4 control-label">{% trans "Last name" %}</label>
-        <div class="col-sm-8">
+        <label for="id_last_name" class="col-sm-3 control-label">{% trans "Last name" %}</label>
+        <div class="col-sm-7">
             <input id="id_last_name" name="last_name" type="text" class="form-control" value="{{ form.last_name.value|default_if_none:"" }}">
             {% if form.last_name.errors %}
             <div class="errors alert alert-danger">{{ form.last_name.errors }}</div>
@@ -92,8 +92,8 @@
     </div>
 
     <div class="controls form-group">
-        <label for="id_occupation" class="col-sm-4 control-label">{% trans "Occupation" %}</label>
-        <div class="col-sm-8">
+        <label for="id_occupation" class="col-sm-3 control-label">{% trans "Occupation" %}</label>
+        <div class="col-sm-7">
             <input id="id_occupation" name="occupation" type="text" class="form-control" value="{{ form.occupation.value|default_if_none:"" }}">
             {% if form.occupation.errors %}
             <div class="errors alert alert-danger">{{ form.occupation.errors }}</div>
@@ -102,8 +102,8 @@
     </div>
 
     <div class="controls form-group">
-        <label for="id_description" class="col-sm-4 control-label">{% trans "Description" %}</label>
-        <div class="col-sm-8">
+        <label for="id_description" class="col-sm-3 control-label">{% trans "Description" %}</label>
+        <div class="col-sm-7">
             {{ form.description }}
             {% if form.description.errors %}
             <div class="errors alert alert-danger">{{ form.description.errors }}</div>
@@ -112,8 +112,8 @@
     </div>
 
     <div class="controls form-group">
-        <label for="id_homepage_url" class="col-sm-4 control-label">{% trans "Homepage url" %}</label>
-        <div class="col-sm-8">
+        <label for="id_homepage_url" class="col-sm-3 control-label">{% trans "Homepage" %}</label>
+        <div class="col-sm-7">
             <input id="id_homepage_url" name="homepage_url" type="text" class="form-control" value="{{ form.homepage_url.value|default_if_none:"" }}">
             {% if form.homepage_url.errors %}
             <div class="errors alert alert-danger">{{ form.homepage_url.errors }}</div>
@@ -121,10 +121,11 @@
         </div>
     </div>
 
-
-    <div class="col-sm-offset-4 col-sm-8 form-action">
-        <button class="btn btn-primary" type="submit">{% trans "Save changes" %}</button>
-        <a href="{% url 'home' %}" class="btn btn-cancle flat-btn">{% trans "Cancel" %}</a>
+    <div class="controls form-group">
+        <div class="col-sm-offset-3 col-sm-7 form-action">
+            <button class="btn btn-primary" type="submit">{% trans "Save changes" %}</button>
+            <a href="{% url 'home' %}" class="btn btn-cancle flat-btn">{% trans "Cancel" %}</a>
+        </div>
     </div>
 
 </form>
