@@ -1,4 +1,4 @@
-from domain.models import People
+from domain.models import People, Topic
 from account.models import Staff
 
 from uuid import uuid1
@@ -39,6 +39,25 @@ def create_people(permalink=None, first_name='', last_name='', occupation='', de
         description = description,
         homepage_url = homepage_url
     )
-    people.save()
+    people = People.objects.get(id=people.id)
+
 
     return people
+
+
+def create_topic(created_by=None, permalink=None, title='', description='', created=None):
+
+    created_by = created_by or create_staff()
+    permalink = permalink or randstr()
+    title = title or randstr()
+
+    topic = Topic.objects.create(
+        permalink = permalink,
+        title  = title,
+        description = description,
+        created_by = created_by
+    )
+
+    topic = Topic.objects.get(id=topic.id)
+
+    return topic
