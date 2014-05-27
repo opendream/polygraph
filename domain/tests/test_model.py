@@ -1,3 +1,4 @@
+from datetime import timedelta
 from django.test import TestCase
 from django.db import IntegrityError, transaction
 from django.utils import timezone
@@ -60,21 +61,40 @@ class TestTopic(TestCase):
         self.assertEqual(topic1.description, 'I am developer')
         self.assertEqual(topic1.created_by, staff1)
 
-        topic1_created2 = timezone.now()
+        topic1_created2 = timezone.now() - timedelta(days=10)
+        topic1_change1 = timezone.now() - timedelta(days=5)
         topic1 = Topic.objects.get(id=topic1.id)
         topic1.title = 'Change title'
         topic1.description = 'Change description'
-        topic1.created= topic1_created2
+        topic1.created = topic1_created2
+        topic1.changed = topic1_change1
         topic1.created_by = staff2
+
+
+        self.assertEqual(topic1.topicrevision_set.count(), 1)
+        self.assertEqual(topic1.title, 'Change title')
+        self.assertEqual(topic1.description, 'Change description')
+        self.assertEqual(topic1.created_by, staff2)
+        self.assertEqual(topic1.created, topic1_created2)
+        self.assertEqual(topic1.changed, topic1_change1)
+
+
         topic1.save()
 
         topic1 = Topic.objects.get(id=topic1.id)
 
-        self.assertEqual(topic1.topicrevision_set.count(), 2)
+        topic_revision_list = topic1.topicrevision_set.order_by('-id')
+
+        self.assertEqual(topic_revision_list.count(), 2)
+        self.assertEqual(topic_revision_list[0].title, 'Change title')
+        self.assertEqual(topic_revision_list[1].title, 'Hello world')
+        self.assertEqual(topic_revision_list[0].created, topic1_change1)
+        self.assertEqual(topic_revision_list[1].created, topic1_created2)
         self.assertEqual(topic1.title, 'Change title')
         self.assertEqual(topic1.description, 'Change description')
         self.assertEqual(topic1.created_by, staff2)
-
+        self.assertEqual(topic1.created, topic1_created2)
+        self.assertEqual(topic1.changed, topic1_change1)
 
 
         topic2 = factory.create_topic(staff2, 'hi-sea', 'Hi sea', 'I am tester')
