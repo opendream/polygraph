@@ -54,6 +54,8 @@ class TestTopic(TestCase):
         staff1 = factory.create_staff()
         staff2 = factory.create_staff()
 
+        # With revision save
+
         topic1_created1 = timezone.now()
         topic1 = factory.create_topic(staff1, 'hello-world', 'Hello world', 'I am developer', topic1_created1)
         self.assertEqual(topic1.topicrevision_set.count(), 1)
@@ -97,6 +99,7 @@ class TestTopic(TestCase):
         self.assertEqual(topic1.changed, topic1_change1)
 
 
+
         topic2 = factory.create_topic(staff2, 'hi-sea', 'Hi sea', 'I am tester')
         self.assertEqual(topic2.topicrevision_set.count(), 1)
         self.assertEqual(topic2.title, 'Hi sea')
@@ -104,7 +107,7 @@ class TestTopic(TestCase):
         self.assertEqual(topic2.created_by, staff2)
 
 
-
+        # Validate
         try:
             with transaction.atomic():
                 factory.create_topic(staff1, 'hello-world', 'Hello world', 'I am developer')
@@ -112,5 +115,28 @@ class TestTopic(TestCase):
             self.assertTrue(0, 'Duplicate permalink allowed.')
 
         except IntegrityError:
-            pass
+            # check don't create topic
+            self.assertEqual(2, Topic.objects.all().count())
+
+
+
+        # Without revision save
+
+        topic1.title = 'Change without revision'
+        topic1.save(without_revision=True)
+
+        self.assertEqual(topic_revision_list.count(), 2)
+        self.assertEqual(topic_revision_list[0].title, 'Change without revision')
+        self.assertEqual(topic_revision_list[1].title, 'Hello world')
+        self.assertEqual(topic_revision_list[0].created, topic1_change1)
+        self.assertEqual(topic_revision_list[1].created, topic1_created2)
+        self.assertEqual(topic1.title, 'Change without revision')
+        self.assertEqual(topic1.description, 'Change description')
+        self.assertEqual(topic1.created_by, staff2)
+        self.assertEqual(topic1.created, topic1_created2)
+        self.assertEqual(topic1.changed, topic1_change1)
+
+
+
+
 
