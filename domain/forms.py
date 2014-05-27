@@ -1,5 +1,7 @@
+import re
 from ckeditor.widgets import CKEditorWidget
 from django import forms
+from django.core import validators
 from django.core.validators import validate_slug
 from django.utils.translation import ugettext_lazy as _
 
@@ -35,7 +37,12 @@ class PermalinkForm(forms.Form):
 
 class PeopleEditForm(PermalinkForm):
 
-    permalink   = forms.CharField(max_length=255, validators=[validate_slug])
+    permalink   = forms.CharField(
+        max_length=255,
+        validators=[validators.RegexValidator(re.compile('^[\w.+-]+$'), _('Enter a valid permalink.'), 'invalid')],
+        help_text=_('Required unique 30 characters or fewer. Letters, numbers and '
+                    './+/-/_ characters')
+    )
 
     first_name  = forms.CharField(max_length=30, widget=forms.TextInput())
     last_name   = forms.CharField(max_length=30, widget=forms.TextInput())

@@ -23,6 +23,7 @@ class TestEditPeople(TestCase):
         self.url2 = reverse('people_edit', args=[self.people2.id])
         self.message_success = _('Your settings has been updated.')
         self.title = _('People edit')
+        self.button = _('Save changes')
 
 
 
@@ -49,6 +50,7 @@ class TestEditPeople(TestCase):
         self.assertContains(response, 'name="description"')
         self.assertContains(response, 'name="homepage_url"')
         self.assertContains(response, self.title)
+        self.assertContains(response, self.button)
 
         if not self.check_initial:
             return
@@ -126,6 +128,18 @@ class TestEditPeople(TestCase):
         response = self.client.post(self.url1, params)
         self.assertFormError(response, 'form', 'permalink',  [_('This permalink is already in use.')])
 
+
+        params = {
+            'permalink': 'a tom in link?',
+            'first_name': self.people1.first_name,
+            'last_name': self.people1.last_name,
+            'occupation': '',
+            'description': '',
+            'homepage_url': '',
+        }
+        response = self.client.post(self.url1, params)
+        self.assertFormError(response, 'form', 'permalink',  [_('Enter a valid permalink.')])
+
         self.client.logout()
 
     def test_post_edit_profile_not_update(self):
@@ -161,3 +175,4 @@ class TestCreatePeople(TestEditPeople):
         self.url2 = reverse('people_create')
         self.message_success = _('New %s has been created. View this %s <a href="%s">here</a>.') % (_('people'), _('people'), '#')
         self.title = _('People create')
+        self.button = _('Save new')
