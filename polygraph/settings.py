@@ -41,6 +41,8 @@ INSTALLED_APPS = (
 
     # Library
     'ckeditor',
+    'sorl.thumbnail',
+    'topnotchdev.files_widget',
 
     # Project
     'account',
@@ -147,6 +149,8 @@ CKEDITOR_CONFIGS = {
 
 ALLOWED_HOSTS = ['*']
 DEFAULT_FROM_EMAIL = 'Polygraph <no-reply@polygraph.dev>'
+
+THUMBNAIL_DEBUG = False
 
 # DEBUG MODE ##################################################################
 if DEBUG:

@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractBaseUser, UserManager, Permission
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
-from domain.models import AbstractPeopleField
+from common.models import AbstractPeopleField
 
 import re
 

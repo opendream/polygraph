@@ -4,4 +4,6 @@ Pillow==2.4.0
 South==0.8.4
 coverage==3.7.1
 django-ckeditor-updated==4.2.8
+django-files-widget==0.2.4dev
+sorl-thumbnail==11.12.1b
 wsgiref==0.1.2

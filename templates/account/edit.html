@@ -122,6 +122,16 @@
     </div>
 
     <div class="controls form-group">
+        <label for="id_image" class="col-sm-3 control-label">{% trans "Picture" %}</label>
+        <div class="col-sm-7">
+            {{ form.image }}
+            {% if form.image.errors %}
+            <div class="errors alert alert-danger">{{ form.image.errors }}</div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="controls form-group">
         <div class="col-sm-offset-3 col-sm-7 form-action">
             <button class="btn btn-primary" type="submit">{% trans "Save changes" %}</button>
             <a href="{% url 'home' %}" class="btn btn-cancle flat-btn">{% trans "Cancel" %}</a>
