@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.forms import PasswordResetForm
 from django.utils.translation import ugettext_lazy as _
 from topnotchdev import files_widget
-from domain.forms import PermalinkForm
+from common.forms import PermalinkForm
 
 
 class EmailAuthenticationForm(forms.Form):
@@ -79,8 +79,6 @@ class AccountEditForm(PermalinkForm):
     description = forms.CharField(required=False, widget=CKEditorWidget(config_name='minimal'))
     homepage_url = forms.CharField(required=False, max_length=255, widget=forms.TextInput())
 
-    #image = forms.ImageField(widget=ImageWidget())
-    #image = files_widget.ImageField()
     image = files_widget.forms.FilesFormField(required=False, fields=(forms.CharField(required=False), forms.CharField(required=False), forms.CharField(required=False), ), widget=files_widget.forms.widgets.ImageWidget())
 
     PERMALINK_FIELDS = ['username', 'email']
