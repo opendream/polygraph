@@ -68,6 +68,19 @@ a:hover { text-decoration: underline; }
   	padding: 15px;
   	margin: 0 auto;
 }
+.files-widget {
+	width: 100%;
+	.files-widget-dropbox {
+		width: 100% !important;
+		margin: 0;
+		border: 3px dashed $block-border !important;
+	}
+	.files-widget-deleted {
+		p { border: none; }
+		> div { border: none; background-color: #F2F2F2; padding: 10px; }
+	}
+}
+
 
 .sidebar { margin-top: 6px; }
 .sidebar .item-list {
@@ -561,6 +574,7 @@ blockquote {
 footer {
 	background-color: $base_orange;
 	* {color: #FFF; line-height: 60px;}
+	.container { margin-bottom: 0; }
 	.footer-logo { font-size: 30px; }
 	.footer-menu {
 		div {
