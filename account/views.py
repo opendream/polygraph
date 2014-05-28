@@ -80,6 +80,7 @@ def account_edit(request):
             user.occupation = form.cleaned_data['occupation']
             user.description = form.cleaned_data['description']
             user.homepage_url = form.cleaned_data['homepage_url']
+            user.image = form.cleaned_data['image']
 
 
             password = form.cleaned_data.get('password')
@@ -99,7 +100,8 @@ def account_edit(request):
             'last_name': user.last_name,
             'occupation': user.occupation,
             'description': user.description,
-            'homepage_url': user.homepage_url
+            'homepage_url': user.homepage_url,
+            'image': user.image
         })
 
     return render(request, 'account/edit.html', {

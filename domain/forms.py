@@ -38,7 +38,7 @@ class PermalinkForm(forms.Form):
 
 class PeopleEditForm(PermalinkForm):
 
-    permalink   = forms.CharField(
+    permalink = forms.CharField(
         max_length=255,
         validators=[validators.RegexValidator(re.compile('^[\w.+-]+$'), _('Enter a valid permalink.'), 'invalid')],
         help_text=_('Required unique 30 characters or fewer. Letters, numbers and '
@@ -52,8 +52,7 @@ class PeopleEditForm(PermalinkForm):
     description = forms.CharField(required=False, widget=CKEditorWidget(config_name='minimal'))
     homepage_url = forms.CharField(required=False, max_length=255, widget=forms.TextInput())
 
-    image = forms.ImageField(widget=files_widget.forms.widgets.ImageWidget())
-
+    image = files_widget.forms.FilesFormField(required=False, fields=(forms.CharField(required=False), forms.CharField(required=False), forms.CharField(required=False), ), widget=files_widget.forms.widgets.ImageWidget())
 
 
 

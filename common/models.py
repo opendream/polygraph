@@ -71,29 +71,27 @@ class AbstractPeopleField(models.Model):
 
     def get_full_name(self):
 
-        """
-        Returns the first_name plus the last_name, with a space in between.
-        """
-        if self.first_name and self.last_name:
+        try:
             full_name = '%s %s' % (self.first_name, self.last_name)
             return full_name.strip()
-
-        return ''
+        except:
+            return ''
 
     def get_short_name(self):
-        "Returns the short name for the user."
 
+        try:
+            if self.first_name.strip() and self.last_name.strip():
+                return '%s.%s' % (self.first_name.strip(), self.last_name.strip()[0])
 
-        if self.first_name and self.last_name and self.first_name.strip() and self.last_name.strip():
-            return '%s.%s' % (self.first_name.strip(), self.last_name.strip()[0])
+            elif self.first_name.strip():
+                return self.first_name.strip()
 
-        elif self.first_name and self.first_name.strip():
-            return self.first_name.strip()
+            elif self.last_name.strip():
+                return self.last_name.strip()
 
-        elif self.last_name and self.last_name.strip():
-            return self.last_name.strip()
-
-        return ''
+            return ''
+        except:
+            return ''
 
 
 class AbstractPermalink(models.Model):

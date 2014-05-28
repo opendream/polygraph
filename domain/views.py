@@ -43,6 +43,8 @@ def people_create(request, people=None):
             people.occupation = form.cleaned_data['occupation']
             people.description = form.cleaned_data['description']
             people.homepage_url = form.cleaned_data['homepage_url']
+            people.image = form.cleaned_data['image']
+
             people.save()
 
             messages.success(request, message_success)
@@ -56,7 +58,8 @@ def people_create(request, people=None):
             'last_name': people.last_name,
             'occupation': people.occupation,
             'description': people.description,
-            'homepage_url': people.homepage_url
+            'homepage_url': people.homepage_url,
+            'image': people.image
         })
 
     return render(request, 'domain/people_form.html', {
