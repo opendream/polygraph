@@ -151,6 +151,10 @@ ALLOWED_HOSTS = ['*']
 DEFAULT_FROM_EMAIL = 'Polygraph <no-reply@polygraph.dev>'
 
 THUMBNAIL_DEBUG = False
+#FILES_WIDGET_JQUERY_PATH = 'js/none.js'         # (jQuery 1.9.1 from Google)
+#FILES_WIDGET_JQUERY_UI_PATH = 'js/none.js'      # (jQuery UI 1.10.3 from Google)
+FILES_WIDGET_JQUERY_PATH = 'libs/jquery/jquery.min.js'
+FILES_WIDGET_JQUERY_UI_PATH = 'libs/jquery-ui/js/jquery-ui-1.10.4.min.js'
 
 # DEBUG MODE ##################################################################
 if DEBUG:
