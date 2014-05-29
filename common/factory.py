@@ -21,7 +21,6 @@ def create_staff(username=None, email=None, password='password', first_name='', 
     homepage_url = homepage_url or randstr()
     image = image or File(open('.%simages/test.jpg' % settings.STATIC_URL), 'test.jpg')
 
-    #File(open('.%simg/logo.png' % settings.STATIC_URL), 'logo.png')
 
     staff = Staff.objects.create_user(
         username = username,
@@ -34,16 +33,21 @@ def create_staff(username=None, email=None, password='password', first_name='', 
         homepage_url = homepage_url,
         image=image
     )
-    staff.save()
 
     staff = Staff.objects.get(id=staff.id)
 
     return staff
 
 
-def create_people(permalink=None, first_name='', last_name='', occupation='', description='', homepage_url=''):
+def create_people(permalink=None, first_name='', last_name='', occupation='', description='', homepage_url='', image=''):
 
     permalink = permalink or randstr()
+    first_name = first_name or randstr()
+    last_name = last_name or randstr()
+    occupation = occupation or randstr()
+    description = description or randstr()
+    homepage_url = homepage_url or randstr()
+    image = image or File(open('.%simages/test.jpg' % settings.STATIC_URL), 'test.jpg')
 
     people = People.objects.create(
         permalink = permalink,
@@ -51,7 +55,8 @@ def create_people(permalink=None, first_name='', last_name='', occupation='', de
         last_name = last_name,
         occupation = occupation,
         description = description,
-        homepage_url = homepage_url
+        homepage_url = homepage_url,
+        image=image
     )
     people = People.objects.get(id=people.id)
 

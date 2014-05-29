@@ -10,8 +10,6 @@ class TestStaff(TestCase):
 
     def test_create_staff(self):
 
-        image = File(open('.%simages/test.jpg' % settings.STATIC_URL), 'test.jpg')
-
 
         staff1 = factory.create_staff('crosalot', 'crosalot@kmail.com', 'password', ' Crosalot', 'Opendream ', 'Developer', 'Opensource', 'http://opendream.co.th')
         self.assertEqual(staff1.first_name, ' Crosalot')
@@ -23,12 +21,7 @@ class TestStaff(TestCase):
         self.assertEqual(staff1.homepage_url, 'http://opendream.co.th')
         self.assertEqual(staff1.get_full_name(), 'Crosalot Opendream')
         self.assertEqual(staff1.get_short_name(), 'Crosalot.O')
-
-        print staff1.image.url
-
-        self.assertEqual(staff1.image.name, './attachment/%s/logo.png')
-        #self.assertEqual(image.url, '%sattachment/%s/logo.png' % (settings.MEDIA_URL, self.project.id))
-        self.assertEqual(staff1.image.read(), File(open('.%simages/test.jpg' % settings.STATIC_URL), 'test.jpg').read())
+        self.assertEqual(staff1.image, 'test.jpg')
 
         staff2 = factory.create_staff('panudate', 'panudate@kmail.com', 'password', ' Panudate', 'Vasinwattana', 'Tester', 'Unittest', 'http://opendream.in.th')
         self.assertEqual(staff2.first_name, ' Panudate')
@@ -40,6 +33,7 @@ class TestStaff(TestCase):
         self.assertEqual(staff2.homepage_url, 'http://opendream.in.th')
         self.assertEqual(staff2.get_full_name(), 'Panudate Vasinwattana')
         self.assertEqual(staff2.get_short_name(), 'Panudate.V')
+        self.assertEqual(staff1.image, 'test.jpg')
 
         staff3 = get_user_model().objects.create(username='staff3', email='staff3@tester.com', password='password', first_name=' Panudate ', last_name='')
         self.assertEqual(staff3.get_full_name(), 'Panudate')

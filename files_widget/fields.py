@@ -29,10 +29,7 @@ def formfield_defaults(self, default_widget=None, widget=None, form_class=FilesF
 def save_all_data(self, instance, data):
     # Save old data to know which images are deleted.
     # We don't know yet if the form will really be saved.
-    print 'ccccccccc'
-    print self.name
-    print instance
-    print data
+
     old_data = getattr(instance, self.name)
     setattr(instance, OLD_VALUE_STR % self.name, old_data)
     setattr(instance, DELETED_VALUE_STR % self.name, data.deleted_files)
@@ -52,7 +49,6 @@ class FileField(models.CharField):
         setattr(cls, self.name, controllers.FilesDescriptor(self))
 
     def save_form_data(self, instance, data):
-        print 'mmmmmmmmmmm'
         save_all_data(self, instance, data)
         super(FileField, self).save_form_data(instance, data)
 

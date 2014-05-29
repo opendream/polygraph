@@ -156,6 +156,7 @@ DEFAULT_FROM_EMAIL = 'Polygraph <no-reply@polygraph.dev>'
 THUMBNAIL_DEBUG = False
 FILES_WIDGET_JQUERY_PATH = 'libs/jquery/jquery.min.js'
 FILES_WIDGET_JQUERY_UI_PATH = 'libs/jquery-ui/js/jquery-ui-1.10.4.min.js'
+FILES_WIDGET_TEMP_DIR = 'temp/files_widget/'
 #FILES_WIDGET_FILES_DIR = 'uploads/images/files_widget/'
 #FILES_WIDGET_JQUERY_PATH = 'libs/jquery/jquery.min.js'
 #FILES_WIDGET_JQUERY_UI_PATH = 'libs/jquery-ui/js/jquery-ui-1.10.4.min.js'

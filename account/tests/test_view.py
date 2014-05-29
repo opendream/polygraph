@@ -1,8 +1,11 @@
+import os
+import shutil
+from django.conf import settings
 from django.contrib.auth.tokens import default_token_generator
 from django.core import mail
 from django.core.urlresolvers import reverse
 from django.utils.encoding import force_bytes
-from django.utils.http import int_to_base36, urlsafe_base64_encode
+from django.utils.http import urlsafe_base64_encode
 from django.utils.translation import ugettext_lazy as _
 from django.test import TestCase
 from account.models import Staff
@@ -264,11 +267,15 @@ class TestEditProfile(TestCase):
             'occupation': 'occupation change',
             'description': 'description change',
             'homepage_url': 'http://homepage.url/change',
+            'image': 'test.jpg',
         }
         self.client.login(username=self.staff1.username, password='password')
+
         response = self.client.post(reverse('account_edit'), params, follow=True)
 
         staff = Staff.objects.get(email="email.change@gmail.com")
+
+        self.assertEqual(staff.image, 'test.jpg')
         self.assertEqual(staff.first_name, 'first name change')
         self.assertEqual(staff.last_name, 'last name change')
         self.assertEqual(staff.occupation, 'occupation change')
