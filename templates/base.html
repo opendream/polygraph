@@ -1,3 +1,4 @@
+{% load common_tags %}
 <!doctype html>
 <html>
 
@@ -15,16 +16,23 @@
         <link href="{{ STATIC_URL }}css/stylesheets/style.css" rel="stylesheet">
         {% block css %}{% endblock %}
 
+
+
+        {% captureas js_content %}{% block js %}{% endblock %}{% endcaptureas %}
+
+        {% if 'jquery.min.js' not in js_content %}
+        <script src="{{ STATIC_URL }}libs/jquery/jquery.min.js"></script>
+        {% endif %}
+
+        {{ js_content }}
+
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
             <script src="{{ STATIC_URL }}libs/html5shiv/html5shiv.js"></script>
             <script src="{{ STATIC_URL }}libs/respond.js/respond.min.js"></script>
         <![endif]-->
 
-        <script src="{{ STATIC_URL }}libs/jquery/jquery.min.js"></script>
         <script src="{{ STATIC_URL }}libs/bootstrap/js/bootstrap.min.js"></script>
-
-        {% block js %}{% endblock %}
 
 
     </head>
