@@ -11,8 +11,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os, sys
 
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-BASE_PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)), os.path.pardir)
+BASE_PATH = os.path.abspath(os.path.dirname('.'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -42,7 +41,7 @@ INSTALLED_APPS = (
     # Library
     'ckeditor',
     'sorl.thumbnail',
-    'topnotchdev.files_widget',
+    'files_widget',
 
     # Project
     'common',
@@ -69,6 +68,8 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     os.path.join(BASE_PATH, 'templates'),
+    os.path.join(BASE_PATH, 'file_widget/templates'),
+
 )
 
 # Database
@@ -112,6 +113,7 @@ STATIC_URL = '/static/'
 # Additional locations of static files
 STATICFILES_DIRS = (
     os.path.join(BASE_PATH, 'static'),
+    os.path.join(BASE_PATH, 'file_widget/static'),
 )
 
 AUTH_USER_MODEL = 'account.Staff'
@@ -152,10 +154,9 @@ ALLOWED_HOSTS = ['*']
 DEFAULT_FROM_EMAIL = 'Polygraph <no-reply@polygraph.dev>'
 
 THUMBNAIL_DEBUG = False
-FILES_WIDGET_JQUERY_PATH = 'js/none.js'
-FILES_WIDGET_JQUERY_UI_PATH = 'js/none.js'
 FILES_WIDGET_JQUERY_PATH = 'libs/jquery/jquery.min.js'
 FILES_WIDGET_JQUERY_UI_PATH = 'libs/jquery-ui/js/jquery-ui-1.10.4.min.js'
+#FILES_WIDGET_FILES_DIR = 'uploads/images/files_widget/'
 #FILES_WIDGET_JQUERY_PATH = 'libs/jquery/jquery.min.js'
 #FILES_WIDGET_JQUERY_UI_PATH = 'libs/jquery-ui/js/jquery-ui-1.10.4.min.js'
 

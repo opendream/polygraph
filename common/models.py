@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from ckeditor.fields import RichTextField
 
 import re
-from topnotchdev import files_widget
+import files_widget
 
 
 class CommonTrashManager(models.Manager):
@@ -62,7 +62,8 @@ class AbstractPeopleField(models.Model):
     description = RichTextField(null=True, blank=True)
     homepage_url = models.CharField(max_length=255, null=True, blank=True)
 
-    image = files_widget.ImageField()
+    image = files_widget.ImageField(null=True, blank=True)
+
 
     class Meta:
         abstract = True

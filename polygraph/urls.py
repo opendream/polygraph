@@ -11,7 +11,7 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^ckeditor/', include('ckeditor.urls')),
-    url(r'^files-widget/', include('topnotchdev.files_widget.urls')),
+    url(r'^files-widget/', include('files_widget.urls')),
 
     url(r'^account/', include('account.urls')),
     url(r'', include('domain.urls')),
