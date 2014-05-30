@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.core.files import File
-from domain.models import People, Topic
+from domain.models import People, Topic, PeopleCategory
 from account.models import Staff
 
 from uuid import uuid1
@@ -37,6 +37,23 @@ def create_staff(username=None, email=None, password='password', first_name='', 
     staff = Staff.objects.get(id=staff.id)
 
     return staff
+
+
+def create_people_category(permalink=None, title='', description=''):
+
+    permalink = permalink or randstr()
+    title = title or randstr()
+    description = description or randstr()
+
+    people_category = PeopleCategory.objects.create(
+        permalink = permalink,
+        title = title,
+        description = description
+    )
+
+    people_category = PeopleCategory.objects.get(id=people_category.id)
+
+    return people_category
 
 
 def create_people(permalink=None, first_name='', last_name='', occupation='', description='', homepage_url='', image=''):

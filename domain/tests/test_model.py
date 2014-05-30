@@ -7,6 +7,29 @@ from django.utils.translation import ugettext_lazy as _
 from common import factory
 from domain.models import Topic
 
+class TestPeopleCategory(TestCase):
+
+    def test_create_people_category(self):
+
+        people_category1 = factory.create_people_category('politician', 'Politician', 'Politician description bar bar')
+        self.assertEqual(people_category1.title, 'Politician')
+        self.assertEqual(people_category1.description, 'Politician description bar bar')
+        self.assertEqual(people_category1.permalink, 'politician')
+
+        people_category2 = factory.create_people_category('military', 'Military', 'Military description foo bar')
+        self.assertEqual(people_category2.title, 'Military')
+        self.assertEqual(people_category2.description, 'Military description foo bar')
+        self.assertEqual(people_category2.permalink, 'military')
+
+
+        try:
+            with transaction.atomic():
+                factory.create_people_category('politician')
+
+            self.assertTrue(0, 'Duplicate permalink allowed.')
+
+        except IntegrityError:
+            pass
 
 class TestPeople(TestCase):
 
