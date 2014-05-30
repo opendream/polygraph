@@ -56,7 +56,7 @@ def create_people_category(permalink=None, title='', description=''):
     return people_category
 
 
-def create_people(permalink=None, first_name='', last_name='', occupation='', description='', homepage_url='', image=''):
+def create_people(permalink=None, first_name='', last_name='', occupation='', description='', homepage_url='', image='', category=''):
 
     permalink = permalink or randstr()
     first_name = first_name or randstr()
@@ -65,6 +65,7 @@ def create_people(permalink=None, first_name='', last_name='', occupation='', de
     description = description or randstr()
     homepage_url = homepage_url or randstr()
     image = image or File(open('.%simages/test.jpg' % settings.STATIC_URL), 'test.jpg')
+    category = category or create_people_category()
 
     people = People.objects.create(
         permalink = permalink,
@@ -75,6 +76,9 @@ def create_people(permalink=None, first_name='', last_name='', occupation='', de
         homepage_url = homepage_url,
         image=image
     )
+    people.categories.add(category)
+    people.save()
+
     people = People.objects.get(id=people.id)
 
 

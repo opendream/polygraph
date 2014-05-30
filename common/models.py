@@ -94,6 +94,9 @@ class AbstractPeopleField(models.Model):
         except:
             return ''
 
+    def __unicode__(self):
+        return self.get_full_name()
+
 
 class AbstractPermalink(models.Model):
 

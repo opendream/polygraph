@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext_lazy as _
 from domain.forms import PeopleEditForm
-from domain.models import People
+from domain.models import People, PeopleCategory
 
 
 def home(request):
@@ -50,12 +50,15 @@ def people_create(request, people=None):
 
             people.save()
 
+            people.categories.clear()
+            for category in form.cleaned_data['categories']:
+                people.categories.add(category)
+
             messages.success(request, message_success)
 
             return redirect('people_edit', people.id)
     else:
-
-        form = PeopleEditForm(people, People, initial={
+        initial = {
             'permalink': people.permalink,
             'first_name': people.first_name,
             'last_name': people.last_name,
@@ -63,7 +66,13 @@ def people_create(request, people=None):
             'description': people.description,
             'homepage_url': people.homepage_url,
             'image': people.image
-        })
+        }
+
+        if people.id:
+            initial['categories'] = people.categories.all()
+
+
+        form = PeopleEditForm(people, People, initial=initial)
 
     return render(request, 'domain/people_form.html', {
         'form': form

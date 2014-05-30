@@ -11,14 +11,17 @@ class TestEditPeople(TestCase):
 
     def setUp(self):
 
+        self.people_category1 = factory.create_people_category('politician', 'Politician')
+        self.people_category2 = factory.create_people_category('military', 'Military')
+
         self.staff1 = factory.create_staff('staff', 'crosalot@kmail.com', 'password', ' Crosalot', 'Opendream ', 'Developer', 'Opensource', 'http://opendream.co.th')
-        self.people2 = factory.create_people('panudate',' Panudate', 'Vasinwattana', 'Tester', 'Unittest', 'http://opendream.in.th')
+        self.people2 = factory.create_people('panudate',' Panudate', 'Vasinwattana', 'Tester', 'Unittest', 'http://opendream.in.th', category=self.people_category1)
 
         self.client.login(username=self.staff1.username, password='password')
 
         # Define for override
         self.check_initial = True
-        self.people1 = factory.create_people('crosalot',' Crosalot', 'Opendream ', 'Developer', 'Opensource', 'http://opendream.co.th')
+        self.people1 = factory.create_people('crosalot',' Crosalot', 'Opendream ', 'Developer', 'Opensource', 'http://opendream.co.th', category=self.people_category2)
         self.url1 = reverse('people_edit', args=[self.people1.id])
         self.url2 = reverse('people_edit', args=[self.people2.id])
         self.message_success = _('Your settings has been updated.')
@@ -49,6 +52,8 @@ class TestEditPeople(TestCase):
         self.assertContains(response, 'name="occupation"')
         self.assertContains(response, 'name="description"')
         self.assertContains(response, 'name="homepage_url"')
+        self.assertContains(response, 'name="image"')
+        self.assertContains(response, 'name="categories"')
         self.assertContains(response, self.title)
         self.assertContains(response, self.button)
 
@@ -61,6 +66,7 @@ class TestEditPeople(TestCase):
         self.assertContains(response, self.people1.occupation)
         self.assertContains(response, self.people1.description)
         self.assertContains(response, self.people1.homepage_url)
+
 
 
         response = self.client.get(self.url2)
@@ -80,6 +86,7 @@ class TestEditPeople(TestCase):
             'occupation': self.people1.occupation,
             'description': self.people1.description,
             'homepage_url': self.people1.homepage_url,
+            'categories': [self.people_category1.id],
         }
 
         response = self.client.post(self.url1, params, follow=True)
@@ -92,6 +99,8 @@ class TestEditPeople(TestCase):
         self.assertContains(response, self.people1.description)
         self.assertContains(response, self.people1.homepage_url)
         self.assertContains(response, self.message_success)
+
+        self.assertEqual(list(response.context['form'].initial['categories']), [self.people_category1])
 
     def test_has_new(self):
         before = People.objects.all().count()
@@ -110,11 +119,13 @@ class TestEditPeople(TestCase):
             'occupation': '',
             'description': '',
             'homepage_url': '',
+            'categories': [],
         }
         response = self.client.post(self.url1, params)
         self.assertFormError(response, 'form', 'permalink', [_('This field is required.')])
         self.assertFormError(response, 'form', 'first_name', [_('This field is required.')])
         self.assertFormError(response, 'form', 'last_name', [_('This field is required.')])
+        self.assertFormError(response, 'form', 'categories', [_('This field is required.')])
 
 
         params = {
@@ -124,6 +135,7 @@ class TestEditPeople(TestCase):
             'occupation': '',
             'description': '',
             'homepage_url': '',
+            'categories': [],
         }
         response = self.client.post(self.url1, params)
         self.assertFormError(response, 'form', 'permalink',  [_('This permalink is already in use.')])
@@ -136,6 +148,7 @@ class TestEditPeople(TestCase):
             'occupation': '',
             'description': '',
             'homepage_url': '',
+            'categories': [],
         }
         response = self.client.post(self.url1, params)
         self.assertFormError(response, 'form', 'permalink',  [_('Enter a valid permalink.')])
@@ -148,6 +161,8 @@ class TestEditPeople(TestCase):
             'permalink': self.people1.permalink,
             'first_name': self.people1.first_name,
             'last_name': self.people1.last_name,
+            'categories': [self.people_category1.id],
+
         }
 
         response = self.client.post(self.url1, params, follow=True)
@@ -161,7 +176,6 @@ class TestCreatePeople(TestEditPeople):
 
         self.check_initial = False
 
-
         self.people1 = People(**{
             'permalink': 'new-crosalot',
             'first_name': 'New',
@@ -170,7 +184,6 @@ class TestCreatePeople(TestEditPeople):
             'description': 'Work on opendream',
             'homepage_url': 'http://opendream.co.th',
         })
-
         self.url1 = reverse('people_create')
         self.url2 = reverse('people_create')
         self.message_success = _('New %s has been created. View this %s <a href="%s">here</a>.') % (_('people'), _('people'), '#')

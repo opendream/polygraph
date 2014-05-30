@@ -3,11 +3,14 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 import files_widget
 from common.forms import PermalinkForm
+from domain.models import PeopleCategory
 
 
 class PeopleEditForm(PermalinkForm):
 
     permalink = forms.CharField()
+
+    categories = forms.ModelMultipleChoiceField(queryset=PeopleCategory.objects.all(), widget=forms.CheckboxSelectMultiple)
 
     first_name = forms.CharField(max_length=30, widget=forms.TextInput())
     last_name = forms.CharField(max_length=30, widget=forms.TextInput())

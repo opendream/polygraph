@@ -15,11 +15,13 @@ class TestPeopleCategory(TestCase):
         self.assertEqual(people_category1.title, 'Politician')
         self.assertEqual(people_category1.description, 'Politician description bar bar')
         self.assertEqual(people_category1.permalink, 'politician')
+        self.assertEqual(people_category1.__unicode__(), 'Politician')
 
         people_category2 = factory.create_people_category('military', 'Military', 'Military description foo bar')
         self.assertEqual(people_category2.title, 'Military')
         self.assertEqual(people_category2.description, 'Military description foo bar')
         self.assertEqual(people_category2.permalink, 'military')
+        self.assertEqual(people_category2.__unicode__(), 'Military')
 
 
         try:
@@ -33,9 +35,15 @@ class TestPeopleCategory(TestCase):
 
 class TestPeople(TestCase):
 
+    def setUp(self):
+
+        self.people_category1 = factory.create_people_category('politician', 'Politician')
+        self.people_category2 = factory.create_people_category('military', 'Military')
+
+
     def test_create_people(self):
 
-        people1 = factory.create_people('dream.p', 'Dream', 'Politic', 'Prime Minister', 'Black shirt', 'http://dream.politic.com')
+        people1 = factory.create_people('dream.p', 'Dream', 'Politic', 'Prime Minister', 'Black shirt', 'http://dream.politic.com', category=self.people_category1)
         self.assertEqual(people1.first_name, 'Dream')
         self.assertEqual(people1.last_name, 'Politic')
         self.assertEqual(people1.permalink, 'dream.p')
@@ -44,11 +52,12 @@ class TestPeople(TestCase):
         self.assertEqual(people1.homepage_url, 'http://dream.politic.com')
         self.assertEqual(people1.get_full_name(), 'Dream Politic')
         self.assertEqual(people1.get_short_name(), 'Dream.P')
-        self.assertEqual(people1.__unicode__(), 'dream.p')
         self.assertEqual(people1.inst_name, _('People'))
         self.assertEqual(people1.image, 'test.jpg')
+        self.assertEqual(list(people1.categories.all()), [self.people_category1])
+        self.assertEqual(people1.__unicode__(), 'Dream Politic')
 
-        people2 = factory.create_people('open.p', 'Open', 'Politic', 'Minister', 'White shirt', 'http://open.politic.com')
+        people2 = factory.create_people('open.p', 'Open', 'Politic', 'Minister', 'White shirt', 'http://open.politic.com', category=self.people_category2)
         self.assertEqual(people2.first_name, 'Open')
         self.assertEqual(people2.last_name, 'Politic')
         self.assertEqual(people2.permalink, 'open.p')
@@ -57,9 +66,10 @@ class TestPeople(TestCase):
         self.assertEqual(people2.homepage_url, 'http://open.politic.com')
         self.assertEqual(people2.get_full_name(), 'Open Politic')
         self.assertEqual(people2.get_short_name(), 'Open.P')
-        self.assertEqual(people2.__unicode__(), 'open.p')
         self.assertEqual(people2.inst_name, _('People'))
         self.assertEqual(people2.image, 'test.jpg')
+        self.assertEqual(list(people2.categories.all()), [self.people_category2])
+        self.assertEqual(people2.__unicode__(), 'Open Politic')
 
 
         try:

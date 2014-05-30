@@ -268,6 +268,7 @@ class TestEditProfile(TestCase):
             'description': 'description change',
             'homepage_url': 'http://homepage.url/change',
             'image': 'test.jpg',
+            'category'
         }
         self.client.login(username=self.staff1.username, password='password')
 
