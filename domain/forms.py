@@ -10,7 +10,7 @@ class PeopleEditForm(PermalinkForm):
 
     permalink = forms.CharField()
 
-    categories = forms.ModelMultipleChoiceField(queryset=PeopleCategory.objects.all(), widget=forms.CheckboxSelectMultiple)
+    categories = forms.ModelMultipleChoiceField(queryset=PeopleCategory.objects.all(), widget=forms.CheckboxSelectMultiple())
 
     first_name = forms.CharField(max_length=30, widget=forms.TextInput())
     last_name = forms.CharField(max_length=30, widget=forms.TextInput())
