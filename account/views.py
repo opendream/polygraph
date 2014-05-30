@@ -10,6 +10,7 @@ from django.utils.http import urlsafe_base64_decode
 from django.utils.translation import ugettext_lazy as _
 
 from account.forms import EmailAuthenticationForm, ResetPasswordForm, AccountEditForm
+from files_widget.fields import save_all_data
 
 
 def account_login(request):
@@ -67,11 +68,11 @@ def account_edit(request):
 
     required_password = request.GET.get('reset_password')
 
-    user = request.user
     UserModel = get_user_model()
+    user = UserModel.objects.get(id=request.user.id)
 
     if request.method == 'POST':
-        form = AccountEditForm(request.user, UserModel, required_password, request.POST)
+        form = AccountEditForm(request.user, UserModel, required_password, request.POST, request.FILES)
         if form.is_valid():
             user.username = form.cleaned_data['username']
             user.email = form.cleaned_data['email']
@@ -80,8 +81,10 @@ def account_edit(request):
             user.occupation = form.cleaned_data['occupation']
             user.description = form.cleaned_data['description']
             user.homepage_url = form.cleaned_data['homepage_url']
-            user.image = form.cleaned_data['image']
 
+            # Use save_form_data like model form
+            print form.cleaned_data['image']
+            user.image._field.save_form_data(user, form.cleaned_data['image'])
 
             password = form.cleaned_data.get('password')
             if password:

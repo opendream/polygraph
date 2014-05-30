@@ -2,7 +2,6 @@
 {% load i18n %}
 
 {% block js %}
-    <script src="{{ STATIC_URL }}libs/jquery-ui/js/jquery-ui-1.10.4.min.js"></script>
     {{ form.media }}
 {% endblock %}
 
@@ -95,4 +94,6 @@
         </div>
     </div>
 </form>
+{{ form.inst.image }}
+
 {% endblock %}

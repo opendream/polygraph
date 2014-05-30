@@ -23,6 +23,7 @@ class TestPeople(TestCase):
         self.assertEqual(people1.get_short_name(), 'Dream.P')
         self.assertEqual(people1.__unicode__(), 'dream.p')
         self.assertEqual(people1.inst_name, _('People'))
+        self.assertEqual(people1.image, 'test.jpg')
 
         people2 = factory.create_people('open.p', 'Open', 'Politic', 'Minister', 'White shirt', 'http://open.politic.com')
         self.assertEqual(people2.first_name, 'Open')
@@ -35,6 +36,7 @@ class TestPeople(TestCase):
         self.assertEqual(people2.get_short_name(), 'Open.P')
         self.assertEqual(people2.__unicode__(), 'open.p')
         self.assertEqual(people2.inst_name, _('People'))
+        self.assertEqual(people2.image, 'test.jpg')
 
 
         try:

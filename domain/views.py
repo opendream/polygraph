@@ -45,6 +45,9 @@ def people_create(request, people=None):
             people.homepage_url = form.cleaned_data['homepage_url']
             people.image = form.cleaned_data['image']
 
+            # Use save_form_data like model form
+            people.image._field.save_form_data(people, form.cleaned_data['image'])
+
             people.save()
 
             messages.success(request, message_success)
