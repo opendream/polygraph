@@ -535,22 +535,22 @@ blockquote {
 }
 
 //############# Fixed width polygraph block front page
-@media (min-width: 769px) { 
-	.polygraph-list {
-		ul.item-list.ul-left { padding-right: 100px; }
-		ul.item-list.ul-right { padding-left: 100px; }
-	}
-}
-@media (max-width: 768px) { 
-	.polygraph-list {
-		ul.item-list { padding-right: 180px; }
-	}
-}
-@media (max-width: 640px) { 
-	.polygraph-list {
-		ul.item-list { padding-right: 0; }
-	}
-}
+// @media (min-width: 769px) { 
+// 	.polygraph-list {
+// 		ul.item-list.ul-left { padding-right: 100px; }
+// 		ul.item-list.ul-right { padding-left: 100px; }
+// 	}
+// }
+// @media (max-width: 768px) { 
+// 	.polygraph-list {
+// 		ul.item-list { padding-right: 180px; }
+// 	}
+// }
+// @media (max-width: 640px) { 
+// 	.polygraph-list {
+// 		ul.item-list { padding-right: 0; }
+// 	}
+// }
 //####################################################
 
 .btn-group-custom {

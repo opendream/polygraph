@@ -803,28 +803,6 @@ blockquote:after {
   overflow: hidden;
 }
 
-@media (min-width: 769px) {
-  /* line 540, ../sass/style.scss */
-  .polygraph-list ul.item-list.ul-left {
-    padding-right: 100px;
-  }
-  /* line 541, ../sass/style.scss */
-  .polygraph-list ul.item-list.ul-right {
-    padding-left: 100px;
-  }
-}
-@media (max-width: 768px) {
-  /* line 546, ../sass/style.scss */
-  .polygraph-list ul.item-list {
-    padding-right: 180px;
-  }
-}
-@media (max-width: 640px) {
-  /* line 551, ../sass/style.scss */
-  .polygraph-list ul.item-list {
-    padding-right: 0;
-  }
-}
 /* line 556, ../sass/style.scss */
 .btn-group-custom {
   position: absolute;
