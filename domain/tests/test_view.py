@@ -263,6 +263,13 @@ class TestEditTopic(TestCase):
         self.assertContains(response, self.topic1.description)
         self.assertContains(response, self.message_success)
 
+        try:
+            self.topic1 = Topic.objects.get(id=self.topic1.id)
+        except: # For created
+            self.topic1 = Topic.objects.latest('id')
+
+        self.assertEqual(self.staff1, self.topic1.created_by)
+
 
     def test_has_new(self):
         before = Topic.objects.all().count()
