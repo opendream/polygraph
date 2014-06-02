@@ -1,6 +1,7 @@
 from django import forms
 from django.core import validators
 from django.utils.translation import ugettext_lazy as _
+from django.forms.util import ErrorList
 
 import re
 
@@ -27,7 +28,11 @@ class PermalinkForm(forms.Form):
             permalink = cleaned_data.get(field_name, '')
 
             if self.model.objects.filter(**{field_name: permalink}).exclude(id=self.inst.id).count() > 0:
-                self._errors[field_name] = [_('This %s is already in use.') % field_name]
+
+                if not self._errors.has_key(field_name):
+                    self._errors[field_name] = ErrorList()
+
+                self._errors[field_name].append(_('This %s is already in use.') % field_name)
 
         return cleaned_data
 
