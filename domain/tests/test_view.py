@@ -24,7 +24,7 @@ class TestEditPeople(TestCase):
         self.people1 = factory.create_people('crosalot',' Crosalot', 'Opendream ', 'Developer', 'Opensource', 'http://opendream.co.th', category=self.people_category2)
         self.url1 = reverse('people_edit', args=[self.people1.id])
         self.url2 = reverse('people_edit', args=[self.people2.id])
-        self.message_success = _('Your settings has been updated.')
+        self.message_success = _('Your people settings has been updated.')
         self.title = _('People edit')
         self.button = _('Save changes')
 

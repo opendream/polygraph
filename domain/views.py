@@ -31,7 +31,7 @@ def people_create(request, people=None):
         people = People()
         message_success = _('New %s has been created. View this %s <a href="%s">here</a>.') % (_('people'), _('people'), '#')
     else:
-        message_success = _('Your settings has been updated.')
+        message_success = _('Your %s settings has been updated. View this %s <a href="%s">here</a>.') % (_('people'), _('people'), '#')
 
 
     if request.method == 'POST':
@@ -73,6 +73,10 @@ def people_create(request, people=None):
 
 
         form = PeopleEditForm(people, People, initial=initial)
+
+
+        print dir(form)
+
 
     return render(request, 'domain/people_form.html', {
         'form': form

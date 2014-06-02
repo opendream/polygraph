@@ -187,7 +187,7 @@ class TestEditProfile(TestCase):
         self.client.logout()
 
     def test_edit_profile_context(self):
-        self.client.login(username=self.staff1, password='password')
+        self.client.login(username=self.staff1.username, password='password')
         response = self.client.get(reverse('account_edit'))
 
         self.assertContains(response, 'name="username"')
@@ -211,7 +211,7 @@ class TestEditProfile(TestCase):
 
         self.client.logout()
 
-        self.client.login(username=self.staff2, password='password')
+        self.client.login(username=self.staff2.username, password='password')
         response = self.client.get(reverse('account_edit'))
         self.assertContains(response, self.staff2.username)
         self.assertContains(response, self.staff2.email)
@@ -267,8 +267,7 @@ class TestEditProfile(TestCase):
             'occupation': 'occupation change',
             'description': 'description change',
             'homepage_url': 'http://homepage.url/change',
-            'image': 'test.jpg',
-            'category'
+            'image': 'test.jpg'
         }
         self.client.login(username=self.staff1.username, password='password')
 
