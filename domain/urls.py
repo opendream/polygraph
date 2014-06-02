@@ -9,5 +9,7 @@ urlpatterns = patterns('domain.views',
     url(r'^people/edit/(?P<people_id>\d+)/$', 'people_edit', name='people_edit'),
     url(r'^people/create/$', 'people_create', name='people_create'),
 
+    url(r'^topic/edit/(?P<topic_id>\d+)/$', 'topic_edit', name='topic_edit'),
+    url(r'^topic/create/$', 'topic_create', name='topic_create'),
 
 )

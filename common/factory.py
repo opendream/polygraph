@@ -90,6 +90,7 @@ def create_topic(created_by=None, permalink=None, title='', description='', crea
     created_by = created_by or create_staff()
     permalink = permalink or randstr()
     title = title or randstr()
+    description = description or randstr()
 
     topic = Topic.objects.create(
         permalink = permalink,

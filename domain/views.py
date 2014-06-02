@@ -2,8 +2,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext_lazy as _
-from domain.forms import PeopleEditForm
-from domain.models import People, PeopleCategory
+from domain.forms import PeopleEditForm, TopicEditForm
+from domain.models import People, PeopleCategory, Topic
 
 
 def home(request):
@@ -89,3 +89,48 @@ def people_edit(request, people_id=None):
     people = get_object_or_404(People, pk=people_id)
     return people_create(request, people)
 
+
+
+@login_required
+def topic_create(request, topic=None):
+
+    if not topic:
+        topic = Topic()
+        message_success = _('New %s has been created. View this %s <a href="%s">here</a>.') % (_('topic'), _('topic'), '#')
+    else:
+        message_success = _('Your %s settings has been updated. View this %s <a href="%s">here</a>.') % (_('topic'), _('topic'), '#')
+
+
+    if request.method == 'POST':
+        form = TopicEditForm(topic, Topic, request.POST)
+        if form.is_valid():
+            topic.permalink = form.cleaned_data['permalink']
+            topic.title = form.cleaned_data['title']
+            topic.description = form.cleaned_data['description']
+            topic.created_by = request.user
+
+            topic.save()
+
+            messages.success(request, message_success)
+
+            return redirect('topic_edit', topic.id)
+    else:
+        initial = {
+            'permalink': topic.permalink,
+            'title': topic.title,
+            'description': topic.description,
+        }
+
+        form = TopicEditForm(topic, Topic, initial=initial)
+
+
+    return render(request, 'domain/topic_form.html', {
+        'form': form
+    })
+
+
+@login_required
+def topic_edit(request, topic_id=None):
+
+    topic = get_object_or_404(Topic, pk=topic_id)
+    return topic_create(request, topic)

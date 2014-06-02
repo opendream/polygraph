@@ -1,17 +1,11 @@
 {% extends 'base_single.html' %}
 {% load i18n %}
 
-{% block css %}
-<link href="{{ STATIC_URL }}libs/prettycheckable/css/prettycheckable.css" rel="stylesheet">
-{% endblock %}
-
 {% block js %}
 {{ form.media }}
-<script src="{{ STATIC_URL }}libs/prettycheckable/js/prettycheckable.js"></script>
-<script src="{{ STATIC_URL }}js/form.js"></script>
 {% endblock %}
 
-{% block title %}{{ form.inst.inst_name }} {% if form.is_new %}{% trans "create" %}{% else %}{% trans "edit" %}{% endif %}{% endblock %}
+{% block title %}{% if form.is_new %}{% trans "Create" %}{% else %}{% trans "Edit" %}{% endif %} {{ form.inst.inst_name }}{% endblock %}
 {% block content_class %} content-smart{% endblock %}
 
 {% block content %}
@@ -74,15 +68,6 @@
                 </li>
                 {% endfor %}
             </ul>
-
-            <ul>
-                {% for choice in form.categories %}
-                <li>
-                    {{ choice.check_test }}
-                </li>
-                {% endfor %}
-            </ul>
-
 
             {% if form.categories.errors %}
             <div class="errors alert alert-danger">{{ form.categories.errors }}</div>

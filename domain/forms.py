@@ -22,4 +22,13 @@ class PeopleEditForm(PermalinkForm):
     image = files_widget.forms.FilesFormField(required=False, fields=(forms.CharField(required=False), forms.CharField(required=False), forms.CharField(required=False), ), widget=files_widget.forms.widgets.ImageWidget())
 
 
+class TopicEditForm(PermalinkForm):
+
+    permalink = forms.CharField()
+
+    title = forms.CharField(max_length=30, widget=forms.TextInput())
+    description = forms.CharField(required=False, widget=CKEditorWidget(config_name='default'))
+
+
+
 
