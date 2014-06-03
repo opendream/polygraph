@@ -286,6 +286,14 @@ input + .errors{
   padding-left: 0;
 }
 
+.checkbox-single {
+  margin-top: 10px;
+}
+
+.controls .prettycheckbox label, .controls .prettyradio label {
+  font-weight: normal;
+  margin: 4px 5px;
+}
 // 
 // List in block style
 // 
