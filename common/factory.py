@@ -2,6 +2,7 @@ from django.conf import settings
 from django.core.files import File
 from domain.models import People, Topic, PeopleCategory, Statement
 from account.models import Staff
+from common.constants import STATUS_DRAFT, STATUS_PENDING, STATUS_PUBLISHED
 
 from uuid import uuid1
 
@@ -56,7 +57,7 @@ def create_people_category(permalink=None, title='', description=''):
     return people_category
 
 
-def create_people(permalink=None, first_name='', last_name='', occupation='', description='', homepage_url='', image='', category='', is_draft=False):
+def create_people(permalink=None, first_name='', last_name='', occupation='', description='', homepage_url='', image='', category='', status=STATUS_PUBLISHED):
 
     permalink = permalink or randstr()
     first_name = first_name or randstr()
@@ -74,7 +75,8 @@ def create_people(permalink=None, first_name='', last_name='', occupation='', de
         occupation = occupation,
         description = description,
         homepage_url = homepage_url,
-        image=image
+        image=image,
+        status=status
     )
     people.categories.add(category)
     people.save()
@@ -103,7 +105,7 @@ def create_topic(created_by=None, permalink=None, title='', description='', crea
 
     return topic
 
-def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', title='', description='', references=None, is_draft=False):
+def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', title='', description='', references=None, status=STATUS_PUBLISHED):
 
     created_by = created_by or create_staff()
     quoted_by = quoted_by or create_people()
@@ -120,7 +122,7 @@ def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', 
         title=title,
         description=description,
         references=references,
-        is_draft=is_draft,
+        status=status,
         quoted_by=quoted_by,
         created_by=created_by
     )

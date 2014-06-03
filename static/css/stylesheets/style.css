@@ -430,7 +430,7 @@ input + .errors {
 }
 
 /* line 284, ../sass/style.scss */
-.checkbox ul {
+.checkbox ul, .radio ul {
   list-style: none;
   padding-left: 0;
 }

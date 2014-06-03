@@ -5,6 +5,7 @@ from django.test import TestCase
 
 from common import factory
 from domain.models import People, Topic
+from common.constants import STATUS_DRAFT, STATUS_PENDING, STATUS_PUBLISHED
 
 
 class TestEditPeople(TestCase):
@@ -21,7 +22,7 @@ class TestEditPeople(TestCase):
 
         # Define for override
         self.check_initial = True
-        self.people1 = factory.create_people('crosalot',' Crosalot', 'Opendream ', 'Developer', 'Opensource', 'http://opendream.co.th', category=self.people_category2)
+        self.people1 = factory.create_people('crosalot',' Crosalot', 'Opendream ', 'Developer', 'Opensource', 'http://opendream.co.th', category=self.people_category2, status=STATUS_DRAFT)
         self.url1 = reverse('people_edit', args=[self.people1.id])
         self.url2 = reverse('people_edit', args=[self.people2.id])
         self.message_success = _('Your %s settings has been updated. View this %s <a href="%s">here</a>.') % (_('people'), _('people'), '#')
@@ -54,6 +55,7 @@ class TestEditPeople(TestCase):
         self.assertContains(response, 'name="homepage_url"')
         self.assertContains(response, 'name="image"')
         self.assertContains(response, 'name="categories"')
+        self.assertContains(response, 'name="status"')
         self.assertContains(response, self.title)
         self.assertContains(response, self.button)
 
@@ -87,6 +89,7 @@ class TestEditPeople(TestCase):
             'description': self.people1.description,
             'homepage_url': self.people1.homepage_url,
             'categories': [self.people_category1.id],
+            'status': self.people1.status,
         }
 
         response = self.client.post(self.url1, params, follow=True)
@@ -101,6 +104,9 @@ class TestEditPeople(TestCase):
         self.assertContains(response, self.message_success)
 
         self.assertEqual(list(response.context['form'].initial['categories']), [self.people_category1])
+        self.assertEqual(response.context['form'].initial['status'], self.people1.status)
+
+
 
     def test_has_new(self):
         before = People.objects.all().count()
@@ -183,6 +189,7 @@ class TestCreatePeople(TestEditPeople):
             'occupation': 'Designer',
             'description': 'Work on opendream',
             'homepage_url': 'http://opendream.co.th',
+            'status': STATUS_DRAFT,
         })
         self.url1 = reverse('people_create')
         self.url2 = reverse('people_create')

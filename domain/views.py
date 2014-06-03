@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext_lazy as _
+from common.constants import STATUS_PUBLISHED
 from domain.forms import PeopleEditForm, TopicEditForm
 from domain.models import People, PeopleCategory, Topic
 
@@ -47,7 +48,7 @@ def people_create(request, people=None):
 
             # Use save_form_data like model form
             people.image._field.save_form_data(people, form.cleaned_data['image'])
-
+            people.status = int(STATUS_PUBLISHED if form.cleaned_data['status'] == '' else form.cleaned_data['status'])
             people.save()
 
             people.categories.clear()
@@ -65,7 +66,8 @@ def people_create(request, people=None):
             'occupation': people.occupation,
             'description': people.description,
             'homepage_url': people.homepage_url,
-            'image': people.image
+            'image': people.image,
+            'status': people.status,
         }
 
         if people.id:

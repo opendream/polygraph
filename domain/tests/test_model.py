@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from common import factory
 from domain.models import Topic, Statement
+from common.constants import STATUS_DRAFT, STATUS_PENDING, STATUS_PUBLISHED
 
 
 class TestPeopleCategory(TestCase):
@@ -56,9 +57,10 @@ class TestPeople(TestCase):
         self.assertEqual(people1.inst_name, _('People'))
         self.assertEqual(people1.image, 'test.jpg')
         self.assertEqual(list(people1.categories.all()), [self.people_category1])
+        self.assertEqual(people1.status, STATUS_PUBLISHED)
         self.assertEqual(people1.__unicode__(), 'Dream Politic')
 
-        people2 = factory.create_people('open.p', 'Open', 'Politic', 'Minister', 'White shirt', 'http://open.politic.com', category=self.people_category2)
+        people2 = factory.create_people('open.p', 'Open', 'Politic', 'Minister', 'White shirt', 'http://open.politic.com', category=self.people_category2, status=STATUS_DRAFT)
         self.assertEqual(people2.first_name, 'Open')
         self.assertEqual(people2.last_name, 'Politic')
         self.assertEqual(people2.permalink, 'open.p')
@@ -70,6 +72,7 @@ class TestPeople(TestCase):
         self.assertEqual(people2.inst_name, _('People'))
         self.assertEqual(people2.image, 'test.jpg')
         self.assertEqual(list(people2.categories.all()), [self.people_category2])
+        self.assertEqual(people2.status, STATUS_DRAFT)
         self.assertEqual(people2.__unicode__(), 'Open Politic')
 
 
@@ -192,7 +195,7 @@ class TestStatement(TestCase):
             title='I love polygraph',
             description='I love polygraph and programming. This field is description.',
             references=[{'url': 'http://polygraph.com', 'title': 'Polygraph quote'}, {'url': 'https://google.com', 'title': 'Search yours quotes'}],
-            is_draft=False
+            status=STATUS_PUBLISHED
         )
         self.assertEqual(statement1.created_by, self.staff1)
         self.assertEqual(statement1.quoted_by, self.people1)
@@ -201,7 +204,7 @@ class TestStatement(TestCase):
         self.assertEqual(statement1.title, 'I love polygraph')
         self.assertEqual(statement1.description, 'I love polygraph and programming. This field is description.')
         self.assertEqual(statement1.references, [{'url': 'http://polygraph.com', 'title': 'Polygraph quote'}, {'url': 'https://google.com', 'title': 'Search yours quotes'}])
-        self.assertEqual(statement1.is_draft, False)
+        self.assertEqual(statement1.status, STATUS_PUBLISHED)
         self.assertEqual(statement1.__unicode__(), 'I love polygraph')
 
 
@@ -213,7 +216,7 @@ class TestStatement(TestCase):
             title='',
             description='I love polygraph and programming and testing. This field is description.',
             references=[{'url': 'http://polygraph.test', 'title': 'Polygraph test'}, {'url': 'https://test.com', 'title': 'Test your test'}],
-            is_draft=True
+            status=STATUS_DRAFT
         )
         self.assertEqual(statement2.created_by, self.staff2)
         self.assertEqual(statement2.quoted_by, self.people2)
@@ -222,7 +225,7 @@ class TestStatement(TestCase):
         self.assertEqual(statement2.title, '')
         self.assertEqual(statement2.description, 'I love polygraph and programming and testing. This field is description.')
         self.assertEqual(statement2.references, [{'url': 'http://polygraph.test', 'title': 'Polygraph test'}, {'url': 'https://test.com', 'title': 'Test your test'}])
-        self.assertEqual(statement2.is_draft, True)
+        self.assertEqual(statement2.status, STATUS_DRAFT)
         self.assertEqual(statement2.__unicode__(), 'I love polygraph and programming and testing.')
 
         try:

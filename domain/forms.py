@@ -1,6 +1,6 @@
 from ckeditor.widgets import CKEditorWidget
 from django import forms
-from django.utils.translation import ugettext_lazy as _
+from common.constants import STATUS_CHOICES
 import files_widget
 from common.forms import PermalinkForm
 from domain.models import PeopleCategory
@@ -21,6 +21,7 @@ class PeopleEditForm(PermalinkForm):
 
     image = files_widget.forms.FilesFormField(required=False, fields=(forms.CharField(required=False), forms.CharField(required=False), forms.CharField(required=False), ), widget=files_widget.forms.widgets.ImageWidget())
 
+    status = forms.ChoiceField(required=False, widget=forms.RadioSelect, choices=STATUS_CHOICES)
 
 class TopicEditForm(PermalinkForm):
 
