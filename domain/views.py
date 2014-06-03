@@ -109,7 +109,9 @@ def topic_create(request, topic=None):
             topic.description = form.cleaned_data['description']
             topic.created_by = request.user
 
-            topic.save()
+            without_revision = form.cleaned_data['without_revision'] or False
+
+            topic.save(without_revision=without_revision)
 
             messages.success(request, message_success)
 
@@ -119,6 +121,7 @@ def topic_create(request, topic=None):
             'permalink': topic.permalink,
             'title': topic.title,
             'description': topic.description,
+            'without_revision': False,
         }
 
         form = TopicEditForm(topic, Topic, initial=initial)

@@ -230,6 +230,7 @@ class TestEditTopic(TestCase):
         self.assertContains(response, 'name="permalink"')
         self.assertContains(response, 'name="title"')
         self.assertContains(response, 'name="description"')
+        self.assertContains(response, 'name="without_revision"')
         self.assertContains(response, self.title)
         self.assertContains(response, self.button)
 
@@ -321,6 +322,32 @@ class TestEditTopic(TestCase):
         response = self.client.post(self.url1, params, follow=True)
         self.assertContains(response, self.message_success)
 
+    def test_post_edit_without_revision(self):
+
+        params = {
+            'permalink': self.topic1.permalink,
+            'title': self.topic1.title,
+            'description': self.topic1.description,
+            'without_revision': True
+        }
+
+        before_count = self.topic1.topicrevision_set.count()
+
+        response = self.client.post(self.url1, params, follow=True)
+
+
+        self.assertContains(response, self.topic1.permalink)
+        self.assertContains(response, self.topic1.title)
+        self.assertContains(response, self.topic1.description)
+        self.assertContains(response, self.message_success)
+        self.assertEqual(response.context['form'].initial['without_revision'], False)
+
+        self.topic1 = Topic.objects.get(id=self.topic1.id)
+
+        self.assertEqual(self.staff1, self.topic1.created_by)
+
+        after_count = self.topic1.topicrevision_set.count()
+        self.assertEqual(after_count, before_count)
 
 class TestCreateTopic(TestEditTopic):
 
@@ -339,3 +366,40 @@ class TestCreateTopic(TestEditTopic):
         self.message_success = _('New %s has been created. View this %s <a href="%s">here</a>.') % (_('topic'), _('topic'), '#')
         self.title = _('Create %s') % _('Topic')
         self.button = _('Save new')
+
+
+    def test_edit_context(self):
+        response = self.client.get(self.url1)
+
+        self.assertContains(response, 'name="permalink"')
+        self.assertContains(response, 'name="title"')
+        self.assertContains(response, 'name="description"')
+        self.assertNotContains(response, 'name="without_revision"')
+        self.assertContains(response, self.title)
+        self.assertContains(response, self.button)
+
+    def test_post_edit_without_revision(self):
+
+        params = {
+            'permalink': self.topic1.permalink,
+            'title': self.topic1.title,
+            'description': self.topic1.description,
+            'without_revision': True
+        }
+
+        response = self.client.post(self.url1, params, follow=True)
+
+
+        self.assertContains(response, self.topic1.permalink)
+        self.assertContains(response, self.topic1.title)
+        self.assertContains(response, self.topic1.description)
+        self.assertContains(response, self.message_success)
+        self.assertEqual(response.context['form'].initial['without_revision'], False)
+
+
+        self.topic1 = Topic.objects.latest('id')
+
+        self.assertEqual(self.staff1, self.topic1.created_by)
+
+        after_count = self.topic1.topicrevision_set.count()
+        self.assertEqual(1, after_count)

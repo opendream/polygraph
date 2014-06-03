@@ -29,6 +29,8 @@ class TopicEditForm(PermalinkForm):
     title = forms.CharField(max_length=30, widget=forms.TextInput())
     description = forms.CharField(required=False, widget=CKEditorWidget(config_name='default'))
 
+    without_revision = forms.NullBooleanField(widget=forms.CheckboxInput())
+
 
 
 
