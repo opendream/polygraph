@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.core.files import File
-from domain.models import People, Topic, PeopleCategory
+from domain.models import People, Topic, PeopleCategory, Statement
 from account.models import Staff
 
 from uuid import uuid1
@@ -56,7 +56,7 @@ def create_people_category(permalink=None, title='', description=''):
     return people_category
 
 
-def create_people(permalink=None, first_name='', last_name='', occupation='', description='', homepage_url='', image='', category=''):
+def create_people(permalink=None, first_name='', last_name='', occupation='', description='', homepage_url='', image='', category='', is_draft=False):
 
     permalink = permalink or randstr()
     first_name = first_name or randstr()
@@ -102,3 +102,29 @@ def create_topic(created_by=None, permalink=None, title='', description='', crea
     topic = Topic.objects.get(id=topic.id)
 
     return topic
+
+def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', title='', description='', references=None, is_draft=False):
+
+    created_by = created_by or create_staff()
+    quoted_by = quoted_by or create_people()
+
+    permalink = permalink or randstr()
+    quote = quote or randstr()
+    title = title or randstr()
+    description = description or randstr()
+    references = references or [{'url': randstr(), 'title': randstr()}, {'url': randstr(), 'title': randstr()}]
+
+    statement = Statement.objects.create(
+        permalink=permalink,
+        quote=quote,
+        title=title,
+        description=description,
+        references=references,
+        is_draft=is_draft,
+        quoted_by=quoted_by,
+        created_by=created_by
+    )
+
+    statement = Statement.objects.get(id=statement.id)
+
+    return statement

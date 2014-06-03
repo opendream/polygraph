@@ -5,11 +5,12 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from common import factory
-from domain.models import Topic
+from domain.models import Topic, Statement
+
 
 class TestPeopleCategory(TestCase):
 
-    def test_create_people_category(self):
+    def test_create(self):
 
         people_category1 = factory.create_people_category('politician', 'Politician', 'Politician description bar bar')
         self.assertEqual(people_category1.title, 'Politician')
@@ -41,7 +42,7 @@ class TestPeople(TestCase):
         self.people_category2 = factory.create_people_category('military', 'Military')
 
 
-    def test_create_people(self):
+    def test_create(self):
 
         people1 = factory.create_people('dream.p', 'Dream', 'Politic', 'Prime Minister', 'Black shirt', 'http://dream.politic.com', category=self.people_category1)
         self.assertEqual(people1.first_name, 'Dream')
@@ -84,7 +85,7 @@ class TestPeople(TestCase):
 
 class TestTopic(TestCase):
 
-    def test_create_topic(self):
+    def test_create(self):
 
         staff1 = factory.create_staff()
         staff2 = factory.create_staff()
@@ -172,6 +173,66 @@ class TestTopic(TestCase):
         self.assertEqual(topic1.changed, topic1_change1)
 
 
+class TestStatement(TestCase):
+
+    def setUp(self):
+
+        self.staff1 = factory.create_staff()
+        self.staff2 = factory.create_staff()
+        self.people1 = factory.create_people()
+        self.people2 = factory.create_people()
+
+    def test_create(self):
+
+        statement1 = factory.create_statement(
+            created_by=self.staff1,
+            quoted_by=self.people1,
+            permalink='i-love-polygraph',
+            quote='I love polygraph and programming.',
+            title='I love polygraph',
+            description='I love polygraph and programming. This field is description.',
+            references=[{'url': 'http://polygraph.com', 'title': 'Polygraph quote'}, {'url': 'https://google.com', 'title': 'Search yours quotes'}],
+            is_draft=False
+        )
+        self.assertEqual(statement1.created_by, self.staff1)
+        self.assertEqual(statement1.quoted_by, self.people1)
+        self.assertEqual(statement1.permalink, 'i-love-polygraph')
+        self.assertEqual(statement1.quote, 'I love polygraph and programming.')
+        self.assertEqual(statement1.title, 'I love polygraph')
+        self.assertEqual(statement1.description, 'I love polygraph and programming. This field is description.')
+        self.assertEqual(statement1.references, [{'url': 'http://polygraph.com', 'title': 'Polygraph quote'}, {'url': 'https://google.com', 'title': 'Search yours quotes'}])
+        self.assertEqual(statement1.is_draft, False)
+        self.assertEqual(statement1.__unicode__(), 'I love polygraph')
+
+
+        statement2 = Statement.objects.create(
+            created_by=self.staff2,
+            quoted_by=self.people2,
+            permalink='i-love-polygraph-2',
+            quote='I love polygraph and programming and testing.',
+            title='',
+            description='I love polygraph and programming and testing. This field is description.',
+            references=[{'url': 'http://polygraph.test', 'title': 'Polygraph test'}, {'url': 'https://test.com', 'title': 'Test your test'}],
+            is_draft=True
+        )
+        self.assertEqual(statement2.created_by, self.staff2)
+        self.assertEqual(statement2.quoted_by, self.people2)
+        self.assertEqual(statement2.permalink, 'i-love-polygraph-2')
+        self.assertEqual(statement2.quote, 'I love polygraph and programming and testing.')
+        self.assertEqual(statement2.title, '')
+        self.assertEqual(statement2.description, 'I love polygraph and programming and testing. This field is description.')
+        self.assertEqual(statement2.references, [{'url': 'http://polygraph.test', 'title': 'Polygraph test'}, {'url': 'https://test.com', 'title': 'Test your test'}])
+        self.assertEqual(statement2.is_draft, True)
+        self.assertEqual(statement2.__unicode__(), 'I love polygraph and programming and testing.')
+
+        try:
+            with transaction.atomic():
+                factory.create_statement(permalink='i-love-polygraph')
+
+            self.assertTrue(0, 'Duplicate permalink allowed.')
+
+        except IntegrityError:
+            pass
 
 
 
