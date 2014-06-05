@@ -3,8 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext_lazy as _
 from common.constants import STATUS_PUBLISHED
-from domain.forms import PeopleEditForm, TopicEditForm
-from domain.models import People, PeopleCategory, Topic
+from domain.forms import PeopleEditForm, TopicEditForm, StatementEditForm
+from domain.models import People, PeopleCategory, Topic, Statement
 
 
 def home(request):
@@ -139,3 +139,53 @@ def topic_edit(request, topic_id=None):
 
     topic = get_object_or_404(Topic, pk=topic_id)
     return topic_create(request, topic)
+
+@login_required
+def statement_create(request, statement=None):
+
+    if not statement:
+        statement = Statement()
+        message_success = _('New %s has been created. View this %s <a href="%s">here</a>.') % (_('statement'), _('statement'), '#')
+    else:
+        message_success = _('Your %s settings has been updated. View this %s <a href="%s">here</a>.') % (_('statement'), _('statement'), '#')
+
+
+    if request.method == 'POST':
+        form = StatementEditForm(statement, Statement, request.POST)
+        if form.is_valid():
+            statement.permalink = form.cleaned_data['permalink']
+            statement.quoted_by = form.cleaned_data['quoted_by']
+            statement.quote = form.cleaned_data['quote']
+            statement.title = form.cleaned_data['title']
+            statement.description = form.cleaned_data['description']
+            statement.references = form.cleaned_data['references']
+            statement.created_by = request.user
+
+            statement.save()
+
+            messages.success(request, message_success)
+
+            return redirect('statement_edit', statement.id)
+    else:
+        initial = {
+            'permalink': statement.permalink,
+            #'quoted_by': statement.quoted_by,
+            'quote': statement.quote,
+            'title': statement.title,
+            'description': statement.description,
+            #'references': statement.references,
+        }
+
+        form = StatementEditForm(statement, Topic, initial=initial)
+
+
+    return render(request, 'domain/statement_form.html', {
+        'form': form
+    })
+
+
+@login_required
+def statement_edit(request, statement_id=None):
+
+    statement = get_object_or_404(Topic, pk=statement_id)
+    return statement_create(request, statement)

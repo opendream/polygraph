@@ -23,6 +23,7 @@ class PeopleEditForm(PermalinkForm):
 
     status = forms.ChoiceField(required=False, widget=forms.RadioSelect, choices=STATUS_CHOICES)
 
+
 class TopicEditForm(PermalinkForm):
 
     permalink = forms.CharField()
@@ -33,5 +34,16 @@ class TopicEditForm(PermalinkForm):
     without_revision = forms.NullBooleanField(widget=forms.CheckboxInput())
 
 
+
+class StatementEditForm(PermalinkForm):
+
+    permalink = forms.CharField()
+
+    quoted_by = forms.CharField(widget=CKEditorWidget(config_name='default'))
+    quote = forms.CharField(widget=CKEditorWidget(config_name='default'))
+
+    title = forms.CharField(required=False, max_length=30, widget=forms.TextInput())
+    description = forms.CharField(required=False, widget=CKEditorWidget(config_name='default'))
+    references = forms.CharField(required=False, widget=forms.Textarea)
 
 

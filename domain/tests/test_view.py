@@ -4,7 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.test import TestCase
 
 from common import factory
-from domain.models import People, Topic
+from domain.models import People, Topic, Statement
 from common.constants import STATUS_DRAFT, STATUS_PENDING, STATUS_PUBLISHED
 
 
@@ -410,3 +410,173 @@ class TestCreateTopic(TestEditTopic):
 
         after_count = self.topic1.topicrevision_set.count()
         self.assertEqual(1, after_count)
+
+
+class TestEditStatement(TestCase):
+
+    def setUp(self):
+
+        self.people_category1 = factory.create_people_category('politician', 'Politician')
+        self.people_category2 = factory.create_people_category('military', 'Military')
+
+        self.staff1 = factory.create_staff(password='password')
+        self.people1 = factory.create_people()
+
+        self.statement2 = factory.create_statement()
+
+        self.client.login(username=self.staff1.username, password='password')
+
+        # Define for override
+        self.check_initial = True
+        self.statement1 = factory.create_statement(quoted_by=self.people1, created_by=self.staff1)
+
+        self.url1 = reverse('statement_edit', args=[self.statement1.id])
+        self.url2 = reverse('statement_edit', args=[self.statement2.id])
+        self.message_success = _('Your %s settings has been updated. View this %s <a href="%s">here</a>.') % (_('statement'), _('statement'), '#')
+        self.title = _('Edit %s') % _('Statement')
+        self.button = _('Save changes')
+
+
+
+    def test_get_edit_page(self):
+
+        self.client.logout()
+
+        response = self.client.get(self.url1)
+        self.assertRedirects(response, '%s?next=%s' % (reverse('account_login'), self.url1))
+
+        self.client.login(username=self.staff1.username, password='password')
+        response = self.client.get(self.url1)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'domain/statement_form.html')
+        self.client.logout()
+
+    def test_edit_context(self):
+        response = self.client.get(self.url1)
+
+        self.assertContains(response, 'name="permalink"')
+        self.assertContains(response, 'name="quoted_by"')
+        self.assertContains(response, 'name="quoted"')
+        self.assertContains(response, 'name="title"')
+        self.assertContains(response, 'name="description"')
+        self.assertContains(response, 'name="references"')
+        self.assertContains(response, 'name="status"')
+        self.assertContains(response, self.title)
+        self.assertContains(response, self.button)
+
+        if not self.check_initial:
+            return
+
+        self.assertContains(response, self.statement1.permalink)
+        self.assertContains(response, self.statement1.quoted_by.id)
+        self.assertContains(response, self.statement1.quote)
+        self.assertContains(response, self.statement1.title)
+        self.assertContains(response, self.statement1.description)
+        for reference in self.statement1.references:
+            self.assertContains(response, reference['title'])
+            self.assertContains(response, reference['url'])
+
+
+
+        response = self.client.get(self.url2)
+        self.assertContains(response, self.statement2.permalink)
+        self.assertContains(response, self.statement2.quoted_by.id)
+        self.assertContains(response, self.statement2.quote)
+        self.assertContains(response, self.statement2.title)
+        self.assertContains(response, self.statement2.description)
+        for reference in self.statement2.references:
+            self.assertContains(response, reference['title'])
+            self.assertContains(response, reference['url'])
+
+    def test_edit_post(self):
+
+        params = {
+            'permalink': self.statement1.permalink,
+            'quoted_by': self.statement1.quoted_by.id,
+            'quote': self.statement1.quote,
+            'title': self.statement1.title,
+            'description': self.statement1.description,
+            'references': self.statement1.references,
+            'status': self.statement1.status,
+        }
+
+        response = self.client.post(self.url1, params, follow=True)
+
+
+        self.assertContains(response, self.statement1.permalink)
+        self.assertContains(response, self.statement1.quote)
+        self.assertContains(response, self.statement1.title)
+        self.assertContains(response, self.statement1.description)
+
+        self.assertEqual(list(response.context['form'].initial['references']), self.statement1.references)
+        self.assertEqual(response.context['form'].initial['quoted_by'], self.statement1.quoted_by)
+        self.assertEqual(response.context['form'].initial['status'], self.statement1.status)
+
+
+
+    def test_has_new(self):
+        before = Statement.objects.all().count()
+        self.test_edit_post()
+        after = Statement.objects.all().count()
+
+        self.assertEqual(int(not self.check_initial), after-before)
+
+
+    def test_post_edit_invalid(self):
+
+        params = {
+            'permalink': '',
+            'quoted_by': '',
+            'quote': '',
+            'title': '',
+            'description': '',
+            'references': '',
+            'status': '',
+        }
+        response = self.client.post(self.url1, params)
+        self.assertFormError(response, 'form', 'permalink', [_('This field is required.')])
+        self.assertFormError(response, 'form', 'quoted_by', [_('This field is required.')])
+        self.assertFormError(response, 'form', 'quote', [_('This field is required.')])
+
+
+        params = {
+            'permalink': self.statement2.permalink,
+            'quoted_by': self.statement1.quoted_by.id,
+            'quote': self.statement1.quote,
+            'title': '',
+            'description': '',
+            'references': '',
+            'status': '',
+        }
+        response = self.client.post(self.url1, params)
+        self.assertFormError(response, 'form', 'permalink',  [_('This permalink is already in use.')])
+
+
+        params = {
+            'permalink': 'a tom in link?',
+            'quoted_by': self.statement1.quoted_by.id,
+            'quote': self.statement1.quote,
+            'title': '',
+            'description': '',
+            'references': '',
+            'status': '',
+        }
+        response = self.client.post(self.url1, params)
+        self.assertFormError(response, 'form', 'permalink',  [_('Enter a valid permalink.')])
+
+        self.client.logout()
+
+    def test_post_edit_not_update(self):
+
+        params = {
+            'permalink': self.statement1.permalink,
+            'quoted_by': self.statement1.quoted_by.id,
+            'quote': self.statement1.quote,
+            'title': '',
+            'description': '',
+            'references': '',
+            'status': '',
+        }
+
+        response = self.client.post(self.url1, params, follow=True)
+        self.assertContains(response, self.message_success)

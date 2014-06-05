@@ -12,4 +12,6 @@ urlpatterns = patterns('domain.views',
     url(r'^topic/edit/(?P<topic_id>\d+)/$', 'topic_edit', name='topic_edit'),
     url(r'^topic/create/$', 'topic_create', name='topic_create'),
 
+    url(r'^statement/edit/(?P<statement_id>\d+)/$', 'statement_edit', name='statement_edit'),
+    url(r'^statement/create/$', 'statement_create', name='statement_create'),
 )
