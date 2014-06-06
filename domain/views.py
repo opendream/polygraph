@@ -1,10 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.forms.formsets import formset_factory
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext_lazy as _
 from common.constants import STATUS_PUBLISHED
-from domain.forms import PeopleEditForm, TopicEditForm, StatementEditForm
-from domain.models import People, PeopleCategory, Topic, Statement
+from domain.forms import PeopleEditForm, TopicEditForm, StatementEditForm, ReferenceForm
+from domain.models import People, Topic, Statement
 
 
 def home(request):
@@ -146,6 +147,8 @@ def statement_create(request, statement=None):
     else:
         message_success = _('Your %s settings has been updated. View this %s <a href="%s">here</a>.') % (_('statement'), _('statement'), '#')
 
+    ReferenceFormSet = formset_factory(ReferenceForm, extra=2)
+
 
     if request.method == 'POST':
         form = StatementEditForm(statement, Statement, request.POST)
@@ -178,9 +181,17 @@ def statement_create(request, statement=None):
 
         form = StatementEditForm(statement, Topic, initial=initial)
 
+        reference_formset = ReferenceFormSet(initial=[
+            {
+                'title': 'Django is now open source',
+                'url': 'httpe://google.com',
+            },
+        ])
+
 
     return render(request, 'domain/statement_form.html', {
-        'form': form
+        'form': form,
+        'reference_formset': reference_formset,
     })
 
 

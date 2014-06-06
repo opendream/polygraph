@@ -36,6 +36,7 @@ class TopicEditForm(PermalinkForm):
 
 
 
+'''
 class ReferenceWidget(widgets.MultiWidget):
 
     def __init__(self, attrs=None):
@@ -44,9 +45,7 @@ class ReferenceWidget(widgets.MultiWidget):
 
     def decompress(self, value):
 
-        print value
-
-        if value:
+        if value and type(value) == dict:
             return [value['title'], value['url']]
         return [None, None]
 
@@ -63,6 +62,37 @@ class ReferenceField(forms.MultiValueField):
         return {'title': data_list[0], 'url': data_list[1]}
 
 
+class MultiReferenceWidget(widgets.MultiWidget):
+
+    def __init__(self, attrs=None):
+        widget = (ReferenceWidget(), ReferenceWidget())
+        super(MultiReferenceWidget, self).__init__(widget, attrs=attrs)
+
+    def decompress(self, value):
+
+        print value
+
+        if value and type(value) == list:
+            return value
+        return [None, None]
+
+
+class MultiReferenceField(forms.MultiValueField):
+    widget = MultiReferenceWidget
+
+    def __init__(self, required=True, widget=None, label=None, initial=None, help_text=None):
+
+        field = (ReferenceField(), ReferenceField())
+        super(MultiReferenceField, self).__init__(required=required, fields=field, widget=widget, label=label, initial=initial, help_text=help_text)
+
+    def compress(self, data_list):
+        return data_list
+'''
+
+class ReferenceForm(forms.Form):
+    title = forms.CharField(required=False, widget=forms.TextInput())
+    url = forms.URLField(required=False, widget=forms.URLInput())
+
 
 class StatementEditForm(PermalinkForm):
 
@@ -74,7 +104,7 @@ class StatementEditForm(PermalinkForm):
     title = forms.CharField(required=False, max_length=30, widget=forms.TextInput())
     description = forms.CharField(required=False, widget=CKEditorWidget(config_name='default'))
 
-    references = ReferenceField()
+    #references = MultiReferenceField()
 
     status = forms.ChoiceField(required=False, widget=forms.RadioSelect(attrs={'id': 'id_status'}), choices=STATUS_CHOICES)
 
