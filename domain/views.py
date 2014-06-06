@@ -77,9 +77,6 @@ def people_create(request, people=None):
         form = PeopleEditForm(people, People, initial=initial)
 
 
-        print dir(form)
-
-
     return render(request, 'domain/people_form.html', {
         'form': form
     })
@@ -154,12 +151,13 @@ def statement_create(request, statement=None):
         form = StatementEditForm(statement, Statement, request.POST)
         if form.is_valid():
             statement.permalink = form.cleaned_data['permalink']
-            statement.quoted_by = form.cleaned_data['quoted_by']
             statement.quote = form.cleaned_data['quote']
             statement.title = form.cleaned_data['title']
             statement.description = form.cleaned_data['description']
             statement.references = form.cleaned_data['references']
             statement.created_by = request.user
+
+            statement.quoted_by_id = form.cleaned_data['quoted_by'].id
 
             statement.save()
 
@@ -169,11 +167,13 @@ def statement_create(request, statement=None):
     else:
         initial = {
             'permalink': statement.permalink,
-            #'quoted_by': statement.quoted_by,
             'quote': statement.quote,
             'title': statement.title,
             'description': statement.description,
-            #'references': statement.references,
+            'status': statement.status,
+
+            'references': statement.references,
+            'quoted_by': statement.quoted_by.id,
         }
 
         form = StatementEditForm(statement, Topic, initial=initial)
@@ -187,5 +187,5 @@ def statement_create(request, statement=None):
 @login_required
 def statement_edit(request, statement_id=None):
 
-    statement = get_object_or_404(Topic, pk=statement_id)
+    statement = get_object_or_404(Statement, pk=statement_id)
     return statement_create(request, statement)

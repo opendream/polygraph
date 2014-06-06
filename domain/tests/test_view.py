@@ -456,7 +456,7 @@ class TestEditStatement(TestCase):
 
         self.assertContains(response, 'name="permalink"')
         self.assertContains(response, 'name="quoted_by"')
-        self.assertContains(response, 'name="quoted"')
+        self.assertContains(response, 'name="quote"')
         self.assertContains(response, 'name="title"')
         self.assertContains(response, 'name="description"')
         self.assertContains(response, 'name="references"')
@@ -509,7 +509,7 @@ class TestEditStatement(TestCase):
         self.assertContains(response, self.statement1.description)
 
         self.assertEqual(list(response.context['form'].initial['references']), self.statement1.references)
-        self.assertEqual(response.context['form'].initial['quoted_by'], self.statement1.quoted_by)
+        self.assertEqual(response.context['form'].initial['quoted_by'], self.statement1.quoted_by.id)
         self.assertEqual(response.context['form'].initial['status'], self.statement1.status)
 
 

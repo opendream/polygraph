@@ -139,6 +139,8 @@ CKEDITOR_CONFIGS = {
             ['Image', 'Table'],
         ],
         'width': 'auto',
+        'format_tags': 'h3;h4;h5',
+        'extraPlugins': 'autogrow',
     },
     'minimal': {
         'toolbar': [
@@ -146,7 +148,15 @@ CKEDITOR_CONFIGS = {
             ['NumberedList', 'BulletedList'],
         ],
         'width': 'auto',
-
+        'extraPlugins': 'autogrow',
+    },
+    'bold': {
+        'toolbar': [
+            ['Bold'],
+        ],
+        'width': 'auto',
+        'height': '80',
+        'extraPlugins': 'autogrow',
     },
 }
 

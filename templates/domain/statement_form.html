@@ -28,6 +28,24 @@
     </div>
 
     <div class="controls form-group">
+        <label for="id_quoted_by" class="col-sm-2 control-label">{% trans "Quoted by" %}</label>
+        <div class="col-sm-10 checkbox">
+            <ul>
+                {% for quoted_by in form.quoted_by %}
+                <li>
+                   {{ quoted_by.tag }}
+                    <label for="id_quoted_by_{{ quoted_by.index }}">{{ quoted_by.choice_label }}</label>
+                </li>
+                {% endfor %}
+            </ul>
+
+            {% if form.quoted_by.errors %}
+            <div class="errors alert alert-danger">{{ form.quoted_by.errors }}</div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="controls form-group">
         <label for="id_quote" class="col-sm-2 control-label">{% trans "Quote" %}</label>
         <div class="col-sm-10">
             {{ form.quote }}
@@ -57,6 +75,29 @@
         </div>
     </div>
 
+    <div class="controls form-group">
+        <label for="id_references" class="col-sm-2 control-label">{% trans "References" %}</label>
+        <div class="col-sm-10">
+            {{ form.references }}
+            {% if form.references.errors %}
+            <div class="errors alert alert-danger">{{ form.references.errors }}</div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="controls form-group">
+        <label for="id_status" class="col-sm-2 control-label">{% trans "Status" %}</label>
+        <div class="col-sm-10 radio">
+            {% for status in form.status %}
+                {{ status.tag }}
+                 <label for="id_status_{{ status.index }}">{{ status.choice_label }}</label>
+            {% endfor %}
+
+            {% if form.status.errors %}
+            <div class="errors alert alert-danger">{{ form.status.errors }}</div>
+            {% endif %}
+        </div>
+    </div>
 
     <div class="controls form-group">
         <div class="col-sm-offset-2 col-sm-10 form-action">

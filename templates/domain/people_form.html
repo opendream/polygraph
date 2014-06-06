@@ -61,10 +61,10 @@
         <label for="id_categories" class="col-sm-2 control-label">{% trans "Categories" %}</label>
         <div class="col-sm-10 checkbox">
             <ul>
-                {% for value, text in form.categories.field.choices %}
+                {% for category in form.categories %}
                 <li>
-                    <input{% if value in form.categories.value %} checked=checked{% endif %} id="{{ form.categories.name }}_{{ value }}" type="checkbox" name="{{ form.categories.name }}" value="{{ value }}" />
-                    <label for="{{ form.categories.name }}_{{ value }}">{{ text }}</label>
+                    {{ category.tag }}
+                    <label for="id_categories_{{ category.index }}">{{ category.choice_label }}</label>
                 </li>
                 {% endfor %}
             </ul>
@@ -110,9 +110,9 @@
     <div class="controls form-group">
         <label for="id_status" class="col-sm-2 control-label">{% trans "Status" %}</label>
         <div class="col-sm-10 radio">
-            {% for value, text in form.status.field.choices %}
-                <input{% if value == form.status.value %} checked=checked{% endif %} id="{{ form.status.name }}_{{ value }}" type="radio" name="{{ form.status.name }}" value="{{ value }}" />
-                <label for="{{ form.status.name }}_{{ value }}">{{ text }}</label>
+            {% for status in form.status %}
+                {{ status.tag }}
+                 <label for="id_status_{{ status.index }}">{{ status.choice_label }}</label>
             {% endfor %}
 
             {% if form.status.errors %}
