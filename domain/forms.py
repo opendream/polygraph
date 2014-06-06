@@ -89,6 +89,7 @@ class MultiReferenceField(forms.MultiValueField):
         return data_list
 '''
 
+
 class ReferenceForm(forms.Form):
     title = forms.CharField(required=False, widget=forms.TextInput())
     url = forms.URLField(required=False, widget=forms.URLInput())

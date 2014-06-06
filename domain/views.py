@@ -147,17 +147,20 @@ def statement_create(request, statement=None):
     else:
         message_success = _('Your %s settings has been updated. View this %s <a href="%s">here</a>.') % (_('statement'), _('statement'), '#')
 
-    ReferenceFormSet = formset_factory(ReferenceForm, extra=2)
+    ReferenceFormSet = formset_factory(ReferenceForm, extra=2, can_delete=True)
 
 
     if request.method == 'POST':
         form = StatementEditForm(statement, Statement, request.POST)
-        if form.is_valid():
+        reference_formset = ReferenceFormSet(request.POST, prefix='references')
+
+        if form.is_valid() and reference_formset.is_valid():
             statement.permalink = form.cleaned_data['permalink']
             statement.quote = form.cleaned_data['quote']
             statement.title = form.cleaned_data['title']
             statement.description = form.cleaned_data['description']
-            statement.references = form.cleaned_data['references']
+            # TODO save references
+            #statement.references = form.cleaned_data['references']
             statement.created_by = request.user
 
             statement.quoted_by_id = form.cleaned_data['quoted_by'].id
@@ -181,12 +184,8 @@ def statement_create(request, statement=None):
 
         form = StatementEditForm(statement, Topic, initial=initial)
 
-        reference_formset = ReferenceFormSet(initial=[
-            {
-                'title': 'Django is now open source',
-                'url': 'httpe://google.com',
-            },
-        ])
+        initial_references = [{'title': reference['title'], 'url': reference['url']} for reference in statement.references]
+        reference_formset = ReferenceFormSet(initial=initial_references, prefix='references')
 
 
     return render(request, 'domain/statement_form.html', {

@@ -78,13 +78,10 @@
     <div class="controls form-group">
         <label for="id_references" class="col-sm-2 control-label">{% trans "References" %}</label>
         <div class="col-sm-10">
-            <ul>
-                {% for reference in reference_formset %}
-                <li>
-                    {{ reference }}
-                </li>
-                {% endfor %}
-            </ul>
+            {{ formset.management_form }}
+            <table>
+                {{ reference_formset.as_table }}
+            </table>
             {% if form.reference_formset.errors %}
             <div class="errors alert alert-danger">{{ form.reference_formset.errors }}</div>
             {% endif %}
