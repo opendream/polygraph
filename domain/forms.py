@@ -109,4 +109,3 @@ class StatementEditForm(PermalinkForm):
 
     status = forms.ChoiceField(required=False, widget=forms.RadioSelect(attrs={'id': 'id_status'}), choices=STATUS_CHOICES)
 
-

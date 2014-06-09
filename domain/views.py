@@ -151,6 +151,7 @@ def statement_create(request, statement=None):
 
 
     if request.method == 'POST':
+
         form = StatementEditForm(statement, Statement, request.POST)
         reference_formset = ReferenceFormSet(request.POST, prefix='references')
 
@@ -179,7 +180,7 @@ def statement_create(request, statement=None):
             'status': statement.status,
 
             'references': statement.references,
-            'quoted_by': statement.quoted_by.id,
+            'quoted_by': statement.quoted_by_id,
         }
 
         form = StatementEditForm(statement, Topic, initial=initial)
