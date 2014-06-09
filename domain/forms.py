@@ -49,7 +49,7 @@ class StatementEditForm(PermalinkForm):
     quoted_by = forms.ModelChoiceField(
         queryset=People.objects.filter(status=STATUS_PUBLISHED),
         widget=autocomplete_light.ChoiceWidget(PeopleAutocomplete,
-                                               attrs={'placeholder': 'Type people name'}
+                                               attrs={'placeholder': 'Type people name', 'class': 'form-control'}
 
 
         )
