@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'ckeditor',
     'sorl.thumbnail',
     'files_widget',
+    'autocomplete_light',
 
     # Project
     'common',
