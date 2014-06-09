@@ -79,7 +79,7 @@
         <label for="id_references" class="col-sm-2 control-label">{% trans "References" %}</label>
         <div class="col-sm-10">
             {{ reference_formset.management_form }}
-            <ul>
+            <ul id="id_references">
                 {% for reference in reference_formset %}
                 <li>
                     <span class="input-text">
@@ -94,6 +94,9 @@
                 </li>
                 {% endfor %}
             </ul>
+
+            <input type="button" value="{% trans "Add More"%}" id="id_references_add_more" class="add_more" />
+
             {% if form.reference_formset.errors %}
             <div class="errors alert alert-danger">{{ form.reference_formset.errors }}</div>
             {% endif %}
