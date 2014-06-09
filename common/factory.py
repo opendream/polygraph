@@ -114,7 +114,7 @@ def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', 
     quote = quote or randstr()
     title = title or randstr()
     description = description or randstr()
-    references = references or [{'url': 'http://%s.com' % randstr(), 'title': randstr()}, {'url': 'http://%s.com' % randstr(), 'title': randstr()}]
+    references = references or [{'url': 'http://%s.com/' % randstr(), 'title': randstr()}, {'url': 'http://%s.com/' % randstr(), 'title': randstr()}]
 
     statement = Statement.objects.create(
         permalink=permalink,

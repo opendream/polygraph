@@ -94,6 +94,11 @@ class TestEditPeople(TestCase):
 
         response = self.client.post(self.url1, params, follow=True)
 
+        if self.people1.id:
+            self.people1 = People.objects.get(id=self.people1.id)
+        else:
+            self.people1 = People.objects.latest('id')
+
 
         self.assertContains(response, self.people1.permalink)
         self.assertContains(response, self.people1.first_name)
@@ -265,6 +270,11 @@ class TestEditTopic(TestCase):
 
         response = self.client.post(self.url1, params, follow=True)
 
+
+        if self.topic1.id:
+            self.topic1 = Topic.objects.get(id=self.topic1.id)
+        else:
+            self.topic1 = Topic.objects.latest('id')
 
         self.assertContains(response, self.topic1.permalink)
         self.assertContains(response, self.topic1.title)
@@ -447,6 +457,14 @@ class TestEditStatement(TestCase):
             self.references1['references-%d-title' % i] = reference['title']
             self.references1['references-%d-url' % i] = reference['url']
 
+        self.references2 = {
+            'references-TOTAL_FORMS': 4,
+            'references-INITIAL_FORMS': len(self.statement2.references),
+            'references-MAX_NUM_FORMS': 1000,
+        }
+        for i, reference in enumerate(self.statement2.references):
+            self.references2['references-%d-title' % i] = reference['title']
+            self.references2['references-%d-url' % i] = reference['url']
 
 
     def test_get_edit_page(self):
@@ -502,6 +520,41 @@ class TestEditStatement(TestCase):
     def test_edit_post(self):
 
 
+        params = {
+            'permalink': self.statement1.permalink,
+            'quoted_by': self.statement1.quoted_by_id,
+            'quote': self.statement1.quote,
+            'title': self.statement1.title,
+            'description': self.statement1.description,
+            'status': self.statement1.status,
+        }
+        params.update(self.references2)
+
+        response = self.client.post(self.url1, params, follow=True)
+
+
+        if self.statement1.id:
+            self.statement1 = Statement.objects.get(id=self.statement1.id)
+        else:
+            self.statement1 = Statement.objects.latest('id')
+
+        self.assertContains(response, self.statement1.permalink)
+        self.assertContains(response, self.statement1.quote)
+        self.assertContains(response, self.statement1.title)
+        self.assertContains(response, self.statement1.description)
+
+        # test reference
+
+        self.assertEqual(int(response.context['form'].initial['quoted_by']), self.statement1.quoted_by_id)
+        self.assertEqual(int(response.context['form'].initial['status']), self.statement1.status)
+
+        self.assertEqual(response.context['reference_formset'].initial, self.statement1.references)
+        self.assertEqual(2, len(self.statement1.references))
+
+        #self.assertEqual(response.context['reference_formset'], 0)
+
+    def test_edit_post_delete_reference(self):
+
 
         params = {
             'permalink': self.statement1.permalink,
@@ -511,10 +564,13 @@ class TestEditStatement(TestCase):
             'description': self.statement1.description,
             'status': self.statement1.status,
         }
-        params.update(self.references1)
+        self.references2['references-0-DELETE'] = True
+        params.update(self.references2)
 
         response = self.client.post(self.url1, params, follow=True)
 
+
+        self.statement1 = Statement.objects.get(id=self.statement1.id)
 
         self.assertContains(response, self.statement1.permalink)
         self.assertContains(response, self.statement1.quote)
@@ -523,10 +579,11 @@ class TestEditStatement(TestCase):
 
         # test reference
 
-        #self.assertEqual(response.context['form'].initial['references-0-url'], self.statement1.references[0]['url'])
         self.assertEqual(int(response.context['form'].initial['quoted_by']), self.statement1.quoted_by_id)
         self.assertEqual(int(response.context['form'].initial['status']), self.statement1.status)
 
+        self.assertEqual(response.context['reference_formset'].initial, self.statement1.references)
+        self.assertEqual(1, len(self.statement1.references))
 
 
     def test_has_new(self):
@@ -598,5 +655,29 @@ class TestEditStatement(TestCase):
 
         response = self.client.post(self.url1, params, follow=True)
 
-        print response
         self.assertContains(response, self.message_success)
+
+'''
+class TestCreateStatement(TestEditStatement):
+
+    def setUp(self):
+        super(TestCreateStatement, self).setUp()
+
+
+        self.check_initial = False
+        self.statement1 = factory.create_statement(quoted_by=self.people1, created_by=self.staff1)
+        self.statement1 = Statement(**{
+            'permalink': 'new-statement',
+            'quoted_by': self.people1,
+            'created_by': self.staff1,
+            'quote': 'New quote',
+            'title': 'New title',
+        })
+
+        self.url1 = reverse('statement_create')
+        self.url2 = reverse('statement_create')
+        self.message_success = _('New %s has been created. View this %s <a href="%s">here</a>.') % (_('statement'), _('statement'), '#')
+
+        self.title = _('Create %s') % _('Statement')
+        self.button = _('Save new')
+'''

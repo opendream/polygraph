@@ -1,6 +1,5 @@
 from ckeditor.widgets import CKEditorWidget
 from django import forms
-from django.forms import widgets
 from common.constants import STATUS_CHOICES
 import files_widget
 from common.forms import PermalinkForm
@@ -33,61 +32,6 @@ class TopicEditForm(PermalinkForm):
     description = forms.CharField(required=False, widget=CKEditorWidget(config_name='default'))
 
     without_revision = forms.NullBooleanField(widget=forms.CheckboxInput())
-
-
-
-'''
-class ReferenceWidget(widgets.MultiWidget):
-
-    def __init__(self, attrs=None):
-        widget = (forms.TextInput(), forms.URLInput())
-        super(ReferenceWidget, self).__init__(widget, attrs=attrs)
-
-    def decompress(self, value):
-
-        if value and type(value) == dict:
-            return [value['title'], value['url']]
-        return [None, None]
-
-
-class ReferenceField(forms.MultiValueField):
-    widget = ReferenceWidget
-
-    def __init__(self, required=True, widget=None, label=None, initial=None, help_text=None):
-
-        field = (forms.CharField(), forms.URLField())
-        super(ReferenceField, self).__init__(required=required, fields=field, widget=widget, label=label, initial=initial, help_text=help_text)
-
-    def compress(self, data_list):
-        return {'title': data_list[0], 'url': data_list[1]}
-
-
-class MultiReferenceWidget(widgets.MultiWidget):
-
-    def __init__(self, attrs=None):
-        widget = (ReferenceWidget(), ReferenceWidget())
-        super(MultiReferenceWidget, self).__init__(widget, attrs=attrs)
-
-    def decompress(self, value):
-
-        print value
-
-        if value and type(value) == list:
-            return value
-        return [None, None]
-
-
-class MultiReferenceField(forms.MultiValueField):
-    widget = MultiReferenceWidget
-
-    def __init__(self, required=True, widget=None, label=None, initial=None, help_text=None):
-
-        field = (ReferenceField(), ReferenceField())
-        super(MultiReferenceField, self).__init__(required=required, fields=field, widget=widget, label=label, initial=initial, help_text=help_text)
-
-    def compress(self, data_list):
-        return data_list
-'''
 
 
 class ReferenceForm(forms.Form):

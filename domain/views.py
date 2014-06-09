@@ -160,11 +160,21 @@ def statement_create(request, statement=None):
             statement.quote = form.cleaned_data['quote']
             statement.title = form.cleaned_data['title']
             statement.description = form.cleaned_data['description']
-            # TODO save references
-            #statement.references = form.cleaned_data['references']
             statement.created_by = request.user
-
             statement.quoted_by_id = form.cleaned_data['quoted_by'].id
+
+            # Save references
+            references = []
+            for form in reference_formset:
+
+                if form.cleaned_data and not form.cleaned_data.get('DELETE'):
+
+                    references.append({
+                        'url': form.cleaned_data['url'],
+                        'title': form.cleaned_data['title']
+                    })
+
+            statement.references = references
 
             statement.save()
 
@@ -178,15 +188,12 @@ def statement_create(request, statement=None):
             'title': statement.title,
             'description': statement.description,
             'status': statement.status,
-
-            'references': statement.references,
             'quoted_by': statement.quoted_by_id,
         }
 
         form = StatementEditForm(statement, Topic, initial=initial)
 
-        initial_references = [{'title': reference['title'], 'url': reference['url']} for reference in statement.references]
-        reference_formset = ReferenceFormSet(initial=initial_references, prefix='references')
+        reference_formset = ReferenceFormSet(initial=statement.references, prefix='references')
 
 
     return render(request, 'domain/statement_form.html', {

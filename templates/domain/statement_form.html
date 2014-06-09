@@ -78,10 +78,22 @@
     <div class="controls form-group">
         <label for="id_references" class="col-sm-2 control-label">{% trans "References" %}</label>
         <div class="col-sm-10">
-            {{ formset.management_form }}
-            <table>
-                {{ reference_formset.as_table }}
-            </table>
+            {{ reference_formset.management_form }}
+            <ul>
+                {% for reference in reference_formset %}
+                <li>
+                    <span class="input-text">
+                        <label for="{{ reference.title.id_for_label }}">{% trans "Title" %}</label>{{ reference.title }}
+                        <label for="{{ reference.url.id_for_label }}">{% trans "URL" %}</label>{{ reference.url }}
+                    </span>
+                    <span class="input-delete">
+                        {% if reference.url.value %}
+                        {{ reference.DELETE }}<label for="{{ reference.DELETE.id_for_label }}">{% trans 'Delete' %}</label>
+                        {% endif %}
+                    </span>
+                </li>
+                {% endfor %}
+            </ul>
             {% if form.reference_formset.errors %}
             <div class="errors alert alert-danger">{{ form.reference_formset.errors }}</div>
             {% endif %}
