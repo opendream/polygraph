@@ -99,15 +99,21 @@
                 <ol id="id_references">
                     {% for reference in reference_formset %}
                     <li>
-                        <span class="input-text">
-                            <label for="{{ reference.title.id_for_label }}">{% trans "Title" %}</label>{{ reference.title }}
-                            <label for="{{ reference.url.id_for_label }}">{% trans "URL" %}</label>{{ reference.url }}
-                        </span>
-                        <span class="input-delete">
+                        <div class="input-text">
+                            <div class="input-wrapper">
+                                <label for="{{ reference.title.id_for_label }}">{% trans "Title" %}</label>
+                                {{ reference.title }}
+                            </div>
+                            <div class="input-wrapper">
+                                <label for="{{ reference.url.id_for_label }}">{% trans "URL" %}</label>
+                                {{ reference.url }}
+                            </div>
+                        </div>
+                        <div class="input-delete">
                             {% if reference.url.value %}
                             {{ reference.DELETE }}<label for="{{ reference.DELETE.id_for_label }}">{% trans 'Delete' %}</label>
                             {% endif %}
-                        </span>
+                        </div>
                     </li>
                     {% endfor %}
                 </ol>
