@@ -37,8 +37,8 @@ class TopicEditForm(PermalinkForm):
 
 
 class ReferenceForm(forms.Form):
-    title = forms.CharField(required=False, widget=forms.TextInput())
-    url = forms.URLField(required=False, widget=forms.URLInput())
+    title = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    url = forms.URLField(required=False, widget=forms.URLInput(attrs={'class': 'form-control'}))
 
 
 class StatementEditForm(PermalinkForm):
