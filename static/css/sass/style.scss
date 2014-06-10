@@ -25,13 +25,6 @@ p.border-bt { padding-bottom: 20px; border-bottom: 2px solid $block_border; }
 
 .text-brown { color: $text_brown; }
 
-.block-quote,
-.block-quote * { 
-	color: $text_brown;
-	margin: 0;
-	line-height: 1.5;
-}
-
 a,
 a:hover { color: $text_brown; }
 a:hover { text-decoration: underline; }
@@ -310,9 +303,6 @@ input + .errors{
   }
 }
 
-//
-// List in block style
-//
 .block {
 	overflow: hidden;
 	background-color: #FFF;
@@ -329,6 +319,8 @@ input + .errors{
 				.left {padding-right: 0;padding-left: 0; }
 				.right {padding-right: 0;}
 			}
+			&.first .item-inner { border-top: none; padding-top: 0; }
+			&.last .item-inner { border-bottom: none; padding-bottom: 0; }
 		}
 	}
 	&.block-bg-transparent {
@@ -412,17 +404,27 @@ input + .errors{
 	}
 }
 
-.block-quote {
+.block-quote,
+.block-quote * { 
+	color: $text_brown;
+	margin: 0;
+	line-height: 1.8;
+}
+.block-quote,
+.block-quote-alt {
+	strong { font-size: 1.25em; font-weight: normal; }
 	position: relative;
 	display: block;
 	border-left: 0;
 	padding: 20px 25px 0 25px;
 	&:before,
 	&:after {
+		content: "";
 		width: 23px;
 		height: 18px;
 		background: url(../images/quote.png) transparent no-repeat 0 0;
 		position: absolute;
+		z-index: 999;
 	}
 	&:before {
 		top: 0; left: 0;
@@ -432,16 +434,22 @@ input + .errors{
 		bottom: 0; right: 0;
 	}
 }
+.block-quote-alt {
+	padding-top: 0;
+	* { font-size: 2.5em; font-weight: bold; }
+	&:after {
+		top: 0; right: 0;
+	}	
+}
 
 .who-said {
 	position: relative;
 	overflow: hidden;
 	background-color: $soft_orange;
-	&.block-content { padding: 15px 20px; }
+	&.block-content { padding: 15px 20px 0 20px; }
 	.people-profile {
 		overflow: hidden;
 		padding-top: 20px;
-		padding-bottom: 20px;
 		img { float: left; margin-right: 10px; }
 		h4 { margin-top: 30px; }
 	}
@@ -501,8 +509,8 @@ input + .errors{
 .statement-list {
 	margin-bottom: 20px;
 	ul.block-content li .item-inner {
-		border-bottom: 2px solid #EFEFEF !important;
-		padding: 30px 0;
+		border-bottom: 2px solid #EFEFEF;
+		padding: 30px 0 !important;
 		position: relative;
 	}
 }
@@ -588,6 +596,7 @@ input + .errors{
 			background-color: $hover_orange;
 		}
 		.block-content { padding-top: 50px; }
+		.quote { line-height: 1.8em; }
 	}
 }
 
