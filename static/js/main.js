@@ -17,10 +17,12 @@ function cloneMore(selector, type) {
 }
 
 $(document).ready(function () {
+    // checknox radio style
     $('input[type=checkbox], input[type=radio]').each(function () {
         $(this).prettyCheckable();
     });
 
+    // add more formset
     $('.add_more').click(function() {
 
 
@@ -43,6 +45,16 @@ $(document).ready(function () {
         total++;
         $('#id_' + type + '-TOTAL_FORMS').val(total);
         $(selector).after(newElement);
+
+    });
+
+    // popup create link
+    $('.popup-create-link, .popup-edit-link').click(function (e) {
+        e.preventDefault();
+
+        var wkey = $(this).attr('href').replace('/', '');
+
+        window.open($(this).attr('href') + '?_popup=1', wkey, "width=auto,height=auto");
 
     });
 

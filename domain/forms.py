@@ -40,8 +40,8 @@ class TopicEditForm(PermalinkForm):
 
 
 class ReferenceForm(forms.Form):
-    title = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': _('Title')}))
-    url = forms.URLField(required=False, widget=forms.URLInput(attrs={'class': 'form-control', 'placeholder': _('URL')}))
+    title = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control first', 'placeholder': _('Title')}))
+    url = forms.URLField(required=False, widget=forms.URLInput(attrs={'class': 'form-control last', 'placeholder': _('URL')}))
 
 
 class StatementEditForm(PermalinkForm):

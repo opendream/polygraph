@@ -39,7 +39,9 @@
 
     </head>
 
-    <body>
+    <body{% if request_popup %} class="request-popup"{% endif %}>
+
+        {% if not request_popup %}
 
         <header>
             <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -79,6 +81,8 @@
             </ol>
         </section><!--/.nav-collapse -->
 
+        {% endif %}
+
 
         {% if messages %}
         <div class="container messages">
@@ -93,6 +97,9 @@
 
         {% block base_content %}{% endblock %}
 
+
+        {% if not request_popup %}
+
         <footer>
             <div class="container">
                 <div class="row">
@@ -106,6 +113,8 @@
                 </div>
             </div>
         </footer>
+
+        {% endif %}
 
     </body>
 </html>

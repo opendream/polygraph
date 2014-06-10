@@ -4,6 +4,7 @@ from django.forms.formsets import formset_factory
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext_lazy as _
 from common.constants import STATUS_PUBLISHED
+from common.functions import people_render_reference
 from domain.forms import PeopleEditForm, TopicEditForm, StatementEditForm, ReferenceForm
 from domain.models import People, Topic, Statement
 
@@ -55,6 +56,10 @@ def people_create(request, people=None):
             people.categories.clear()
             for category in form.cleaned_data['categories']:
                 people.categories.add(category)
+
+
+            if request.GET.get('_popup'):
+                message_success = '<script type="text/javascript"> opener.dismissAddAnotherPopup(window, \'%s\', \'%s\'); </script>' % (people.id, people_render_reference(people))
 
             messages.success(request, message_success)
 
