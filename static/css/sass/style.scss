@@ -13,7 +13,7 @@ $block_border : #CCCCCC;
 
 body {
   padding-top: 100px;
-  background-color: #E5E5E5;
+  background: url(../images/body-bg.png);
   font-size: 16px;
 }
 
@@ -22,13 +22,21 @@ p {
 	color: $text_normal;
 }
 p.border-bt { padding-bottom: 20px; border-bottom: 2px solid $block_border; }
+
 .text-brown { color: $text_brown; }
+
+.block-quote,
+.block-quote * { 
+	color: $text_brown;
+	margin: 0;
+	line-height: 1.5;
+}
 
 a,
 a:hover { color: $text_brown; }
 a:hover { text-decoration: underline; }
 
-.text-large { font-size: 40px; font-weight: bold; color: $bright_orange; }
+.text-large { font-size: 40px; font-weight: bold; }
 .align-right { text-align: right; }
 @media (max-width: 768px) {
 	.align-right { text-align: left; }
@@ -327,14 +335,20 @@ input + .errors{
 	}
 	&.block-bg-transparent {
 		background-color: transparent;
-		border: 5px dashed $base_orange;
-		@include border-radius(0);
+		border: none;
 	}
+	&.block-bg-grey { background-color: #F5F5F5; }
 	&.block-bg-color {
 		background-color: $soft_orange;
 		border: none;
 		@include border-radius(0);
 		padding: 20px;
+	}
+	&.block-bg-hover {
+		background-color: $hover_orange;
+	}
+	&.block-no-border {
+		border: none;
 	}
 }
 
@@ -370,7 +384,7 @@ input + .errors{
 }
 .amount {
 	height: 10px;
-	background-color: $bright_orange;
+	background-color: $base_orange;
 	@include border-radius(5px);
 }
 .amount-wrapper {
@@ -399,7 +413,8 @@ input + .errors{
 		background: url(../images/triangle.png) no-repeat 0 0;
 	}
 }
-blockquote {
+
+.block-quote {
 	position: relative;
 	display: block;
 	border-left: 0;
@@ -419,6 +434,7 @@ blockquote {
 		bottom: 0; right: 0;
 	}
 }
+
 .who-said {
 	position: relative;
 	overflow: hidden;
@@ -490,7 +506,6 @@ blockquote {
 		border-bottom: 2px solid #EFEFEF !important;
 		padding: 30px 0;
 		position: relative;
-		// p { margin-bottom: 30px; }
 	}
 }
 .avatar {
@@ -524,7 +539,7 @@ blockquote {
 		}
 		.caret {
 			border-top: none;
-			border-bottom: 12px solid #FFF;
+			border-bottom: 12px solid #F2F2F2;
 			border-right: 12px solid transparent;
 			border-left: 12px solid transparent;
 			margin-bottom: -8px;
@@ -552,9 +567,30 @@ blockquote {
 }
 
 .polygraph-list {
-	&>header { position: relative; z-index: 2; }
-	&>article { position: relative; z-index: 1; }
+	&>header { position: relative; z-index: 2; overflow: visible; }
+	&>section { position: relative; z-index: 1; }
 	.statement-list { overflow: hidden; }
+	.block {
+		margin-bottom: 1.2em;
+	}
+	.polygraph-list-block {
+		position: relative;
+		> span {
+			display: block;
+			padding: 5px 0;
+			color: #FFF;
+			font-size: 75%;
+			background-color: $bright_orange;
+			width: 80px;
+			text-align: center;
+			position: absolute;
+			top: 10px;
+		}
+		&.updated span {
+			background-color: $hover_orange;
+		}
+		.block-content { padding-top: 50px; }
+	}
 }
 
 //############# Fixed width polygraph block front page
