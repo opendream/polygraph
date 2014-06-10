@@ -442,7 +442,12 @@ input + .errors{
 }
 .block-quote-alt {
 	padding-top: 0;
-	* { font-size: 2.5em; font-weight: bold; }
+	display: inline-block;
+	padding: 0 40px;
+	max-width: 270px;
+	font-size: 3.5em;
+	font-weight: bold;
+	line-height: 1.2em;
 	&:after {
 		top: 0; right: 0;
 	}	
@@ -563,6 +568,7 @@ input + .errors{
 	li a {
 		@include border-radius(20px);
 		background-color: transparent;
+		padding: 10px 20px;
 		&:hover {
 			background-color: $soft_orange;
 			color: $text_brown;
@@ -584,6 +590,13 @@ input + .errors{
 	.statement-list { overflow: hidden; }
 	.block {
 		margin-bottom: 1.2em;
+	}
+	.polygraph-list-before { 
+		.block-content { overflow: hidden; }
+		span {
+			margin-bottom: 10px;
+			display: block;
+		}
 	}
 	.polygraph-list-block {
 		position: relative;
@@ -665,5 +678,43 @@ footer {
 				text-align: left;
 			}
 		}
+	}
+}
+
+//############# Form Create Statement
+.sidebar-right {
+	.form-normal {
+		.form-control {
+			padding: 6px 12px;
+			height: 34px;
+			font-size: 14px;
+		}
+	}
+	ol {
+		padding-left: 2em;
+		li.form-group input.form-control { display: inline-block; }	
+	}
+	form {
+		h1, h2 { margin-bottom: 30px; }
+	}
+	.add_more { width: 100%; padding: 5px; }
+}
+.sidebar {
+	.form-group textarea { max-width: 100%; }	
+}
+//####################################################
+
+.autocomplete-light-widget {
+	.deck .hilight {
+		position: relative;
+		padding: 10px !important;
+		background-color: $soft_orange;
+		@include border-radius(5px);
+		span {
+			position: absolute;
+			top: 50%;
+			margin-top: -8px;
+		}
+		img { margin: 0 20px 0 30px; }
 	}
 }
