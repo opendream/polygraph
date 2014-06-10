@@ -1,6 +1,8 @@
+import autocomplete_light
 from ckeditor.widgets import CKEditorWidget
 from django import forms
-from common.constants import STATUS_CHOICES
+from common.constants import STATUS_CHOICES, STATUS_PUBLISHED
+from domain.autocomplete_light_registry import PeopleAutocomplete
 import files_widget
 from common.forms import PermalinkForm
 from domain.models import PeopleCategory, People
@@ -43,7 +45,17 @@ class StatementEditForm(PermalinkForm):
 
     permalink = forms.CharField()
 
-    quoted_by = forms.ModelChoiceField(queryset=People.objects.all(), widget=forms.RadioSelect(attrs={'id': 'id_quoted_by'}))
+    #quoted_by = forms.ModelChoiceField(queryset=People.objects.all(), widget=forms.RadioSelect(attrs={'id': 'id_quoted_by'}))
+    quoted_by = forms.ModelChoiceField(
+        queryset=People.objects.filter(status=STATUS_PUBLISHED),
+        widget=autocomplete_light.ChoiceWidget(PeopleAutocomplete,
+                                               attrs={'placeholder': 'Type people name', 'class': 'form-control'}
+
+
+        )
+    )
+
+
     quote = forms.CharField(widget=CKEditorWidget(config_name='bold'))
 
     title = forms.CharField(required=False, max_length=30, widget=forms.TextInput())

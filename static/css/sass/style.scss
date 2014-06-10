@@ -303,6 +303,18 @@ input + .errors{
   margin: 4px 5px;
 }
 
+.form-group {
+  .autocomplete-light-widget {
+    display: block;
+  }
+  .autocomplete-light-widget input, .autocomplete-light-widget input:focus {
+    width: 100%;
+  }
+}
+
+//
+// List in block style
+//
 .block {
 	overflow: hidden;
 	background-color: #FFF;
@@ -329,7 +341,7 @@ input + .errors{
 	&.block-bg-color {
 		background-color: $soft_orange;
 		border: none;
-		@include border-radius(0);		
+		@include border-radius(0);
 		padding: 20px;
 	}
 	&.block-bg-hover {
@@ -352,9 +364,9 @@ input + .errors{
 	}
 }
 @media (max-width: 640px) {
-	.item { 
+	.item {
 		width: 100%;
-		.item-inner { 
+		.item-inner {
 			min-height: 111px;
 			.left { position: absolute; }
 			.right {
@@ -366,7 +378,7 @@ input + .errors{
 }
 
 .summary h3 {
-	.left { 
+	.left {
 		img { max-width: 80px; width: 100%; }
 	}
 }
@@ -428,7 +440,7 @@ input + .errors{
 	overflow: hidden;
 	background-color: $soft_orange;
 	&.block-content { padding: 15px 20px; }
-	.people-profile { 
+	.people-profile {
 		overflow: hidden;
 		padding-top: 20px;
 		padding-bottom: 20px;
@@ -441,7 +453,7 @@ input + .errors{
 }
 @media (max-width: 600px) {
 	.who-said {
-		.people-profile { 
+		.people-profile {
 			width: 100%;
 			padding-bottom: 30px;
 		}
@@ -478,7 +490,7 @@ input + .errors{
 		position: absolute;
 		bottom: -15px;
 		left: 75px;
-		margin-left: -10px;			
+		margin-left: -10px;
 	}
 	.media { margin-top: 20px; }
 }
@@ -490,7 +502,7 @@ input + .errors{
 
 .statement-list {
 	margin-bottom: 20px;
-	ul.block-content li .item-inner { 
+	ul.block-content li .item-inner {
 		border-bottom: 2px solid #EFEFEF !important;
 		padding: 30px 0;
 		position: relative;
@@ -500,8 +512,8 @@ input + .errors{
 	img { float: left; margin-right: 10px; }
 }
 
-@media (max-width: 640px) { 
-	.statement-list ul.block-content li .item-inner>div:first-child { 
+@media (max-width: 640px) {
+	.statement-list ul.block-content li .item-inner>div:first-child {
 		width: 100%;
 		.avatar { padding-right: 120px;}
 	}
@@ -582,18 +594,18 @@ input + .errors{
 }
 
 //############# Fixed width polygraph block front page
-// @media (min-width: 769px) { 
+// @media (min-width: 769px) {
 // 	.polygraph-list {
 // 		ul.item-list.ul-left { padding-right: 100px; }
 // 		ul.item-list.ul-right { padding-left: 100px; }
 // 	}
 // }
-// @media (max-width: 768px) { 
+// @media (max-width: 768px) {
 // 	.polygraph-list {
 // 		ul.item-list { padding-right: 180px; }
 // 	}
 // }
-// @media (max-width: 640px) { 
+// @media (max-width: 640px) {
 // 	.polygraph-list {
 // 		ul.item-list { padding-right: 0; }
 // 	}
@@ -606,7 +618,7 @@ input + .errors{
 	right: 0;
 	.btn {
 		@include border-radius(0);
-	} 
+	}
 }
 
 .about-statement {

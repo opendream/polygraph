@@ -9,6 +9,7 @@
 {% block content_class %} content-smart{% endblock %}
 
 {% block content %}
+{% include 'autocomplete_light/static.html' %}
 <form method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
     {% csrf_token %}
 
@@ -30,15 +31,7 @@
     <div class="controls form-group">
         <label for="id_quoted_by" class="col-sm-2 control-label">{% trans "Quoted by" %}</label>
         <div class="col-sm-10 checkbox">
-            <ul>
-                {% for quoted_by in form.quoted_by %}
-                <li>
-                   {{ quoted_by.tag }}
-                    <label for="id_quoted_by_{{ quoted_by.index }}">{{ quoted_by.choice_label }}</label>
-                </li>
-                {% endfor %}
-            </ul>
-
+            {{ form.quoted_by }}
             {% if form.quoted_by.errors %}
             <div class="errors alert alert-danger">{{ form.quoted_by.errors }}</div>
             {% endif %}
