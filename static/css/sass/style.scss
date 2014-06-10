@@ -443,7 +443,7 @@ input + .errors{
 .block-quote-alt {
 	padding-top: 0;
 	display: inline-block;
-	padding: 0 40px;
+	padding: 0 30px;
 	max-width: 270px;
 	font-size: 3.5em;
 	font-weight: bold;
@@ -451,6 +451,12 @@ input + .errors{
 	&:after {
 		top: 0; right: 0;
 	}	
+}
+@media (max-width: 992px) {
+	.block-quote-alt {
+		max-width: 100%;
+		margin-bottom: 30px;
+	}
 }
 
 .who-said {
@@ -616,6 +622,22 @@ input + .errors{
 		}
 		.block-content { padding-top: 50px; }
 		.quote { line-height: 1.8em; }
+	}
+}
+@media (min-width: 992px) {
+	.polygraph-list {
+		.polygraph-list-before {
+			display: table;
+			.block-content {
+				display: table-row;
+				> div {
+					display: table-cell;
+					float: none;
+					vertical-align: middle;
+					padding: 20px;
+				}
+			}
+		}
 	}
 }
 
