@@ -1,4 +1,4 @@
-{% extends 'base_single.html' %}
+{% extends 'base_sidebar.html' %}
 {% load i18n %}
 
 {% block js %}
@@ -6,11 +6,20 @@
 {% endblock %}
 
 {% block title %}{% if form.is_new %}{% trans "Create" %}{% else %}{% trans "Edit" %}{% endif %} {{ form.inst.inst_name }}{% endblock %}
-{% block content_class %} content-smart{% endblock %}
+
+{% block before_wrapper %}
+<form method="post" role="form" enctype="multipart/form-data">
+{% endblock %}
+{% block after_wrapper %}
+</form>
+{% endblock %}
+
 
 {% block content %}
-{% include 'autocomplete_light/static.html' %}
-<form method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
+
+<div class="form-normal">
+
+    {% include 'autocomplete_light/static.html' %}
     {% csrf_token %}
 
     {% if form.non_field_errors %}
@@ -18,8 +27,8 @@
     {% endif %}
 
     <div class="controls form-group">
-        <label for="id_permalink" class="col-sm-2 control-label">{% trans "Permalink" %}</label>
-        <div class="col-sm-10">
+        <label for="id_permalink" class="col-sm-2-bnk control-label">{% trans "Permalink" %}</label>
+        <div class="col-sm-10-bnk ">
             <input id="id_permalink" name="permalink" type="text" class="form-control" value="{{ form.permalink.value|default_if_none:"" }}" required>
             <span class="help-block">{{ form.permalink.help_text }}</span>
             {% if form.permalink.errors %}
@@ -29,18 +38,8 @@
     </div>
 
     <div class="controls form-group">
-        <label for="id_quoted_by" class="col-sm-2 control-label">{% trans "Quoted by" %}</label>
-        <div class="col-sm-10 checkbox">
-            {{ form.quoted_by }}
-            {% if form.quoted_by.errors %}
-            <div class="errors alert alert-danger">{{ form.quoted_by.errors }}</div>
-            {% endif %}
-        </div>
-    </div>
-
-    <div class="controls form-group">
-        <label for="id_quote" class="col-sm-2 control-label">{% trans "Quote" %}</label>
-        <div class="col-sm-10">
+        <label for="id_quote" class="col-sm-2-bnk control-label">{% trans "Quote" %}</label>
+        <div class="col-sm-10-bnk">
             {{ form.quote }}
             {% if form.quote.errors %}
             <div class="errors alert alert-danger">{{ form.quote.errors }}</div>
@@ -49,18 +48,19 @@
     </div>
 
     <div class="controls form-group">
-        <label for="id_title" class="col-sm-2 control-label">{% trans "Title" %}</label>
-        <div class="col-sm-10">
-            <input id="id_title" name="title" type="text" class="form-control" value="{{ form.title.value|default_if_none:"" }}">
-            {% if form.title.errors %}
-            <div class="errors alert alert-danger">{{ form.title.errors }}</div>
+        <label for="id_quoted_by" class="col-sm-2-bnk control-label">{% trans "Quoted by" %}</label>
+        <div class="col-sm-10-bnk">
+            {{ form.quoted_by }}
+            {% if form.quoted_by.errors %}
+            <div class="errors alert alert-danger">{{ form.quoted_by.errors }}</div>
             {% endif %}
         </div>
     </div>
 
+
     <div class="controls form-group">
-        <label for="id_description" class="col-sm-2 control-label">{% trans "Description" %}</label>
-        <div class="col-sm-10">
+        <label for="id_description" class="col-sm-2-bnk control-label">{% trans "Description" %}</label>
+        <div class="col-sm-10-bnk">
             {{ form.description }}
             {% if form.description.errors %}
             <div class="errors alert alert-danger">{{ form.description.errors }}</div>
@@ -68,54 +68,84 @@
         </div>
     </div>
 
-    <div class="controls form-group">
-        <label for="id_references" class="col-sm-2 control-label">{% trans "References" %}</label>
-        <div class="col-sm-10">
-            {{ reference_formset.management_form }}
-            <ul id="id_references">
-                {% for reference in reference_formset %}
-                <li>
-                    <span class="input-text">
-                        <label for="{{ reference.title.id_for_label }}">{% trans "Title" %}</label>{{ reference.title }}
-                        <label for="{{ reference.url.id_for_label }}">{% trans "URL" %}</label>{{ reference.url }}
-                    </span>
-                    <span class="input-delete">
-                        {% if reference.url.value %}
-                        {{ reference.DELETE }}<label for="{{ reference.DELETE.id_for_label }}">{% trans 'Delete' %}</label>
-                        {% endif %}
-                    </span>
-                </li>
-                {% endfor %}
-            </ul>
 
-            <input type="button" value="{% trans "Add More"%}" id="id_references_add_more" class="add_more" />
+</div>
+{% endblock %}
 
-            {% if form.reference_formset.errors %}
-            <div class="errors alert alert-danger">{{ form.reference_formset.errors }}</div>
-            {% endif %}
+
+{% block sidebar %}
+<section>
+    <header>
+        <h2>{% trans "About Statement" %}</h2>
+    </header>
+
+    <div class="form-normal">
+
+        <div class="controls form-group">
+            <label for="id_title" class="col-sm-2-bnk control-label">{% trans "Title" %}</label>
+            <div class="col-sm-10-bnk">
+                <textarea id="id_title" name="title" type="text" class="form-control">{{ form.title.value|default_if_none:"" }}</textarea>
+                {% if form.title.errors %}
+                <div class="errors alert alert-danger">{{ form.title.errors }}</div>
+                {% endif %}
+            </div>
+        </div>
+
+
+        <div class="controls form-group">
+            <label for="id_references" class="col-sm-2-bnk control-label">{% trans "References" %}</label>
+            <div class="col-sm-10-bnk">
+                {{ reference_formset.management_form }}
+                <ol id="id_references">
+                    {% for reference in reference_formset %}
+                    <li>
+                        <span class="input-text">
+                            <label for="{{ reference.title.id_for_label }}">{% trans "Title" %}</label>{{ reference.title }}
+                            <label for="{{ reference.url.id_for_label }}">{% trans "URL" %}</label>{{ reference.url }}
+                        </span>
+                        <span class="input-delete">
+                            {% if reference.url.value %}
+                            {{ reference.DELETE }}<label for="{{ reference.DELETE.id_for_label }}">{% trans 'Delete' %}</label>
+                            {% endif %}
+                        </span>
+                    </li>
+                    {% endfor %}
+                </ol>
+
+                <input type="button" value="{% trans "Add More"%}" id="id_references_add_more" class="add_more" />
+
+                {% if form.reference_formset.errors %}
+                <div class="errors alert alert-danger">{{ form.reference_formset.errors }}</div>
+                {% endif %}
+            </div>
         </div>
     </div>
 
-    <div class="controls form-group">
-        <label for="id_status" class="col-sm-2 control-label">{% trans "Status" %}</label>
-        <div class="col-sm-10 radio">
-            {% for status in form.status %}
-                {{ status.tag }}
-                 <label for="id_status_{{ status.index }}">{{ status.choice_label }}</label>
-            {% endfor %}
+</section>
 
-            {% if form.status.errors %}
-            <div class="errors alert alert-danger">{{ form.status.errors }}</div>
-            {% endif %}
-        </div>
+{% endblock %}
+
+
+{% block after_sidebar %}
+
+<div class="controls form-group">
+    <label for="id_status" class="col-sm-2-bnk control-label">{% trans "Status" %}</label>
+    <div class="col-sm-10-bnk radio">
+        {% for status in form.status %}
+            {{ status.tag }}
+             <label for="id_status_{{ status.index }}">{{ status.choice_label }}</label>
+        {% endfor %}
+
+        {% if form.status.errors %}
+        <div class="errors alert alert-danger">{{ form.status.errors }}</div>
+        {% endif %}
     </div>
+</div>
 
-    <div class="controls form-group">
-        <div class="col-sm-offset-2 col-sm-10 form-action">
-            <button class="btn btn-primary" type="submit">{% if form.is_new %}{% trans "Save new" %}{% else %}{% trans "Save changes" %}{% endif %}</button>
-            <a href="{% url 'home' %}" class="btn btn-cancle flat-btn">{% trans "Cancel" %}</a>
-        </div>
+<div class="controls form-group">
+    <div class="col-sm-offset-2-bnk col-sm-10-bnk form-action">
+        <button class="btn btn-primary" type="submit">{% if form.is_new %}{% trans "Save new" %}{% else %}{% trans "Save changes" %}{% endif %}</button>
+        <a href="{% url 'home' %}" class="btn btn-cancle flat-btn">{% trans "Cancel" %}</a>
     </div>
-</form>
-
+</div>
 {% endblock %}

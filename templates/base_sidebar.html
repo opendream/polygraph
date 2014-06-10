@@ -5,6 +5,8 @@
 <div class="container sidebar-right">
     <div class="row">
 
+        {% block before_wrapper %}{% endblock %}
+
         <section class="col-md-8">
 
             <header>
@@ -20,6 +22,12 @@
         <aside class="col-md-4 sidebar">
             {% block sidebar %}{% endblock %}
         </aside>
+
+        <section class="col-md-8 after-sidebar">
+            {% block after_sidebar %}{% endblock %}
+        </section>
+
+        {% block after_wrapper %}{% endblock %}
 
     </div>
 
