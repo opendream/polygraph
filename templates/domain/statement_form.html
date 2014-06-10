@@ -134,9 +134,9 @@
 
 {% block after_sidebar %}
 
-<div class="controls form-group">
-    <label for="id_status" class="col-sm-2-bnk control-label">{% trans "Status" %}</label>
-    <div class="col-sm-10-bnk radio">
+<div class="controls form-group inst-status form-horizontal">
+    <label for="id_status" class="col-sm-2 control-label">{% trans "Status" %}</label>
+    <div class="col-sm-10 radio">
         {% for status in form.status %}
             {{ status.tag }}
              <label for="id_status_{{ status.index }}">{{ status.choice_label }}</label>
