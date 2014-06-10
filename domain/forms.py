@@ -1,7 +1,10 @@
 import autocomplete_light
 from ckeditor.widgets import CKEditorWidget
 from django import forms
+from django.utils.translation import ugettext_lazy as _
 from common.constants import STATUS_CHOICES, STATUS_PUBLISHED
+
+
 from domain.autocomplete_light_registry import PeopleAutocomplete
 import files_widget
 from common.forms import PermalinkForm
@@ -37,19 +40,18 @@ class TopicEditForm(PermalinkForm):
 
 
 class ReferenceForm(forms.Form):
-    title = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
-    url = forms.URLField(required=False, widget=forms.URLInput(attrs={'class': 'form-control'}))
+    title = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': _('Title')}))
+    url = forms.URLField(required=False, widget=forms.URLInput(attrs={'class': 'form-control', 'placeholder': _('URL')}))
 
 
 class StatementEditForm(PermalinkForm):
 
     permalink = forms.CharField()
 
-    #quoted_by = forms.ModelChoiceField(queryset=People.objects.all(), widget=forms.RadioSelect(attrs={'id': 'id_quoted_by'}))
     quoted_by = forms.ModelChoiceField(
         queryset=People.objects.filter(status=STATUS_PUBLISHED),
         widget=autocomplete_light.ChoiceWidget(PeopleAutocomplete,
-                                               attrs={'placeholder': 'Type people name', 'class': 'form-control'}
+                                               attrs={'placeholder': 'Type for search by people name', 'class': 'form-control'}
 
 
         )

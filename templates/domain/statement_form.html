@@ -51,6 +51,9 @@
         <label for="id_quoted_by" class="col-sm-2-bnk control-label">{% trans "Quoted by" %}</label>
         <div class="col-sm-10-bnk">
             {{ form.quoted_by }}
+            <div class="inline-create-wrapper">
+                <div class="inline-create-link-wrapper">or <a href="{% url 'people_create' %}" class="inline-create-link">Create</a></div>
+            </div>
             {% if form.quoted_by.errors %}
             <div class="errors alert alert-danger">{{ form.quoted_by.errors }}</div>
             {% endif %}
@@ -98,14 +101,14 @@
                 {{ reference_formset.management_form }}
                 <ol id="id_references">
                     {% for reference in reference_formset %}
-                    <li>
+                    <li class="form-group">
                         <div class="input-text">
                             <div class="input-wrapper">
-                                <label for="{{ reference.title.id_for_label }}">{% trans "Title" %}</label>
+                                <label class="sr-only" for="{{ reference.title.id_for_label }}">{% trans "Title" %}</label>
                                 {{ reference.title }}
                             </div>
                             <div class="input-wrapper">
-                                <label for="{{ reference.url.id_for_label }}">{% trans "URL" %}</label>
+                                <label class="sr-only" for="{{ reference.url.id_for_label }}">{% trans "URL" %}</label>
                                 {{ reference.url }}
                             </div>
                         </div>
