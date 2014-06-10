@@ -58,7 +58,7 @@ class StatementEditForm(PermalinkForm):
 
     quote = forms.CharField(widget=CKEditorWidget(config_name='bold'))
 
-    title = forms.CharField(required=False, max_length=30, widget=forms.TextInput())
+    title = forms.CharField(required=False, max_length=30, widget=forms.Textarea())
     description = forms.CharField(required=False, widget=CKEditorWidget(config_name='default'))
 
     #references = MultiReferenceField()
