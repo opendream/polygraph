@@ -4,7 +4,7 @@ from django.forms.formsets import formset_factory
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext_lazy as _
 from common.constants import STATUS_PUBLISHED
-from common.functions import people_render_reference
+from common.functions import people_render_reference, topic_render_reference
 from domain.forms import PeopleEditForm, TopicEditForm, StatementEditForm, ReferenceForm
 from domain.models import People, Topic, Statement
 
@@ -118,6 +118,9 @@ def topic_create(request, topic=None):
 
             topic.save(without_revision=without_revision)
 
+            if request.GET.get('_popup'):
+                message_success = '<script type="text/javascript"> opener.dismissAddAnotherPopup(window, \'%s\', \'%s\'); </script>' % (topic.id, topic_render_reference(topic))
+
             messages.success(request, message_success)
 
             return redirect('topic_edit', topic.id)
@@ -167,6 +170,7 @@ def statement_create(request, statement=None):
             statement.description = form.cleaned_data['description']
             statement.created_by = request.user
             statement.quoted_by_id = form.cleaned_data['quoted_by'].id
+            statement.topic_id = form.cleaned_data['topic'].id
 
             # Save references
             references = []

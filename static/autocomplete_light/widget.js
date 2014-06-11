@@ -111,7 +111,7 @@ yourlabs.Widget.prototype.selectChoice = function(choice) {
         this.input.focus();
     } else {
         var next = $(':input:visible:eq('+ index +')');
-        next.focus();
+        //next.focus();
     }
 
     if (this.clearInputOnSelectChoice === "1")

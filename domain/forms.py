@@ -5,10 +5,10 @@ from django.utils.translation import ugettext_lazy as _
 from common.constants import STATUS_CHOICES, STATUS_PUBLISHED
 
 
-from domain.autocomplete_light_registry import PeopleAutocomplete
+from domain.autocomplete_light_registry import PeopleAutocomplete, TopicAutocomplete
 import files_widget
 from common.forms import PermalinkForm
-from domain.models import PeopleCategory, People
+from domain.models import PeopleCategory, People, Topic, TopicRevision
 
 
 class PeopleEditForm(PermalinkForm):
@@ -48,22 +48,27 @@ class StatementEditForm(PermalinkForm):
 
     permalink = forms.CharField()
 
+    quote = forms.CharField(widget=CKEditorWidget(config_name='bold'))
+
     quoted_by = forms.ModelChoiceField(
-        queryset=People.objects.filter(status=STATUS_PUBLISHED),
+        queryset=People.objects.filter(),
         widget=autocomplete_light.ChoiceWidget(PeopleAutocomplete,
-                                               attrs={'placeholder': 'Type for search by people name', 'class': 'form-control'}
-
-
+            attrs={'placeholder': 'Type for search by people name', 'class': 'form-control'}
         )
     )
 
 
-    quote = forms.CharField(widget=CKEditorWidget(config_name='bold'))
-
-    title = forms.CharField(required=False, max_length=30, widget=forms.Textarea())
+    topic = forms.ModelChoiceField(
+        required=False,
+        queryset=Topic.objects.all(),
+        widget=autocomplete_light.ChoiceWidget(TopicAutocomplete,
+            attrs={'placeholder': 'Type for search by topic title', 'class': 'form-control'}
+        )
+    )
     description = forms.CharField(required=False, widget=CKEditorWidget(config_name='default'))
 
-    #references = MultiReferenceField()
+
+    title = forms.CharField(required=False, max_length=30, widget=forms.Textarea())
 
     status = forms.ChoiceField(required=False, widget=forms.RadioSelect(attrs={'id': 'id_status'}), choices=STATUS_CHOICES)
 

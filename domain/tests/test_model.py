@@ -101,6 +101,7 @@ class TestTopic(TestCase):
         self.assertEqual(topic1.title, 'Hello world')
         self.assertEqual(topic1.description, 'I am developer')
         self.assertEqual(topic1.created_by, staff1)
+        self.assertEqual(topic1.__unicode__(), 'Hello world')
 
         topic1_created2 = timezone.now() - timedelta(days=10)
         topic1_change1 = timezone.now() - timedelta(days=5)
@@ -118,6 +119,8 @@ class TestTopic(TestCase):
         self.assertEqual(topic1.created_by, staff2)
         self.assertEqual(topic1.created, topic1_created2)
         self.assertEqual(topic1.changed, topic1_change1)
+        self.assertEqual(topic1.__unicode__(), 'Change title')
+
 
 
         topic1.save()

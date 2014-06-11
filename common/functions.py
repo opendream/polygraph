@@ -17,3 +17,14 @@ def people_render_reference(people, display_edit_link=True, field_name='quoted_b
     html = '<span class="people-reference-wrapper">%s</span>' % html
 
     return html
+
+def topic_render_reference(topic, display_edit_link=True, field_name='topic'):
+
+    html = '<span class="topic-title">%s</span>' % topic.title
+
+    if display_edit_link:
+        html = '%s <a class="autocomplete-add-another" id="edit_id_%s" href="%s?_popup=1">%s</a>' % (html, field_name, reverse('topic_edit', args=[topic.id]), _('edit'))
+
+    html = '<span class="topic-reference-wrapper">%s</span>' % html
+
+    return html

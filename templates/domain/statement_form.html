@@ -65,7 +65,6 @@
         </div>
     </div>
 
-
     <div class="controls form-group">
         <label for="id_description" class="col-sm-2-bnk control-label">{% trans "Description" %}</label>
         <div class="col-sm-10-bnk">
@@ -73,6 +72,29 @@
             {% if form.description.errors %}
             <div class="errors alert alert-danger">{{ form.description.errors }}</div>
             {% endif %}
+        </div>
+    </div>
+
+    <div class="controls form-group">
+        <label for="id_topic" class="col-sm-2-bnk control-label">{% trans "Topic" %}</label>
+        <div class="col-sm-10-bnk">
+            {{ form.topic }}
+            {% if form.topic.errors %}
+            <div class="errors alert alert-danger">{{ form.topic.errors }}</div>
+            {% endif %}
+
+            <div class="popup-create-link-wrapper">
+                or
+                <a href="{% url 'topic_create' %}?_popup=1" class="autocomplete-add-another" id="add_id_topic">
+                    {% trans "create topic" %}
+                    <img src="/static/admin/img/icon_addlink.gif" width="10" height="10" alt="{%  trans "Add another" %}">
+                </a>
+            </div>
+            {% if form.topic.errors %}
+            <div class="errors alert alert-danger">{{ form.topic.errors }}</div>
+            {% endif %}
+
+
         </div>
     </div>
 
