@@ -1034,8 +1034,7 @@ footer .footer-menu div a:hover {
 }
 /* line 722, ../sass/style.scss */
 .sidebar-right .add_more {
-  width: 100%;
-  padding: 5px;
+  float: right;
 }
 
 /* line 725, ../sass/style.scss */
