@@ -14,6 +14,6 @@ def people_render_reference(people, display_edit_link=True, field_name='quoted_b
     if display_edit_link:
         html = '%s <a class="autocomplete-add-another" id="edit_id_%s" href="%s?_popup=1">%s</a>' % (html, field_name, reverse('people_edit', args=[people.id]), _('edit'))
 
-    html = '<span class"people-reference-wrapper">%s</span>' % html
+    html = '<span class="people-reference-wrapper">%s</span>' % html
 
     return html
