@@ -440,7 +440,7 @@ class TestEditStatement(TestCase):
 
         # Define for override
         self.check_initial = True
-        self.statement1 = factory.create_statement(quoted_by=self.people1, created_by=self.staff1)
+        self.statement1 = factory.create_statement(quoted_by=self.people1, created_by=self.staff1, topic=self.topic1)
 
         self.url1 = reverse('statement_edit', args=[self.statement1.id])
         self.url2 = reverse('statement_edit', args=[self.statement2.id])
@@ -492,7 +492,7 @@ class TestEditStatement(TestCase):
         self.assertContains(response, 'name="references-0-url"')
         self.assertContains(response, 'name="references-1-title"')
         self.assertContains(response, 'name="references-1-url"')
-
+        self.assertContains(response, 'name="topic"')
         self.assertContains(response, 'name="status"')
         self.assertContains(response, self.title)
         self.assertContains(response, self.button)
@@ -503,6 +503,7 @@ class TestEditStatement(TestCase):
         self.assertContains(response, self.statement1.permalink)
         self.assertContains(response, self.statement1.quoted_by_id)
         self.assertContains(response, self.statement1.quote)
+
         for reference in self.statement1.references:
             self.assertContains(response, reference['title'])
             self.assertContains(response, reference['url'])
@@ -524,6 +525,7 @@ class TestEditStatement(TestCase):
             'permalink': self.statement1.permalink,
             'quoted_by': self.statement1.quoted_by_id,
             'quote': self.statement1.quote,
+            'topic': self.statement1.topic_id,
             'status': self.statement1.status,
         }
         params.update(self.references2)
@@ -543,6 +545,7 @@ class TestEditStatement(TestCase):
 
         self.assertEqual(int(response.context['form'].initial['quoted_by']), self.statement1.quoted_by_id)
         self.assertEqual(int(response.context['form'].initial['status']), self.statement1.status)
+        self.assertEqual(int(response.context['form'].initial['topic']), self.statement1.topic_id)
 
         self.assertEqual(response.context['reference_formset'].initial, self.statement1.references)
         self.assertEqual(2, len(self.statement1.references))
@@ -556,6 +559,7 @@ class TestEditStatement(TestCase):
             'permalink': self.statement1.permalink,
             'quoted_by': self.statement1.quoted_by_id,
             'quote': self.statement1.quote,
+            'topic': self.statement1.topic_id,
             'status': self.statement1.status,
         }
         self.references2['references-0-DELETE'] = True
@@ -564,15 +568,9 @@ class TestEditStatement(TestCase):
         response = self.client.post(self.url1, params, follow=True)
 
 
-        self.statement1 = Statement.objects.get(id=self.statement1.id)
-
-        self.assertContains(response, self.statement1.permalink)
-        self.assertContains(response, self.statement1.quote)
-
         # test reference
 
-        self.assertEqual(int(response.context['form'].initial['quoted_by']), self.statement1.quoted_by_id)
-        self.assertEqual(int(response.context['form'].initial['status']), self.statement1.status)
+        self.statement1 = Statement.objects.get(id=self.statement1.id)
 
         self.assertEqual(response.context['reference_formset'].initial, self.statement1.references)
         self.assertEqual(1, len(self.statement1.references))
@@ -598,6 +596,7 @@ class TestEditStatement(TestCase):
             'status': '',
             'topic': '',
             'topic-autocomplete': '',
+            'topic': '',
 
         }
         params.update(self.references1)
@@ -648,7 +647,8 @@ class TestEditStatement(TestCase):
 
         self.assertContains(response, self.message_success)
 
-'''
+
+
 class TestCreateStatement(TestEditStatement):
 
     def setUp(self):
@@ -662,7 +662,7 @@ class TestCreateStatement(TestEditStatement):
             'quoted_by': self.people1,
             'created_by': self.staff1,
             'quote': 'New quote',
-            'title': 'New title',
+            'topic': self.topic1,
         })
 
         self.url1 = reverse('statement_create')
@@ -671,4 +671,7 @@ class TestCreateStatement(TestEditStatement):
 
         self.title = _('Create %s') % _('Statement')
         self.button = _('Save new')
-'''
+
+    def test_edit_post_delete_reference(self):
+        pass
+
