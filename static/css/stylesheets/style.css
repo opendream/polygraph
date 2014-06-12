@@ -1064,7 +1064,7 @@ footer .footer-menu div a:hover {
 }
 /* line 746, ../sass/style.scss */
 .autocomplete-light-widget .deck > span[data-value] img {
-  margin: 0 0 0 20px;
+  margin: 0 0 0 0;
 }
 /* line 747, ../sass/style.scss */
 .autocomplete-light-widget .deck > span[data-value] .remove {
@@ -1076,6 +1076,6 @@ footer .footer-menu div a:hover {
   background-position-y: 3px;
 }
 /* line 754, ../sass/style.scss */
-.autocomplete-light-widget .deck > span[data-value] .people-full-name {
-  margin-left: 20px;
+.autocomplete-light-widget .deck > span[data-value] .reference-span {
+  margin-left: 10px;
 }

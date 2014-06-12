@@ -743,7 +743,7 @@ footer {
 		border: 1px solid #ccc;
 		box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
 		webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
-		img { margin: 0 0 0 20px; }
+		img { margin: 0 0 0 0; }
 		.remove {
 		    background-position-y: 3px;
 		    height: 17px;
@@ -751,8 +751,9 @@ footer {
 		.remove:hover {
 		    background-position-y: 3px;
 		}
-		.people-full-name {
-		    margin-left: 20px;
+		.reference-span {
+		    margin-left: 10px;
 		}
+
 	}
 }

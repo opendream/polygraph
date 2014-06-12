@@ -198,6 +198,7 @@ def statement_create(request, statement=None):
             'description': statement.description,
             'status': statement.status,
             'quoted_by': statement.quoted_by_id,
+            'topic': statement.topic_id,
         }
 
         form = StatementEditForm(statement, Topic, initial=initial)
