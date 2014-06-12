@@ -540,13 +540,6 @@ input + .errors{
 		width: 100%;
 		.avatar { padding-right: 120px;}
 	}
-	.meter-md {
-		position: absolute;
-		bottom: 15px;
-		right: 0;
-		width: 120px;
-		img { height: 80px; }
-	}
 }
 
 .nav-color {
@@ -622,6 +615,20 @@ input + .errors{
 		}
 		.block-content { padding-top: 50px; }
 		.quote { line-height: 1.8em; }
+	}
+}
+.polygraph-list-block {
+	.block-content {
+		&.float-right-img {
+			padding-right: 250px;
+			img { width: 40px; height: 40px; }
+		}
+	}
+	.meter-md {
+		position: absolute;
+		top: 50%;
+		margin-top: -5em;
+		right: 0;
 	}
 }
 @media (min-width: 992px) {
