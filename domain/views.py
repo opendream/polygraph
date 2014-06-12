@@ -166,11 +166,9 @@ def statement_create(request, statement=None):
         if form.is_valid() and reference_formset.is_valid():
             statement.permalink = form.cleaned_data['permalink']
             statement.quote = form.cleaned_data['quote']
-            statement.title = form.cleaned_data['title']
-            statement.description = form.cleaned_data['description']
             statement.created_by = request.user
             statement.quoted_by_id = form.cleaned_data['quoted_by'].id
-            statement.topic_id = form.cleaned_data['topic'].id
+            statement.topic_id = form.cleaned_data['topic'].id if form.cleaned_data['topic'] else None
 
             # Save references
             references = []
@@ -194,8 +192,6 @@ def statement_create(request, statement=None):
         initial = {
             'permalink': statement.permalink,
             'quote': statement.quote,
-            'title': statement.title,
-            'description': statement.description,
             'status': statement.status,
             'quoted_by': statement.quoted_by_id,
             'topic': statement.topic_id,

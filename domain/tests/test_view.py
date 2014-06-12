@@ -431,6 +431,8 @@ class TestEditStatement(TestCase):
 
         self.staff1 = factory.create_staff(password='password')
         self.people1 = factory.create_people()
+        self.topic1 = factory.create_topic()
+
 
         self.statement2 = factory.create_statement()
 
@@ -486,9 +488,11 @@ class TestEditStatement(TestCase):
         self.assertContains(response, 'name="permalink"')
         self.assertContains(response, 'name="quoted_by"')
         self.assertContains(response, 'name="quote"')
-        self.assertContains(response, 'name="title"')
-        self.assertContains(response, 'name="description"')
-        #self.assertContains(response, 'name="references"')
+        self.assertContains(response, 'name="references-0-title"')
+        self.assertContains(response, 'name="references-0-url"')
+        self.assertContains(response, 'name="references-1-title"')
+        self.assertContains(response, 'name="references-1-url"')
+
         self.assertContains(response, 'name="status"')
         self.assertContains(response, self.title)
         self.assertContains(response, self.button)
@@ -499,8 +503,6 @@ class TestEditStatement(TestCase):
         self.assertContains(response, self.statement1.permalink)
         self.assertContains(response, self.statement1.quoted_by_id)
         self.assertContains(response, self.statement1.quote)
-        self.assertContains(response, self.statement1.title)
-        self.assertContains(response, self.statement1.description)
         for reference in self.statement1.references:
             self.assertContains(response, reference['title'])
             self.assertContains(response, reference['url'])
@@ -511,8 +513,6 @@ class TestEditStatement(TestCase):
         self.assertContains(response, self.statement2.permalink)
         self.assertContains(response, self.statement2.quoted_by_id)
         self.assertContains(response, self.statement2.quote)
-        self.assertContains(response, self.statement2.title)
-        self.assertContains(response, self.statement2.description)
         for reference in self.statement2.references:
             self.assertContains(response, reference['title'])
             self.assertContains(response, reference['url'])
@@ -524,8 +524,6 @@ class TestEditStatement(TestCase):
             'permalink': self.statement1.permalink,
             'quoted_by': self.statement1.quoted_by_id,
             'quote': self.statement1.quote,
-            'title': self.statement1.title,
-            'description': self.statement1.description,
             'status': self.statement1.status,
         }
         params.update(self.references2)
@@ -540,8 +538,6 @@ class TestEditStatement(TestCase):
 
         self.assertContains(response, self.statement1.permalink)
         self.assertContains(response, self.statement1.quote)
-        self.assertContains(response, self.statement1.title)
-        self.assertContains(response, self.statement1.description)
 
         # test reference
 
@@ -560,8 +556,6 @@ class TestEditStatement(TestCase):
             'permalink': self.statement1.permalink,
             'quoted_by': self.statement1.quoted_by_id,
             'quote': self.statement1.quote,
-            'title': self.statement1.title,
-            'description': self.statement1.description,
             'status': self.statement1.status,
         }
         self.references2['references-0-DELETE'] = True
@@ -574,8 +568,6 @@ class TestEditStatement(TestCase):
 
         self.assertContains(response, self.statement1.permalink)
         self.assertContains(response, self.statement1.quote)
-        self.assertContains(response, self.statement1.title)
-        self.assertContains(response, self.statement1.description)
 
         # test reference
 
@@ -603,8 +595,6 @@ class TestEditStatement(TestCase):
             'quoted_by': '',
             'quoted_by-autocomplete': '',
             'quote': '',
-            'title': '',
-            'description': '',
             'status': '',
             'topic': '',
             'topic-autocomplete': '',
@@ -623,8 +613,6 @@ class TestEditStatement(TestCase):
             'quoted_by': self.statement1.quoted_by_id,
             'quoted_by-autocomplete': self.statement1.quoted_by_id,
             'quote': self.statement1.quote,
-            'title': '',
-            'description': '',
             'status': '',
         }
         params.update(self.references1)
@@ -637,8 +625,6 @@ class TestEditStatement(TestCase):
             'permalink': 'a tom in link?',
             'quoted_by': self.statement1.quoted_by_id,
             'quote': self.statement1.quote,
-            'title': '',
-            'description': '',
             'status': '',
         }
         params.update(self.references1)
@@ -654,8 +640,6 @@ class TestEditStatement(TestCase):
             'permalink': self.statement1.permalink,
             'quoted_by': self.statement1.quoted_by_id,
             'quote': self.statement1.quote,
-            'title': '',
-            'description': '',
             'status': self.statement1.status,
         }
         params.update(self.references1)
