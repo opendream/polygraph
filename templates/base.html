@@ -83,7 +83,7 @@
 
         {% endif %}
 
-
+        {% if not request_inline %}
         {% if messages %}
         <div class="container messages">
         {% for message in messages %}
@@ -93,6 +93,7 @@
             </div>
         {% endfor %}
         </div>
+        {% endif %}
         {% endif %}
 
         {% block base_content %}{% endblock %}

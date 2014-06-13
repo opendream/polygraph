@@ -109,7 +109,6 @@ def topic_create(request, topic=None):
     if request.method == 'POST':
         form = TopicEditForm(topic, Topic, request.POST)
         if form.is_valid():
-            topic.permalink = form.cleaned_data['permalink']
             topic.title = form.cleaned_data['title']
             topic.description = form.cleaned_data['description']
             topic.created_by = request.user
@@ -126,7 +125,6 @@ def topic_create(request, topic=None):
             return redirect('topic_edit', topic.id)
     else:
         initial = {
-            'permalink': topic.permalink,
             'title': topic.title,
             'description': topic.description,
             'without_revision': False,

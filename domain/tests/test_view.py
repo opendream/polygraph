@@ -239,7 +239,6 @@ class TestEditTopic(TestCase):
     def test_edit_context(self):
         response = self.client.get(self.url1)
 
-        self.assertContains(response, 'name="permalink"')
         self.assertContains(response, 'name="title"')
         self.assertContains(response, 'name="description"')
         self.assertContains(response, 'name="without_revision"')
@@ -249,21 +248,18 @@ class TestEditTopic(TestCase):
         if not self.check_initial:
             return
 
-        self.assertContains(response, self.topic1.permalink)
         self.assertContains(response, self.topic1.title)
         self.assertContains(response, self.topic1.description)
 
 
 
         response = self.client.get(self.url2)
-        self.assertContains(response, self.topic2.permalink)
         self.assertContains(response, self.topic2.title)
         self.assertContains(response, self.topic2.description)
 
     def test_edit_post(self):
 
         params = {
-            'permalink': self.topic1.permalink,
             'title': self.topic1.title,
             'description': self.topic1.description,
         }
@@ -276,7 +272,6 @@ class TestEditTopic(TestCase):
         else:
             self.topic1 = Topic.objects.latest('id')
 
-        self.assertContains(response, self.topic1.permalink)
         self.assertContains(response, self.topic1.title)
         self.assertContains(response, self.topic1.description)
         self.assertContains(response, self.message_success)
@@ -300,38 +295,17 @@ class TestEditTopic(TestCase):
     def test_post_edit_invalid(self):
 
         params = {
-            'permalink': '',
             'title': '',
             'description': '',
         }
         response = self.client.post(self.url1, params)
-        self.assertFormError(response, 'form', 'permalink', [_('This field is required.')])
         self.assertFormError(response, 'form', 'title', [_('This field is required.')])
-
-
-        params = {
-            'permalink': self.topic2.permalink,
-            'title': self.topic1.title,
-            'description': '',
-        }
-        response = self.client.post(self.url1, params)
-        self.assertFormError(response, 'form', 'permalink',  [_('This permalink is already in use.')])
-
-
-        params = {
-            'permalink': 'a tom in link?',
-            'title': self.topic1.title,
-            'description': '',
-        }
-        response = self.client.post(self.url1, params)
-        self.assertFormError(response, 'form', 'permalink',  [_('Enter a valid permalink.')])
 
         self.client.logout()
 
     def test_post_edit_not_update(self):
 
         params = {
-            'permalink': self.topic1.permalink,
             'title': self.topic1.title,
 
         }
@@ -342,7 +316,6 @@ class TestEditTopic(TestCase):
     def test_post_edit_without_revision(self):
 
         params = {
-            'permalink': self.topic1.permalink,
             'title': self.topic1.title,
             'description': self.topic1.description,
             'without_revision': True
@@ -353,7 +326,6 @@ class TestEditTopic(TestCase):
         response = self.client.post(self.url1, params, follow=True)
 
 
-        self.assertContains(response, self.topic1.permalink)
         self.assertContains(response, self.topic1.title)
         self.assertContains(response, self.topic1.description)
         self.assertContains(response, self.message_success)
@@ -374,7 +346,6 @@ class TestCreateTopic(TestEditTopic):
         self.check_initial = False
 
         self.topic1 = Topic(**{
-            'permalink': 'new-topic',
             'title': 'New topic',
             'description': 'Work on opendream as topic',
         })
@@ -388,7 +359,6 @@ class TestCreateTopic(TestEditTopic):
     def test_edit_context(self):
         response = self.client.get(self.url1)
 
-        self.assertContains(response, 'name="permalink"')
         self.assertContains(response, 'name="title"')
         self.assertContains(response, 'name="description"')
         self.assertNotContains(response, 'name="without_revision"')
@@ -398,7 +368,6 @@ class TestCreateTopic(TestEditTopic):
     def test_post_edit_without_revision(self):
 
         params = {
-            'permalink': self.topic1.permalink,
             'title': self.topic1.title,
             'description': self.topic1.description,
             'without_revision': True
@@ -407,7 +376,6 @@ class TestCreateTopic(TestEditTopic):
         response = self.client.post(self.url1, params, follow=True)
 
 
-        self.assertContains(response, self.topic1.permalink)
         self.assertContains(response, self.topic1.title)
         self.assertContains(response, self.topic1.description)
         self.assertContains(response, self.message_success)

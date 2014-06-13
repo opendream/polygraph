@@ -2,6 +2,7 @@
 
 {% block base_content %}
 
+{% if not request_inline %}
 <div class="container">
 
     <div class="content-inner{% block content_class %}{% endblock %}">
@@ -10,10 +11,15 @@
                 <h1>{% block title %}{% endblock %}</h1>
             </header>
             <div class="section-content">
+{% endif %}
+
                 {% block content %}{% endblock %}
+
+{% if not request_inline %}
             </div>
         </section>
     </div>
 </div>
+{% endif %}
 
 {% endblock %}

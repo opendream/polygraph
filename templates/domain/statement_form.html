@@ -73,13 +73,18 @@
             <div class="errors alert alert-danger">{{ form.topic.errors }}</div>
             {% endif %}
 
-            <div class="popup-create-link-wrapper">
+            <div class="inline-create-link-wrapper">
                 or
-                <a href="{% url 'topic_create' %}?_popup=1" class="autocomplete-add-another" id="add_id_topic">
+                <a href="{% url 'topic_create' %}?_popup=1&_inline=1" class="add-another-inline" id="add_id_topic" target="topic_inline">
                     {% trans "create topic" %}
                     <img src="/static/admin/img/icon_addlink.gif" width="10" height="10" alt="{%  trans "Add another" %}">
                 </a>
             </div>
+
+            <div class="add-another-inline-input-list" id="topic_inline">
+
+            </div>
+
             {% if form.topic.errors %}
             <div class="errors alert alert-danger">{{ form.topic.errors }}</div>
             {% endif %}

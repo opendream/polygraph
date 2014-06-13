@@ -8,6 +8,7 @@ import re
 import files_widget
 
 
+
 class CommonTrashManager(models.Manager):
     def filter_without_trash(self, *args, **kwargs):
         if not kwargs.get('is_deleted'):
@@ -36,6 +37,15 @@ class CommonTrashManager(models.Manager):
     def annotate(self, *args, **kwargs):
         return super(CommonTrashManager, self).exclude(is_deleted=True).annotate(*args, **kwargs)
 
+
+class CommonModel(models.Model):
+
+    @property
+    def inst_name(self):
+        return _(self.__class__.__name__)
+
+    class Meta:
+        abstract = True
 
 class CommonTrashModel(models.Model):
     is_deleted  = models.BooleanField(default=False)
@@ -98,7 +108,7 @@ class AbstractPeopleField(models.Model):
         return self.get_full_name()
 
 
-class AbstractPermalink(models.Model):
+class AbstractPermalink(CommonModel):
 
     class Meta:
         abstract = True
@@ -112,7 +122,3 @@ class AbstractPermalink(models.Model):
 
     def __unicode__(self):
         return self.permalink
-
-    @property
-    def inst_name(self):
-        return _(self.__class__.__name__)

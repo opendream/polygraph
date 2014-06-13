@@ -7,7 +7,7 @@ from common.constants import STATUS_CHOICES, STATUS_PUBLISHED
 
 from domain.autocomplete_light_registry import PeopleAutocomplete, TopicAutocomplete
 import files_widget
-from common.forms import PermalinkForm
+from common.forms import PermalinkForm, CommonForm
 from domain.models import PeopleCategory, People, Topic, TopicRevision
 
 
@@ -29,9 +29,7 @@ class PeopleEditForm(PermalinkForm):
     status = forms.ChoiceField(required=False, widget=forms.RadioSelect(attrs={'id': 'id_status'}), choices=STATUS_CHOICES)
 
 
-class TopicEditForm(PermalinkForm):
-
-    permalink = forms.CharField()
+class TopicEditForm(CommonForm):
 
     title = forms.CharField(max_length=30, widget=forms.TextInput())
     description = forms.CharField(required=False, widget=CKEditorWidget(config_name='default'))

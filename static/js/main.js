@@ -57,6 +57,13 @@ $(document).ready(function () {
         window.open($(this).attr('href') + '?_popup=1', wkey, "width=auto,height=auto");
 
     });
+    
+    $(document).on('click', '.add-another-inline', function (e) {
+      e.preventDefault();
+      
+      var href = $(this).attr('href');
+      
+    });
 
 });
 
