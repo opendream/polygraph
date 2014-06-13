@@ -736,6 +736,15 @@ footer {
 	.form-group textarea { max-width: 100%; }	
 }
 
+.add-another-inline-input-list {
+
+    overflow: hidden;
+    margin-top: 20px;
+
+    .form-group {
+        overflow: hidden;
+    }
+}
 //####################################################
 
 .autocomplete-light-widget {

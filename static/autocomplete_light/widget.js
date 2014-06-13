@@ -160,7 +160,6 @@ yourlabs.Widget.prototype.optionChoice = function(option) {
     
     var target = optionChoice.find('.append-option-html');
 
-    console.log(target);
     // crosalot hack
     if (target.length) {
         target.append(option.text());

@@ -18,12 +18,7 @@
 
     {% include 'domain/topic_inline_form.html' %}
 
-    <div class="controls form-group">
-        <div class="col-sm-offset-2 col-sm-10 form-action">
-            <button class="btn btn-primary" type="submit">{% if form.is_new %}{% trans "Save new" %}{% else %}{% trans "Save changes" %}{% endif %}</button>
-            <a href="{% url 'home' %}" class="btn btn-cancle flat-btn">{% trans "Cancel" %}</a>
-        </div>
-    </div>
+
 </form>
 
 {% endblock %}

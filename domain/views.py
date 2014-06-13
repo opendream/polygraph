@@ -122,7 +122,10 @@ def topic_create(request, topic=None):
 
             messages.success(request, message_success)
 
-            return redirect('topic_edit', topic.id)
+            if request.GET.get('_inline') or request.POST.get('_inline'):
+                form.inst = topic
+            else:
+                return redirect('topic_edit', topic.id)
     else:
         initial = {
             'title': topic.title,
@@ -131,6 +134,12 @@ def topic_create(request, topic=None):
         }
 
         form = TopicEditForm(topic, Topic, initial=initial)
+
+
+    if request.GET.get('_inline') or request.POST.get('_inline'):
+        return render(request, 'domain/topic_inline_form.html', {
+            'form': form
+        })
 
 
     return render(request, 'domain/topic_form.html', {

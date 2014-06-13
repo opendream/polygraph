@@ -1,4 +1,6 @@
 from django import template
+from common.functions import topic_render_reference
+from domain.models import Topic
 
 register = template.Library()
 
@@ -21,3 +23,9 @@ class CaptureasNode(template.Node):
         output = self.nodelist.render(context)
         context[self.varname] = output  
         return ''
+
+@register.filter(name='topic_render_reference')
+def do_topic_render_reference(topic_id):
+
+    topic = Topic.objects.get(id=topic_id)
+    return topic_render_reference(topic)
