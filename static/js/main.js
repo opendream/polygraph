@@ -62,6 +62,9 @@ $(document).ready(function () {
       e.preventDefault();
       
       var href = $(this).attr('href');
+      console.log(href);
+      
+      $('#' + $(this).attr('target')).load($(this).attr('href'));
       
     });
 
