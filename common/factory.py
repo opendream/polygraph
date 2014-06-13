@@ -105,26 +105,23 @@ def create_topic(created_by=None, permalink=None, title='', description='', crea
 
     return topic
 
-def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', title='', description='', references=None, status=STATUS_PUBLISHED):
+def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', references=None, status=STATUS_PUBLISHED, topic=None):
 
     created_by = created_by or create_staff()
     quoted_by = quoted_by or create_people()
+    topic = topic or create_topic(created_by=created_by)
 
     permalink = permalink or randstr()
     quote = quote or randstr()
-    title = title or randstr()
-    description = description or randstr()
     references = references or [{'url': 'http://%s.com/' % randstr(), 'title': randstr()}, {'url': 'http://%s.com/' % randstr(), 'title': randstr()}]
-
     statement = Statement.objects.create(
         permalink=permalink,
         quote=quote,
-        title=title,
-        description=description,
         references=references,
         status=status,
         quoted_by=quoted_by,
-        created_by=created_by
+        created_by=created_by,
+        topic=topic
     )
 
     statement = Statement.objects.get(id=statement.id)

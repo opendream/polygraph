@@ -187,6 +187,8 @@ class TestStatement(TestCase):
         self.staff2 = factory.create_staff()
         self.people1 = factory.create_people()
         self.people2 = factory.create_people()
+        self.topic1 = factory.create_topic(created_by=self.staff1)
+        self.topic2 = factory.create_topic(created_by=self.staff2)
 
     def test_create(self):
 
@@ -195,20 +197,18 @@ class TestStatement(TestCase):
             quoted_by=self.people1,
             permalink='i-love-polygraph',
             quote='I love polygraph and programming.',
-            title='I love polygraph',
-            description='I love polygraph and programming. This field is description.',
             references=[{'url': 'http://polygraph.com', 'title': 'Polygraph quote'}, {'url': 'https://google.com', 'title': 'Search yours quotes'}],
-            status=STATUS_PUBLISHED
+            status=STATUS_PUBLISHED,
+            topic=self.topic1
         )
         self.assertEqual(statement1.created_by, self.staff1)
         self.assertEqual(statement1.quoted_by, self.people1)
         self.assertEqual(statement1.permalink, 'i-love-polygraph')
         self.assertEqual(statement1.quote, 'I love polygraph and programming.')
-        self.assertEqual(statement1.title, 'I love polygraph')
-        self.assertEqual(statement1.description, 'I love polygraph and programming. This field is description.')
         self.assertEqual(statement1.references, [{'url': 'http://polygraph.com', 'title': 'Polygraph quote'}, {'url': 'https://google.com', 'title': 'Search yours quotes'}])
         self.assertEqual(statement1.status, STATUS_PUBLISHED)
-        self.assertEqual(statement1.__unicode__(), 'I love polygraph')
+        self.assertEqual(statement1.__unicode__(), 'I love polygraph and programming.')
+        self.assertEqual(statement1.topic, self.topic1)
 
 
         statement2 = Statement.objects.create(
@@ -216,20 +216,18 @@ class TestStatement(TestCase):
             quoted_by=self.people2,
             permalink='i-love-polygraph-2',
             quote='I love polygraph and programming and testing.',
-            title='',
-            description='I love polygraph and programming and testing. This field is description.',
             references=[{'url': 'http://polygraph.test', 'title': 'Polygraph test'}, {'url': 'https://test.com', 'title': 'Test your test'}],
-            status=STATUS_DRAFT
+            status=STATUS_DRAFT,
+            topic=self.topic2
         )
         self.assertEqual(statement2.created_by, self.staff2)
         self.assertEqual(statement2.quoted_by, self.people2)
         self.assertEqual(statement2.permalink, 'i-love-polygraph-2')
         self.assertEqual(statement2.quote, 'I love polygraph and programming and testing.')
-        self.assertEqual(statement2.title, '')
-        self.assertEqual(statement2.description, 'I love polygraph and programming and testing. This field is description.')
         self.assertEqual(statement2.references, [{'url': 'http://polygraph.test', 'title': 'Polygraph test'}, {'url': 'https://test.com', 'title': 'Test your test'}])
         self.assertEqual(statement2.status, STATUS_DRAFT)
         self.assertEqual(statement2.__unicode__(), 'I love polygraph and programming and testing.')
+        self.assertEqual(statement2.topic, self.topic2)
 
         try:
             with transaction.atomic():

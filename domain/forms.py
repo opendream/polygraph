@@ -65,10 +65,7 @@ class StatementEditForm(PermalinkForm):
             attrs={'placeholder': 'Type for search by topic title', 'class': 'form-control'}
         )
     )
-    description = forms.CharField(required=False, widget=CKEditorWidget(config_name='default'))
 
-
-    title = forms.CharField(required=False, max_length=30, widget=forms.Textarea())
 
     status = forms.ChoiceField(required=False, widget=forms.RadioSelect(attrs={'id': 'id_status'}), choices=STATUS_CHOICES)
 
