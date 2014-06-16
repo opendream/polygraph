@@ -241,7 +241,7 @@ class TestEditTopic(TestCase):
 
         self.assertContains(response, 'name="title"')
         self.assertContains(response, 'name="description"')
-        self.assertContains(response, 'name="without_revision"')
+        self.assertContains(response, 'name="as_revision"')
         self.assertContains(response, self.title)
         self.assertContains(response, self.button)
 
@@ -318,7 +318,7 @@ class TestEditTopic(TestCase):
         params = {
             'title': self.topic1.title,
             'description': self.topic1.description,
-            'without_revision': True
+            'as_revision': False
         }
 
         before_count = self.topic1.topicrevision_set.count()
@@ -329,7 +329,7 @@ class TestEditTopic(TestCase):
         self.assertContains(response, self.topic1.title)
         self.assertContains(response, self.topic1.description)
         self.assertContains(response, self.message_success)
-        self.assertEqual(response.context['form'].initial['without_revision'], False)
+        self.assertEqual(response.context['form'].initial['as_revision'], True)
 
         self.topic1 = Topic.objects.get(id=self.topic1.id)
 
@@ -337,6 +337,7 @@ class TestEditTopic(TestCase):
 
         after_count = self.topic1.topicrevision_set.count()
         self.assertEqual(after_count, before_count)
+
 
 class TestCreateTopic(TestEditTopic):
 
@@ -361,7 +362,7 @@ class TestCreateTopic(TestEditTopic):
 
         self.assertContains(response, 'name="title"')
         self.assertContains(response, 'name="description"')
-        self.assertNotContains(response, 'name="without_revision"')
+        self.assertNotContains(response, 'name="as_revision"')
         self.assertContains(response, self.title)
         self.assertContains(response, self.button)
 
@@ -370,7 +371,7 @@ class TestCreateTopic(TestEditTopic):
         params = {
             'title': self.topic1.title,
             'description': self.topic1.description,
-            'without_revision': True
+            'as_revision': False
         }
 
         response = self.client.post(self.url1, params, follow=True)
@@ -379,7 +380,7 @@ class TestCreateTopic(TestEditTopic):
         self.assertContains(response, self.topic1.title)
         self.assertContains(response, self.topic1.description)
         self.assertContains(response, self.message_success)
-        self.assertEqual(response.context['form'].initial['without_revision'], False)
+        self.assertEqual(response.context['form'].initial['as_revision'], True)
 
 
         self.topic1 = Topic.objects.latest('id')

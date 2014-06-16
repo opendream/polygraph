@@ -113,7 +113,8 @@ def topic_create(request, topic=None):
             topic.description = form.cleaned_data['description']
             topic.created_by = request.user
 
-            without_revision = form.cleaned_data['without_revision'] or False
+            as_revision = form.cleaned_data['as_revision'] or True
+            without_revision = not as_revision
 
             topic.save(without_revision=without_revision)
 
@@ -130,7 +131,7 @@ def topic_create(request, topic=None):
         initial = {
             'title': topic.title,
             'description': topic.description,
-            'without_revision': False,
+            'as_revision': True,
         }
 
         form = TopicEditForm(topic, Topic, initial=initial)

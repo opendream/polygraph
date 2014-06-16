@@ -34,7 +34,7 @@ class TopicEditForm(CommonForm):
     title = forms.CharField(max_length=30, widget=forms.TextInput())
     description = forms.CharField(required=False, widget=CKEditorWidget(config_name='default'))
 
-    without_revision = forms.NullBooleanField(widget=forms.CheckboxInput())
+    as_revision = forms.NullBooleanField(widget=forms.CheckboxInput(attrs={'chacked': 'checked'}))
 
 
 class ReferenceForm(forms.Form):
