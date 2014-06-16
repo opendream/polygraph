@@ -65,26 +65,34 @@
         </div>
     </div>
 
-    <div class="controls form-group">
-        <label for="id_topic" class="col-sm-2-bnk control-label">{% trans "Topic" %}</label>
-        <div class="col-sm-10-bnk">
-            {{ form.topic }}
-            {% if form.topic.errors %}
-            <div class="errors alert alert-danger">{{ form.topic.errors }}</div>
-            {% endif %}
+    <div class="controls form-group block block-bg-transparent statement-desc">
+        <div class="block-content">
 
-            <div class="popup-create-link-wrapper">
-                or
-                <a href="{% url 'topic_create' %}?_popup=1" class="autocomplete-add-another" id="add_id_topic">
-                    {% trans "create topic" %}
-                    <img src="/static/admin/img/icon_addlink.gif" width="10" height="10" alt="{%  trans "Add another" %}">
-                </a>
+            <label for="id_topic" class="col-sm-2-bnk control-label">{% trans "Topic" %}</label>
+            <div class="col-sm-10-bnk">
+                {{ form.topic }}
+                {% if form.topic.errors %}
+                <div class="errors alert alert-danger">{{ form.topic.errors }}</div>
+                {% endif %}
+
+                <div class="inline-create-link-wrapper">
+                    or
+                    <a href="{% url 'topic_create' %}?_inline=1" class="add-another-inline" id="add_id_topic" target="topic_inline">
+                        {% trans "create topic" %}
+                        <img src="/static/admin/img/icon_addlink.gif" width="10" height="10" alt="{%  trans "Add another" %}">
+                    </a>
+                </div>
+
+                <div class="add-another-inline-input-list" id="topic_inline">
+
+                </div>
+
+                {% if form.topic.errors %}
+                <div class="errors alert alert-danger">{{ form.topic.errors }}</div>
+                {% endif %}
+
+
             </div>
-            {% if form.topic.errors %}
-            <div class="errors alert alert-danger">{{ form.topic.errors }}</div>
-            {% endif %}
-
-
         </div>
     </div>
 

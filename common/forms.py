@@ -5,14 +5,28 @@ from django.forms.util import ErrorList
 
 import re
 
-class PermalinkForm(forms.Form):
+
+class CommonForm(forms.Form):
+
+    def __init__(self, inst=None, model=None, *args, **kwargs):
+        super(CommonForm, self).__init__(*args, **kwargs)
+        self.inst = inst
+        self.model = model
+
+    def is_new(self):
+
+        if self.inst and self.inst.id:
+            return False
+
+        return True
+
+
+class PermalinkForm(CommonForm):
 
     PERMALINK_FIELDS = ['permalink']
 
     def __init__(self, inst=None, model=None, *args, **kwargs):
-        super(PermalinkForm, self).__init__(*args, **kwargs)
-        self.inst = inst
-        self.model = model
+        super(PermalinkForm, self).__init__(inst, model, *args, **kwargs)
 
         for field_name in self.PERMALINK_FIELDS:
             self.fields[field_name].max_length = 255
@@ -35,10 +49,3 @@ class PermalinkForm(forms.Form):
                 self._errors[field_name].append(_('This %s is already in use.') % field_name)
 
         return cleaned_data
-
-    def is_new(self):
-
-        if self.inst and self.inst.id:
-            return False
-
-        return True

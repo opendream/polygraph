@@ -87,15 +87,13 @@ def create_people(permalink=None, first_name='', last_name='', occupation='', de
     return people
 
 
-def create_topic(created_by=None, permalink=None, title='', description='', created=None):
+def create_topic(created_by=None, title='', description='', created=None):
 
     created_by = created_by or create_staff()
-    permalink = permalink or randstr()
     title = title or randstr()
     description = description or randstr()
 
     topic = Topic.objects.create(
-        permalink = permalink,
         title  = title,
         description = description,
         created_by = created_by

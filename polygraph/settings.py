@@ -152,7 +152,9 @@ CKEDITOR_CONFIGS = {
             ['Image', 'Table'],
         ],
         'width': 'auto',
+        'height': '200',
         'format_tags': 'h3;h4;h5',
+        'removePlugins': 'resize',
         'extraPlugins': 'autogrow',
     },
     'minimal': {
@@ -161,6 +163,8 @@ CKEDITOR_CONFIGS = {
             ['NumberedList', 'BulletedList'],
         ],
         'width': 'auto',
+        'height': '200',
+        'removePlugins': 'resize',
         'extraPlugins': 'autogrow',
     },
     'bold': {
@@ -169,6 +173,8 @@ CKEDITOR_CONFIGS = {
         ],
         'width': 'auto',
         'height': '80',
+        'autoGrow_minHeight': '80',
+        'removePlugins': 'resize',
         'extraPlugins': 'autogrow',
     },
 }

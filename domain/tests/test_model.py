@@ -96,7 +96,7 @@ class TestTopic(TestCase):
         # With revision save
 
         topic1_created1 = timezone.now()
-        topic1 = factory.create_topic(staff1, 'hello-world', 'Hello world', 'I am developer', topic1_created1)
+        topic1 = factory.create_topic(staff1, 'Hello world', 'I am developer', topic1_created1)
         self.assertEqual(topic1.topicrevision_set.count(), 1)
         self.assertEqual(topic1.title, 'Hello world')
         self.assertEqual(topic1.description, 'I am developer')
@@ -142,23 +142,11 @@ class TestTopic(TestCase):
 
 
 
-        topic2 = factory.create_topic(staff2, 'hi-sea', 'Hi sea', 'I am tester')
+        topic2 = factory.create_topic(staff2, 'Hi sea', 'I am tester')
         self.assertEqual(topic2.topicrevision_set.count(), 1)
         self.assertEqual(topic2.title, 'Hi sea')
         self.assertEqual(topic2.description, 'I am tester')
         self.assertEqual(topic2.created_by, staff2)
-
-
-        # Validate
-        try:
-            with transaction.atomic():
-                factory.create_topic(staff1, 'hello-world', 'Hello world', 'I am developer')
-
-            self.assertTrue(0, 'Duplicate permalink allowed.')
-
-        except IntegrityError:
-            # check don't create topic
-            self.assertEqual(2, Topic.objects.all().count())
 
 
 

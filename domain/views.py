@@ -109,7 +109,6 @@ def topic_create(request, topic=None):
     if request.method == 'POST':
         form = TopicEditForm(topic, Topic, request.POST)
         if form.is_valid():
-            topic.permalink = form.cleaned_data['permalink']
             topic.title = form.cleaned_data['title']
             topic.description = form.cleaned_data['description']
             topic.created_by = request.user
@@ -123,16 +122,24 @@ def topic_create(request, topic=None):
 
             messages.success(request, message_success)
 
-            return redirect('topic_edit', topic.id)
+            if request.GET.get('_inline') or request.POST.get('_inline'):
+                form.inst = topic
+            else:
+                return redirect('topic_edit', topic.id)
     else:
         initial = {
-            'permalink': topic.permalink,
             'title': topic.title,
             'description': topic.description,
             'without_revision': False,
         }
 
         form = TopicEditForm(topic, Topic, initial=initial)
+
+
+    if request.GET.get('_inline') or request.POST.get('_inline'):
+        return render(request, 'domain/topic_inline_form.html', {
+            'form': form
+        })
 
 
     return render(request, 'domain/topic_form.html', {

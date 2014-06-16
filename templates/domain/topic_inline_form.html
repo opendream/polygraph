@@ -1,0 +1,132 @@
+{% load i18n %}
+{% load common_tags %}
+
+<div class="controls form-group">
+    <label for="id_title" class="{% if not request_inline %}col-sm-2 {% endif %}control-label">{% trans "Title" %}</label>
+    <div class="{% if not request_inline %}col-sm-10{% endif %}">
+        <input id="id_title" name="title" type="text" class="form-control" value="{{ form.title.value|default_if_none:"" }}">
+        {% if form.title.errors %}
+        <div class="errors alert alert-danger">{{ form.title.errors }}</div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="controls form-group">
+    <label for="id_description" class="{% if not request_inline %}col-sm-2 {% endif %}control-label">{% trans "Description" %}</label>
+    <div class="{% if not request_inline %}col-sm-10{% endif %}">
+        {{ form.description }}
+        {% if form.description.errors %}
+        <div class="errors alert alert-danger">{{ form.description.errors }}</div>
+        {% endif %}
+    </div>
+</div>
+
+{% if not form.is_new %}
+<div class="controls form-group">
+    <label class="{% if not request_inline %}col-sm-2 {% endif %}control-label">{% trans "Revision" %}</label>
+    <div class="{% if not request_inline %}col-sm-10 checkbox{% endif %}">
+        <input{% if form.without_revision.value %} checked=checked{% endif %} id="id_{{ form.without_revision.name }}" type="checkbox" name="{{ form.without_revision.name }}" value="1" />
+        <label for="id_{{ form.without_revision.name }}">{% trans "Save without new revision" %}</label>
+        {% if form.without_revision.errors %}
+        <div class="errors alert alert-danger">{{ form.without_revision.errors }}</div>
+        {% endif %}
+    </div>
+</div>
+{% endif %}
+
+<div class="controls form-group">
+    <div class="{% if not request_inline %}col-sm-offset-2 col-sm-10 {% endif %}form-action">
+        <button class="btn btn-primary" type="submit">{% if form.is_new %}{% trans "Save new" %}{% else %}{% trans "Save changes" %}{% endif %}</button>
+        <a href="{% url 'home' %}" class="btn btn-cancel flat-btn">{% trans "Cancel" %}</a>
+    </div>
+</div>
+
+
+{% if request_inline %}
+<script type="text/javascript">
+
+    (function ($) {
+
+
+        {% if form.is_valid %}
+
+        var win = {
+            'name': 'id_topic',
+            'close': function () {
+                //delete(CKEDITOR.instances.id_description);
+                $('.add-another-inline-input-list').html('');
+
+            }
+        };
+
+        dismissAddAnotherPopup(win, '{{ form.inst.id }}', '{{ form.inst.id|topic_render_reference|safe }}');
+
+        {% else %}
+
+
+        $('.add-another-inline-input-list .btn-cancel').click(function (e) {
+            e.preventDefault();
+            $('.add-another-inline-input-list').html('');
+        });
+
+        $('.add-another-inline-input-list .btn-primary').click(function (e) {
+            e.preventDefault();
+
+            if (CKEDITOR.instances.id_description) {
+                $('#id_description').val(CKEDITOR.instances.id_description.getData());
+            }
+
+            var input_list_container = $(this).parents('.add-another-inline-input-list');
+            var input_list = input_list_container.find('[name]');
+
+            var params = {'_inline': '1'};
+            input_list.each(function () {
+                params[$(this).attr('name')] = $(this).val();
+            });
+
+            var topic_post_url = '{% if form.is_new %}{% url 'topic_create' %}{% else %}{% url 'topic_edit' form.inst.id %}{% endif %}';
+
+
+            input_list_container.load(topic_post_url, params);
+
+
+        });
+
+        {% endif %}
+
+
+    }) (jQuery);
+
+</script>
+{% endif %}
+
+
+<script type="text/javascript">
+
+    (function ($) {
+
+
+        var without_revision = $('#id_{{ form.without_revision.name }}');
+
+        if (without_revision.length) {
+
+            without_revision.attr('checked', 'checked');
+            without_revision.prettyCheckable();
+
+            var ignore_check_without_revision  = false;
+
+            if (CKEDITOR.instances.id_description) {
+                CKEDITOR.instances.id_description.on('blur', function () {
+                    if (!ignore_check_without_revision && this.checkDirty()) {
+                        without_revision.removeAttr('checked').siblings().removeClass('checked');
+                    }
+                });
+            }
+
+            without_revision.siblings().click(function () {
+                ignore_check_without_revision  = true;
+            });
+        }
+    }) (jQuery);
+
+</script>

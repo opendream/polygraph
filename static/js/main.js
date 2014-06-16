@@ -21,7 +21,7 @@ $(document).ready(function () {
     $('input[type=checkbox], input[type=radio]').each(function () {
         $(this).prettyCheckable();
     });
-
+    
     // add more formset
     $('.add_more').click(function() {
 
@@ -57,11 +57,22 @@ $(document).ready(function () {
         window.open($(this).attr('href') + '?_popup=1', wkey, "width=auto,height=auto");
 
     });
+    
+    $(document).on('click', '.add-another-inline', function (e) {
+      e.preventDefault();
+      
+      var href = $(this).attr('href');
+      
+      $('#' + $(this).attr('target')).load($(this).attr('href'));
+      
+    });
 
 });
 
+/*
 if (typeof CKEDITOR != 'undefined') {
     CKEDITOR.on('dialogDefinition', function(ev) {
+              
         // Take the dialog window name and its definition from the event data.
         var dialogName = ev.data.name;
         var dialogDefinition = ev.data.definition;
@@ -74,3 +85,4 @@ if (typeof CKEDITOR != 'undefined') {
         }
     });
 }
+*/
