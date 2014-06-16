@@ -1070,8 +1070,8 @@ footer .footer-menu div a:hover {
 
 /* line 753, ../sass/style.scss */
 #inline_overlay {
-  background-color: #FFF;
-  opacity: 0.5;
+  background: url(../images/body-bg.png);
+  opacity: 0.8;
   position: absolute;
   top: -5px;
   left: -5px;
@@ -1080,9 +1080,10 @@ footer .footer-menu div a:hover {
   padding: 5px;
   box-sizing: content-box;
   border-radius: 5px;
+  border: solid 1px #DDD;
 }
 
-/* line 769, ../sass/style.scss */
+/* line 770, ../sass/style.scss */
 .autocomplete-light-widget .deck > span[data-value] {
   position: relative;
   width: 100%;
@@ -1097,20 +1098,20 @@ footer .footer-menu div a:hover {
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
-/* line 778, ../sass/style.scss */
+/* line 779, ../sass/style.scss */
 .autocomplete-light-widget .deck > span[data-value] img {
   margin: 0 0 0 0;
 }
-/* line 779, ../sass/style.scss */
+/* line 780, ../sass/style.scss */
 .autocomplete-light-widget .deck > span[data-value] .remove {
   background-position-y: 3px;
   height: 17px;
 }
-/* line 783, ../sass/style.scss */
+/* line 784, ../sass/style.scss */
 .autocomplete-light-widget .deck > span[data-value] .remove:hover {
   background-position-y: 3px;
 }
-/* line 786, ../sass/style.scss */
+/* line 787, ../sass/style.scss */
 .autocomplete-light-widget .deck > span[data-value] .reference-span {
   margin-left: 10px;
 }

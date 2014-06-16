@@ -751,8 +751,8 @@ footer {
 }
 
 #inline_overlay {
-    background-color: #FFF;
-    opacity: 0.5;
+    background: url(../images/body-bg.png);
+    opacity: 0.8;
     position: absolute;
     top: -5px;
     left: -5px;
@@ -761,6 +761,7 @@ footer {
     padding: 5px;
     box-sizing: content-box;
     border-radius: 5px;
+    border: solid 1px #DDD;
 }
 
 //####################################################
