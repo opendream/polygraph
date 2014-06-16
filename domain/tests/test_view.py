@@ -462,6 +462,7 @@ class TestEditStatement(TestCase):
         self.assertContains(response, 'name="references-1-title"')
         self.assertContains(response, 'name="references-1-url"')
         self.assertContains(response, 'name="topic"')
+        self.assertContains(response, 'name="tags"')
         self.assertContains(response, 'name="status"')
         self.assertContains(response, self.title)
         self.assertContains(response, self.button)

@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'files_widget',
     'autocomplete_light',
+    'tagging',
 
     # Project
     'common',

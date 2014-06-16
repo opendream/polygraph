@@ -113,7 +113,7 @@ def topic_create(request, topic=None):
             topic.description = form.cleaned_data['description']
             topic.created_by = request.user
 
-            as_revision = form.cleaned_data['as_revision'] or True
+            as_revision = bool(form.cleaned_data['as_revision'])
             without_revision = not as_revision
 
             topic.save(without_revision=without_revision)

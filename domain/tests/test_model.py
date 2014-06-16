@@ -167,6 +167,29 @@ class TestTopic(TestCase):
         self.assertEqual(topic1.changed, topic1_change1)
 
 
+class TestTag(TestCase):
+
+    def test_create(self):
+
+        tag1 = factory.create_tag('Tagit Na')
+        self.assertEqual(tag1.name, 'Tagit Na')
+        self.assertEqual(tag1.__unicode__(), 'Tagit Na')
+
+        tag2 = factory.create_tag('Tag in the moon')
+        self.assertEqual(tag2.name, 'Tag in the moon')
+        self.assertEqual(tag2.__unicode__(), 'Tag in the moon')
+
+
+        try:
+            with transaction.atomic():
+                factory.create_tag('Tagit Na')
+
+            self.assertTrue(0, 'Duplicate permalink allowed.')
+
+        except IntegrityError:
+            pass
+
+
 class TestStatement(TestCase):
 
     def setUp(self):

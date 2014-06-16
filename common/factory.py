@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.core.files import File
-from domain.models import People, Topic, PeopleCategory, Statement
+from domain.models import People, Topic, PeopleCategory, Statement, Tag
 from account.models import Staff
 from common.constants import STATUS_DRAFT, STATUS_PENDING, STATUS_PUBLISHED
 
@@ -102,6 +102,12 @@ def create_topic(created_by=None, title='', description='', created=None):
     topic = Topic.objects.get(id=topic.id)
 
     return topic
+
+def create_tag(name=''):
+    tag = Tag.objects.create(name=name)
+    tag = Tag.objects.get(id=tag.id)
+
+    return tag
 
 def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', references=None, status=STATUS_PUBLISHED, topic=None):
 

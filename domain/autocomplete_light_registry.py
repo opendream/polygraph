@@ -1,10 +1,10 @@
 import autocomplete_light
+from django.contrib.contenttypes.models import ContentType
 from django.db.models.query import QuerySet
-from django.utils.encoding import force_text
+from tagging.models import TaggedItem, Tag
 
-from common.constants import STATUS_PUBLISHED
 from common.functions import people_render_reference, topic_render_reference
-from models import People, Topic, TopicRevision
+from models import People, Topic, TopicRevision, Statement
 
 
 class PeopleAutocomplete(autocomplete_light.AutocompleteModelBase):
@@ -52,5 +52,13 @@ class TopicAutocomplete(autocomplete_light.AutocompleteModelBase):
             self.choice_label(choice))
 
 
+class TagAutocomplete(autocomplete_light.AutocompleteModelBase):
+    choices = TaggedItem.objects.filter(content_type__pk=ContentType.objects.get(model='Statement').id)
+    search_fields = ['tag__name', ]
+
+    def choice_label(self, choice):
+        return choice.tag.name
+
 autocomplete_light.register(People, PeopleAutocomplete)
 autocomplete_light.register(Topic, TopicAutocomplete)
+autocomplete_light.register(Tag, TagAutocomplete)
