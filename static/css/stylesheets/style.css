@@ -1115,3 +1115,18 @@ footer .footer-menu div a:hover {
 .autocomplete-light-widget .deck > span[data-value] .reference-span {
   margin-left: 10px;
 }
+
+/* line 794, ../sass/style.scss */
+.form-group ul.tagit {
+  width: 100%;
+}
+
+/* line 797, ../sass/style.scss */
+.field-container {
+  overflow: hidden;
+}
+
+/* line 800, ../sass/style.scss */
+.tagit-hidden-field {
+  display: none;
+}

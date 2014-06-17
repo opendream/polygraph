@@ -27,8 +27,8 @@
     {% endif %}
 
     <div class="controls form-group">
-        <label for="id_permalink" class="col-sm-2-bnk control-label">{% trans "Permalink" %}</label>
-        <div class="col-sm-10-bnk ">
+        <label for="id_permalink" class="field-container control-label">{% trans "Permalink" %}</label>
+        <div class="field-container ">
             <input id="id_permalink" name="permalink" type="text" class="form-control" value="{{ form.permalink.value|default_if_none:"" }}" required>
             <span class="help-block">{{ form.permalink.help_text }}</span>
             {% if form.permalink.errors %}
@@ -38,8 +38,8 @@
     </div>
 
     <div class="controls form-group">
-        <label for="id_quote" class="col-sm-2-bnk control-label">{% trans "Quote" %}</label>
-        <div class="col-sm-10-bnk">
+        <label for="id_quote" class="field-container control-label">{% trans "Quote" %}</label>
+        <div class="field-container">
             {{ form.quote }}
             {% if form.quote.errors %}
             <div class="errors alert alert-danger">{{ form.quote.errors }}</div>
@@ -48,8 +48,8 @@
     </div>
 
     <div class="controls form-group">
-        <label for="id_quoted_by" class="col-sm-2-bnk control-label">{% trans "Quoted by" %}</label>
-        <div class="col-sm-10-bnk">
+        <label for="id_quoted_by" class="field-container control-label">{% trans "Quoted by" %}</label>
+        <div class="field-container">
             {{ form.quoted_by }}
 
             <div class="popup-create-link-wrapper">
@@ -68,8 +68,8 @@
     <div class="controls form-group block block-bg-transparent statement-desc">
         <div class="block-content">
 
-            <label for="id_topic" class="col-sm-2-bnk control-label">{% trans "Topic" %}</label>
-            <div class="col-sm-10-bnk">
+            <label for="id_topic" class="field-container control-label">{% trans "Topic" %}</label>
+            <div class="field-container">
 
                 <div class="inline-reference-wrapper">
 
@@ -114,8 +114,8 @@
     <div class="form-normal">
 
         <div class="controls form-group">
-            <label for="id_references" class="col-sm-2-bnk control-label">{% trans "References" %}</label>
-            <div class="col-sm-10-bnk">
+            <label for="id_references" class="field-container control-label">{% trans "References" %}</label>
+            <div class="field-container">
                 {{ reference_formset.management_form }}
                 <ol id="id_references">
                     {% for reference in reference_formset %}
@@ -146,9 +146,28 @@
                 {% endif %}
             </div>
         </div>
+
+
+        <div class="controls form-group">
+            <label for="id_references" class="field-container control-label">{% trans "Tags" %}</label>
+            <div class="field-container">
+
+
+                {{ form.tags }}
+
+                {% if form.tags.errors %}
+                <div class="errors alert alert-danger">{{ form.tags.errors }}</div>
+                {% endif %}
+            </div>
+        </div>
+
+        
     </div>
 
-    {{ form.tags }}
+
+
+
+
 
 </section>
 
@@ -172,7 +191,7 @@
 </div>
 
 <div class="controls form-group">
-    <div class="col-sm-offset-2-bnk col-sm-10-bnk form-action">
+    <div class="col-sm-offset-2-bnk field-container form-action">
         <button class="btn btn-primary" type="submit">{% if form.is_new %}{% trans "Save new" %}{% else %}{% trans "Save changes" %}{% endif %}</button>
         <a href="{% url 'home' %}" class="btn btn-cancle flat-btn">{% trans "Cancel" %}</a>
     </div>

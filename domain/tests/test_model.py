@@ -8,6 +8,8 @@ from common import factory
 from domain.models import Topic, Statement
 from common.constants import STATUS_DRAFT, STATUS_PENDING, STATUS_PUBLISHED
 
+from tagging.models import TaggedItem
+
 
 class TestPeopleCategory(TestCase):
 
@@ -167,29 +169,6 @@ class TestTopic(TestCase):
         self.assertEqual(topic1.changed, topic1_change1)
 
 
-class TestTag(TestCase):
-
-    def test_create(self):
-
-        tag1 = factory.create_tag('Tagit Na')
-        self.assertEqual(tag1.name, 'Tagit Na')
-        self.assertEqual(tag1.__unicode__(), 'Tagit Na')
-
-        tag2 = factory.create_tag('Tag in the moon')
-        self.assertEqual(tag2.name, 'Tag in the moon')
-        self.assertEqual(tag2.__unicode__(), 'Tag in the moon')
-
-
-        try:
-            with transaction.atomic():
-                factory.create_tag('Tagit Na')
-
-            self.assertTrue(0, 'Duplicate permalink allowed.')
-
-        except IntegrityError:
-            pass
-
-
 class TestStatement(TestCase):
 
     def setUp(self):
@@ -210,7 +189,8 @@ class TestStatement(TestCase):
             quote='I love polygraph and programming.',
             references=[{'url': 'http://polygraph.com', 'title': 'Polygraph quote'}, {'url': 'https://google.com', 'title': 'Search yours quotes'}],
             status=STATUS_PUBLISHED,
-            topic=self.topic1
+            topic=self.topic1,
+            tags='hello, world',
         )
         self.assertEqual(statement1.created_by, self.staff1)
         self.assertEqual(statement1.quoted_by, self.people1)
@@ -220,7 +200,8 @@ class TestStatement(TestCase):
         self.assertEqual(statement1.status, STATUS_PUBLISHED)
         self.assertEqual(statement1.__unicode__(), 'I love polygraph and programming.')
         self.assertEqual(statement1.topic, self.topic1)
-
+        self.assertEqual(statement1.tags, 'hello, world')
+        #TaggedItem.objects.filter(content_type__name='Statement').count()
 
         statement2 = Statement.objects.create(
             created_by=self.staff2,
@@ -229,7 +210,8 @@ class TestStatement(TestCase):
             quote='I love polygraph and programming and testing.',
             references=[{'url': 'http://polygraph.test', 'title': 'Polygraph test'}, {'url': 'https://test.com', 'title': 'Test your test'}],
             status=STATUS_DRAFT,
-            topic=self.topic2
+            topic=self.topic2,
+            tags='hello, new year',
         )
         self.assertEqual(statement2.created_by, self.staff2)
         self.assertEqual(statement2.quoted_by, self.people2)
@@ -239,6 +221,7 @@ class TestStatement(TestCase):
         self.assertEqual(statement2.status, STATUS_DRAFT)
         self.assertEqual(statement2.__unicode__(), 'I love polygraph and programming and testing.')
         self.assertEqual(statement2.topic, self.topic2)
+        self.assertEqual(statement2.tags, 'hello, new year')
 
         try:
             with transaction.atomic():

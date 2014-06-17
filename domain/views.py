@@ -177,6 +177,10 @@ def statement_create(request, statement=None):
             statement.created_by = request.user
             statement.quoted_by_id = form.cleaned_data['quoted_by'].id
             statement.topic_id = form.cleaned_data['topic'].id if form.cleaned_data['topic'] else None
+            statement.tags = form.cleaned_data['tags']
+
+
+            print statement.tags
 
             # Save references
             references = []
@@ -203,6 +207,7 @@ def statement_create(request, statement=None):
             'status': statement.status,
             'quoted_by': statement.quoted_by_id,
             'topic': statement.topic_id,
+            'tags': statement.tags,
         }
 
         form = StatementEditForm(statement, Topic, initial=initial)
