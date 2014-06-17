@@ -468,11 +468,11 @@ input + .errors{
 	overflow: hidden;
 	background-color: $soft_orange;
 	&.block-content { padding: 15px 20px 0 20px; }
-	.people-profile {
+	.media {
 		overflow: hidden;
-		padding-top: 20px;
-		img { float: left; margin-right: 10px; }
-		h4 { margin-top: 30px; }
+		margin-top: 20px;
+		//img { margin-right: 10px; }
+		.media-body { margin-top: 30px; }
 	}
 	.meter {
 		text-align: right;
@@ -480,13 +480,28 @@ input + .errors{
 }
 @media (max-width: 600px) {
 	.who-said {
-		.people-profile {
-			width: 100%;
-			padding-bottom: 30px;
+		&.block-content { padding: 25px 20px 0 20px; }
+	}
+
+}
+@media (max-width: 540px) {
+	.who-said {
+		.media {
+			padding-left: 0;
+			margin-top: 0;
+			a.pull-left {
+				width: 75px;
+				img { width: 100% }
+			}
+			.media-body {
+				margin-top: 0;
+				font-size: 95%;
+			}
 		}
 		.meter {
-			width: 100%;
-			text-align: left;
+			padding-right: 0;
+			height: 100%;
+			img {width: 95%;}
 		}
 	}
 }
@@ -585,6 +600,51 @@ input + .errors{
 			color: $text_brown;
 		}
 	}
+}
+@media (max-width: 600px) {
+.nav-color {
+	// padding-top: 15px;
+	li {
+		// padding: 0 10px; margin: 0;
+		// text-align: center;
+		&:after {
+			// content: "•";
+			// position: absolute;
+			// top: 0.8em;
+			// right: -3px;
+			display: none;
+		}
+		.caret {
+			border-top: none;
+			border-bottom: 12px solid #F2F2F2;
+			border-right: 12px solid transparent;
+			border-left: 12px solid transparent;
+			margin-bottom: -8px;
+		}
+		&:last-child {
+			&:after { display: none; }
+		}
+	}
+	li a {
+		// @include border-radius(20px);
+		// background-color: transparent;
+		// padding: 10px 20px;
+		// &:hover {
+		// 	background-color: $soft_orange;
+		// 	color: $text_brown;
+		// }
+		padding: 10px 10px;
+		font-size: 90%;
+	}
+	li.active a {
+		background-color: $bright_orange;
+		color: #FFFFFF;
+		&:hover {
+			background-color: $soft_orange;
+			color: $text_brown;
+		}
+	}
+}
 }
 
 .polygraph-list {
