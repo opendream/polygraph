@@ -11,6 +11,10 @@ $text_brown : #7f5d3d; // text brown
 $text_normal : #333333; // text normal
 $block_border : #CCCCCC;
 
+img {
+	border: 1px solid red;
+}
+
 body {
   padding-top: 100px;
   background: url(../images/body-bg.png);
@@ -648,25 +652,45 @@ input + .errors{
 		right: 0;
 	}
 }
-
-// .statement-list {
-// 	margin-bottom: 20px;
-// 	ul.block-content li .item-inner {
-// 		border-bottom: 2px solid #EFEFEF;
-// 		padding: 30px 0 !important;
-// 		position: relative;
-// 	}
-// }
-// .avatar {
-// 	img { float: left; margin-right: 10px; }
-// }
-
-// @media (max-width: 640px) {
-// 	.statement-list ul.block-content li .item-inner>div:first-child {
-// 		width: 100%;
-// 		.avatar { padding-right: 120px;}
-// 	}
-// }
+.statement-list {
+	.block-content {
+		padding-bottom: 0;
+		border-bottom: 75px solid #F2F2F2;
+		position: initial;
+		.quote {
+			font-size: 18px;
+		}
+		.media {
+			position: absolute;
+			bottom: 10px;
+			a.pull-left {
+				width: 40px;
+				height: 40px;
+			}
+			img { width: 100%; }
+		}
+	}
+	.meter-md {
+		height: 95px;
+		right: 20px;
+		bottom: 10px;
+		img { height: 100%; }
+	}
+}
+@media (max-width: 991px) {
+	.statement-list {
+		.polygraph-list-block {
+			.meter-md {
+				position: absolute;
+				bottom: 10px;
+				right: 20px;
+				img {
+					height: 100%;
+				}
+			}
+		}
+	}
+}
 
 @media (min-width: 992px) {
 	.polygraph-list {
