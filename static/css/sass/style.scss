@@ -329,8 +329,6 @@ input + .errors{
 				.left {padding-right: 0;padding-left: 0; }
 				.right {padding-right: 0;}
 			}
-			&.first .item-inner { border-top: none; padding-top: 0; }
-			&.last .item-inner { border-bottom: none; padding-bottom: 0; }
 		}
 	}
 	&.block-bg-transparent {
@@ -349,6 +347,25 @@ input + .errors{
 	}
 	&.block-no-border {
 		border: none;
+	}
+}
+@media (min-width: 993px) {
+	.block {
+		ul.block-content {
+			li {
+				&.first .item-inner { border-top: none; padding-top: 0; }
+				&.last .item-inner { border-bottom: none; padding-bottom: 0; }
+			}
+		}
+	}
+}
+@media (max-width: 992px) {
+	.block {
+		ul.block-content {
+			li {
+				.item-inner { border: none; }
+			}
+		}
 	}
 }
 
@@ -542,25 +559,6 @@ input + .errors{
 	.right { padding-left: 140px; }
 }
 
-.statement-list {
-	margin-bottom: 20px;
-	ul.block-content li .item-inner {
-		border-bottom: 2px solid #EFEFEF;
-		padding: 30px 0 !important;
-		position: relative;
-	}
-}
-.avatar {
-	img { float: left; margin-right: 10px; }
-}
-
-@media (max-width: 640px) {
-	.statement-list ul.block-content li .item-inner>div:first-child {
-		width: 100%;
-		.avatar { padding-right: 120px;}
-	}
-}
-
 .nav-color {
 	padding-top: 15px;
 	li {
@@ -600,51 +598,6 @@ input + .errors{
 			color: $text_brown;
 		}
 	}
-}
-@media (max-width: 600px) {
-.nav-color {
-	// padding-top: 15px;
-	li {
-		// padding: 0 10px; margin: 0;
-		// text-align: center;
-		&:after {
-			// content: "•";
-			// position: absolute;
-			// top: 0.8em;
-			// right: -3px;
-			display: none;
-		}
-		.caret {
-			border-top: none;
-			border-bottom: 12px solid #F2F2F2;
-			border-right: 12px solid transparent;
-			border-left: 12px solid transparent;
-			margin-bottom: -8px;
-		}
-		&:last-child {
-			&:after { display: none; }
-		}
-	}
-	li a {
-		// @include border-radius(20px);
-		// background-color: transparent;
-		// padding: 10px 20px;
-		// &:hover {
-		// 	background-color: $soft_orange;
-		// 	color: $text_brown;
-		// }
-		padding: 10px 10px;
-		font-size: 90%;
-	}
-	li.active a {
-		background-color: $bright_orange;
-		color: #FFFFFF;
-		&:hover {
-			background-color: $soft_orange;
-			color: $text_brown;
-		}
-	}
-}
 }
 
 .polygraph-list {
@@ -695,6 +648,26 @@ input + .errors{
 		right: 0;
 	}
 }
+
+// .statement-list {
+// 	margin-bottom: 20px;
+// 	ul.block-content li .item-inner {
+// 		border-bottom: 2px solid #EFEFEF;
+// 		padding: 30px 0 !important;
+// 		position: relative;
+// 	}
+// }
+// .avatar {
+// 	img { float: left; margin-right: 10px; }
+// }
+
+// @media (max-width: 640px) {
+// 	.statement-list ul.block-content li .item-inner>div:first-child {
+// 		width: 100%;
+// 		.avatar { padding-right: 120px;}
+// 	}
+// }
+
 @media (min-width: 992px) {
 	.polygraph-list {
 		.polygraph-list-before {
