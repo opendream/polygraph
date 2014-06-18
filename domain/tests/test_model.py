@@ -180,6 +180,9 @@ class TestStatement(TestCase):
         self.topic1 = factory.create_topic(created_by=self.staff1)
         self.topic2 = factory.create_topic(created_by=self.staff2)
 
+        self.meter1 = factory.create_meter(point=0)
+        self.meter2 = factory.create_meter(point=1)
+
     def test_create(self):
 
         statement1 = factory.create_statement(
@@ -191,6 +194,7 @@ class TestStatement(TestCase):
             status=STATUS_PUBLISHED,
             topic=self.topic1,
             tags='hello, world',
+            meter=self.meter1
         )
         self.assertEqual(statement1.created_by, self.staff1)
         self.assertEqual(statement1.quoted_by, self.people1)
@@ -201,9 +205,7 @@ class TestStatement(TestCase):
         self.assertEqual(statement1.__unicode__(), 'I love polygraph and programming.')
         self.assertEqual(statement1.topic, self.topic1)
         self.assertEqual(statement1.tags, 'hello, world')
-        self.assertEqual(statement1.meter.permalink, 'unprovable')
-        self.assertEqual(statement1.meter.title, 'Unprovable')
-        self.assertEqual(statement1.meter.point, 0)
+        self.assertEqual(statement1.meter, self.meter1)
 
         self.assertEqual(2, TaggedItem.objects.filter(content_type__name='statement').count())
         self.assertEqual(2, Tag.objects.all().count())
@@ -218,6 +220,7 @@ class TestStatement(TestCase):
             status=STATUS_DRAFT,
             topic=self.topic2,
             tags='hello, new year',
+            meter=self.meter2
         )
         self.assertEqual(statement2.created_by, self.staff2)
         self.assertEqual(statement2.quoted_by, self.people2)
@@ -228,9 +231,7 @@ class TestStatement(TestCase):
         self.assertEqual(statement2.__unicode__(), 'I love polygraph and programming and testing.')
         self.assertEqual(statement2.topic, self.topic2)
         self.assertEqual(statement2.tags, 'hello, new year')
-        self.assertEqual(statement2.meter.permalink, 'unprovable')
-        self.assertEqual(statement2.meter.title, 'Unprovable')
-        self.assertEqual(statement2.meter.point, 0)
+        self.assertEqual(statement2.meter, self.meter2)
 
         self.assertEqual(4, TaggedItem.objects.filter(content_type__name='statement').count())
         self.assertEqual(3, Tag.objects.all().count())
@@ -254,12 +255,14 @@ class TestMeter(TestCase):
             permalink = 'unprovable',
             title = 'Unprovable',
             description = 'Unprovable description',
-            point = 0
+            point = 0,
+            order = 0,
         )
         self.assertEqual(meter1.permalink, 'unprovable')
         self.assertEqual(meter1.title, 'Unprovable')
         self.assertEqual(meter1.description, 'Unprovable description')
         self.assertEqual(meter1.point, 0)
+        self.assertEqual(meter1.order, 0)
         self.assertEqual(meter1.image_large_text, 'test.jpg')
         self.assertEqual(meter1.image_small_text, 'test.jpg')
         self.assertEqual(meter1.image_small, 'test.jpg')
@@ -270,12 +273,14 @@ class TestMeter(TestCase):
             permalink = 'true',
             title = 'True',
             description = 'True description',
-            point = 2
+            point = 2,
+            order = 1
         )
         self.assertEqual(meter2.permalink, 'true')
         self.assertEqual(meter2.title, 'True')
         self.assertEqual(meter2.description, 'True description')
         self.assertEqual(meter2.point, 2)
+        self.assertEqual(meter2.order, 1)
         self.assertEqual(meter2.image_large_text, 'test.jpg')
         self.assertEqual(meter2.image_small_text, 'test.jpg')
         self.assertEqual(meter2.image_small, 'test.jpg')

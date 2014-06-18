@@ -104,7 +104,7 @@ def create_topic(created_by=None, title='', description='', created=None):
     return topic
 
 
-def create_meter(permalink=None, title='', description='', point=0, image_large_text='', image_small_text='', image_small=''):
+def create_meter(permalink=None, title='', description='', point=0, order=0, image_large_text='', image_small_text='', image_small=''):
 
     permalink = permalink or randstr()
     title = title or randstr()
@@ -119,8 +119,9 @@ def create_meter(permalink=None, title='', description='', point=0, image_large_
         title=title,
         description=description,
         point=point,
+        order=order,
         image_large_text=image_large_text,
-        image_small_text=image_large_text,
+        image_small_text=image_small_text,
         image_small=image_small
     )
 
@@ -129,11 +130,12 @@ def create_meter(permalink=None, title='', description='', point=0, image_large_
     return meter
 
 
-def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', references=None, status=STATUS_PUBLISHED, topic=None, tags='hello world'):
+def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', references=None, status=STATUS_PUBLISHED, topic=None, tags='hello world', meter=None):
 
     created_by = created_by or create_staff()
     quoted_by = quoted_by or create_people()
     topic = topic or create_topic(created_by=created_by)
+    meter = meter or create_meter()
 
     permalink = permalink or randstr()
     quote = quote or randstr()
@@ -146,7 +148,8 @@ def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', 
         quoted_by=quoted_by,
         created_by=created_by,
         topic=topic,
-        tags=tags
+        tags=tags,
+        meter=meter
     )
 
     statement = Statement.objects.get(id=statement.id)
