@@ -25,10 +25,10 @@
 <div class="controls form-group">
     <label class="{% if not request_inline %}col-sm-2 {% endif %}control-label">{% trans "Revision" %}</label>
     <div class="{% if not request_inline %}col-sm-10 checkbox{% endif %}">
-        <input{% if form.without_revision.value %} checked=checked{% endif %} id="id_{{ form.without_revision.name }}" type="checkbox" name="{{ form.without_revision.name }}" value="1" />
-        <label for="id_{{ form.without_revision.name }}">{% trans "Save without new revision" %}</label>
-        {% if form.without_revision.errors %}
-        <div class="errors alert alert-danger">{{ form.without_revision.errors }}</div>
+        <input{% if not form.as_revision.value %} checked=checked{% endif %} id="id_{{ form.as_revision.name }}" type="checkbox" name="{{ form.as_revision.name }}" value="1" />
+        <label for="id_{{ form.as_revision.name }}">{% trans "Save as new revision" %}</label>
+        {% if form.as_revision.errors %}
+        <div class="errors alert alert-danger">{{ form.as_revision.errors }}</div>
         {% endif %}
     </div>
 </div>
@@ -67,6 +67,7 @@
         $('.add-another-inline-input-list .btn-cancel').click(function (e) {
             e.preventDefault();
             $('.add-another-inline-input-list').html('');
+            $('#inline_overlay').remove();
         });
 
         $('.add-another-inline-input-list .btn-primary').click(function (e) {
@@ -89,8 +90,12 @@
 
             input_list_container.load(topic_post_url, params);
 
+            $('#inline_overlay').remove();
+
 
         });
+
+        $('.inline-reference-wrapper').append('<div id="inline_overlay"></div>');
 
         {% endif %}
 
@@ -106,27 +111,34 @@
     (function ($) {
 
 
-        var without_revision = $('#id_{{ form.without_revision.name }}');
+        var as_revision = $('#id_{{ form.as_revision.name }}');
 
-        if (without_revision.length) {
+        if (as_revision.length) {
 
-            without_revision.attr('checked', 'checked');
-            without_revision.prettyCheckable();
+            as_revision.removeAttr('checked');
 
-            var ignore_check_without_revision  = false;
+            {% if request_inline %}
+            as_revision.prettyCheckable();
+            {% endif %}
+
+            var ignore_check_as_revision  = false;
 
             if (CKEDITOR.instances.id_description) {
                 CKEDITOR.instances.id_description.on('blur', function () {
-                    if (!ignore_check_without_revision && this.checkDirty()) {
-                        without_revision.removeAttr('checked').siblings().removeClass('checked');
+                    if (!ignore_check_as_revision && this.checkDirty()) {
+                        as_revision.attr('checked', 'checked').siblings().addClass('checked');
                     }
                 });
             }
 
-            without_revision.siblings().click(function () {
-                ignore_check_without_revision  = true;
-            });
+            setTimeout(function () {
+                as_revision.siblings().click(function () {
+                    ignore_check_as_revision  = true;
+                });
+            }, 1000);
         }
+
+
     }) (jQuery);
 
 </script>

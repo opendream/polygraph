@@ -8,6 +8,8 @@ from common import factory
 from domain.models import Topic, Statement
 from common.constants import STATUS_DRAFT, STATUS_PENDING, STATUS_PUBLISHED
 
+from tagging.models import TaggedItem, Tag
+
 
 class TestPeopleCategory(TestCase):
 
@@ -187,7 +189,8 @@ class TestStatement(TestCase):
             quote='I love polygraph and programming.',
             references=[{'url': 'http://polygraph.com', 'title': 'Polygraph quote'}, {'url': 'https://google.com', 'title': 'Search yours quotes'}],
             status=STATUS_PUBLISHED,
-            topic=self.topic1
+            topic=self.topic1,
+            tags='hello, world',
         )
         self.assertEqual(statement1.created_by, self.staff1)
         self.assertEqual(statement1.quoted_by, self.people1)
@@ -197,7 +200,9 @@ class TestStatement(TestCase):
         self.assertEqual(statement1.status, STATUS_PUBLISHED)
         self.assertEqual(statement1.__unicode__(), 'I love polygraph and programming.')
         self.assertEqual(statement1.topic, self.topic1)
-
+        self.assertEqual(statement1.tags, 'hello, world')
+        self.assertEqual(2, TaggedItem.objects.filter(content_type__name='Statement').count())
+        self.assertEqual(2, Tag.objects.all().count())
 
         statement2 = Statement.objects.create(
             created_by=self.staff2,
@@ -206,7 +211,8 @@ class TestStatement(TestCase):
             quote='I love polygraph and programming and testing.',
             references=[{'url': 'http://polygraph.test', 'title': 'Polygraph test'}, {'url': 'https://test.com', 'title': 'Test your test'}],
             status=STATUS_DRAFT,
-            topic=self.topic2
+            topic=self.topic2,
+            tags='hello, new year',
         )
         self.assertEqual(statement2.created_by, self.staff2)
         self.assertEqual(statement2.quoted_by, self.people2)
@@ -216,7 +222,9 @@ class TestStatement(TestCase):
         self.assertEqual(statement2.status, STATUS_DRAFT)
         self.assertEqual(statement2.__unicode__(), 'I love polygraph and programming and testing.')
         self.assertEqual(statement2.topic, self.topic2)
-
+        self.assertEqual(statement2.tags, 'hello, new year')
+        self.assertEqual(4, TaggedItem.objects.filter(content_type__name='Statement').count())
+        self.assertEqual(3, Tag.objects.all().count())
         try:
             with transaction.atomic():
                 factory.create_statement(permalink='i-love-polygraph')

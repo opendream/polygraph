@@ -2,14 +2,17 @@ import autocomplete_light
 from ckeditor.widgets import CKEditorWidget
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-from common.constants import STATUS_CHOICES, STATUS_PUBLISHED
 
+from common.constants import STATUS_CHOICES, STATUS_PUBLISHED
 
 from domain.autocomplete_light_registry import PeopleAutocomplete, TopicAutocomplete
 import files_widget
 from common.forms import PermalinkForm, CommonForm
-from domain.models import PeopleCategory, People, Topic, TopicRevision
+from domain.models import PeopleCategory, People, Topic
 
+
+from tagging.forms import TagField
+from tagging_autocomplete_tagit.widgets import TagAutocompleteTagIt
 
 class PeopleEditForm(PermalinkForm):
 
@@ -34,7 +37,7 @@ class TopicEditForm(CommonForm):
     title = forms.CharField(max_length=30, widget=forms.TextInput())
     description = forms.CharField(required=False, widget=CKEditorWidget(config_name='default'))
 
-    without_revision = forms.NullBooleanField(widget=forms.CheckboxInput())
+    as_revision = forms.NullBooleanField(widget=forms.CheckboxInput(attrs={'chacked': 'checked'}))
 
 
 class ReferenceForm(forms.Form):
@@ -63,6 +66,8 @@ class StatementEditForm(PermalinkForm):
             attrs={'placeholder': 'Type for search by topic title', 'class': 'form-control'}
         )
     )
+
+    tags = TagField(required=False, widget=TagAutocompleteTagIt(max_tags=False))
 
 
     status = forms.ChoiceField(required=False, widget=forms.RadioSelect(attrs={'id': 'id_status'}), choices=STATUS_CHOICES)

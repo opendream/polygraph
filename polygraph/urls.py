@@ -13,8 +13,8 @@ urlpatterns = patterns('',
     url(r'^ckeditor/', include('ckeditor.urls')),
     url(r'^files-widget/', include('files_widget.urls')),
     url(r'autocomplete/', include('autocomplete_light.urls')),
-
     url(r'^account/', include('account.urls')),
+    url(r'^tagging_autocomplete_tagit/', include('tagging_autocomplete_tagit.urls')),
     url(r'', include('domain.urls')),
 
 

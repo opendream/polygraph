@@ -1,10 +1,8 @@
 import autocomplete_light
 from django.db.models.query import QuerySet
-from django.utils.encoding import force_text
 
-from common.constants import STATUS_PUBLISHED
 from common.functions import people_render_reference, topic_render_reference
-from models import People, Topic, TopicRevision
+from models import People, Topic, TopicRevision, Statement
 
 
 class PeopleAutocomplete(autocomplete_light.AutocompleteModelBase):

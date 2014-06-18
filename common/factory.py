@@ -103,7 +103,7 @@ def create_topic(created_by=None, title='', description='', created=None):
 
     return topic
 
-def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', references=None, status=STATUS_PUBLISHED, topic=None):
+def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', references=None, status=STATUS_PUBLISHED, topic=None, tags='hello world'):
 
     created_by = created_by or create_staff()
     quoted_by = quoted_by or create_people()
@@ -119,7 +119,8 @@ def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', 
         status=status,
         quoted_by=quoted_by,
         created_by=created_by,
-        topic=topic
+        topic=topic,
+        tags=tags
     )
 
     statement = Statement.objects.get(id=statement.id)

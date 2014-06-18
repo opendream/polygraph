@@ -67,6 +67,13 @@ $(document).ready(function () {
       
     });
 
+    var resize_input = function () {
+        $(this).attr('size', $(this).val().length+1);
+    };
+    $('.tagit-new input[type="text"]').keyup(resize_input).each(resize_input);
+
+
+
 });
 
 /*
