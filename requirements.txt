@@ -8,3 +8,4 @@ django-ckeditor-updated==4.2.8
 six==1.7.2
 sorl-thumbnail==11.12.1b
 wsgiref==0.1.2
+django-tagging==0.3.2
