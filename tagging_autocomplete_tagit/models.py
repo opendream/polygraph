@@ -20,6 +20,6 @@ class TagAutocompleteTagItField(TagField):
 
         # As an ugly hack, we override the admin widget
         if defaults['widget'] == AdminTextInputWidget:
-            defaults['widget'] = TagAutocompleteTagIt()
+            defaults['widget'] = TagAutocompleteTagIt(max_tags=self.max_tags)
 
         return super(TagAutocompleteTagItField, self).formfield(**defaults)

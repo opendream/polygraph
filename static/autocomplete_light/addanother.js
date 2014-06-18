@@ -16,7 +16,7 @@ $(document).ready(function() {
 
             var height = 'auto';
             var width = 'auto';
-            var height = 500;
+            var height = 600;
             var width = 800;
             var left = (screen.width/2)-(width/2);
             var top = (screen.height/2)-(height/2);
