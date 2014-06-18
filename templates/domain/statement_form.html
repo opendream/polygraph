@@ -163,12 +163,12 @@
 
 
         <div class="controls form-group">
-            <label for="id_meter" class="field-container control-label">{% trans "Meter" %}</label>
-            <div class="field-container">
+            <label for="id_meter" class="field-container control-label">{% trans "Polygraph" %}</label>
+            <div class="field-container radio block">
 
-                <ul>
+                <ul class="media-list item-list block-content row">
                     {% for meter in form.meter %}
-                    <li>
+                    <li class="media">
                         {{ meter.tag }}
                         <label for="id_meter_{{ meter.index }}">{% trans meter.choice_label %}</label>
                     </li>

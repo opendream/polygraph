@@ -71,6 +71,7 @@ class StatementEditForm(PermalinkForm):
     meter = forms.ModelChoiceField(
         required=True,
         queryset=Meter.objects.all(),
+        empty_label=None,
         widget=forms.RadioSelect(attrs={'id': 'id_meter'})
     )
 

@@ -873,7 +873,17 @@ footer {
 .field-container {
     overflow: hidden;
 }
+.sidebar .radio {
+    padding-left: 0;
+}
 .tagit-hidden-field {
     display: none;
+}
+.media-list .prettyradio {
+    display: table-row;
+}
+
+.media-list .prettyradio > * {
+    display: table-cell;
 }
 

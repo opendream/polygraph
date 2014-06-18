@@ -1214,6 +1214,21 @@ footer .footer-menu div a:hover {
 }
 
 /* line 876, ../sass/style.scss */
+.sidebar .radio {
+  padding-left: 0;
+}
+
+/* line 879, ../sass/style.scss */
 .tagit-hidden-field {
   display: none;
+}
+
+/* line 882, ../sass/style.scss */
+.media-list .prettyradio {
+  display: table-row;
+}
+
+/* line 886, ../sass/style.scss */
+.media-list .prettyradio > * {
+  display: table-cell;
 }
