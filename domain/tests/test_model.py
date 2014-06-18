@@ -201,9 +201,13 @@ class TestStatement(TestCase):
         self.assertEqual(statement1.__unicode__(), 'I love polygraph and programming.')
         self.assertEqual(statement1.topic, self.topic1)
         self.assertEqual(statement1.tags, 'hello, world')
+        self.assertEqual(statement1.meter.permalink, 'unprovable')
+        self.assertEqual(statement1.meter.title, 'Unprovable')
+        self.assertEqual(statement1.meter.point, 0)
 
         self.assertEqual(2, TaggedItem.objects.filter(content_type__name='statement').count())
         self.assertEqual(2, Tag.objects.all().count())
+
 
         statement2 = Statement.objects.create(
             created_by=self.staff2,
@@ -224,8 +228,13 @@ class TestStatement(TestCase):
         self.assertEqual(statement2.__unicode__(), 'I love polygraph and programming and testing.')
         self.assertEqual(statement2.topic, self.topic2)
         self.assertEqual(statement2.tags, 'hello, new year')
+        self.assertEqual(statement2.meter.permalink, 'unprovable')
+        self.assertEqual(statement2.meter.title, 'Unprovable')
+        self.assertEqual(statement2.meter.point, 0)
+
         self.assertEqual(4, TaggedItem.objects.filter(content_type__name='statement').count())
         self.assertEqual(3, Tag.objects.all().count())
+
         try:
             with transaction.atomic():
                 factory.create_statement(permalink='i-love-polygraph')
@@ -236,4 +245,48 @@ class TestStatement(TestCase):
             pass
 
 
+class TestMeter(TestCase):
 
+
+    def test_create(self):
+
+        meter1 = factory.create_meter(
+            permalink = 'unprovable',
+            title = 'Unprovable',
+            description = 'Unprovable description',
+            point = 0
+        )
+        self.assertEqual(meter1.permalink, 'unprovable')
+        self.assertEqual(meter1.title, 'Unprovable')
+        self.assertEqual(meter1.description, 'Unprovable description')
+        self.assertEqual(meter1.point, 0)
+        self.assertEqual(meter1.image_large_text, 'test.jpg')
+        self.assertEqual(meter1.image_small_text, 'test.jpg')
+        self.assertEqual(meter1.image_small, 'test.jpg')
+        self.assertEqual(meter1.__unicode__(), 'Unprovable')
+
+
+        meter2 = factory.create_meter(
+            permalink = 'true',
+            title = 'True',
+            description = 'True description',
+            point = 2
+        )
+        self.assertEqual(meter2.permalink, 'true')
+        self.assertEqual(meter2.title, 'True')
+        self.assertEqual(meter2.description, 'True description')
+        self.assertEqual(meter2.point, 2)
+        self.assertEqual(meter2.image_large_text, 'test.jpg')
+        self.assertEqual(meter2.image_small_text, 'test.jpg')
+        self.assertEqual(meter2.image_small, 'test.jpg')
+        self.assertEqual(meter2.__unicode__(), 'True')
+
+
+        try:
+            with transaction.atomic():
+                factory.create_meter('unprovable')
+
+            self.assertTrue(0, 'Duplicate permalink allowed.')
+
+        except IntegrityError:
+            pass

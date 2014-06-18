@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.core.files import File
-from domain.models import People, Topic, PeopleCategory, Statement
+from domain.models import People, Topic, PeopleCategory, Statement, Meter
 from account.models import Staff
 from common.constants import STATUS_DRAFT, STATUS_PENDING, STATUS_PUBLISHED
 
@@ -102,6 +102,32 @@ def create_topic(created_by=None, title='', description='', created=None):
     topic = Topic.objects.get(id=topic.id)
 
     return topic
+
+
+def create_meter(permalink=None, title='', description='', point=0, image_large_text='', image_small_text='', image_small=''):
+
+    permalink = permalink or randstr()
+    title = title or randstr()
+    description = description or randstr()
+
+    image_large_text = image_large_text or File(open('.%simages/test.jpg' % settings.STATIC_URL), 'test.jpg')
+    image_small_text = image_small_text or File(open('.%simages/test.jpg' % settings.STATIC_URL), 'test.jpg')
+    image_small = image_small or File(open('.%simages/test.jpg' % settings.STATIC_URL), 'test.jpg')
+
+    meter = Meter.objects.create(
+        permalink=permalink,
+        title=title,
+        description=description,
+        point=point,
+        image_large_text=image_large_text,
+        image_small_text=image_large_text,
+        image_small=image_small
+    )
+
+    meter = Meter.objects.get(id=meter.id)
+
+    return meter
+
 
 def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', references=None, status=STATUS_PUBLISHED, topic=None, tags='hello world'):
 
