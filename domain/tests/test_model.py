@@ -201,7 +201,8 @@ class TestStatement(TestCase):
         self.assertEqual(statement1.__unicode__(), 'I love polygraph and programming.')
         self.assertEqual(statement1.topic, self.topic1)
         self.assertEqual(statement1.tags, 'hello, world')
-        self.assertEqual(2, TaggedItem.objects.filter(content_type__name='Statement').count())
+
+        self.assertEqual(2, TaggedItem.objects.filter(content_type__name='statement').count())
         self.assertEqual(2, Tag.objects.all().count())
 
         statement2 = Statement.objects.create(
@@ -223,7 +224,7 @@ class TestStatement(TestCase):
         self.assertEqual(statement2.__unicode__(), 'I love polygraph and programming and testing.')
         self.assertEqual(statement2.topic, self.topic2)
         self.assertEqual(statement2.tags, 'hello, new year')
-        self.assertEqual(4, TaggedItem.objects.filter(content_type__name='Statement').count())
+        self.assertEqual(4, TaggedItem.objects.filter(content_type__name='statement').count())
         self.assertEqual(3, Tag.objects.all().count())
         try:
             with transaction.atomic():
