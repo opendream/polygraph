@@ -401,6 +401,7 @@ class TestEditStatement(TestCase):
         self.staff1 = factory.create_staff(password='password')
         self.people1 = factory.create_people()
         self.topic1 = factory.create_topic()
+        self.meter1 = factory.create_meter(permalink='unprovable')
 
 
         self.statement2 = factory.create_statement()
@@ -463,6 +464,7 @@ class TestEditStatement(TestCase):
         self.assertContains(response, 'name="references-1-url"')
         self.assertContains(response, 'name="topic"')
         self.assertContains(response, 'name="tags"')
+        self.assertContains(response, 'name="meter"')
         self.assertContains(response, 'name="status"')
         self.assertContains(response, self.title)
         self.assertContains(response, self.button)
@@ -473,6 +475,8 @@ class TestEditStatement(TestCase):
         self.assertContains(response, self.statement1.permalink)
         self.assertContains(response, self.statement1.quoted_by_id)
         self.assertContains(response, self.statement1.quote)
+        self.assertEqual(int(response.context['form'].initial['meter']), self.statement1.meter_id)
+
 
         for reference in self.statement1.references:
             self.assertContains(response, reference['title'])
@@ -484,6 +488,8 @@ class TestEditStatement(TestCase):
         self.assertContains(response, self.statement2.permalink)
         self.assertContains(response, self.statement2.quoted_by_id)
         self.assertContains(response, self.statement2.quote)
+        self.assertEqual(int(response.context['form'].initial['meter']), self.statement2.meter_id)
+
         for reference in self.statement2.references:
             self.assertContains(response, reference['title'])
             self.assertContains(response, reference['url'])
@@ -496,6 +502,7 @@ class TestEditStatement(TestCase):
             'quoted_by': self.statement1.quoted_by_id,
             'quote': self.statement1.quote,
             'topic': self.statement1.topic_id,
+            'meter': self.statement1.meter_id,
             'status': self.statement1.status,
         }
         params.update(self.references2)
@@ -516,6 +523,7 @@ class TestEditStatement(TestCase):
         self.assertEqual(int(response.context['form'].initial['quoted_by']), self.statement1.quoted_by_id)
         self.assertEqual(int(response.context['form'].initial['status']), self.statement1.status)
         self.assertEqual(int(response.context['form'].initial['topic']), self.statement1.topic_id)
+        self.assertEqual(int(response.context['form'].initial['meter']), self.statement1.meter_id)
 
         self.assertEqual(response.context['reference_formset'].initial, self.statement1.references)
         self.assertEqual(2, len(self.statement1.references))
@@ -530,6 +538,7 @@ class TestEditStatement(TestCase):
             'quoted_by': self.statement1.quoted_by_id,
             'quote': self.statement1.quote,
             'topic': self.statement1.topic_id,
+            'meter': self.statement1.meter_id,
             'status': self.statement1.status,
         }
         self.references2['references-0-DELETE'] = True
@@ -567,6 +576,7 @@ class TestEditStatement(TestCase):
             'topic': '',
             'topic-autocomplete': '',
             'topic': '',
+            'meter': ''
 
         }
         params.update(self.references1)
@@ -575,6 +585,7 @@ class TestEditStatement(TestCase):
         self.assertFormError(response, 'form', 'permalink', [_('This field is required.')])
         self.assertFormError(response, 'form', 'quoted_by', [_('This field is required.')])
         self.assertFormError(response, 'form', 'quote', [_('This field is required.')])
+        self.assertFormError(response, 'form', 'meter', [_('This field is required.')])
 
 
         params = {
@@ -582,6 +593,7 @@ class TestEditStatement(TestCase):
             'quoted_by': self.statement1.quoted_by_id,
             'quoted_by-autocomplete': self.statement1.quoted_by_id,
             'quote': self.statement1.quote,
+            'meter': self.statement1.meter_id,
             'status': '',
         }
         params.update(self.references1)
@@ -594,6 +606,7 @@ class TestEditStatement(TestCase):
             'permalink': 'a tom in link?',
             'quoted_by': self.statement1.quoted_by_id,
             'quote': self.statement1.quote,
+            'meter': self.statement1.meter_id,
             'status': '',
         }
         params.update(self.references1)
@@ -609,6 +622,7 @@ class TestEditStatement(TestCase):
             'permalink': self.statement1.permalink,
             'quoted_by': self.statement1.quoted_by_id,
             'quote': self.statement1.quote,
+            'meter': self.statement1.meter_id,
             'status': self.statement1.status,
         }
         params.update(self.references1)
@@ -633,6 +647,7 @@ class TestCreateStatement(TestEditStatement):
             'created_by': self.staff1,
             'quote': 'New quote',
             'topic': self.topic1,
+            'meter': self.meter1
         })
 
         self.url1 = reverse('statement_create')

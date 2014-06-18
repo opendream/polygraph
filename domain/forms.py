@@ -8,8 +8,7 @@ from common.constants import STATUS_CHOICES, STATUS_PUBLISHED
 from domain.autocomplete_light_registry import PeopleAutocomplete, TopicAutocomplete
 import files_widget
 from common.forms import PermalinkForm, CommonForm
-from domain.models import PeopleCategory, People, Topic
-
+from domain.models import PeopleCategory, People, Topic, Meter
 
 from tagging.forms import TagField
 from tagging_autocomplete_tagit.widgets import TagAutocompleteTagIt
@@ -68,6 +67,12 @@ class StatementEditForm(PermalinkForm):
     )
 
     tags = TagField(required=False, widget=TagAutocompleteTagIt(max_tags=False))
+
+    meter = forms.ModelChoiceField(
+        required=True,
+        queryset=Meter.objects.all(),
+        widget=forms.RadioSelect(attrs={'id': 'id_meter'})
+    )
 
 
     status = forms.ChoiceField(required=False, widget=forms.RadioSelect(attrs={'id': 'id_status'}), choices=STATUS_CHOICES)

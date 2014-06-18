@@ -6,7 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from common.constants import STATUS_PUBLISHED
 from common.functions import people_render_reference, topic_render_reference
 from domain.forms import PeopleEditForm, TopicEditForm, StatementEditForm, ReferenceForm
-from domain.models import People, Topic, Statement
+from domain.models import People, Topic, Statement, Meter
 
 
 def home(request):
@@ -178,9 +178,9 @@ def statement_create(request, statement=None):
             statement.quoted_by_id = form.cleaned_data['quoted_by'].id
             statement.topic_id = form.cleaned_data['topic'].id if form.cleaned_data['topic'] else None
             statement.tags = form.cleaned_data['tags']
+            statement.meter_id = form.cleaned_data['meter'].id
 
 
-            print statement.tags
 
             # Save references
             references = []
@@ -208,6 +208,7 @@ def statement_create(request, statement=None):
             'quoted_by': statement.quoted_by_id,
             'topic': statement.topic_id,
             'tags': statement.tags,
+            'meter': statement.meter_id or Meter.objects.get(permalink='unprovable').id
         }
 
         form = StatementEditForm(statement, Topic, initial=initial)
