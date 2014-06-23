@@ -183,6 +183,9 @@ class TestStatement(TestCase):
         self.meter1 = factory.create_meter(point=0)
         self.meter2 = factory.create_meter(point=1)
 
+        self.relate_statements1 = [factory.create_statement(tags=''), factory.create_statement(tags='')]
+        self.relate_statements2 = [factory.create_statement(tags=''), factory.create_statement(tags='')]
+
     def test_create(self):
 
         statement1 = factory.create_statement(
@@ -196,6 +199,9 @@ class TestStatement(TestCase):
             tags='hello, world',
             meter=self.meter1
         )
+        for relate_sattement in self.relate_statements1:
+            statement1.relate_statements.add(relate_sattement)
+
         self.assertEqual(statement1.created_by, self.staff1)
         self.assertEqual(statement1.quoted_by, self.people1)
         self.assertEqual(statement1.permalink, 'i-love-polygraph')
@@ -210,6 +216,8 @@ class TestStatement(TestCase):
         self.assertEqual(2, TaggedItem.objects.filter(content_type__name='statement').count())
         self.assertEqual(2, Tag.objects.all().count())
 
+        self.assertEqual(list(statement1.relate_statements.all()), self.relate_statements1)
+
 
         statement2 = Statement.objects.create(
             created_by=self.staff2,
@@ -220,8 +228,11 @@ class TestStatement(TestCase):
             status=STATUS_DRAFT,
             topic=self.topic2,
             tags='hello, new year',
-            meter=self.meter2
+            meter=self.meter2,
         )
+        for relate_sattement in self.relate_statements2:
+            statement2.relate_statements.add(relate_sattement)
+
         self.assertEqual(statement2.created_by, self.staff2)
         self.assertEqual(statement2.quoted_by, self.people2)
         self.assertEqual(statement2.permalink, 'i-love-polygraph-2')
@@ -235,6 +246,8 @@ class TestStatement(TestCase):
 
         self.assertEqual(4, TaggedItem.objects.filter(content_type__name='statement').count())
         self.assertEqual(3, Tag.objects.all().count())
+
+        self.assertEqual(list(statement2.relate_statements.all()), self.relate_statements2)
 
         try:
             with transaction.atomic():
