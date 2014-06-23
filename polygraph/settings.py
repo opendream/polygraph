@@ -193,6 +193,8 @@ FILES_WIDGET_TEMP_DIR = 'temp/files_widget/'
 #FILES_WIDGET_JQUERY_PATH = 'libs/jquery/jquery.min.js'
 #FILES_WIDGET_JQUERY_UI_PATH = 'libs/jquery-ui/js/jquery-ui-1.10.4.min.js'
 
+DEFAULT_IMAGE = '%simages/default.png' % STATIC_URL
+
 TAGGING_AUTOCOMPLETE_JQUERY_UI_FILE = 'libs/jquery-ui/js/jquery-ui-1.10.4.min.js'
 TAGGING_AUTOCOMPLETE_MAX_TAGS = 9999
 

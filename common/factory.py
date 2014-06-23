@@ -110,9 +110,12 @@ def create_meter(permalink=None, title='', description='', point=0, order=0, ima
     title = title or randstr()
     description = description or randstr()
 
+
     image_large_text = image_large_text or File(open('.%simages/test.jpg' % settings.STATIC_URL), 'test.jpg')
     image_small_text = image_small_text or File(open('.%simages/test.jpg' % settings.STATIC_URL), 'test.jpg')
     image_small = image_small or File(open('.%simages/test.jpg' % settings.STATIC_URL), 'test.jpg')
+
+
 
     meter = Meter.objects.create(
         permalink=permalink,

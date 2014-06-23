@@ -5,10 +5,10 @@ from django.utils.translation import ugettext_lazy as _
 
 from common.constants import STATUS_CHOICES, STATUS_PUBLISHED
 
-from domain.autocomplete_light_registry import PeopleAutocomplete, TopicAutocomplete
+from domain.autocomplete_light_registry import PeopleAutocomplete, TopicAutocomplete, StatementAutocomplete
 import files_widget
 from common.forms import PermalinkForm, CommonForm
-from domain.models import PeopleCategory, People, Topic, Meter
+from domain.models import PeopleCategory, People, Topic, Meter, Statement
 
 from tagging.forms import TagField
 from tagging_autocomplete_tagit.widgets import TagAutocompleteTagIt
@@ -51,9 +51,9 @@ class StatementEditForm(PermalinkForm):
     quote = forms.CharField(widget=CKEditorWidget(config_name='bold'))
 
     quoted_by = forms.ModelChoiceField(
-        queryset=People.objects.filter(),
+        queryset=People.objects.all(),
         widget=autocomplete_light.ChoiceWidget(PeopleAutocomplete,
-            attrs={'placeholder': 'Type for search by people name', 'class': 'form-control'}
+            attrs={'placeholder': 'Type for search people by name', 'class': 'form-control'}
         )
     )
 
@@ -62,7 +62,7 @@ class StatementEditForm(PermalinkForm):
         required=False,
         queryset=Topic.objects.all(),
         widget=autocomplete_light.ChoiceWidget(TopicAutocomplete,
-            attrs={'placeholder': 'Type for search by topic title', 'class': 'form-control'}
+            attrs={'placeholder': 'Type for search topic by title', 'class': 'form-control'}
         )
     )
 
@@ -73,6 +73,14 @@ class StatementEditForm(PermalinkForm):
         queryset=Meter.objects.all(),
         empty_label=None,
         widget=forms.RadioSelect(attrs={'id': 'id_meter'})
+    )
+
+    relate_statements = forms.ModelMultipleChoiceField(
+        required=False,
+        queryset=Statement.objects.all(),
+        widget=autocomplete_light.MultipleChoiceWidget(StatementAutocomplete,
+            attrs={'placeholder': 'Type for search statement by quote or topic title ', 'class': 'form-control'}
+        )
     )
 
 

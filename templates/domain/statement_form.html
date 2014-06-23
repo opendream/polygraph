@@ -65,6 +65,20 @@
         </div>
     </div>
 
+    <div class="controls form-group statement-meter">
+        <label for="id_meter" class="field-container control-label">{% trans "Polygraph" %}</label>
+        <div class="field-container radio">
+            {% for meter in form.meter %}
+                {{ meter.tag }}
+                 <label for="id_meter_{{ meter.index }}">{{ meter.choice_label }}</label>
+            {% endfor %}
+
+            {% if form.meter.errors %}
+            <div class="errors alert alert-danger">{{ form.meter.errors }}</div>
+            {% endif %}
+        </div>
+    </div>
+
     <div class="controls form-group block block-bg-transparent statement-desc">
         <div class="block-content">
 
@@ -149,9 +163,8 @@
 
 
         <div class="controls form-group">
-            <label for="id_references" class="field-container control-label">{% trans "Tags" %}</label>
+            <label for="id_tags" class="field-container control-label">{% trans "Tags" %}</label>
             <div class="field-container">
-
 
                 {{ form.tags }}
 
@@ -161,27 +174,16 @@
             </div>
         </div>
 
-
         <div class="controls form-group">
-            <label for="id_meter" class="field-container control-label">{% trans "Polygraph" %}</label>
-            <div class="field-container radio block">
-
-                <ul class="media-list item-list block-content row">
-                    {% for meter in form.meter %}
-                    <li class="media">
-                        {{ meter.tag }}
-                        <label for="id_meter_{{ meter.index }}">{% trans meter.choice_label %}</label>
-                    </li>
-                    {% endfor %}
-                </ul>
-
-
-                {% if form.meter.errors %}
-                <div class="errors alert alert-danger">{{ form.meter.errors }}</div>
+            <label for="id_relate_statements" class="field-container control-label">{% trans "Relate Statement" %}</label>
+            <div class="field-container">
+                {{ form.relate_statements }}
+                {% if form.relate_statements.errors %}
+                <div class="errors alert alert-danger">{{ form.relate_statements.errors }}</div>
                 {% endif %}
-
             </div>
         </div>
+
 
         
     </div>

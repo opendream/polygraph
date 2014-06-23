@@ -4,7 +4,7 @@ from django.forms.formsets import formset_factory
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext_lazy as _
 from common.constants import STATUS_PUBLISHED
-from common.functions import people_render_reference, topic_render_reference
+from common.functions import people_render_reference, topic_render_reference, statement_render_reference
 from domain.forms import PeopleEditForm, TopicEditForm, StatementEditForm, ReferenceForm
 from domain.models import People, Topic, Statement, Meter
 
@@ -181,21 +181,28 @@ def statement_create(request, statement=None):
             statement.meter_id = form.cleaned_data['meter'].id
 
 
-
             # Save references
             references = []
-            for form in reference_formset:
+            for reference_form in reference_formset:
 
-                if form.cleaned_data and not form.cleaned_data.get('DELETE'):
+                if reference_form.cleaned_data and not reference_form.cleaned_data.get('DELETE'):
 
                     references.append({
-                        'url': form.cleaned_data['url'],
-                        'title': form.cleaned_data['title']
+                        'url': reference_form.cleaned_data['url'],
+                        'title': reference_form.cleaned_data['title']
                     })
 
             statement.references = references
 
             statement.save()
+
+            statement.relate_statements.clear()
+            for relate_statement in form.cleaned_data['relate_statements']:
+                statement.relate_statements.add(relate_statement)
+
+            if request.GET.get('_popup'):
+                message_success = '<script type="text/javascript"> opener.dismissAddAnotherPopup(window, \'%s\', \'%s\'); </script>' % (statement.id, statement_render_reference(statement))
+
 
             messages.success(request, message_success)
 
@@ -211,7 +218,10 @@ def statement_create(request, statement=None):
             'meter': statement.meter_id or Meter.objects.get(permalink='unprovable').id
         }
 
-        form = StatementEditForm(statement, Topic, initial=initial)
+        if statement.id:
+            initial['relate_statements'] = statement.relate_statements.all()
+
+        form = StatementEditForm(statement, Statement, initial=initial)
 
         reference_formset = ReferenceFormSet(initial=statement.references, prefix='references')
 

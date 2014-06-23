@@ -266,7 +266,7 @@ class TestMeter(TestCase):
         self.assertEqual(meter1.image_large_text, 'test.jpg')
         self.assertEqual(meter1.image_small_text, 'test.jpg')
         self.assertEqual(meter1.image_small, 'test.jpg')
-        self.assertEqual(meter1.__unicode__(), 'Unprovable')
+        self.assertTrue('Unprovable' in meter1.__unicode__())
 
 
         meter2 = factory.create_meter(
@@ -284,7 +284,7 @@ class TestMeter(TestCase):
         self.assertEqual(meter2.image_large_text, 'test.jpg')
         self.assertEqual(meter2.image_small_text, 'test.jpg')
         self.assertEqual(meter2.image_small, 'test.jpg')
-        self.assertEqual(meter2.__unicode__(), 'True')
+        self.assertTrue('True' in meter2.__unicode__())
 
 
         try:

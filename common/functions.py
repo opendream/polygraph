@@ -1,6 +1,25 @@
+from django.conf import settings
 from django.core.urlresolvers import reverse
+from django.utils.html import strip_tags
 from django.utils.translation import ugettext_lazy as _
 
+
+from django import template
+from django.utils.safestring import mark_safe
+from django.template.defaultfilters import stringfilter
+from django.utils.text import normalize_newlines
+
+register = template.Library()
+
+
+def remove_newlines(text):
+    """
+    Removes all newline characters from a block of text.
+    """
+    # First normalize the newlines using Django's nifty utility
+    normalized_text = normalize_newlines(text)
+    # Then simply remove the newlines like so.
+    return mark_safe(normalized_text.replace('\n', ' '))
 
 
 
@@ -37,19 +56,39 @@ def topic_render_reference(topic, display_edit_link=True, field_name='topic'):
     return html
 
 
+def image_render(image, size):
+
+    thumbnail = False
+    if image:
+        try:
+            thumbnail = getattr(image, 'thumbnail_tag_%s' % size)()
+        except:
+            pass
+
+    if not thumbnail:
+        width, height = size.split('x')
+        thumbnail = '<img src="%s" width="%s" height="%s" alt="no-image" />' % (settings.DEFAULT_IMAGE, width, height)
+
+    return thumbnail
+
 def meter_render_reference(meter, display_edit_link=False, field_name='meter'):
 
-    html = '<div class="media-body"><h3 class="media-heading">%s</h3></div>' % meter.title
-
-    image_url = ''
-    image_width = 85
-    image_height = 103
-
-    if meter.image_small:
-        image_url = meter.image_small.url
+    html = '<div class="media-body"><span class="media-heading">%s</span></div>' % meter.title
 
 
-    html = '<span class="pull-left"><img class="media-object" src="%s" alt="%s" width="%s" height="%s"></span> %s' % (image_url, meter.title, image_width, image_height, html)
+    html = '<span class="pull-left image-wrapper">%s</span> %s' % (image_render(meter.image_small, '36x44'), html)
+
     html = '<div class="item-inner">%s</div>' % html
+
+    return html
+
+def statement_render_reference(statement, display_edit_link=True, field_name='relate_statements'):
+
+    html = '<span class="reference-span">%s</span>' % remove_newlines(strip_tags(statement.quote))
+
+    if display_edit_link:
+        html = '%s <a class="reference-span autocomplete-add-another" id="edit_id_%s" href="%s?_popup=1">%s</a>' % (html, field_name, reverse('statement_edit', args=[statement.id]), _('edit'))
+
+    html = '<span class="statement-reference-wrapper reference-wrapper">%s</span>' % html
 
     return html

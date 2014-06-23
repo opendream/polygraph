@@ -887,3 +887,21 @@ footer {
     display: table-cell;
 }
 
+.statement-meter .radio {
+    padding-left: 0;
+}
+.statement-meter .radio .image-wrapper {
+    margin-top: -11px;
+    margin-right: 5px;
+}
+
+.statement-meter .prettyradio {
+    padding-top: 11px;
+    padding-left: 7px;
+    padding-right: 3px;
+    background-color: #FFF;
+    border-radius: 25px 2px 2px 25px;
+    border-right: solid 5px #ffc092;
+    margin-right: 5px;
+
+}
