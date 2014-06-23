@@ -175,7 +175,7 @@
         </div>
 
         <div class="controls form-group">
-            <label for="id_relate_statements" class="field-container control-label">{% trans "Relate Statement" %}</label>
+            <label for="id_relate_statements" class="field-container control-label">{% trans "Relate Statements" %}</label>
             <div class="field-container">
                 {{ form.relate_statements }}
                 {% if form.relate_statements.errors %}
@@ -185,6 +185,15 @@
         </div>
 
 
+        <div class="controls form-group">
+            <label for="id_relate_peoples" class="field-container control-label">{% trans "Relate Peoples" %}</label>
+            <div class="field-container">
+                {{ form.relate_peoples }}
+                {% if form.relate_peoples.errors %}
+                <div class="errors alert alert-danger">{{ form.relate_peoples.errors }}</div>
+                {% endif %}
+            </div>
+        </div>
         
     </div>
 

@@ -200,6 +200,10 @@ def statement_create(request, statement=None):
             for relate_statement in form.cleaned_data['relate_statements']:
                 statement.relate_statements.add(relate_statement)
 
+            statement.relate_peoples.clear()
+            for relate_people in form.cleaned_data['relate_peoples']:
+                statement.relate_peoples.add(relate_people)
+
             if request.GET.get('_popup'):
                 message_success = '<script type="text/javascript"> opener.dismissAddAnotherPopup(window, \'%s\', \'%s\'); </script>' % (statement.id, statement_render_reference(statement))
 
@@ -220,6 +224,7 @@ def statement_create(request, statement=None):
 
         if statement.id:
             initial['relate_statements'] = statement.relate_statements.all()
+            initial['relate_peoples'] = statement.relate_peoples.all()
 
         form = StatementEditForm(statement, Statement, initial=initial)
 

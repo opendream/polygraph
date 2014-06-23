@@ -186,6 +186,9 @@ class TestStatement(TestCase):
         self.relate_statements1 = [factory.create_statement(tags=''), factory.create_statement(tags='')]
         self.relate_statements2 = [factory.create_statement(tags=''), factory.create_statement(tags='')]
 
+        self.relate_peoples1 = [factory.create_people(), factory.create_people()]
+        self.relate_peoples2 = [factory.create_people(), factory.create_people()]
+
     def test_create(self):
 
         statement1 = factory.create_statement(
@@ -199,8 +202,11 @@ class TestStatement(TestCase):
             tags='hello, world',
             meter=self.meter1
         )
-        for relate_sattement in self.relate_statements1:
-            statement1.relate_statements.add(relate_sattement)
+        for relate_statement in self.relate_statements1:
+            statement1.relate_statements.add(relate_statement)
+
+        for relate_people in self.relate_peoples1:
+            statement1.relate_peoples.add(relate_people)
 
         self.assertEqual(statement1.created_by, self.staff1)
         self.assertEqual(statement1.quoted_by, self.people1)
@@ -217,6 +223,7 @@ class TestStatement(TestCase):
         self.assertEqual(2, Tag.objects.all().count())
 
         self.assertEqual(list(statement1.relate_statements.all()), self.relate_statements1)
+        self.assertEqual(list(statement1.relate_peoples.all()), self.relate_peoples1)
 
 
         statement2 = Statement.objects.create(
@@ -233,6 +240,9 @@ class TestStatement(TestCase):
         for relate_sattement in self.relate_statements2:
             statement2.relate_statements.add(relate_sattement)
 
+        for relate_people in self.relate_peoples2:
+            statement2.relate_peoples.add(relate_people)
+
         self.assertEqual(statement2.created_by, self.staff2)
         self.assertEqual(statement2.quoted_by, self.people2)
         self.assertEqual(statement2.permalink, 'i-love-polygraph-2')
@@ -248,6 +258,7 @@ class TestStatement(TestCase):
         self.assertEqual(3, Tag.objects.all().count())
 
         self.assertEqual(list(statement2.relate_statements.all()), self.relate_statements2)
+        self.assertEqual(list(statement2.relate_peoples.all()), self.relate_peoples2)
 
         try:
             with transaction.atomic():

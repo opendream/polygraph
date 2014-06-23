@@ -83,6 +83,13 @@ class StatementEditForm(PermalinkForm):
         )
     )
 
+    relate_peoples = forms.ModelMultipleChoiceField(
+        required=False,
+        queryset=People.objects.all(),
+        widget=autocomplete_light.MultipleChoiceWidget(PeopleAutocomplete,
+            attrs={'placeholder': 'Type for search statement by quote or topic title ', 'class': 'form-control'}
+        )
+    )
 
     status = forms.ChoiceField(required=False, widget=forms.RadioSelect(attrs={'id': 'id_status'}), choices=STATUS_CHOICES)
 

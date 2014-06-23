@@ -403,6 +403,7 @@ class TestEditStatement(TestCase):
         self.topic1 = factory.create_topic()
         self.meter1 = factory.create_meter(permalink='unprovable')
         self.relate_statements1 = [factory.create_statement(tags=''), factory.create_statement(tags='')]
+        self.relate_peoples1 = [factory.create_people(), factory.create_people()]
 
 
         self.statement2 = factory.create_statement()
@@ -411,7 +412,7 @@ class TestEditStatement(TestCase):
 
         # Define for override
         self.check_initial = True
-        self.statement1 = factory.create_statement(quoted_by=self.people1, created_by=self.staff1, topic=self.topic1, relate_statements=self.relate_statements1)
+        self.statement1 = factory.create_statement(quoted_by=self.people1, created_by=self.staff1, topic=self.topic1, relate_statements=self.relate_statements1, relate_peoples=self.relate_peoples1)
 
         self.url1 = reverse('statement_edit', args=[self.statement1.id])
         self.url2 = reverse('statement_edit', args=[self.statement2.id])
@@ -467,6 +468,7 @@ class TestEditStatement(TestCase):
         self.assertContains(response, 'name="tags"')
         self.assertContains(response, 'name="meter"')
         self.assertContains(response, 'name="relate_statements"')
+        self.assertContains(response, 'name="relate_peoples"')
         self.assertContains(response, 'name="status"')
         self.assertContains(response, self.title)
         self.assertContains(response, self.button)
@@ -479,6 +481,7 @@ class TestEditStatement(TestCase):
         self.assertContains(response, self.statement1.quote)
         self.assertEqual(int(response.context['form'].initial['meter']), self.statement1.meter_id)
         self.assertEqual(list(response.context['form'].initial['relate_statements']), self.relate_statements1)
+        self.assertEqual(list(response.context['form'].initial['relate_peoples']), self.relate_peoples1)
 
         for reference in self.statement1.references:
             self.assertContains(response, reference['title'])
@@ -506,6 +509,7 @@ class TestEditStatement(TestCase):
             'topic': self.statement1.topic_id,
             'meter': self.statement1.meter_id,
             'relate_statements': [relate_statement.id for relate_statement in self.relate_statements1],
+            'relate_peoples': [relate_people.id for relate_people in self.relate_peoples1],
             'status': self.statement1.status
         }
         params.update(self.references2)
@@ -528,6 +532,7 @@ class TestEditStatement(TestCase):
         self.assertEqual(int(response.context['form'].initial['topic']), self.statement1.topic_id)
         self.assertEqual(int(response.context['form'].initial['meter']), self.statement1.meter_id)
         self.assertEqual(list(response.context['form'].initial['relate_statements']), self.relate_statements1)
+        self.assertEqual(list(response.context['form'].initial['relate_peoples']), self.relate_peoples1)
 
         self.assertEqual(response.context['reference_formset'].initial, self.statement1.references)
         self.assertEqual(2, len(self.statement1.references))
@@ -544,6 +549,7 @@ class TestEditStatement(TestCase):
             'topic': self.statement1.topic_id,
             'meter': self.statement1.meter_id,
             'relate_statements': [relate_statement.id for relate_statement in self.relate_statements1],
+            'relate_peoples': [relate_statement.id for relate_statement in self.relate_peoples1],
             'status': self.statement1.status,
         }
         self.references2['references-0-DELETE'] = True
