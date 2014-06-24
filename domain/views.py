@@ -195,7 +195,8 @@ def statement_create(request, statement=None):
             statement.tags = form.cleaned_data['tags']
             statement.meter_id = form.cleaned_data['meter'].id
 
-            statement.status = process_status(request.user, form.cleaned_data['status'])
+            status = int(form.cleaned_data['status'])
+            statement.status = process_status(request.user, status) if not statement.published else status
 
             if not statement.published and statement.status == STATUS_PUBLISHED:
                 statement.published = timezone.now()

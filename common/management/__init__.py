@@ -77,6 +77,18 @@ def create_common(app, created_models, verbosity, **kwargs):
             password = 'password'
         )
 
+    try:
+        Staff.objects.get(username='writer')
+    except Staff.DoesNotExist:
+
+        Staff.objects.create_user(
+            username = 'writer',
+            email = 'writer@polygraph.ex',
+            first_name = 'Wriet',
+            last_name = 'Polygraph',
+            password = 'password'
+        )
+
 
 post_syncdb.connect(
     create_common,
