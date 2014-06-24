@@ -10,6 +10,46 @@ from common.constants import STATUS_DRAFT, STATUS_PENDING, STATUS_PUBLISHED
 from domain.views import domain_delete
 
 
+class TestDeleteDomain(TestCase):
+
+    def setUp(self):
+        self.query = eval(self.inst_name.title()).objects.all()
+        self.created_by = factory.create_staff()
+        self.inst = getattr(factory, 'create_%s' % self.inst_name)(created_by=self.created_by)
+        self.url = reverse('domain_delete', args=[self.inst_name, self.inst.id])
+
+    def test_delete_success(self):
+        self.client.login(username=self.created_by.username, password='password')
+        response = self.client.get(self.url)
+
+        self.assertRedirects(response, reverse('home'))
+        self.assertEqual(0, self.query.filter(id=self.inst.id).count())
+
+    def test_delete_authorize(self):
+
+        # not login
+        response = self.client.get(self.url)
+        self.assertRedirects(response, '%s?next=%s' % (reverse('account_login'), self.url))
+
+        # login and not inst owner
+        other_staff = factory.create_staff()
+        self.client.login(username=other_staff.username, password='password')
+        #response = self.client.get(self.url)
+        request = HttpRequest()
+        request.user = other_staff
+        self.assertRaises(Http404, domain_delete, request, 'people', self.inst.id)
+
+        self.client.logout()
+
+        # login and staff permission
+        staff = factory.create_staff(is_staff=True)
+        self.client.login(username=staff.username, password='password')
+        response = self.client.get(self.url)
+
+        self.assertRedirects(response, reverse('home'))
+        self.assertEqual(0, self.query.filter(id=self.inst.id).count())
+
+
 class TestEditPeople(TestCase):
 
     def setUp(self):
@@ -204,45 +244,6 @@ class TestCreatePeople(TestEditPeople):
         self.title = _('Create %s') % _('People')
         self.button = _('Save new')
 
-
-class TestDeleteDomain(TestCase):
-
-    def setUp(self):
-        self.query = eval(self.inst_name.title()).objects.all()
-        self.created_by = factory.create_staff()
-        self.inst = getattr(factory, 'create_%s' % self.inst_name)(created_by=self.created_by)
-        self.url = reverse('domain_delete', args=[self.inst_name, self.inst.id])
-
-    def test_delete_success(self):
-        self.client.login(username=self.created_by.username, password='password')
-        response = self.client.get(self.url)
-
-        self.assertRedirects(response, reverse('home'))
-        self.assertEqual(0, self.query.filter(id=self.inst.id).count())
-
-    def test_delete_authorize(self):
-
-        # not login
-        response = self.client.get(self.url)
-        self.assertRedirects(response, '%s?next=%s' % (reverse('account_login'), self.url))
-
-        # login and not inst owner
-        other_staff = factory.create_staff()
-        self.client.login(username=other_staff.username, password='password')
-        #response = self.client.get(self.url)
-        request = HttpRequest()
-        request.user = other_staff
-        self.assertRaises(Http404, domain_delete, request, 'people', self.inst.id)
-
-        self.client.logout()
-
-        # login and staff permission
-        staff = factory.create_staff(is_staff=True)
-        self.client.login(username=staff.username, password='password')
-        response = self.client.get(self.url)
-
-        self.assertRedirects(response, reverse('home'))
-        self.assertEqual(0, self.query.filter(id=self.inst.id).count())
 
 class TestDeletePeople(TestDeleteDomain):
 
