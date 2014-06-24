@@ -6,6 +6,6 @@ STATUS_DRAFT = 0
 
 STATUS_CHOICES = (
     (STATUS_PUBLISHED, _('Published')),
-    #(STATUS_PENDING, _('Pending')),
+    (STATUS_PENDING, _('Pending')),
     (STATUS_DRAFT, _('Draft')),
 )

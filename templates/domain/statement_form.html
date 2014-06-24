@@ -197,11 +197,6 @@
         
     </div>
 
-
-
-
-
-
 </section>
 
 {% endblock %}
@@ -227,6 +222,11 @@
     <div class="col-sm-offset-2-bnk field-container form-action">
         <button class="btn btn-primary" type="submit">{% if form.is_new %}{% trans "Save new" %}{% else %}{% trans "Save changes" %}{% endif %}</button>
         <a href="{% url 'home' %}" class="btn btn-cancle flat-btn">{% trans "Cancel" %}</a>
+
+        {% if not form.is_new %}
+        <a class="btn btn-delete" href="{% url 'domain_delete' 'topic' form.inst.id %}">{% trans "Delete" %}</a>
+        {% endif %}
+
     </div>
 </div>
 {% endblock %}
