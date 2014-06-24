@@ -848,9 +848,13 @@ class TestPublishStatement(TestCase):
         # writer save again
         published = statement.published
 
-        self.client.post(reverse('statement_edit', args=[self.statement_pending.id]), params)
+        params['status'] = STATUS_PENDING
+
+        response = self.client.post(reverse('statement_edit', args=[self.statement_pending.id]), params, follow=True)
         statement = Statement.objects.get(id=self.statement_pending.id)
 
+        self.assertEqual(int(response.context['form'].initial['status']), STATUS_PENDING)
+        self.assertContains(response, 'name="status" type="radio" value="%s"' % STATUS_PUBLISHED)
         self.assertEquals(statement.published, published)
         self.assertEquals(statement.published_by, self.editor)
 

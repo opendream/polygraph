@@ -208,7 +208,7 @@
     <label for="id_status" class="col-sm-2 control-label">{% trans "Status" %}</label>
     <div class="col-sm-10 radio">
         {% for status in form.status %}
-            {% if status.choice_value != STATUS_PUBLISHED|slugify or status.value = STATUS_PUBLISHED|slugify or user.is_staff %}
+            {% if status.choice_value != STATUS_PUBLISHED|slugify or form.inst.published or user.is_staff %}
             {{ status.tag }}
              <label for="id_status_{{ status.index }}">{{ status.choice_label }}</label>
             {% endif %}
