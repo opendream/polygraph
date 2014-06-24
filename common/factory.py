@@ -139,7 +139,7 @@ def create_meter(permalink=None, title='', description='', point=0, order=0, ima
     return meter
 
 
-def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', references=None, status=STATUS_PUBLISHED, topic=None, tags='hello world', meter=None, relate_statements=[], relate_peoples=[]):
+def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', references=None, status=STATUS_PENDING, topic=None, tags='hello world', meter=None, relate_statements=[], relate_peoples=[], published=None, published_by=None):
 
     created_by = created_by or create_staff()
     quoted_by = quoted_by or create_people()
@@ -158,7 +158,9 @@ def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', 
         created_by=created_by,
         topic=topic,
         tags=tags,
-        meter=meter
+        meter=meter,
+        published=published,
+        published_by=published_by
     )
 
     for relate_statement in relate_statements:

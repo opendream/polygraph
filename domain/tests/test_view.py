@@ -1,5 +1,6 @@
 from django.core.urlresolvers import reverse
 from django.http import Http404, HttpRequest
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from django.test import TestCase
@@ -735,3 +736,109 @@ class TestCreateStatement(TestEditStatement):
 class TestDeleteStatement(TestDeleteDomain):
 
     inst_name = 'statement'
+
+
+class TestPublishStatement(TestCase):
+
+    def setUp(self):
+
+        factory.create_meter(permalink='unprovable')
+
+        self.editor = factory.create_staff(password='password', is_staff=True)
+        self.writer = factory.create_staff(password='password')
+
+        self.statement_published = factory.create_statement(
+            created_by=self.writer,
+            status=STATUS_PUBLISHED,
+            published=timezone.now(),
+            published_by=self.editor
+        )
+
+        self.statement_pending = factory.create_statement(
+            created_by=self.writer,
+            status=STATUS_PENDING
+        )
+
+
+    def test_create(self):
+
+        self.client.login(username=self.editor.username, password='password')
+        response = self.client.get(reverse('statement_create'))
+
+        self.assertEqual(int(response.context['form'].initial['status']), STATUS_PUBLISHED)
+
+        self.client.logout()
+
+
+        self.client.login(username=self.writer.username, password='password')
+        response = self.client.get(reverse('statement_create'))
+
+        self.assertEqual(int(response.context['form'].initial['status']), STATUS_PENDING)
+        self.assertNotContains(response, 'name="status" type="radio" value="%s"' % STATUS_PUBLISHED)
+
+
+        self.client.logout()
+
+
+    def test_edit(self):
+
+        self.client.login(username=self.editor.username, password='password')
+
+        response = self.client.get(reverse('statement_edit', args=[self.statement_published.id]))
+        self.assertEqual(int(response.context['form'].initial['status']), STATUS_PUBLISHED)
+
+        response = self.client.get(reverse('statement_edit', args=[self.statement_pending.id]))
+        self.assertEqual(int(response.context['form'].initial['status']), STATUS_PENDING)
+
+        self.client.logout()
+
+
+        self.client.login(username=self.writer.username, password='password')
+
+        response = self.client.get(reverse('statement_edit', args=[self.statement_published.id]))
+        self.assertEqual(int(response.context['form'].initial['status']), STATUS_PENDING)
+
+        response = self.client.get(reverse('statement_edit', args=[self.statement_pending.id]))
+        self.assertEqual(int(response.context['form'].initial['status']), STATUS_PENDING)
+        self.assertNotContains(response, 'name="status" type="radio" value="%s"' % STATUS_PUBLISHED)
+
+        self.client.logout()
+
+    def test_edit_pending_to_published(self):
+
+        self.client.login(username=self.editor.username, password='password')
+
+        params = {
+            'permalink': self.statement_pending.permalink,
+            'quoted_by': self.statement_pending.quoted_by_id,
+            'quote': self.statement_pending.quote,
+            'topic': self.statement_pending.topic_id,
+            'meter': self.statement_pending.meter_id,
+
+            'status': STATUS_PUBLISHED,
+
+            'references-TOTAL_FORMS': 4,
+            'references-INITIAL_FORMS': 1,
+            'references-MAX_NUM_FORMS': 1000,
+            'references-0-title': 'title',
+            'references-0-url': 'http://google.ex/'
+        }
+
+
+
+        self.client.post(reverse('statement_edit', args=[self.statement_pending.id]), params)
+        now = timezone.now()
+
+        statement = Statement.objects.get(id=self.statement_pending.id)
+        self.assertEquals(statement.published, now)
+        self.assertEquals(statement.published_by, self.editor)
+
+        self.client.logout()
+
+
+        self.client.login(username=self.writer.username, password='password')
+        response = self.client.get(reverse('statement_edit', args=[self.statement.id]))
+        self.assertContains(response, 'name="status" type="radio" value="%s"' % STATUS_PUBLISHED)
+
+
+

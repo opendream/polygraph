@@ -202,7 +202,7 @@ class TestStatement(TestCase):
             permalink='i-love-polygraph',
             quote='I love polygraph and programming.',
             references=[{'url': 'http://polygraph.com', 'title': 'Polygraph quote'}, {'url': 'https://google.com', 'title': 'Search yours quotes'}],
-            status=STATUS_PUBLISHED,
+            status=STATUS_PENDING,
             topic=self.topic1,
             tags='hello, world',
             meter=self.meter1
@@ -218,11 +218,14 @@ class TestStatement(TestCase):
         self.assertEqual(statement1.permalink, 'i-love-polygraph')
         self.assertEqual(statement1.quote, 'I love polygraph and programming.')
         self.assertEqual(statement1.references, [{'url': 'http://polygraph.com', 'title': 'Polygraph quote'}, {'url': 'https://google.com', 'title': 'Search yours quotes'}])
-        self.assertEqual(statement1.status, STATUS_PUBLISHED)
+        self.assertEqual(statement1.status, STATUS_PENDING)
         self.assertEqual(statement1.__unicode__(), 'I love polygraph and programming.')
         self.assertEqual(statement1.topic, self.topic1)
         self.assertEqual(statement1.tags, 'hello, world')
         self.assertEqual(statement1.meter, self.meter1)
+        self.assertEqual(statement1.published, None)
+        self.assertEqual(statement1.published_by, None)
+
 
         self.assertEqual(2, TaggedItem.objects.filter(content_type__name='statement').count())
         self.assertEqual(2, Tag.objects.all().count())
@@ -258,6 +261,8 @@ class TestStatement(TestCase):
         self.assertEqual(statement2.topic, self.topic2)
         self.assertEqual(statement2.tags, 'hello, new year')
         self.assertEqual(statement2.meter, self.meter2)
+        self.assertEqual(statement2.published, None)
+        self.assertEqual(statement2.published_by, None)
 
         self.assertEqual(4, TaggedItem.objects.filter(content_type__name='statement').count())
         self.assertEqual(3, Tag.objects.all().count())
