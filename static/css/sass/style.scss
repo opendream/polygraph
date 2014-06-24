@@ -61,6 +61,9 @@ a:hover { text-decoration: underline; }
 		background-color: $soft_orange;
 	}
 }
+.btn-delete {
+    float: right;
+}
 @media (max-width: 640px) {
 	.hidden-640 { display: none !important; }
 	aside .item-list li { width: 100%; }
