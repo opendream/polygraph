@@ -36,6 +36,7 @@ def domain_delete(request, inst_name, id):
     else:
         raise Http404('No item matches the given query.')
 
+    messages.success(request, _('Your %s has been deleted.') % inst_name)
     return redirect('home')
 
 

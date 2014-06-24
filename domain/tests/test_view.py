@@ -13,19 +13,31 @@ from domain.views import domain_delete
 class TestDeleteDomain(TestCase):
 
     def setUp(self):
+
+        if not hasattr(self, 'inst_name'):
+            return
+
         self.query = eval(self.inst_name.title()).objects.all()
         self.created_by = factory.create_staff()
         self.inst = getattr(factory, 'create_%s' % self.inst_name)(created_by=self.created_by)
         self.url = reverse('domain_delete', args=[self.inst_name, self.inst.id])
 
     def test_delete_success(self):
+
+        if not hasattr(self, 'inst_name'):
+            return
+
         self.client.login(username=self.created_by.username, password='password')
-        response = self.client.get(self.url)
+        response = self.client.get(self.url, follow=True)
 
         self.assertRedirects(response, reverse('home'))
         self.assertEqual(0, self.query.filter(id=self.inst.id).count())
+        self.assertContains(response, _('Your %s has been deleted.') % self.inst_name)
 
     def test_delete_authorize(self):
+
+        if not hasattr(self, 'inst_name'):
+            return
 
         # not login
         response = self.client.get(self.url)
@@ -438,6 +450,11 @@ class TestCreateTopic(TestEditTopic):
         self.assertEqual(1, after_count)
 
 
+class TestDeleteTopic(TestDeleteDomain):
+
+    inst_name = 'topic'
+
+
 class TestEditStatement(TestCase):
 
     def setUp(self):
@@ -712,3 +729,7 @@ class TestCreateStatement(TestEditStatement):
     def test_edit_post_delete_reference(self):
         pass
 
+
+class TestDeleteStatement(TestDeleteDomain):
+
+    inst_name = 'statement'

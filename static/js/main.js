@@ -73,6 +73,14 @@ $(document).ready(function () {
     $('.tagit-new input[type="text"]').keyup(resize_input).each(resize_input);
 
 
+    // confirm delete
+    $('.btn-delete').popConfirm({
+        title: "Delete Item",
+        content: "Are you sure you want to delete this item?",
+        placement: "top"
+    });
+
+
 
 });
 

@@ -128,6 +128,11 @@
             <button class="btn btn-primary" type="submit">{% if form.is_new %}{% trans "Save new" %}{% else %}{% trans "Save changes" %}{% endif %}</button>
             {% if not request_popup %}
             <a href="{% url 'home' %}" class="btn btn-cancle flat-btn">{% trans "Cancel" %}</a>
+
+            {% if not form.is_new %}
+            <a class="btn btn-delete" href="{% url 'domain_delete' 'people' form.inst.id %}">{% trans "Delete" %}</a>
+            {% endif %}
+
             {% endif %}
         </div>
     </div>

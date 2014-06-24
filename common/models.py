@@ -1,3 +1,4 @@
+from uuid import uuid1
 from django.core import validators
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -52,7 +53,12 @@ class CommonTrashModel(models.Model):
     objects = CommonTrashManager()
 
     def trash(self, *args, **kwargs):
-        self.is_deleted = True;
+
+        self.is_deleted = True
+
+        if hasattr(self, 'permalink'):
+            self.permalink = 'deleted_%s_%s' % (str(uuid1())[0: 10].replace('-', ''), self.permalink)
+
         self.save()
         return self
 
@@ -113,7 +119,7 @@ class AbstractPermalink(CommonModel):
     class Meta:
         abstract = True
 
-    permalink = models.CharField(max_length=30, unique=True,
+    permalink = models.CharField(max_length=255, unique=True,
         help_text=_('Required unique 30 characters or fewer. Letters, numbers and '
                     './+/-/_ characters'),
         validators=[
