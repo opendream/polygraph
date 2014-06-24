@@ -8,6 +8,7 @@ from django import template
 from django.utils.safestring import mark_safe
 from django.template.defaultfilters import stringfilter
 from django.utils.text import normalize_newlines
+from common.constants import STATUS_PUBLISHED, STATUS_PENDING
 
 register = template.Library()
 
@@ -20,6 +21,17 @@ def remove_newlines(text):
     normalized_text = normalize_newlines(text)
     # Then simply remove the newlines like so.
     return mark_safe(normalized_text.replace('\n', ' '))
+
+def process_status(user, status, default=False):
+
+    if default:
+        return STATUS_PUBLISHED if user.is_staff else STATUS_PENDING
+
+    status = int(status)
+    if not user.is_staff and status == STATUS_PUBLISHED:
+        status = STATUS_PENDING
+
+    return status
 
 
 

@@ -3,9 +3,10 @@ from django.contrib.auth.decorators import login_required
 from django.forms.formsets import formset_factory
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-from common.constants import STATUS_PUBLISHED
-from common.functions import people_render_reference, topic_render_reference, statement_render_reference
+from common.constants import STATUS_PUBLISHED, STATUS_PENDING
+from common.functions import people_render_reference, topic_render_reference, statement_render_reference, process_status
 from domain.forms import PeopleEditForm, TopicEditForm, StatementEditForm, ReferenceForm
 from domain.models import People, Topic, Statement, Meter
 
@@ -194,6 +195,11 @@ def statement_create(request, statement=None):
             statement.tags = form.cleaned_data['tags']
             statement.meter_id = form.cleaned_data['meter'].id
 
+            statement.status = process_status(request.user, form.cleaned_data['status'])
+
+            if not statement.published and statement.status == STATUS_PUBLISHED:
+                statement.published = timezone.now()
+                statement.published_by = request.user
 
             # Save references
             references = []
@@ -233,12 +239,14 @@ def statement_create(request, statement=None):
             'quoted_by': statement.quoted_by_id,
             'topic': statement.topic_id,
             'tags': statement.tags,
-            'meter': statement.meter_id or Meter.objects.get(permalink='unprovable').id
+            'meter': statement.meter_id or Meter.objects.get(permalink='unprovable').id,
         }
 
         if statement.id:
             initial['relate_statements'] = statement.relate_statements.all()
             initial['relate_peoples'] = statement.relate_peoples.all()
+        else:
+            initial['status'] = process_status(request.user, initial['status'], True)
 
         form = StatementEditForm(statement, Statement, initial=initial)
 

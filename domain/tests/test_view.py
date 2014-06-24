@@ -762,6 +762,7 @@ class TestPublishStatement(TestCase):
 
     def test_create(self):
 
+        # editor
         self.client.login(username=self.editor.username, password='password')
         response = self.client.get(reverse('statement_create'))
 
@@ -769,7 +770,7 @@ class TestPublishStatement(TestCase):
 
         self.client.logout()
 
-
+        # writer
         self.client.login(username=self.writer.username, password='password')
         response = self.client.get(reverse('statement_create'))
 
@@ -782,6 +783,7 @@ class TestPublishStatement(TestCase):
 
     def test_edit(self):
 
+        # editor
         self.client.login(username=self.editor.username, password='password')
 
         response = self.client.get(reverse('statement_edit', args=[self.statement_published.id]))
@@ -792,11 +794,11 @@ class TestPublishStatement(TestCase):
 
         self.client.logout()
 
-
+        # writer
         self.client.login(username=self.writer.username, password='password')
 
         response = self.client.get(reverse('statement_edit', args=[self.statement_published.id]))
-        self.assertEqual(int(response.context['form'].initial['status']), STATUS_PENDING)
+        self.assertEqual(int(response.context['form'].initial['status']), STATUS_PUBLISHED)
 
         response = self.client.get(reverse('statement_edit', args=[self.statement_pending.id]))
         self.assertEqual(int(response.context['form'].initial['status']), STATUS_PENDING)
@@ -804,9 +806,8 @@ class TestPublishStatement(TestCase):
 
         self.client.logout()
 
-    def test_edit_pending_to_published(self):
+    def test_post_edit_pending_to_published(self):
 
-        self.client.login(username=self.editor.username, password='password')
 
         params = {
             'permalink': self.statement_pending.permalink,
@@ -825,20 +826,69 @@ class TestPublishStatement(TestCase):
         }
 
 
-
+        # editor
+        self.client.login(username=self.editor.username, password='password')
         self.client.post(reverse('statement_edit', args=[self.statement_pending.id]), params)
-        now = timezone.now()
 
         statement = Statement.objects.get(id=self.statement_pending.id)
-        self.assertEquals(statement.published, now)
+
+
+        self.assertIsNotNone(statement.published)
+        self.assertEquals(statement.published_by, self.editor)
+
+        self.client.logout()
+
+        # writer
+        self.client.login(username=self.writer.username, password='password')
+        response = self.client.get(reverse('statement_edit', args=[statement.id]))
+
+        self.assertEqual(int(response.context['form'].initial['status']), STATUS_PUBLISHED)
+        self.assertContains(response, 'name="status" type="radio" value="%s"' % STATUS_PUBLISHED)
+
+        # writer save again
+        published = statement.published
+
+        self.client.post(reverse('statement_edit', args=[self.statement_pending.id]), params)
+        statement = Statement.objects.get(id=self.statement_pending.id)
+
+        self.assertEquals(statement.published, published)
         self.assertEquals(statement.published_by, self.editor)
 
         self.client.logout()
 
 
+    def test_post_edit_pending_to_published_by_writer(self):
+
+
+        params = {
+            'permalink': self.statement_pending.permalink,
+            'quoted_by': self.statement_pending.quoted_by_id,
+            'quote': self.statement_pending.quote,
+            'topic': self.statement_pending.topic_id,
+            'meter': self.statement_pending.meter_id,
+
+            'status': STATUS_PUBLISHED,
+
+            'references-TOTAL_FORMS': 4,
+            'references-INITIAL_FORMS': 1,
+            'references-MAX_NUM_FORMS': 1000,
+            'references-0-title': 'title',
+            'references-0-url': 'http://google.ex/'
+        }
+
+
+        # writer
+
         self.client.login(username=self.writer.username, password='password')
-        response = self.client.get(reverse('statement_edit', args=[self.statement.id]))
-        self.assertContains(response, 'name="status" type="radio" value="%s"' % STATUS_PUBLISHED)
 
+        response = self.client.post(reverse('statement_edit', args=[self.statement_pending.id]), params, follow=True)
 
+        statement = Statement.objects.get(id=self.statement_pending.id)
 
+        self.assertEquals(statement.status, STATUS_PENDING)
+        self.assertIsNone(statement.published)
+        self.assertIsNone(statement.published_by)
+        self.assertEqual(int(response.context['form'].initial['status']), STATUS_PENDING)
+        self.assertNotContains(response, 'name="status" type="radio" value="%s"' % STATUS_PUBLISHED)
+
+        self.client.logout()
