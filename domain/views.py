@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.forms.formsets import formset_factory
+from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.translation import ugettext_lazy as _
 from common.constants import STATUS_PUBLISHED
@@ -25,6 +26,17 @@ def statement_detail(request, statement_permalink):
 
 # Staff form ===========================================================================
 
+@login_required
+def domain_delete(request, inst_name, id):
+
+    inst = get_object_or_404(eval(inst_name.title()), pk=id)
+
+    if (hasattr(inst, 'created_by') and request.user.id == inst.created_by.id) or request.user.is_staff:
+        inst.delete()
+    else:
+        raise Http404('No item matches the given query.')
+
+    return redirect('home')
 
 
 @login_required
@@ -51,6 +63,7 @@ def people_create(request, people=None):
             # Use save_form_data like model form
             people.image._field.save_form_data(people, form.cleaned_data['image'])
             people.status = int(STATUS_PUBLISHED if form.cleaned_data['status'] == '' else form.cleaned_data['status'])
+            people.created_by = request.user
             people.save()
 
             people.categories.clear()

@@ -44,10 +44,12 @@ class TestPeople(TestCase):
         self.people_category1 = factory.create_people_category('politician', 'Politician')
         self.people_category2 = factory.create_people_category('military', 'Military')
 
+        self.staff1 = factory.create_staff()
+        self.staff2 = factory.create_staff()
 
     def test_create(self):
 
-        people1 = factory.create_people('dream.p', 'Dream', 'Politic', 'Prime Minister', 'Black shirt', 'http://dream.politic.com', category=self.people_category1)
+        people1 = factory.create_people('dream.p', 'Dream', 'Politic', 'Prime Minister', 'Black shirt', 'http://dream.politic.com', category=self.people_category1, created_by=self.staff1)
         self.assertEqual(people1.first_name, 'Dream')
         self.assertEqual(people1.last_name, 'Politic')
         self.assertEqual(people1.permalink, 'dream.p')
@@ -58,11 +60,13 @@ class TestPeople(TestCase):
         self.assertEqual(people1.get_short_name(), 'Dream.P')
         self.assertEqual(people1.inst_name, _('People'))
         self.assertEqual(people1.image, 'test.jpg')
+        self.assertEqual(people1.created_by, self.staff1)
+
         self.assertEqual(list(people1.categories.all()), [self.people_category1])
         self.assertEqual(people1.status, STATUS_PUBLISHED)
         self.assertEqual(people1.__unicode__(), 'Dream Politic')
 
-        people2 = factory.create_people('open.p', 'Open', 'Politic', 'Minister', 'White shirt', 'http://open.politic.com', category=self.people_category2, status=STATUS_DRAFT)
+        people2 = factory.create_people('open.p', 'Open', 'Politic', 'Minister', 'White shirt', 'http://open.politic.com', category=self.people_category2, status=STATUS_DRAFT, created_by=self.staff2)
         self.assertEqual(people2.first_name, 'Open')
         self.assertEqual(people2.last_name, 'Politic')
         self.assertEqual(people2.permalink, 'open.p')
@@ -73,6 +77,7 @@ class TestPeople(TestCase):
         self.assertEqual(people2.get_short_name(), 'Open.P')
         self.assertEqual(people2.inst_name, _('People'))
         self.assertEqual(people2.image, 'test.jpg')
+        self.assertEqual(people2.created_by, self.staff2)
         self.assertEqual(list(people2.categories.all()), [self.people_category2])
         self.assertEqual(people2.status, STATUS_DRAFT)
         self.assertEqual(people2.__unicode__(), 'Open Politic')

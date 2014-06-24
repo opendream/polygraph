@@ -87,7 +87,7 @@ class StatementEditForm(PermalinkForm):
         required=False,
         queryset=People.objects.all(),
         widget=autocomplete_light.MultipleChoiceWidget(PeopleAutocomplete,
-            attrs={'placeholder': 'Type for search statement by quote or topic title ', 'class': 'form-control'}
+            attrs={'placeholder': 'Type for search people by name', 'class': 'form-control'}
         )
     )
 

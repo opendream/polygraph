@@ -10,7 +10,7 @@ def randstr():
     return str(uuid1())[0: 10].replace('-', '')
 
 
-def create_staff(username=None, email=None, password='password', first_name='', last_name='', occupation='', description='', homepage_url='', image=''):
+def create_staff(username=None, email=None, password='password', first_name='', last_name='', occupation='', description='', homepage_url='', image='', is_staff=False):
 
     username = username or randstr()
     email = email or '%s@kmail.com' % username
@@ -32,8 +32,12 @@ def create_staff(username=None, email=None, password='password', first_name='', 
         occupation = occupation,
         description = description,
         homepage_url = homepage_url,
-        image=image
+        image = image
     )
+
+    if is_staff:
+        staff.is_staff = True
+        staff.save()
 
     staff = Staff.objects.get(id=staff.id)
 
@@ -57,8 +61,9 @@ def create_people_category(permalink=None, title='', description=''):
     return people_category
 
 
-def create_people(permalink=None, first_name='', last_name='', occupation='', description='', homepage_url='', image='', category='', status=STATUS_PUBLISHED):
+def create_people(permalink=None, first_name='', last_name='', occupation='', description='', homepage_url='', image='', category='', status=STATUS_PUBLISHED, created_by=''):
 
+    created_by = created_by or create_staff()
     permalink = permalink or randstr()
     first_name = first_name or randstr()
     last_name = last_name or randstr()
@@ -76,7 +81,8 @@ def create_people(permalink=None, first_name='', last_name='', occupation='', de
         description = description,
         homepage_url = homepage_url,
         image=image,
-        status=status
+        status=status,
+        created_by=created_by
     )
     people.categories.add(category)
     people.save()
