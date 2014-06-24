@@ -546,6 +546,7 @@ class TestEditStatement(TestCase):
         self.assertEqual(int(response.context['form'].initial['meter']), self.statement1.meter_id)
         self.assertEqual(list(response.context['form'].initial['relate_statements']), self.relate_statements1)
         self.assertEqual(list(response.context['form'].initial['relate_peoples']), self.relate_peoples1)
+        self.assertEqual(response.context['form'].initial['status'], self.statement1.status)
 
         for reference in self.statement1.references:
             self.assertContains(response, reference['title'])
@@ -558,6 +559,7 @@ class TestEditStatement(TestCase):
         self.assertContains(response, self.statement2.quoted_by_id)
         self.assertContains(response, self.statement2.quote)
         self.assertEqual(int(response.context['form'].initial['meter']), self.statement2.meter_id)
+        self.assertEqual(response.context['form'].initial['status'], self.statement2.status)
 
         for reference in self.statement2.references:
             self.assertContains(response, reference['title'])
@@ -716,7 +718,7 @@ class TestCreateStatement(TestEditStatement):
             'created_by': self.staff1,
             'quote': 'New quote',
             'topic': self.topic1,
-            'meter': self.meter1
+            'meter': self.meter1,
         })
 
         self.url1 = reverse('statement_create')
