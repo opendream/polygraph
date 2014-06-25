@@ -49,6 +49,7 @@ class FileField(models.CharField):
         setattr(cls, self.name, controllers.FilesDescriptor(self))
 
     def save_form_data(self, instance, data):
+
         save_all_data(self, instance, data)
         super(FileField, self).save_form_data(instance, data)
 
