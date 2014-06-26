@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.forms.formsets import formset_factory
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
@@ -15,14 +15,6 @@ def home(request):
 
     return render(request, 'domain/home.html', {})
 
-
-def statement_list(request):
-
-    return render(request, 'domain/statement_list.html', {})
-
-def statement_detail(request, statement_permalink):
-
-    return render(request, 'domain/statement_detail.html', {statement_permalink: statement_permalink})
 
 
 # Staff form ===========================================================================
@@ -110,6 +102,12 @@ def people_edit(request, people_id=None):
     return people_create(request, people)
 
 
+def people_detail(request, people_permalink):
+
+    people = get_object_or_404(Statement, permalink=people_permalink)
+
+    return HttpResponse('Fix me !!')
+
 
 @login_required
 def topic_create(request, topic=None):
@@ -191,6 +189,7 @@ def statement_create(request, statement=None):
             statement.quote = form.cleaned_data['quote']
             statement.created_by = request.user
             statement.quoted_by_id = form.cleaned_data['quoted_by'].id
+            statement.source = form.cleaned_data['source']
             statement.topic_id = form.cleaned_data['topic'].id if form.cleaned_data['topic'] else None
             statement.tags = form.cleaned_data['tags']
             statement.meter_id = form.cleaned_data['meter'].id
@@ -238,6 +237,7 @@ def statement_create(request, statement=None):
             'quote': statement.quote,
             'status': statement.status,
             'quoted_by': statement.quoted_by_id,
+            'source': statement.source,
             'topic': statement.topic_id,
             'tags': statement.tags,
             'meter': statement.meter_id or Meter.objects.get(permalink='unprovable').id,
@@ -265,3 +265,15 @@ def statement_edit(request, statement_id=None):
 
     statement = get_object_or_404(Statement, pk=statement_id)
     return statement_create(request, statement)
+
+
+def statement_list(request):
+
+    return render(request, 'domain/statement_list.html', {})
+
+def statement_detail(request, statement_permalink):
+
+    statement = get_object_or_404(Statement, permalink=statement_permalink)
+    print statement
+
+    return render(request, 'domain/statement_detail.html', {'statement': statement})

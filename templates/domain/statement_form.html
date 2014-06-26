@@ -79,6 +79,16 @@
         </div>
     </div>
 
+    <div class="controls form-group">
+        <label for="id_source" class="field-container control-label">{% trans "Source" %}</label>
+        <div class="field-container">
+            <input id="id_source" name="source" type="text" class="form-control" value="{{ form.source.value|default_if_none:"" }}">
+            {% if form.source.errors %}
+            <div class="errors alert alert-danger">{{ form.source.errors }}</div>
+            {% endif %}
+        </div>
+    </div>
+
     <div class="controls form-group block block-bg-transparent statement-desc">
         <div class="block-content">
 

@@ -19,10 +19,10 @@ class PeopleEditForm(PermalinkForm):
 
     categories = forms.ModelMultipleChoiceField(queryset=PeopleCategory.objects.all(), widget=forms.CheckboxSelectMultiple(attrs={'id': 'id_categories'}))
 
-    first_name = forms.CharField(max_length=30, widget=forms.TextInput())
-    last_name = forms.CharField(max_length=30, widget=forms.TextInput())
+    first_name = forms.CharField(max_length=255, widget=forms.TextInput())
+    last_name = forms.CharField(max_length=255, widget=forms.TextInput())
 
-    occupation = forms.CharField(required=False, max_length=128, widget=forms.TextInput())
+    occupation = forms.CharField(required=False, max_length=255, widget=forms.TextInput())
     description = forms.CharField(required=False, widget=CKEditorWidget(config_name='minimal'))
     homepage_url = forms.CharField(required=False, max_length=255, widget=forms.TextInput())
 
@@ -33,7 +33,7 @@ class PeopleEditForm(PermalinkForm):
 
 class TopicEditForm(CommonForm):
 
-    title = forms.CharField(max_length=30, widget=forms.TextInput())
+    title = forms.CharField(max_length=255, widget=forms.TextInput())
     description = forms.CharField(required=False, widget=CKEditorWidget(config_name='default'))
 
     as_revision = forms.NullBooleanField(widget=forms.CheckboxInput(attrs={'chacked': 'checked'}))
@@ -57,6 +57,7 @@ class StatementEditForm(PermalinkForm):
         )
     )
 
+    source = forms.CharField(required=False, widget=forms.TextInput())
 
     topic = forms.ModelChoiceField(
         required=False,

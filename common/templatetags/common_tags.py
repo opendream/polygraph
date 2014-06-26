@@ -1,5 +1,5 @@
 from django import template
-from common.functions import topic_render_reference
+from common.functions import topic_render_reference, image_render
 from domain.models import Topic
 
 register = template.Library()
@@ -14,6 +14,7 @@ def do_captureas(parser, token):
     parser.delete_first_token()
     return CaptureasNode(nodelist, args)
 
+
 class CaptureasNode(template.Node):
     def __init__(self, nodelist, varname):
         self.nodelist = nodelist
@@ -24,8 +25,15 @@ class CaptureasNode(template.Node):
         context[self.varname] = output  
         return ''
 
+
 @register.filter(name='topic_render_reference')
 def do_topic_render_reference(topic_id):
 
     topic = Topic.objects.get(id=topic_id)
     return topic_render_reference(topic)
+
+
+@register.simple_tag(name="image_render")
+def do_image_render(image, size, alt='no alt'):
+
+    return image_render(image, size, alt)

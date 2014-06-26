@@ -68,7 +68,7 @@ def topic_render_reference(topic, display_edit_link=True, field_name='topic'):
     return html
 
 
-def image_render(image, size):
+def image_render(image, size, alt=''):
 
     thumbnail = False
     if image:
