@@ -128,13 +128,19 @@
 
             var ignore_check_as_revision  = false;
 
-            if (CKEDITOR.instances.id_description) {
-                CKEDITOR.instances.id_description.on('blur', function () {
-                    if (!ignore_check_as_revision && this.checkDirty()) {
-                        as_revision.attr('checked', 'checked').siblings().addClass('checked');
-                    }
-                });
+            var check_data_change = function (is_changed) {
+                if (is_changed === true || (!ignore_check_as_revision && this.checkDirty())) {
+                    as_revision.attr('checked', 'checked').siblings().addClass('checked');
+                }
             }
+
+            if (CKEDITOR.instances.id_description) {
+                CKEDITOR.instances.id_description.on('blur', check_data_change);
+            }
+
+            $('input[name=title]').change(function () {check_data_change(true)});
+
+
 
             setTimeout(function () {
                 as_revision.siblings().click(function () {

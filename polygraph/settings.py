@@ -54,6 +54,7 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'common.middleware.ForceDefaultLanguageMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -106,7 +107,7 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en'
 
 TIME_ZONE = 'UTC'
 
@@ -159,6 +160,9 @@ CKEDITOR_CONFIGS = {
         'format_tags': 'h3;h4;h5',
         'removePlugins': 'resize',
         'extraPlugins': 'autogrow',
+        'forcePasteAsPlainText': True,
+
+
     },
     'minimal': {
         'toolbar': [
@@ -169,6 +173,7 @@ CKEDITOR_CONFIGS = {
         'height': '200',
         'removePlugins': 'resize',
         'extraPlugins': 'autogrow',
+        'forcePasteAsPlainText': True,
     },
     'bold': {
         'toolbar': [
@@ -179,6 +184,7 @@ CKEDITOR_CONFIGS = {
         'autoGrow_minHeight': '80',
         'removePlugins': 'resize',
         'extraPlugins': 'autogrow',
+        'forcePasteAsPlainText': True,
     },
 }
 

@@ -102,9 +102,20 @@ def people_edit(request, people_id=None):
     return people_create(request, people)
 
 
-def people_detail(request, people_permalink):
+def people_detail(request, people_id):
 
     people = get_object_or_404(Statement, permalink=people_permalink)
+
+    return HttpResponse('Fix me !!')
+
+
+
+def tags_detail(request, tags_id):
+
+    return HttpResponse('Fix me !!')
+
+
+def meter_detail(request, meter_permalink):
 
     return HttpResponse('Fix me !!')
 
@@ -274,6 +285,8 @@ def statement_list(request):
 def statement_detail(request, statement_permalink):
 
     statement = get_object_or_404(Statement, permalink=statement_permalink)
-    print statement
 
-    return render(request, 'domain/statement_detail.html', {'statement': statement})
+    return render(request, 'domain/statement_detail.html', {
+        'statement': statement,
+        'meter_list': Meter.objects.all().order_by('order')
+    })
