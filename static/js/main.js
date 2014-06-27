@@ -80,6 +80,32 @@ $(document).ready(function () {
         placement: "top"
     });
 
+    // load more inline
+    $('.load-more-inline-wrapper li').each(function (i, item) {
+        if (i > 4) {
+            $(this).addClass('hidden');
+        }
+    });
+
+    $('.load-more-inline').click(function (e) {
+        e.preventDefault();
+        $($(this).attr('href')).find('li').removeClass('hidden');
+        $(this).remove();
+    });
+
+});
+
+$(window).on('scroll', function() {
+
+    var tool = $('.cke_inner > .cke_top');
+
+    var offset = $(this).scrollTop();
+    toolOffset = tool.offset().top;
+    toolwidth = tool.width();
+    toolheight = tool.height();
+
+    console.log(offset);
+    console.log(toolOffset);
 
 
 });

@@ -63,76 +63,57 @@
                 <header>
                     <h2 class="hidden">{% trans "Statement Detail" %}</h2>
                 </header>
-                {{ statement.description }}
-                <div class="block block-bg-transparent statement-desc">
-                    <div class="block-content">
-                        <section>
-                            <header><h3>เส้นทางรถไฟ 29 จังหวัด</h3></header>
-                            <p>สำหรับเส้นทางที่กระทรวงคมนาคมเตรียมเร่งรัดก่อสร้างรถไฟความเร็วสูงมี 4 เส้นทาง ตัดผ่าน 29 จังหวัด ประกอบด้วย</p>
-                            <ul>
-                                <li>เส้นทางที่ 1 กรุงเทพฯ-เชียงใหม่ ผ่านจังหวัดปทุมธานี พระนครศรีอยุธยา นครสวรรค์ พิจิตร พิษณุโลก  อุตรดิตถ์ แพร่ ลำปาง ลำพูน และเชียงใหม่</li>
-                                <li>เส้นทางที่ 2 กรุงเทพฯ-นครราชสีมา-หนองคาย ผ่านจังหวัดปทุมธานี พระนครศรีอยุธยา สระบุรี นครราชสีมา ข่อนแก่น อุดรธานี และหนองคาย</li>
-                                <li>เส้นทางที่ 3 กรุงเทพฯ-หัวหิน-ปาดังเบซาร์ ผ่านจังหวัดสมุทรสาคร สมุทรสงคราม ราชบุรี เพชรบุรี ประจวบคีรีขันธ์ ชุมพร สุราษฎร์ธานี นครศรีธรรมราช พัทลุง และสงขลา</li>
-                                <li>เส้นทางที่  กรุงเทพฯ-ระยอง ผ่านจังหวัด ฉะเชิงเทรา ชลบุรี และระยอง</li>
-                            </ul>
-                        </section>
-                        <section>
-                            <header><h4>Update</h4></header>
-                            <ul class="item-list">
-                                <li class="item">
-                                    <div class="item-inner">
-                                        <div><time>20 May 2014</time></div>
-                                        <a href="/">มิใช่คะแนนนิยมของรัฐบาล แต่คือการยกระดับและรักษาความมั่นคงของรายได้</a>
-                                    </div>
-                                </li>
-                                <li class="item">
-                                    <div class="item-inner">
-                                        <div><time>22 May 2014</time></div>
-                                        <a href="/">หมายถึงปลูกอนาคตตัวเองลงบนผืนแผ่นดิน โดยไม่กระทบกับวินัยทางการเงินของประเทศ</a>
-                                    </div>
-                                </li>
-                            </ul>
-                            <div class="load-more">
-                                <a href="/">+ See all update</a>
+
+                {{ statement.topic.description|safe }}
+
+                {% if statement.topic.topicrevision_set.all.count > 1 %}
+                <section>
+                    <header><h4>{% trans "Update" %}</h4></header>
+                    <ul id="topicrevision-update-list" class="item-list load-more-inline-wrapper">
+
+                        {% for topicrevision in statement.topic.topicrevision_set.all %}
+                        <li class="item">
+                            <div class="item-inner">
+                                <div><time>{{ topicrevision.created|format_abbr_date }}</time></div>
+                                <a href="/">{{ topicrevision.title }}</a>
                             </div>
-                        </section>
+                        </li>
+                        {% endfor %}
+
+                    </ul>
+                    <div class="load-more">
+                        <a class="load-more-inline" href="#topicrevision-update-list">+ {% trans "See all update" %}</a>
                     </div>
-                </div>
+                </section>
+                {% endif %}
+
         </section>
     </article>
+
+    {% if statement.relate_statements.all.count %}
     <section class="related-statement">
         <header>
-            <h2>Related Statement</h2>
+            <h2>{% trans "Related Statement" %}</h2>
         </header>
         <div class="row">
+            {% for relate_statement in statement.relate_statements.all %}
             <article class="col-md-6">
                 <div class="block block-bg-color">
-                    <a href="/">"เป้าหมายสูงสุดของโครงการรับจำนำข้าว มิใช่คะแนนนิยมของรัฐบาล แต่คือการยกระดับและรักษาความมั่นคงของรายได้ เพื่อชีวิตความเป็นอยู่ที่ดีข      เพื่ออนาคตที่ดีกว่าของลูกหลาน และเพื่อให้อาชีพปลูกข้าวให้คนกิน หมายถึงปลูกอนาคตตัวเองลงบนผืนแผ่นดิน โดยไม่กระทบกับวินัยทางการเงินของประเทศ"</a>
+                    <a href="{% url 'statement_detail' relate_statement.permalink %}">"{{ relate_statement.quote|striptags }}"</a>
                 </div>
                 <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="media-object" src="/static/css/images/people-3-sm.png" alt="...">
+                    <a class="pull-left" href="{% url 'people_detail' relate_statement.quoted_by.permalink %}">
+                        {% image_render relate_statement.quoted_by.image '52x52' relate_statement.quoted_by.get_full_name %}
                     </a>
                     <div class="media-body">
-                        <a href="/" class="media-heading">Media heading</a>
+                        <a href="{% url 'statement_detail' relate_statement.permalink %}" class="media-heading">{{ relate_statement.quoted_by.get_full_name }}</a>
                     </div>
                 </div>
             </article>
-            <article class="col-md-6">
-                <div class="block block-bg-color">
-                    <a href="/">"เป้าหมายสูงสุดของโครงการรับจำนำข้าว มิใช่คะแนนนิยมของรัฐบาล แต่คือการยกระดับและรักษาความมั่นคงของรายได้ เพื่อชีวิตความเป็นอยู่ที่ดีข      เพื่ออนาคตที่ดีกว่าของลูกหลาน และเพื่อให้อาชีพปลูกข้าวให้คนกิน หมายถึงปลูกอนาคตตัวเองลงบนผืนแผ่นดิน โดยไม่กระทบกับวินัยทางการเงินของประเทศ"</a>
-                </div>
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="media-object" src="/static/css/images/people-3-sm.png" alt="...">
-                    </a>
-                    <div class="media-body">
-                        <a href="/" class="media-heading">Media heading</a>
-                    </div>
-                </div>
-            </article>
-        </div>
+            {% endfor %}
+      </div>
     </section>
+    {% endif %}
 
 {% endblock %}
 
@@ -140,122 +121,76 @@
 
     <section class="about-statement">
         <header>
-            <h2>About Statement</h2>
+            <h2>{% trans "About Statement" %}</h2>
         </header>
+
+        {% if statement.topic or statement.references %}
         <div class="block">
             <div class="block-content">
-                <h3>Topic</h3>
-                <p>งบประมาณระว่างการสร้างรถไฟฟ้าในเขตกรุงเทพฯ และพื้นที่รอบนอกอีกส่วนหนึ่ง กับการสร้างรถไฟฟ้าความเร็วสูงที่ผ่านพื้นที่ 29 จังหวัด</p>
-                <h3>References</h3>
+
+                {% if statement.topic %}
+                <h3>{% trans "Topic" %}</h3>
+                <p>{{ statement.topic.title }}</p>
+                {% endif  %}
+
+                {% if statement.references %}
+                <h3>{% trans "References" %}</h3>
                 <ul class="item-list block-content row">
+                    {% for reference in statement.references %}
                     <li>
                         <div class="item-inner">
-                            <a href="http://www.thaihispeedtrain.com/about2.php" target="_blank">โครงการศึกษาและออกแบบระบบรถไฟความเร็วสูง</a>
+                            <a href="{{ reference.url }}" target="_blank">{{ reference.title }}</a>
                         </div>
                     </li>
-                    <li>
-                        <div class="item-inner">
-                            <a href="https://www.youtube.com/watch?v=BnhXk3V9Rio" target="_blank">เจาะข่าวตื้น 128 : เจาะชัชชาติ รมต.ที่แข็งแกร่งที่สุดในปฐพี</a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="item-inner">
-                            <a href="www.tisco.co.th/AttachFileAction.do?fileName=jul_sep2013_01.pdf" target="_blank">โครงการลงทุนโครงสร้างพื้นฐาน 2 ล้านล้านบาท</a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="item-inner">
-                            <a href="http://www.oknation.net/blog/print.php?id=852019" target="_blank">ไฟเขียวพรบ.กู้ลงทุนโครงสร้างพื้นฐาน 2.2 ล้านล้านบาท:รถไฟครองงบ 80%</a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="item-inner">
-                            <a href="/people/2" target="_blank">PDF pitlprojects_v2-1-1 , spitlprojects_v2-2-1, v3-1</a>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="item-inner">
-                            <a href="http://pantip.com/topic/31069628" target="_blank">pantip.com: 53 โครงการ??งบประมาณ 2 ล้านล้านบาท??กับระยะเวลา 7 ปี???</a>
-                        </div>
-                    </li>
+                    {% endfor %}
                 </ul>
+                {% endif %}
             </div>
         </div>
+        {% endif %}
+
     </section>
 
+    {% if statement.tag_set.all.count %}
     <section>
         <header>
-            <h2>Tags</h2>
+            <h2>{% trans "Tags" %}</h2>
         </header>
         <div class="tag-list">
-            <a href="/" type="button" class="btn btn-default"><strong>จำนำข้าว</strong></a>
-            <a href="/" type="button" class="btn btn-default"><strong>รฟม.</strong></a>
-            <a href="/" type="button" class="btn btn-default"><strong>ธกส.</strong></a>
-            <a href="/" type="button" class="btn btn-default"><strong>สหยูเนี่ยน</strong></a>
-            <a href="/" type="button" class="btn btn-default"><strong>รถไฟความเร้วสูง</strong></a>
-            <a href="/" type="button" class="btn btn-default"><strong>จำนำข้าว</strong></a>
-            <a href="/" type="button" class="btn btn-default"><strong>รฟม.</strong></a>
-            <a href="/" type="button" class="btn btn-default"><strong>ธกส.</strong></a> 
-            <a href="/" type="button" class="btn btn-default"><strong>สหยูเนี่ยน</strong></a>
-            <a href="/" type="button" class="btn btn-default"><strong>รถไฟความเร้วสูง</strong></a>
-            <a href="/" type="button" class="btn btn-default"><strong>จำนำข้าว</strong></a>
-            <a href="/" type="button" class="btn btn-default"><strong>รฟม.</strong></a>
-            <a href="/" type="button" class="btn btn-default"><strong>ธกส.</strong></a> 
+
+            {% for tag in statement.tag_set.all %}
+            <a href="{% url 'tags_detail' tag.id %}" type="button" class="btn btn-default"><strong>{{ tag.name }}</strong></a>
+            {% endfor %}
+
         </div>
     </section>
+    {% endif %}
 
+    {% if meter_list.count %}
     <section class="filter-by-status">
         <header>
-            <h2>By Status</h2>
+            <h2>{% trans "By Status" %}</h2>
         </header>
         <div class="block">
             <ul class="media-list item-list block-content row">
+
+                {% for meter in meter_list %}
                 <li class="media">
                     <div class="item-inner">
-                        <a class="pull-left" href="#">
-                            <img class="media-object" src="/static/css/images/true-sm.png" alt="...">
+                        <a class="pull-left" href="{% url 'meter_detail' meter.permalink %}">
+                            {% image_render meter.image_small '87x105' meter.title %}
                         </a>
                         <div class="media-body">
-                            <h3 class="media-heading">True</h3>
-                            <a href="/people/2">ดูคำพูด "True" ทั้งหมด</a>
+                            <h3 class="media-heading">{{ meter.title }}</h3>
+                            <a href="{% url 'meter_detail' meter.permalink %}">{% trans "See all" %} "{{ meter.title }}" {% trans "statements" %}</a>
                         </div>
                     </div>
                 </li>
-                <li class="media">
-                    <div class="item-inner">
-                        <a class="pull-left" href="#">
-                            <img class="media-object" src="/static/css/images/false-sm.png" alt="...">
-                        </a>
-                        <div class="media-body">
-                            <h3 class="media-heading">False</h3>
-                            <a href="/people/2">ดูคำพูด "False" ทั้งหมด</a>
-                        </div>
-                    </div>
-                </li>
-                <li class="media">
-                    <div class="item-inner">
-                        <a class="pull-left" href="#">
-                            <img class="media-object" src="/static/css/images/tricky-sm.png" alt="...">
-                        </a>
-                        <div class="media-body">
-                            <h3 class="media-heading">Tricky</h3>
-                            <a href="/people/2">ดูคำพูด "Tricky" ทั้งหมด</a>
-                        </div>
-                    </div>
-                </li>
-                <li class="media">
-                    <div class="item-inner">
-                        <a class="pull-left" href="#">
-                            <img class="media-object" src="/static/css/images/cant-prove-sm.png" alt="...">
-                        </a>
-                        <div class="media-body">
-                            <h3 class="media-heading">Can't Prove</h3>
-                            <a href="/people/2">ดูคำพูด "Can't Prove" ทั้งหมด</a>
-                        </div>
-                    </div>
-                </li>
+                {% endfor %}
+
             </ul>
         </div>
     </section>
+    {% endif %}
 
 {% endblock %}
