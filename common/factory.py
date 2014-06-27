@@ -139,7 +139,7 @@ def create_meter(permalink=None, title='', description='', point=0, order=0, ima
     return meter
 
 
-def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', references=None, status=STATUS_PENDING, topic=None, tags='hello world', meter=None, relate_statements=[], relate_peoples=[], published=None, published_by=None):
+def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', references=None, status=STATUS_PENDING, topic=None, tags='hello world', meter=None, relate_statements=[], relate_peoples=[], published=None, published_by=None, source=''):
 
     created_by = created_by or create_staff()
     quoted_by = quoted_by or create_people()
@@ -148,6 +148,7 @@ def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', 
 
     permalink = permalink or randstr()
     quote = quote or randstr()
+    source = source or randstr()
     references = references or [{'url': 'http://%s.com/' % randstr(), 'title': randstr()}, {'url': 'http://%s.com/' % randstr(), 'title': randstr()}]
     statement = Statement.objects.create(
         permalink=permalink,
@@ -160,7 +161,8 @@ def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', 
         tags=tags,
         meter=meter,
         published=published,
-        published_by=published_by
+        published_by=published_by,
+        source=source
     )
 
     for relate_statement in relate_statements:

@@ -525,6 +525,7 @@ class TestEditStatement(TestCase):
         self.assertContains(response, 'name="permalink"')
         self.assertContains(response, 'name="quoted_by"')
         self.assertContains(response, 'name="quote"')
+        self.assertContains(response, 'name="source"')
         self.assertContains(response, 'name="references-0-title"')
         self.assertContains(response, 'name="references-0-url"')
         self.assertContains(response, 'name="references-1-title"')
@@ -548,6 +549,8 @@ class TestEditStatement(TestCase):
         self.assertEqual(list(response.context['form'].initial['relate_statements']), self.relate_statements1)
         self.assertEqual(list(response.context['form'].initial['relate_peoples']), self.relate_peoples1)
         self.assertEqual(response.context['form'].initial['status'], self.statement1.status)
+        self.assertEqual(response.context['form'].initial['source'], self.statement1.source)
+
 
         for reference in self.statement1.references:
             self.assertContains(response, reference['title'])
@@ -561,6 +564,7 @@ class TestEditStatement(TestCase):
         self.assertContains(response, self.statement2.quote)
         self.assertEqual(int(response.context['form'].initial['meter']), self.statement2.meter_id)
         self.assertEqual(response.context['form'].initial['status'], self.statement2.status)
+        self.assertEqual(response.context['form'].initial['source'], self.statement2.source)
 
         for reference in self.statement2.references:
             self.assertContains(response, reference['title'])
@@ -577,7 +581,8 @@ class TestEditStatement(TestCase):
             'meter': self.statement1.meter_id,
             'relate_statements': [relate_statement.id for relate_statement in self.relate_statements1],
             'relate_peoples': [relate_people.id for relate_people in self.relate_peoples1],
-            'status': self.statement1.status
+            'status': self.statement1.status,
+            'source': self.statement1.source
         }
         params.update(self.references2)
 
@@ -591,6 +596,7 @@ class TestEditStatement(TestCase):
 
         self.assertContains(response, self.statement1.permalink)
         self.assertContains(response, self.statement1.quote)
+        self.assertEqual(response.context['form'].initial['source'], self.statement1.source)
 
         # test reference
 

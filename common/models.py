@@ -59,7 +59,7 @@ class CommonTrashModel(models.Model):
         if hasattr(self, 'permalink'):
             self.permalink = 'deleted_%s_%s' % (str(uuid1())[0: 10].replace('-', ''), self.permalink)
 
-        self.save()
+        self.save(*args, **kwargs)
         return self
 
     def delete(self, *args, **kwargs):
