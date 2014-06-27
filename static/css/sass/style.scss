@@ -16,7 +16,7 @@ img {
 }
 
 body {
-  padding-top: 100px;
+  padding-top: 140px;
   background: url(../images/body-bg.png);
   font-size: 16px;
   position: relative;
@@ -159,7 +159,7 @@ a:hover { text-decoration: underline; }
 
 .navbar-default {
 	background-color: $base_orange;
-	height: 61px;
+	.container { margin-bottom: 0; }
 	.navbar-toggle {
 		border: none;
 		&:hover { background-color: $hover_orange; }
@@ -179,6 +179,7 @@ a:hover { text-decoration: underline; }
 	}
 	.navbar-nav {
 		border-left: 1px solid $border_orange;
+		margin-top: 60px;
 		&.navbar-right:last-child {	margin-right: 0;}
 		&>li { position: relative; }
 		&>li>a {
@@ -211,9 +212,14 @@ a:hover { text-decoration: underline; }
 }
 @media (max-width: 767px) {
 	.navbar-default {
-		padding-bottom: 5em;
+		// padding-bottom: 5em;
+		.navbar-header img {
+			width: 65%;
+		}
 		.navbar-nav { 
 			border: none;
+			margin-top: 0;
+			margin-bottom: 0;
 			&.navbar-right:last-child {margin-right: -15px;}
 			&>li>a {
 				color: $text_hover;
@@ -230,6 +236,10 @@ a:hover { text-decoration: underline; }
 			&>li.active:after {
 				display: none;
 			}
+		}
+		.navbar-toggle {
+			margin-top: 20px;
+			.icon-bar+.icon-bar { margin-top: 6px; }
 		}
 		.navbar-collapse { max-height: 100%; }
 		.sec-menu {
@@ -254,7 +264,7 @@ a:hover { text-decoration: underline; }
 .navbar { background-color: $base_orange; }
 
 .navbar-header h1 {margin: 0;}
-
+.navbar-brand { height: auto; }
 .form-action {
 	margin-top: 10px;
   	margin-bottom: 10px;
@@ -330,12 +340,30 @@ input + .errors{
 		padding: 20px;
 	}
 	ul.block-content {
-		padding: 10px 20px 0 20px;
+		// padding: 10px 20px 0 20px;
+		padding: 0;
 		li {
 			.item-inner {
 				margin: 0;
 				.left {padding-right: 0;padding-left: 0; }
 				.right {padding-right: 0;}
+			}
+		}
+		&.bg-list {
+			margin-bottom: 0;
+			li,
+			li + li + li + li { background-color: $hover_orange; }
+			li + li { background-color: #e78c30; }
+			li + li + li { background-color: #ffaf4c; } 
+			.item-inner {
+				padding-top: 10px;
+				padding-bottom: 0;
+				padding: 10px 5px 0 15px;
+			}
+			li.first { 
+				.item-inner {
+					padding-top: 10px;
+				}
 			}
 		}
 	}
