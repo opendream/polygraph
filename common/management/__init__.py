@@ -33,7 +33,7 @@ def create_common(app, created_models, verbosity, **kwargs):
     if not os.path.exists('%sdefault_meters' % full_dir):
         shutil.copytree('.%s' % os.path.join(settings.STATIC_URL, 'images/default_meters'), '%sdefault_meters' % full_dir)
 
-    Meter.objects.get_or_create(permalink='unprovable', defaults={
+    Meter.objects.get_or_create(permalink='unverifiable', defaults={
         'title': 'Unverifiable',
         'description': 'This is unverifiable description. Please, edit me on the admin site.',
         'point': 0,

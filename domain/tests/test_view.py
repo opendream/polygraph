@@ -80,7 +80,11 @@ class TestEditPeople(TestCase):
         self.people1 = factory.create_people('crosalot',' Crosalot', 'Opendream ', 'Developer', 'Opensource', 'http://opendream.co.th', category=self.people_category2, status=STATUS_DRAFT)
         self.url1 = reverse('people_edit', args=[self.people1.id])
         self.url2 = reverse('people_edit', args=[self.people2.id])
-        self.message_success = _('Your %s settings has been updated. View this %s <a href="%s">here</a>.') % (_('people'), _('people'), '#')
+        self.message_success = _('Your %s settings has been updated. View this %s <a href="%s">here</a>.') % (
+            _('people'),
+            _('people'),
+            reverse('people_detail', args=[self.people1.permalink])
+        )
         self.title = _('Edit %s') % _('People')
         self.button = _('Save changes')
 
@@ -253,7 +257,11 @@ class TestCreatePeople(TestEditPeople):
         })
         self.url1 = reverse('people_create')
         self.url2 = reverse('people_create')
-        self.message_success = _('New %s has been created. View this %s <a href="%s">here</a>.') % (_('people'), _('people'), '#')
+        self.message_success = _('New %s has been created. View this %s <a href="%s">here</a>.') % (
+            _('people'),
+            _('people'),
+            reverse('people_detail', args=['new-crosalot'])
+        )
         self.title = _('Create %s') % _('People')
         self.button = _('Save new')
 
@@ -277,7 +285,11 @@ class TestEditTopic(TestCase):
         self.topic1 = factory.create_topic(created_by=self.staff1)
         self.url1 = reverse('topic_edit', args=[self.topic1.id])
         self.url2 = reverse('topic_edit', args=[self.topic2.id])
-        self.message_success = _('Your %s settings has been updated. View this %s <a href="%s">here</a>.') % (_('topic'), _('topic'), '#')
+        self.message_success = _('Your %s settings has been updated. View this %s <a href="%s">here</a>.') % (
+            _('topic'),
+            _('topic'),
+            reverse('topic_detail', args=[self.topic1.id])
+        )
         self.title = _('Edit %s') % _('Topic')
         self.button = _('Save changes')
 
@@ -412,7 +424,11 @@ class TestCreateTopic(TestEditTopic):
         })
         self.url1 = reverse('topic_create')
         self.url2 = reverse('topic_create')
-        self.message_success = _('New %s has been created. View this %s <a href="%s">here</a>.') % (_('topic'), _('topic'), '#')
+        self.message_success = _('New %s has been created. View this %s <a href="%s">here</a>.') % (
+            _('topic'),
+            _('topic'),
+            reverse('topic_detail', args=[Topic.objects.latest('id').id + 1])
+        )
         self.title = _('Create %s') % _('Topic')
         self.button = _('Save new')
 
@@ -481,7 +497,12 @@ class TestEditStatement(TestCase):
 
         self.url1 = reverse('statement_edit', args=[self.statement1.id])
         self.url2 = reverse('statement_edit', args=[self.statement2.id])
-        self.message_success = _('Your %s settings has been updated. View this %s <a href="%s">here</a>.') % (_('statement'), _('statement'), '#')
+        self.message_success = _('Your %s settings has been updated. View this %s <a href="%s">here</a>.') % (
+            _('statement'),
+            _('statement'),
+            reverse('statement_detail', args=[self.statement1.permalink])
+        )
+
         self.title = _('Edit %s') % _('Statement')
         self.button = _('Save changes')
 
@@ -718,7 +739,6 @@ class TestCreateStatement(TestEditStatement):
 
 
         self.check_initial = False
-        self.statement1 = factory.create_statement(quoted_by=self.people1, created_by=self.staff1)
         self.statement1 = Statement(**{
             'permalink': 'new-statement',
             'quoted_by': self.people1,
@@ -730,7 +750,11 @@ class TestCreateStatement(TestEditStatement):
 
         self.url1 = reverse('statement_create')
         self.url2 = reverse('statement_create')
-        self.message_success = _('New %s has been created. View this %s <a href="%s">here</a>.') % (_('statement'), _('statement'), '#')
+        self.message_success = _('New %s has been created. View this %s <a href="%s">here</a>.') % (
+            _('statement'),
+            _('statement'),
+            reverse('statement_detail', args=['new-statement'])
+        )
 
         self.title = _('Create %s') % _('Statement')
         self.button = _('Save new')

@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.core.urlresolvers import reverse
 from django.forms.formsets import formset_factory
 from django.http import Http404, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
@@ -38,15 +39,13 @@ def domain_delete(request, inst_name, id):
 @login_required
 def people_create(request, people=None):
 
-    if not people:
-        people = People()
-        message_success = _('New %s has been created. View this %s <a href="%s">here</a>.') % (_('people'), _('people'), '#')
-    else:
-        message_success = _('Your %s settings has been updated. View this %s <a href="%s">here</a>.') % (_('people'), _('people'), '#')
-
+    people = people or People()
 
     if request.method == 'POST':
         form = PeopleEditForm(people, People, request.POST)
+
+        is_new = form.is_new()
+
         if form.is_valid():
             people.permalink = form.cleaned_data['permalink']
             people.first_name = form.cleaned_data['first_name']
@@ -66,6 +65,19 @@ def people_create(request, people=None):
             for category in form.cleaned_data['categories']:
                 people.categories.add(category)
 
+            if is_new:
+                message_success = _('New %s has been created. View this %s <a href="%s">here</a>.') % (
+                    _('people'),
+                    _('people'),
+                    reverse('people_detail', args=[people.permalink])
+
+                )
+            else:
+                message_success = _('Your %s settings has been updated. View this %s <a href="%s">here</a>.') % (
+                    _('people'),
+                    _('people'),
+                    reverse('people_detail', args=[people.permalink])
+                )
 
             if request.GET.get('_popup'):
                 message_success = '<script type="text/javascript"> opener.dismissAddAnotherPopup(window, \'%s\', \'%s\'); </script>' % (people.id, people_render_reference(people))
@@ -125,15 +137,13 @@ def meter_detail(request, meter_permalink):
 @login_required
 def topic_create(request, topic=None):
 
-    if not topic:
-        topic = Topic()
-        message_success = _('New %s has been created. View this %s <a href="%s">here</a>.') % (_('topic'), _('topic'), '#')
-    else:
-        message_success = _('Your %s settings has been updated. View this %s <a href="%s">here</a>.') % (_('topic'), _('topic'), '#')
-
+    topic = topic or Topic()
 
     if request.method == 'POST':
         form = TopicEditForm(topic, Topic, request.POST)
+
+        is_new = form.is_new()
+
         if form.is_valid():
             topic.title = form.cleaned_data['title']
             topic.description = form.cleaned_data['description']
@@ -144,14 +154,28 @@ def topic_create(request, topic=None):
 
             topic.save(without_revision=without_revision)
 
+
+            if is_new:
+                message_success = _('New %s has been created. View this %s <a href="%s">here</a>.') % (
+                    _('topic'),
+                    _('topic'),
+                    reverse('topic_detail', args=[topic.id])
+                )
+            else:
+                message_success = _('Your %s settings has been updated. View this %s <a href="%s">here</a>.') % (
+                    _('topic'),
+                    _('topic'),
+                    reverse('topic_detail', args=[topic.id])
+                )
+
             if request.GET.get('_popup'):
                 message_success = '<script type="text/javascript"> opener.dismissAddAnotherPopup(window, \'%s\', \'%s\'); </script>' % (topic.id, topic_render_reference(topic))
 
-            messages.success(request, message_success)
 
             if request.GET.get('_inline') or request.POST.get('_inline'):
                 form.inst = topic
             else:
+                messages.success(request, message_success)
                 return redirect('topic_edit', topic.id)
     else:
         initial = {
@@ -180,14 +204,16 @@ def topic_edit(request, topic_id=None):
     topic = get_object_or_404(Topic, pk=topic_id)
     return topic_create(request, topic)
 
+
+def topic_detail(request, topic_id):
+    return HttpResponse('Fixed me !!')
+
+
 @login_required
 def statement_create(request, statement=None):
 
-    if not statement:
-        statement = Statement()
-        message_success = _('New %s has been created. View this %s <a href="%s">here</a>.') % (_('statement'), _('statement'), '#')
-    else:
-        message_success = _('Your %s settings has been updated. View this %s <a href="%s">here</a>.') % (_('statement'), _('statement'), '#')
+    statement = statement or Statement()
+
 
     ReferenceFormSet = formset_factory(ReferenceForm, extra=2, can_delete=True)
 
@@ -196,6 +222,8 @@ def statement_create(request, statement=None):
 
         form = StatementEditForm(statement, Statement, request.POST)
         reference_formset = ReferenceFormSet(request.POST, prefix='references')
+
+        is_new = form.is_new()
 
         if form.is_valid() and reference_formset.is_valid():
             statement.permalink = form.cleaned_data['permalink']
@@ -236,6 +264,21 @@ def statement_create(request, statement=None):
             statement.relate_peoples.clear()
             for relate_people in form.cleaned_data['relate_peoples']:
                 statement.relate_peoples.add(relate_people)
+
+
+
+            if is_new:
+                message_success = _('New %s has been created. View this %s <a href="%s">here</a>.') % (
+                    _('statement'),
+                    _('statement'),
+                    reverse('statement_detail', args=[statement.permalink])
+                )
+            else:
+                message_success = _('Your %s settings has been updated. View this %s <a href="%s">here</a>.') % (
+                    _('statement'),
+                    _('statement'),
+                    reverse('statement_detail', args=[statement.permalink])
+                )
 
             if request.GET.get('_popup'):
                 message_success = '<script type="text/javascript"> opener.dismissAddAnotherPopup(window, \'%s\', \'%s\'); </script>' % (statement.id, statement_render_reference(statement))

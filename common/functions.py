@@ -74,6 +74,9 @@ def image_render(image, size, alt=''):
     if image:
         try:
             thumbnail = getattr(image, 'thumbnail_tag_%s' % size)()
+            if 'alt=' not in thumbnail:
+                thumbnail = thumbnail.replace('/>', 'alt="%s" />' % alt)
+
         except:
             pass
 
