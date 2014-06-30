@@ -6,6 +6,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from common.constants import STATUS_PUBLISHED, STATUS_PENDING
+from common.decorators import statistic
 from common.functions import people_render_reference, topic_render_reference, statement_render_reference, process_status
 from domain.forms import PeopleEditForm, TopicEditForm, StatementEditForm, ReferenceForm
 from domain.models import People, Topic, Statement, Meter
@@ -282,6 +283,7 @@ def statement_list(request):
 
     return render(request, 'domain/statement_list.html', {})
 
+@statistic
 def statement_detail(request, statement_permalink):
 
     statement = get_object_or_404(Statement, permalink=statement_permalink)

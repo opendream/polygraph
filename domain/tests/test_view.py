@@ -918,3 +918,18 @@ class TestPublishStatement(TestCase):
         self.assertNotContains(response, 'name="status" type="radio" value="%s"' % STATUS_PUBLISHED)
 
         self.client.logout()
+
+
+class TestStatistic(TestCase):
+
+    def test_statement_detail(self):
+
+        statement = factory.create_statement()
+
+        self.assertEqual(statement.total_views, 0)
+
+        self.client.get(reverse('statement_detail', args=[statement.permalink]))
+        self.assertEqual(statement.total_views, 1)
+
+        self.client.get(reverse('statement_detail', args=[statement.permalink]))
+        self.assertEqual(statement.total_views, 2)
