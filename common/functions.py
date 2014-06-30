@@ -33,6 +33,23 @@ def process_status(user, status, default=False):
 
     return status
 
+def get_success_message(inst, is_new=False):
+
+    inst_name = inst.inst_name.lower()
+    key = inst.permalink if hasattr(inst, 'permalink') else inst.id
+
+    if is_new:
+        return  _('New %s has been created. View this %s <a href="%s">here</a>.') % (
+            _(inst_name),
+            _(inst_name),
+            reverse('%s_detail' % inst_name, args=[key])
+        )
+    else:
+        return _('Your %s settings has been updated. View this %s <a href="%s">here</a>.') % (
+            _(inst_name),
+            _(inst_name),
+            reverse('%s_detail' % inst_name, args=[key])
+        )
 
 
 def people_render_reference(people, display_edit_link=True, field_name='quoted_by'):

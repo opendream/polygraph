@@ -9,7 +9,8 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from common.constants import STATUS_PUBLISHED, STATUS_PENDING
 from common.decorators import statistic
-from common.functions import people_render_reference, topic_render_reference, statement_render_reference, process_status
+from common.functions import people_render_reference, topic_render_reference, statement_render_reference, process_status, \
+    get_success_message
 from domain.forms import PeopleEditForm, TopicEditForm, StatementEditForm, ReferenceForm
 from domain.models import People, Topic, Statement, Meter
 
@@ -65,19 +66,7 @@ def people_create(request, people=None):
             for category in form.cleaned_data['categories']:
                 people.categories.add(category)
 
-            if is_new:
-                message_success = _('New %s has been created. View this %s <a href="%s">here</a>.') % (
-                    _('people'),
-                    _('people'),
-                    reverse('people_detail', args=[people.permalink])
-
-                )
-            else:
-                message_success = _('Your %s settings has been updated. View this %s <a href="%s">here</a>.') % (
-                    _('people'),
-                    _('people'),
-                    reverse('people_detail', args=[people.permalink])
-                )
+            message_success = get_success_message(people, is_new)
 
             if request.GET.get('_popup'):
                 message_success = '<script type="text/javascript"> opener.dismissAddAnotherPopup(window, \'%s\', \'%s\'); </script>' % (people.id, people_render_reference(people))
@@ -154,19 +143,7 @@ def topic_create(request, topic=None):
 
             topic.save(without_revision=without_revision)
 
-
-            if is_new:
-                message_success = _('New %s has been created. View this %s <a href="%s">here</a>.') % (
-                    _('topic'),
-                    _('topic'),
-                    reverse('topic_detail', args=[topic.id])
-                )
-            else:
-                message_success = _('Your %s settings has been updated. View this %s <a href="%s">here</a>.') % (
-                    _('topic'),
-                    _('topic'),
-                    reverse('topic_detail', args=[topic.id])
-                )
+            message_success = get_success_message(topic, is_new)
 
             if request.GET.get('_popup'):
                 message_success = '<script type="text/javascript"> opener.dismissAddAnotherPopup(window, \'%s\', \'%s\'); </script>' % (topic.id, topic_render_reference(topic))
@@ -265,20 +242,7 @@ def statement_create(request, statement=None):
             for relate_people in form.cleaned_data['relate_peoples']:
                 statement.relate_peoples.add(relate_people)
 
-
-
-            if is_new:
-                message_success = _('New %s has been created. View this %s <a href="%s">here</a>.') % (
-                    _('statement'),
-                    _('statement'),
-                    reverse('statement_detail', args=[statement.permalink])
-                )
-            else:
-                message_success = _('Your %s settings has been updated. View this %s <a href="%s">here</a>.') % (
-                    _('statement'),
-                    _('statement'),
-                    reverse('statement_detail', args=[statement.permalink])
-                )
+            message_success = get_success_message(statement, is_new)
 
             if request.GET.get('_popup'):
                 message_success = '<script type="text/javascript"> opener.dismissAddAnotherPopup(window, \'%s\', \'%s\'); </script>' % (statement.id, statement_render_reference(statement))
