@@ -466,7 +466,7 @@ class TestEditStatement(TestCase):
         self.staff1 = factory.create_staff(password='password')
         self.people1 = factory.create_people()
         self.topic1 = factory.create_topic()
-        self.meter1 = factory.create_meter(permalink='unprovable')
+        self.meter1 = factory.create_meter(permalink='unverifiable')
         self.relate_statements1 = [factory.create_statement(tags=''), factory.create_statement(tags='')]
         self.relate_peoples1 = [factory.create_people(), factory.create_people()]
 
@@ -748,7 +748,7 @@ class TestPublishStatement(TestCase):
 
     def setUp(self):
 
-        factory.create_meter(permalink='unprovable')
+        factory.create_meter(permalink='unverifiable')
 
         self.editor = factory.create_staff(password='password', is_staff=True)
         self.writer = factory.create_staff(password='password')

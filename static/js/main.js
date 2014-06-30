@@ -95,7 +95,7 @@ $(document).ready(function () {
 
 });
 
-
+/*
 $(window).on('scroll', function() {
 
     var offset = $(this).scrollTop();
@@ -135,6 +135,7 @@ $(window).on('scroll', function() {
     });
 
 });
+*/
 
 /*
 if (typeof CKEDITOR != 'undefined') {

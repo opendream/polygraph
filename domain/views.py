@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.forms.formsets import formset_factory
 from django.http import Http404, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
@@ -252,7 +253,7 @@ def statement_create(request, statement=None):
             'source': statement.source,
             'topic': statement.topic_id,
             'tags': statement.tags,
-            'meter': statement.meter_id or Meter.objects.get(permalink='unprovable').id,
+            'meter': statement.meter_id or Meter.objects.get(permalink='unverifiable').id,
         }
 
         if statement.id:
@@ -281,7 +282,25 @@ def statement_edit(request, statement_id=None):
 
 def statement_list(request):
 
-    return render(request, 'domain/statement_list.html', {})
+    statement_list = Statement.objects.all()
+
+    paginator = Paginator(statement_list, 10)
+
+    page = request.GET.get('page')
+    try:
+        statement_list = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        statement_list = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        statement_list = paginator.page(paginator.num_pages)
+
+
+    return render(request, 'domain/statement_list.html', {
+        'statement_list': statement_list,
+        'meter_list': Meter.objects.all().order_by('order')
+    })
 
 @statistic
 def statement_detail(request, statement_permalink):

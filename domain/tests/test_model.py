@@ -320,21 +320,21 @@ class TestMeter(TestCase):
     def test_create(self):
 
         meter1 = factory.create_meter(
-            permalink = 'unprovable',
-            title = 'Unprovable',
-            description = 'Unprovable description',
+            permalink = 'unverifiable',
+            title = 'Unverifiable',
+            description = 'Unverifiable description',
             point = 0,
             order = 0,
         )
-        self.assertEqual(meter1.permalink, 'unprovable')
-        self.assertEqual(meter1.title, 'Unprovable')
-        self.assertEqual(meter1.description, 'Unprovable description')
+        self.assertEqual(meter1.permalink, 'unverifiable')
+        self.assertEqual(meter1.title, 'Unverifiable')
+        self.assertEqual(meter1.description, 'Unverifiable description')
         self.assertEqual(meter1.point, 0)
         self.assertEqual(meter1.order, 0)
         self.assertEqual(meter1.image_large_text, 'test.jpg')
         self.assertEqual(meter1.image_small_text, 'test.jpg')
         self.assertEqual(meter1.image_small, 'test.jpg')
-        self.assertTrue('Unprovable' in meter1.__unicode__())
+        self.assertTrue('Unverifiable' in meter1.__unicode__())
 
 
         meter2 = factory.create_meter(
@@ -357,7 +357,7 @@ class TestMeter(TestCase):
 
         try:
             with transaction.atomic():
-                factory.create_meter('unprovable')
+                factory.create_meter('unverifiable')
 
             self.assertTrue(0, 'Duplicate permalink allowed.')
 

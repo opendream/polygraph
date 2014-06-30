@@ -128,7 +128,7 @@
         {% if statement.topic or statement.references %}
         <div class="block">
             <div class="block-content">
-
+                {{ statement.topic.id }}
                 {% if statement.topic %}
                 <h3>{% trans "Topic" %}</h3>
                 <p>{{ statement.topic.title }}</p>
