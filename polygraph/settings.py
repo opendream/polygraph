@@ -132,7 +132,7 @@ STATIC_URL = '/static/'
 # Additional locations of static files
 STATICFILES_DIRS = (
     os.path.join(BASE_PATH, 'static'),
-    os.path.join(BASE_PATH, 'file_widget/static'),
+    os.path.join(BASE_PATH, 'files_widget/static'),
 )
 
 AUTH_USER_MODEL = 'account.Staff'
