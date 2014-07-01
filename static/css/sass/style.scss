@@ -99,7 +99,7 @@ a:hover { text-decoration: underline; }
 .sidebar { margin-top: 6px; }
 .sidebar .item-list {
 	.media {
-		padding: 0 10px;
+		padding: 0 15px;
 		margin-top: 0;
 		img { margin-right: 10px; }
 		.media-heading { margin-top: 15px; }
@@ -349,16 +349,18 @@ input + .errors{
 				.right {padding-right: 0;}
 			}
 		}
-		&.bg-list {
+		&.item-list {
 			margin-bottom: 0;
-			li,
-			li + li + li + li { background-color: $hover_orange; }
-			li + li { background-color: #e78c30; }
-			li + li + li { background-color: #ffaf4c; } 
 			.item-inner {
-				padding-top: 10px;
-				padding-bottom: 0;
 				padding: 10px 5px 0 15px;
+			}
+			&.shuffle-bg {
+				li,
+				li + li + li + li { background-color: $hover_orange; }
+				li + li,
+				li + li + li + li + li { background-color: #e78c30; }
+				li + li + li,
+				li + li + li + li + li + li { background-color: #ffaf4c; }
 			}
 			li.first { 
 				.item-inner {
