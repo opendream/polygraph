@@ -11,7 +11,9 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os, sys
 
-BASE_PATH = os.path.abspath(os.path.dirname('.'))
+#BASE_PATH = os.path.abspath(os.path.dirname('.'))
+BASE_PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)), os.path.pardir)
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
@@ -37,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
 
     # Library
     'ckeditor',
@@ -61,6 +64,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'common.middleware.EvilMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -85,7 +89,7 @@ TEMPLATE_DIRS = (
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     os.path.join(BASE_PATH, 'templates'),
-    os.path.join(BASE_PATH, 'file_widget/templates'),
+    os.path.join(BASE_PATH, 'files_widget/templates'),
 
 )
 
@@ -130,7 +134,7 @@ STATIC_URL = '/static/'
 # Additional locations of static files
 STATICFILES_DIRS = (
     os.path.join(BASE_PATH, 'static'),
-    os.path.join(BASE_PATH, 'file_widget/static'),
+    os.path.join(BASE_PATH, 'files_widget/static'),
 )
 
 AUTH_USER_MODEL = 'account.Staff'

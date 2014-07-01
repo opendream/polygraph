@@ -1,5 +1,6 @@
 {% extends 'base_sidebar.html' %}
 {% load i18n %}
+{% load humanize %}
 {% load common_tags %}
 
 {% block title %}{% trans "Statement" %}{% endblock %}
@@ -57,7 +58,7 @@
                 <div class="fb-share-button" data-href="{% url 'statement_detail' statement.permalink %}" data-type="button_count"></div>
                 <a href="https://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a>
             </div>
-            <div class="views-count pull-right"><span>2,376</span> Views</div>
+            <div class="views-count pull-right"><span>{{ statement.total_views|intcomma }}</span> {% trans "Views" %}</div>
         </section>
         <section class="statement-detail block-content">
                 <header>
@@ -127,7 +128,6 @@
         {% if statement.topic or statement.references %}
         <div class="block">
             <div class="block-content">
-
                 {% if statement.topic %}
                 <h3>{% trans "Topic" %}</h3>
                 <p>{{ statement.topic.title }}</p>

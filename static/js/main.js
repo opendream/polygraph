@@ -95,20 +95,47 @@ $(document).ready(function () {
 
 });
 
+/*
 $(window).on('scroll', function() {
 
-    var tool = $('.cke_inner > .cke_top');
-
     var offset = $(this).scrollTop();
-    toolOffset = tool.offset().top;
-    toolwidth = tool.width();
-    toolheight = tool.height();
 
-    console.log(offset);
-    console.log(toolOffset);
+    $('.cke_inner > .cke_top').each(function () {
 
+        var tool = $(this);
+        var inner = tool.parent();
+        var toolOffset = tool.offset().top;
+        var toolwidth = inner.width();
+        var toolheight = tool.height();
+
+        var nav_fixed_height = $('.navbar-fixed-top').height();
+
+
+        console.log('offset', offset+ $('.navbar-fixed-top').height() );
+        console.log('toolOffset', toolOffset);
+        console.log('nav_fixed_height', nav_fixed_height);
+
+        if (offset + nav_fixed_height > toolOffset && tool.css('position') != 'fixed') {
+            inner.css({'padding-top': toolheight});
+            tool.css({
+                position: 'fixed',
+                top: nav_fixed_height,
+                width: toolwidth,
+                'z-index': 1000000
+            });
+        }
+        else {
+            inner.css({'padding-top': 0});
+            tool.css({
+                position: 'static',
+                top: nav_fixed_height,
+                width: 'auto'
+            });
+        }
+    });
 
 });
+*/
 
 /*
 if (typeof CKEDITOR != 'undefined') {

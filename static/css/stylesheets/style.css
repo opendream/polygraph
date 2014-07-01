@@ -1305,3 +1305,7 @@ footer .footer-menu div a:hover {
   border-right: solid 5px #ffc092;
   margin-right: 5px;
 }
+/* line 938, ../sass/style.scss */
+.statement-meter .prettyradio label {
+  margin-left: 2px;
+}

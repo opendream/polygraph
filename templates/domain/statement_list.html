@@ -1,5 +1,6 @@
 {% extends 'base_sidebar.html' %}
 {% load i18n %}
+{% load common_tags %}
 
 {% block title %}{% trans "Statement list" %}{% endblock %}
 
@@ -22,8 +23,32 @@
         <section class="polygraph-list statement-list">
             <section class="col-md-12">
                 <header>
-                    <h3 class="hidden">Polygraph List Item</h3>
+                    <h3 class="hidden">{% trans "Polygraph List Item" %}</h3>
                 </header>
+
+                {% for statement in statement_list %}
+                 <article class="row block block-no-border polygraph-list-block new">
+                    <span>New</span>
+                    <div class="block-content col-lg-12">
+
+                        <div class="text-brown quote lead">
+                            <a href="{% url 'statement_detail' statement.permalink %}">&ldquo; {{ statement.quote|removetags:'p'|safe }} &rdquo;</a>
+                        </div>
+                        <div class="media">
+                            <a class="pull-left" href="{% url 'people_detail' statement.quoted_by.permalink %}">
+                                {% image_render statement.quoted_by.image '40x40' statement.quoted_by.get_full_name %}
+                            </a>
+                            <div class="media-body">
+                                <a href="{% url 'people_detail' statement.quoted_by.permalink %}" class="media-heading">{{ statement.quoted_by.get_full_name }}</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="meter-md">
+                        {% image_render statement.meter.image_small_text '137x95' statement.meter.title %}
+                    </div>
+                </article>
+                {% endfor %}
+
                 <article class="row block block-no-border polygraph-list-block new">
                     <span>New</span>
                     <div class="block-content col-lg-12">

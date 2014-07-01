@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load common_tags %}
 <!doctype html>
 <html>
@@ -62,10 +63,10 @@
                     </div>
                     <div class="navbar-collapse collapse" style="height: 1px;">
                         <ul class="nav navbar-nav navbar-right">
-                            <li class="active"><a href="/">Home</a></li>
-                            <li><a href="/statement/list/">Statement</a></li>
-                            <li><a href="/">People</a></li>
-                            <li><a href="/">Polygraph</a></li>
+                            <li class="active"><a href="{% url 'home' %}">{% trans "Home" %}</a></li>
+                            <li><a href="{% url 'statement_list' %}">{% trans "Statement" %}</a></li>
+                            <li><a href="/">{% trans "People" %}</a></li>
+                            <li><a href="/">{% trans "Polygraph" %}</a></li>
                         </ul>
                         <ul class="nav navbar-nav sec-menu visible-xs">
                             <li class="active"><a href="/">About us</a></li>

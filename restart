@@ -1,3 +1,4 @@
 #!/bin/sh
+python manage.py collectstatic
 service uwsgi restart
 service nginx restart

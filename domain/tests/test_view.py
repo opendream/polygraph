@@ -80,7 +80,11 @@ class TestEditPeople(TestCase):
         self.people1 = factory.create_people('crosalot',' Crosalot', 'Opendream ', 'Developer', 'Opensource', 'http://opendream.co.th', category=self.people_category2, status=STATUS_DRAFT)
         self.url1 = reverse('people_edit', args=[self.people1.id])
         self.url2 = reverse('people_edit', args=[self.people2.id])
-        self.message_success = _('Your %s settings has been updated. View this %s <a href="%s">here</a>.') % (_('people'), _('people'), '#')
+        self.message_success = _('Your %s settings has been updated. View this %s <a href="%s">here</a>.') % (
+            _('people'),
+            _('people'),
+            reverse('people_detail', args=[self.people1.permalink])
+        )
         self.title = _('Edit %s') % _('People')
         self.button = _('Save changes')
 
@@ -253,7 +257,11 @@ class TestCreatePeople(TestEditPeople):
         })
         self.url1 = reverse('people_create')
         self.url2 = reverse('people_create')
-        self.message_success = _('New %s has been created. View this %s <a href="%s">here</a>.') % (_('people'), _('people'), '#')
+        self.message_success = _('New %s has been created. View this %s <a href="%s">here</a>.') % (
+            _('people'),
+            _('people'),
+            reverse('people_detail', args=['new-crosalot'])
+        )
         self.title = _('Create %s') % _('People')
         self.button = _('Save new')
 
@@ -277,7 +285,11 @@ class TestEditTopic(TestCase):
         self.topic1 = factory.create_topic(created_by=self.staff1)
         self.url1 = reverse('topic_edit', args=[self.topic1.id])
         self.url2 = reverse('topic_edit', args=[self.topic2.id])
-        self.message_success = _('Your %s settings has been updated. View this %s <a href="%s">here</a>.') % (_('topic'), _('topic'), '#')
+        self.message_success = _('Your %s settings has been updated. View this %s <a href="%s">here</a>.') % (
+            _('topic'),
+            _('topic'),
+            reverse('topic_detail', args=[self.topic1.id])
+        )
         self.title = _('Edit %s') % _('Topic')
         self.button = _('Save changes')
 
@@ -412,7 +424,11 @@ class TestCreateTopic(TestEditTopic):
         })
         self.url1 = reverse('topic_create')
         self.url2 = reverse('topic_create')
-        self.message_success = _('New %s has been created. View this %s <a href="%s">here</a>.') % (_('topic'), _('topic'), '#')
+        self.message_success = _('New %s has been created. View this %s <a href="%s">here</a>.') % (
+            _('topic'),
+            _('topic'),
+            reverse('topic_detail', args=[Topic.objects.latest('id').id + 1])
+        )
         self.title = _('Create %s') % _('Topic')
         self.button = _('Save new')
 
@@ -466,7 +482,7 @@ class TestEditStatement(TestCase):
         self.staff1 = factory.create_staff(password='password')
         self.people1 = factory.create_people()
         self.topic1 = factory.create_topic()
-        self.meter1 = factory.create_meter(permalink='unprovable')
+        self.meter1 = factory.create_meter(permalink='unverifiable')
         self.relate_statements1 = [factory.create_statement(tags=''), factory.create_statement(tags='')]
         self.relate_peoples1 = [factory.create_people(), factory.create_people()]
 
@@ -481,7 +497,12 @@ class TestEditStatement(TestCase):
 
         self.url1 = reverse('statement_edit', args=[self.statement1.id])
         self.url2 = reverse('statement_edit', args=[self.statement2.id])
-        self.message_success = _('Your %s settings has been updated. View this %s <a href="%s">here</a>.') % (_('statement'), _('statement'), '#')
+        self.message_success = _('Your %s settings has been updated. View this %s <a href="%s">here</a>.') % (
+            _('statement'),
+            _('statement'),
+            reverse('statement_detail', args=[self.statement1.permalink])
+        )
+
         self.title = _('Edit %s') % _('Statement')
         self.button = _('Save changes')
 
@@ -525,6 +546,7 @@ class TestEditStatement(TestCase):
         self.assertContains(response, 'name="permalink"')
         self.assertContains(response, 'name="quoted_by"')
         self.assertContains(response, 'name="quote"')
+        self.assertContains(response, 'name="source"')
         self.assertContains(response, 'name="references-0-title"')
         self.assertContains(response, 'name="references-0-url"')
         self.assertContains(response, 'name="references-1-title"')
@@ -548,6 +570,8 @@ class TestEditStatement(TestCase):
         self.assertEqual(list(response.context['form'].initial['relate_statements']), self.relate_statements1)
         self.assertEqual(list(response.context['form'].initial['relate_peoples']), self.relate_peoples1)
         self.assertEqual(response.context['form'].initial['status'], self.statement1.status)
+        self.assertEqual(response.context['form'].initial['source'], self.statement1.source)
+
 
         for reference in self.statement1.references:
             self.assertContains(response, reference['title'])
@@ -561,6 +585,7 @@ class TestEditStatement(TestCase):
         self.assertContains(response, self.statement2.quote)
         self.assertEqual(int(response.context['form'].initial['meter']), self.statement2.meter_id)
         self.assertEqual(response.context['form'].initial['status'], self.statement2.status)
+        self.assertEqual(response.context['form'].initial['source'], self.statement2.source)
 
         for reference in self.statement2.references:
             self.assertContains(response, reference['title'])
@@ -577,7 +602,8 @@ class TestEditStatement(TestCase):
             'meter': self.statement1.meter_id,
             'relate_statements': [relate_statement.id for relate_statement in self.relate_statements1],
             'relate_peoples': [relate_people.id for relate_people in self.relate_peoples1],
-            'status': self.statement1.status
+            'status': self.statement1.status,
+            'source': self.statement1.source
         }
         params.update(self.references2)
 
@@ -591,6 +617,7 @@ class TestEditStatement(TestCase):
 
         self.assertContains(response, self.statement1.permalink)
         self.assertContains(response, self.statement1.quote)
+        self.assertEqual(response.context['form'].initial['source'], self.statement1.source)
 
         # test reference
 
@@ -712,7 +739,6 @@ class TestCreateStatement(TestEditStatement):
 
 
         self.check_initial = False
-        self.statement1 = factory.create_statement(quoted_by=self.people1, created_by=self.staff1)
         self.statement1 = Statement(**{
             'permalink': 'new-statement',
             'quoted_by': self.people1,
@@ -724,7 +750,11 @@ class TestCreateStatement(TestEditStatement):
 
         self.url1 = reverse('statement_create')
         self.url2 = reverse('statement_create')
-        self.message_success = _('New %s has been created. View this %s <a href="%s">here</a>.') % (_('statement'), _('statement'), '#')
+        self.message_success = _('New %s has been created. View this %s <a href="%s">here</a>.') % (
+            _('statement'),
+            _('statement'),
+            reverse('statement_detail', args=['new-statement'])
+        )
 
         self.title = _('Create %s') % _('Statement')
         self.button = _('Save new')
@@ -742,7 +772,7 @@ class TestPublishStatement(TestCase):
 
     def setUp(self):
 
-        factory.create_meter(permalink='unprovable')
+        factory.create_meter(permalink='unverifiable')
 
         self.editor = factory.create_staff(password='password', is_staff=True)
         self.writer = factory.create_staff(password='password')
@@ -912,3 +942,18 @@ class TestPublishStatement(TestCase):
         self.assertNotContains(response, 'name="status" type="radio" value="%s"' % STATUS_PUBLISHED)
 
         self.client.logout()
+
+
+class TestStatistic(TestCase):
+
+    def test_statement_detail(self):
+
+        statement = factory.create_statement()
+
+        self.assertEqual(statement.total_views, 0)
+
+        self.client.get(reverse('statement_detail', args=[statement.permalink]))
+        self.assertEqual(statement.total_views, 1)
+
+        self.client.get(reverse('statement_detail', args=[statement.permalink]))
+        self.assertEqual(statement.total_views, 2)

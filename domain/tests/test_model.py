@@ -5,7 +5,7 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from common import factory
-from domain.models import Topic, Statement
+from domain.models import Topic, Statement, TopicRevision
 from common.constants import STATUS_DRAFT, STATUS_PENDING, STATUS_PUBLISHED
 
 from tagging.models import TaggedItem, Tag
@@ -173,6 +173,34 @@ class TestTopic(TestCase):
         self.assertEqual(topic1.created, topic1_created2)
         self.assertEqual(topic1.changed, topic1_change1)
 
+    def test_delete(self):
+
+        topic1 = factory.create_topic()
+
+        topic1.title = 'change title 1'
+        topic1.save()
+
+        topic1.title = 'change title 2'
+        topic1.save()
+
+        topic2 = factory.create_topic()
+
+        topic2.title = 'change title 1'
+        topic2.save()
+
+        topic2.title = 'change title 2'
+        topic2.save()
+
+        topic2.title = 'change title 3'
+        topic2.save()
+
+        self.assertEqual(TopicRevision.objects.all().count(), 7)
+
+        topic1.delete()
+        self.assertEqual(TopicRevision.objects.all().count(), 4)
+
+        topic2.delete()
+        self.assertEqual(TopicRevision.objects.all().count(), 0)
 
 class TestStatement(TestCase):
 
@@ -205,7 +233,8 @@ class TestStatement(TestCase):
             status=STATUS_PENDING,
             topic=self.topic1,
             tags='hello, world',
-            meter=self.meter1
+            meter=self.meter1,
+            source='jupiter page 13'
         )
         for relate_statement in self.relate_statements1:
             statement1.relate_statements.add(relate_statement)
@@ -225,6 +254,8 @@ class TestStatement(TestCase):
         self.assertEqual(statement1.meter, self.meter1)
         self.assertEqual(statement1.published, None)
         self.assertEqual(statement1.published_by, None)
+        self.assertEqual(statement1.source, 'jupiter page 13')
+
 
 
         self.assertEqual(2, TaggedItem.objects.filter(content_type__name='statement').count())
@@ -244,6 +275,8 @@ class TestStatement(TestCase):
             topic=self.topic2,
             tags='hello, new year',
             meter=self.meter2,
+            source='sun page 10010'
+
         )
         for relate_sattement in self.relate_statements2:
             statement2.relate_statements.add(relate_sattement)
@@ -263,6 +296,7 @@ class TestStatement(TestCase):
         self.assertEqual(statement2.meter, self.meter2)
         self.assertEqual(statement2.published, None)
         self.assertEqual(statement2.published_by, None)
+        self.assertEqual(statement2.source, 'sun page 10010')
 
         self.assertEqual(4, TaggedItem.objects.filter(content_type__name='statement').count())
         self.assertEqual(3, Tag.objects.all().count())
@@ -286,21 +320,21 @@ class TestMeter(TestCase):
     def test_create(self):
 
         meter1 = factory.create_meter(
-            permalink = 'unprovable',
-            title = 'Unprovable',
-            description = 'Unprovable description',
+            permalink = 'unverifiable',
+            title = 'Unverifiable',
+            description = 'Unverifiable description',
             point = 0,
             order = 0,
         )
-        self.assertEqual(meter1.permalink, 'unprovable')
-        self.assertEqual(meter1.title, 'Unprovable')
-        self.assertEqual(meter1.description, 'Unprovable description')
+        self.assertEqual(meter1.permalink, 'unverifiable')
+        self.assertEqual(meter1.title, 'Unverifiable')
+        self.assertEqual(meter1.description, 'Unverifiable description')
         self.assertEqual(meter1.point, 0)
         self.assertEqual(meter1.order, 0)
         self.assertEqual(meter1.image_large_text, 'test.jpg')
         self.assertEqual(meter1.image_small_text, 'test.jpg')
         self.assertEqual(meter1.image_small, 'test.jpg')
-        self.assertTrue('Unprovable' in meter1.__unicode__())
+        self.assertTrue('Unverifiable' in meter1.__unicode__())
 
 
         meter2 = factory.create_meter(
@@ -323,7 +357,7 @@ class TestMeter(TestCase):
 
         try:
             with transaction.atomic():
-                factory.create_meter('unprovable')
+                factory.create_meter('unverifiable')
 
             self.assertTrue(0, 'Duplicate permalink allowed.')
 

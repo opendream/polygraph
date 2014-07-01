@@ -33,36 +33,45 @@ def create_common(app, created_models, verbosity, **kwargs):
     if not os.path.exists('%sdefault_meters' % full_dir):
         shutil.copytree('.%s' % os.path.join(settings.STATIC_URL, 'images/default_meters'), '%sdefault_meters' % full_dir)
 
-    Meter.objects.get_or_create(permalink='unprovable', defaults={
-        'title': 'Unprovable',
-        'description': 'This is unprovable description. Please, edit me on the admin site.',
+    Meter.objects.get_or_create(permalink='unverifiable', defaults={
+        'title': 'Unverifiable',
+        'description': 'This is unverifiable description. Please, edit me on the admin site.',
         'point': 0,
-        'image_small': '%sdefault_meters/image_small_unprovable.png' % settings.FILES_WIDGET_TEMP_DIR,
+        'image_large_text': '%sdefault_meters/status-unverifiable---large-text.png' % settings.FILES_WIDGET_TEMP_DIR,
+        'image_medium_text': '%sdefault_meters/status-unverifiable---medium-text.png' % settings.FILES_WIDGET_TEMP_DIR,
+        'image_small_text': '%sdefault_meters/status-unverifiable---small-text.png' % settings.FILES_WIDGET_TEMP_DIR,
+        'image_small': '%sdefault_meters/status-unverifiable---small.png' % settings.FILES_WIDGET_TEMP_DIR,
 
         'order': 3
     })
-    Meter.objects.get_or_create(permalink='tricky', defaults={
-        'title': 'Tricky',
-        'description': 'This is tricky description. Please, edit me on the admin site.',
+    Meter.objects.get_or_create(permalink='half-truth', defaults={
+        'title': 'Half True',
+        'description': 'This is half truth description. Please, edit me on the admin site.',
         'point': -1,
-        'image_small': '%sdefault_meters/image_small_tricky.png' % settings.FILES_WIDGET_TEMP_DIR,
-
+        'image_large_text': '%sdefault_meters/status-half-truth---large-text.png' % settings.FILES_WIDGET_TEMP_DIR,
+        'image_medium_text': '%sdefault_meters/status-half-truth---medium-text.png' % settings.FILES_WIDGET_TEMP_DIR,
+        'image_small_text': '%sdefault_meters/status-half-truth---small-text.png' % settings.FILES_WIDGET_TEMP_DIR,
+        'image_small': '%sdefault_meters/status-half-truth---small.png' % settings.FILES_WIDGET_TEMP_DIR,
         'order': 2
     })
-    Meter.objects.get_or_create(permalink='false', defaults={
-        'title': 'False',
-        'description': 'This is unprovable description. Please, edit me on the admin site.',
+    Meter.objects.get_or_create(permalink='lie', defaults={
+        'title': 'Lie',
+        'description': 'This is lie description. Please, edit me on the admin site.',
         'point': -2,
-        'image_small': '%sdefault_meters/image_small_false.png' % settings.FILES_WIDGET_TEMP_DIR,
-
+        'image_large_text': '%sdefault_meters/status-lie---large-text.png' % settings.FILES_WIDGET_TEMP_DIR,
+        'image_medium_text': '%sdefault_meters/status-lie---medium-text.png' % settings.FILES_WIDGET_TEMP_DIR,
+        'image_small_text': '%sdefault_meters/status-lie---small-text.png' % settings.FILES_WIDGET_TEMP_DIR,
+        'image_small': '%sdefault_meters/status-lie---small.png' % settings.FILES_WIDGET_TEMP_DIR,
         'order': 1
     })
-    Meter.objects.get_or_create( permalink='true', defaults={
-        'title': 'True',
-        'description': 'This is true description. Please, edit me on the admin site.',
+    Meter.objects.get_or_create(permalink='truth', defaults={
+        'title': 'Truth',
+        'description': 'This is truth description. Please, edit me on the admin site.',
         'point': 2,
-        'image_small': '%sdefault_meters/image_small_true.png' % settings.FILES_WIDGET_TEMP_DIR,
-
+        'image_large_text': '%sdefault_meters/status-truth---large-text.png' % settings.FILES_WIDGET_TEMP_DIR,
+        'image_medium_text': '%sdefault_meters/status-truth---medium-text.png' % settings.FILES_WIDGET_TEMP_DIR,
+        'image_small_text': '%sdefault_meters/status-truth---small-text.png' % settings.FILES_WIDGET_TEMP_DIR,
+        'image_small': '%sdefault_meters/status-truth---small.png' % settings.FILES_WIDGET_TEMP_DIR,
         'order':0
     })
 

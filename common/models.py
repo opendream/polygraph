@@ -2,10 +2,14 @@ from uuid import uuid1
 from django.core import validators
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes import generic
 
 from ckeditor.fields import RichTextField
 
 import re
+from common.constants import NO_IP
+from common.middleware import get_request
 import files_widget
 
 
@@ -64,6 +68,16 @@ class CommonTrashModel(models.Model):
 
     def delete(self, *args, **kwargs):
         return self.trash(self, *args, **kwargs)
+
+    @property
+    def total_views(self):
+
+        content_type = ContentType.objects.get_for_model(self)
+
+        try:
+            return StatisitcTotal.objects.get(content_type=content_type, object_id=self.id).value
+        except StatisitcTotal.DoesNotExist:
+            return 0
 
     class Meta:
         abstract = True
@@ -128,3 +142,50 @@ class AbstractPermalink(CommonModel):
 
     def __unicode__(self):
         return self.permalink
+
+
+class StatisitcTotal(models.Model):
+
+    content_type = models.ForeignKey(ContentType)
+    object_id = models.PositiveIntegerField()
+    content_object = generic.GenericForeignKey('content_type', 'object_id')
+
+    value = models.PositiveIntegerField()
+
+
+class StatisitcAccess(models.Model):
+
+    content_type = models.ForeignKey(ContentType)
+    object_id = models.PositiveIntegerField()
+    content_object = generic.GenericForeignKey('content_type', 'object_id')
+
+    created = models.DateTimeField(auto_now_add=True)
+    ip_address = models.IPAddressField(default=NO_IP)
+
+    def save(self, *args, **kwargs):
+
+        request = get_request()
+        try:
+            x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+            if x_forwarded_for:
+                self.ip_address = x_forwarded_for.split(',')[0]
+            else:
+                self.ip_address = request.META.get('REMOTE_ADDR')
+        except:
+            self.ip_address = NO_IP
+
+        if not self.ip_address:
+            self.ip_address = NO_IP
+
+        try:
+            total = StatisitcTotal.objects.get(content_type=self.content_type, object_id=self.object_id)
+            total.value = total.value + 1
+            total.save()
+
+        except StatisitcTotal.DoesNotExist:
+            StatisitcTotal.objects.create(content_type=self.content_type, object_id=self.object_id, value=1)
+
+        super(StatisitcAccess, self).save(*args, **kwargs)
+
+
+
