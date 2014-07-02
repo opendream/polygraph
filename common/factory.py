@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.conf import settings
 from django.core.files import File
 from domain.models import People, Topic, PeopleCategory, Statement, Meter
@@ -5,6 +7,7 @@ from account.models import Staff
 from common.constants import STATUS_DRAFT, STATUS_PENDING, STATUS_PUBLISHED
 
 from uuid import uuid1
+import random
 
 def randstr():
     return str(uuid1())[0: 10].replace('-', '')
@@ -20,7 +23,7 @@ def create_staff(username=None, email=None, password='password', first_name='', 
     occupation = occupation or randstr()
     description = description or randstr()
     homepage_url = homepage_url or randstr()
-    image = image or File(open('.%simages/test.jpg' % settings.STATIC_URL), 'test.jpg')
+    image = image or '%sdefault/default-people.png' % settings.FILES_WIDGET_TEMP_DIR,
 
 
     staff = Staff.objects.create_user(
@@ -70,7 +73,7 @@ def create_people(permalink=None, first_name='', last_name='', occupation='', de
     occupation = occupation or randstr()
     description = description or randstr()
     homepage_url = homepage_url or randstr()
-    image = image or File(open('.%simages/test.jpg' % settings.STATIC_URL), 'test.jpg')
+    image = image or '%sdefault/default-people.png' % settings.FILES_WIDGET_TEMP_DIR,
     category = category or create_people_category()
 
     people = People.objects.create(
@@ -110,16 +113,17 @@ def create_topic(created_by=None, title='', description='', created=None):
     return topic
 
 
-def create_meter(permalink=None, title='', description='', point=0, order=0, image_large_text='', image_small_text='', image_small=''):
+def create_meter(permalink=None, title='', description='', point=0, order=0, image_large_text='', image_medium_text='', image_small_text='', image_small=''):
 
     permalink = permalink or randstr()
     title = title or randstr()
     description = description or randstr()
 
 
-    image_large_text = image_large_text or File(open('.%simages/test.jpg' % settings.STATIC_URL), 'test.jpg')
-    image_small_text = image_small_text or File(open('.%simages/test.jpg' % settings.STATIC_URL), 'test.jpg')
-    image_small = image_small or File(open('.%simages/test.jpg' % settings.STATIC_URL), 'test.jpg')
+    image_large_text = image_large_text or '%sdefault_meters/status-unverifiable---large-text.png' % settings.FILES_WIDGET_TEMP_DIR,
+    image_medium_text = image_medium_text or '%sdefault_meters/status-unverifiable---medium-text.png' % settings.FILES_WIDGET_TEMP_DIR,
+    image_small_text = image_small_text or '%sdefault_meters/status-unverifiable---small-text.png' % settings.FILES_WIDGET_TEMP_DIR,
+    image_small = image_small or '%sdefault_meters/status-unverifiable---small.png' % settings.FILES_WIDGET_TEMP_DIR,
 
 
 
@@ -131,6 +135,7 @@ def create_meter(permalink=None, title='', description='', point=0, order=0, ima
         order=order,
         image_large_text=image_large_text,
         image_small_text=image_small_text,
+        image_medium_text=image_medium_text,
         image_small=image_small
     )
 
@@ -141,13 +146,23 @@ def create_meter(permalink=None, title='', description='', point=0, order=0, ima
 
 def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', references=None, status=STATUS_PENDING, topic=None, tags='hello world', meter=None, relate_statements=[], relate_peoples=[], published=None, published_by=None, source=''):
 
-    created_by = created_by or create_staff()
-    quoted_by = quoted_by or create_people()
+    created_by_list = list(Staff.objects.all()) or [None]
+    created_by = created_by or random.choice(created_by_list) or create_staff()
+
+    quoted_by_list = list(People.objects.all()) or [None]
+    quoted_by = quoted_by or random.choice(quoted_by_list) or create_people()
+
+
+    meter_list = list(Meter.objects.all()) or [None]
+    meter = meter or random.choice(meter_list) or create_meter()
+
     topic = topic or create_topic(created_by=created_by)
-    meter = meter or create_meter()
 
     permalink = permalink or randstr()
-    quote = quote or randstr()
+
+    dummy_text = u'ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอเอ็กซ์เพรสคาแร็คเตอร์ชะโป่าไม้สระโงกอ่อนด้อยเทอร์โบบ็อกซ์ ฟลุกแทงโก้สะกอม ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอเอ็กซ์เพรสคาแร็คเตอร์ชะโป่าไม้สระโงกอ่อนด้อยเทอร์โบบ็อกซ์ ฟลุกแทงโก้สะกอม ฮิแฟ็กซ์'
+
+    quote = quote or '%s %s' % (dummy_text, randstr())
     source = source or randstr()
     references = references or [{'url': 'http://%s.com/' % randstr(), 'title': randstr()}, {'url': 'http://%s.com/' % randstr(), 'title': randstr()}]
     statement = Statement.objects.create(
