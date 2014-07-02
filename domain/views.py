@@ -1,13 +1,13 @@
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.core.urlresolvers import reverse
 from django.forms.formsets import formset_factory
 from django.http import Http404, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-from common.constants import STATUS_PUBLISHED, STATUS_PENDING
+from common.constants import STATUS_PUBLISHED
 from common.decorators import statistic
 from common.functions import people_render_reference, topic_render_reference, statement_render_reference, process_status, \
     get_success_message
@@ -129,6 +129,10 @@ def topic_create(request, topic=None):
     topic = topic or Topic()
 
     if request.method == 'POST':
+
+        if request.POST.get('as_revision') is None or not int(request.POST.get('as_revision')):
+            request.POST['as_revision'] = None
+
         form = TopicEditForm(topic, Topic, request.POST)
 
         is_new = form.is_new()
@@ -138,7 +142,7 @@ def topic_create(request, topic=None):
             topic.description = form.cleaned_data['description']
             topic.created_by = request.user
 
-            as_revision = bool(form.cleaned_data['as_revision'])
+            as_revision = form.cleaned_data['as_revision']
             without_revision = not as_revision
 
             topic.save(without_revision=without_revision)
@@ -181,6 +185,17 @@ def topic_edit(request, topic_id=None):
     topic = get_object_or_404(Topic, pk=topic_id)
     return topic_create(request, topic)
 
+
+@login_required
+def topic_edit_from_statement(request, topic_id, statement_id):
+
+    statement = get_object_or_404(Statement, pk=statement_id, topic_id=topic_id)
+    response = topic_edit(request, topic_id)
+
+    if response.status_code == 302 and request.POST.get('as_revision'):
+        statement.save()
+
+    return response
 
 def topic_detail(request, topic_id):
     return HttpResponse('Fixed me !!')
@@ -289,7 +304,7 @@ def statement_edit(request, statement_id=None):
 
 def statement_list(request):
 
-    statement_list = Statement.objects.all()
+    statement_list = Statement.objects.all().extra(select={'uptodate': '%s(COALESCE(created, "1000-01-01"), COALESCE(changed, "1000-01-01"))' % settings.GREATEST_FUNCTION}).order_by('-uptodate')
 
     paginator = Paginator(statement_list, 10)
 

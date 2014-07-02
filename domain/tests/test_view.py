@@ -1,3 +1,4 @@
+from datetime import timedelta
 from django.core.urlresolvers import reverse
 from django.http import Http404, HttpRequest
 from django.utils import timezone
@@ -283,8 +284,11 @@ class TestEditTopic(TestCase):
         # Define for override
         self.check_initial = True
         self.topic1 = factory.create_topic(created_by=self.staff1)
+        self.statement1 = factory.create_statement(topic=self.topic1)
+
         self.url1 = reverse('topic_edit', args=[self.topic1.id])
         self.url2 = reverse('topic_edit', args=[self.topic2.id])
+        self.url_from_statement = reverse('topic_edit_from_statement', args=[self.topic1.id, self.statement1.id])
         self.message_success = _('Your %s settings has been updated. View this %s <a href="%s">here</a>.') % (
             _('topic'),
             _('topic'),
@@ -385,12 +389,50 @@ class TestEditTopic(TestCase):
         response = self.client.post(self.url1, params, follow=True)
         self.assertContains(response, self.message_success)
 
+
+    def test_edit_post_from_statement(self):
+
+        params = {
+            'title': self.topic1.title,
+            'description': self.topic1.description,
+            'as_revision': 1
+        }
+
+        statement1_origin_changed = self.statement1.changed
+        self.client.post(self.url_from_statement, params, follow=True)
+
+        self.statement1 = Statement.objects.get(id=self.statement1.id)
+
+        self.assertTrue(self.statement1.changed > statement1_origin_changed and self.statement1.changed >= self.topic1.changed)
+
+        statement2 = factory.create_statement(topic=self.topic2)
+        statement2_origin_changed = statement2.changed
+        response = self.client.post(reverse('topic_edit_from_statement', args=[self.topic1.id, statement2.id]), params, follow=True)
+
+        self.assertEqual(404, response.status_code)
+        self.assertEqual(statement2.changed, statement2_origin_changed)
+
+
+        params = {
+            'title': self.topic1.title,
+            'description': self.topic1.description,
+            'as_revision': 0
+        }
+
+        statement1_origin_changed = self.statement1.changed
+        self.client.post(self.url_from_statement, params, follow=True)
+        self.statement1 = Statement.objects.get(id=self.statement1.id)
+
+        self.assertEqual(self.statement1.changed, statement1_origin_changed)
+
+
+
     def test_post_edit_without_revision(self):
 
         params = {
             'title': self.topic1.title,
             'description': self.topic1.description,
-            'as_revision': False
+            'as_revision': 0
         }
 
         before_count = self.topic1.topicrevision_set.count()
@@ -447,7 +489,7 @@ class TestCreateTopic(TestEditTopic):
         params = {
             'title': self.topic1.title,
             'description': self.topic1.description,
-            'as_revision': False
+            'as_revision': 0
         }
 
         response = self.client.post(self.url1, params, follow=True)
@@ -465,6 +507,9 @@ class TestCreateTopic(TestEditTopic):
 
         after_count = self.topic1.topicrevision_set.count()
         self.assertEqual(1, after_count)
+
+    def test_edit_post_from_statement(self):
+        pass
 
 
 class TestDeleteTopic(TestDeleteDomain):
@@ -942,6 +987,22 @@ class TestPublishStatement(TestCase):
         self.assertNotContains(response, 'name="status" type="radio" value="%s"' % STATUS_PUBLISHED)
 
         self.client.logout()
+
+
+class TestStatementList(TestCase):
+
+    def test_ordering(self):
+
+        now = timezone.now()
+
+        statement1 = factory.create_statement(created=now, changed=now)
+        statement2 = factory.create_statement(created=now-timedelta(days=1), changed=None)
+        statement3 = factory.create_statement(created=now-timedelta(days=4), changed=now-timedelta(days=3))
+        statement4 = factory.create_statement(created=now-timedelta(days=10), changed=now-timedelta(days=2))
+
+        response = self.client.get(reverse('statement_list'))
+
+        self.assertEqual([statement1, statement2, statement4, statement3], list(response.context['statement_list']))
 
 
 class TestStatistic(TestCase):

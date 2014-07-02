@@ -981,3 +981,21 @@ footer {
         margin-left: 2px;
     }
 }
+
+.staff-link-wrapper {
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px 10px 0 10px;
+    color: #555;
+
+    ul {
+        list-style: none;
+        padding-left: 0px;
+
+    }
+    a {
+        color: #555;
+    }
+}

@@ -1366,3 +1366,21 @@ footer .footer-menu div a:hover {
 .statement-meter .prettyradio label {
   margin-left: 2px;
 }
+
+/* line 985, ../sass/style.scss */
+.staff-link-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px 10px 0 10px;
+  color: #555;
+}
+/* line 993, ../sass/style.scss */
+.staff-link-wrapper ul {
+  list-style: none;
+  padding-left: 0px;
+}
+/* line 998, ../sass/style.scss */
+.staff-link-wrapper a {
+  color: #555;
+}

@@ -19,6 +19,13 @@
 
     <article class="block">
         <section class="highlight-statement block-content">
+
+            <div class="staff-link-wrapper">
+                <ul>
+                    <li><a href="{% url 'statement_edit' statement.id %}">{% trans "Edit" %}</a></li>
+                </ul>
+            </div>
+
             <header>
                 <h2 class="hidden">{% trans "Statement" %}</h2>
             </header>

@@ -9,7 +9,7 @@ from models import People, Topic, TopicRevision, Statement
 
 class PeopleAutocomplete(autocomplete_light.AutocompleteModelBase):
 
-    choices = People.objects.filter()
+    choices = People.objects.all().order_by('-id')
     search_fields = ['first_name', 'last_name', 'permalink']
 
     def choice_label(self, choice):
@@ -25,7 +25,7 @@ class PeopleAutocomplete(autocomplete_light.AutocompleteModelBase):
 
 def get_default_topic_quesrset():
 
-    query = TopicRevision.objects.all().query
+    query = TopicRevision.objects.all().order_by('-id').query
     query.group_by = ['origin_id']
     results = QuerySet(query=query, model=TopicRevision)
 
@@ -54,7 +54,7 @@ class TopicAutocomplete(autocomplete_light.AutocompleteModelBase):
 
 class StatementAutocomplete(autocomplete_light.AutocompleteModelBase):
 
-    choices = Statement.objects.filter()
+    choices = Statement.objects.all().order_by('-id')
     search_fields = ['quote', 'permalink', 'topic__topicrevision__title']
 
     def choice_label(self, choice):

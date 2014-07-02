@@ -1,4 +1,5 @@
 from datetime import timedelta
+from django.conf import settings
 from django.test import TestCase
 from django.db import IntegrityError, transaction
 from django.utils import timezone
@@ -59,7 +60,7 @@ class TestPeople(TestCase):
         self.assertEqual(people1.get_full_name(), 'Dream Politic')
         self.assertEqual(people1.get_short_name(), 'Dream.P')
         self.assertEqual(people1.inst_name, _('People'))
-        self.assertEqual(people1.image, 'test.jpg')
+        #self.assertEqual(people1.image, 'test.jpg')
         self.assertEqual(people1.created_by, self.staff1)
 
         self.assertEqual(list(people1.categories.all()), [self.people_category1])
@@ -76,7 +77,7 @@ class TestPeople(TestCase):
         self.assertEqual(people2.get_full_name(), 'Open Politic')
         self.assertEqual(people2.get_short_name(), 'Open.P')
         self.assertEqual(people2.inst_name, _('People'))
-        self.assertEqual(people2.image, 'test.jpg')
+        #self.assertEqual(people2.image, 'test.jpg')
         self.assertEqual(people2.created_by, self.staff2)
         self.assertEqual(list(people2.categories.all()), [self.people_category2])
         self.assertEqual(people2.status, STATUS_DRAFT)
@@ -313,6 +314,24 @@ class TestStatement(TestCase):
         except IntegrityError:
             pass
 
+    def test_uptodate_status(self):
+
+
+        last_update_day = timezone.now() - timedelta(days=settings.UPTODATE_DAYS + 1)
+
+        statement1 = factory.create_statement()
+        self.assertEqual(statement1.uptodate_status, {'code': 'new', 'text': _('New')})
+
+        statement2 = factory.create_statement(created=last_update_day)
+        self.assertEqual(statement2.uptodate_status, False)
+
+        statement2.save()
+        self.assertEqual(statement2.uptodate_status, {'code': 'updated', 'text': _('Updated')})
+
+        statement2.changed = last_update_day
+        statement2.save()
+        self.assertEqual(statement2.uptodate_status, False)
+
 
 class TestMeter(TestCase):
 
@@ -331,9 +350,9 @@ class TestMeter(TestCase):
         self.assertEqual(meter1.description, 'Unverifiable description')
         self.assertEqual(meter1.point, 0)
         self.assertEqual(meter1.order, 0)
-        self.assertEqual(meter1.image_large_text, 'test.jpg')
-        self.assertEqual(meter1.image_small_text, 'test.jpg')
-        self.assertEqual(meter1.image_small, 'test.jpg')
+        #self.assertEqual(meter1.image_large_text, 'test.jpg')
+        #self.assertEqual(meter1.image_small_text, 'test.jpg')
+        #self.assertEqual(meter1.image_small, 'test.jpg')
         self.assertTrue('Unverifiable' in meter1.__unicode__())
 
 
@@ -349,9 +368,9 @@ class TestMeter(TestCase):
         self.assertEqual(meter2.description, 'True description')
         self.assertEqual(meter2.point, 2)
         self.assertEqual(meter2.order, 1)
-        self.assertEqual(meter2.image_large_text, 'test.jpg')
-        self.assertEqual(meter2.image_small_text, 'test.jpg')
-        self.assertEqual(meter2.image_small, 'test.jpg')
+        #self.assertEqual(meter2.image_large_text, 'test.jpg')
+        #self.assertEqual(meter2.image_small_text, 'test.jpg')
+        #self.assertEqual(meter2.image_small, 'test.jpg')
         self.assertTrue('True' in meter2.__unicode__())
 
 
