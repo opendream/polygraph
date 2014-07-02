@@ -72,10 +72,10 @@ def topic_render_reference(topic, display_edit_link=True, field_name='topic'):
     html = '<span class="reference-span">%s</span>' % topic.title
 
     used_to = [statement.quoted_by.get_short_name() for statement in topic.statement_set.order_by('-created')[0:3]]
-    used_to = ', '.join(used_to)
 
-
-    html = '%s<span class="reference-span">-- %s %s</span>' % (html, _('by'), used_to)
+    if used_to:
+        used_to = ', '.join(used_to)
+        html = '%s<span class="reference-span">-- %s %s</span>' % (html, _('by'), used_to)
 
     if display_edit_link:
         html = '%s <a class="reference-span add-another-inline" id="edit_id_%s" href="%s?_inline=1" target="topic_inline">%s</a>' % (html, field_name, reverse('topic_edit', args=[topic.id]), _('edit'))

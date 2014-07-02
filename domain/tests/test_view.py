@@ -382,8 +382,31 @@ class TestEditTopic(TestCase):
 
         }
 
-        response = self.client.post(self.url1, params, follow=True)
-        self.assertContains(response, self.message_success)
+
+    def test_edit_post_from_statement(self):
+
+        params = {
+            'title': self.topic1.title,
+            'description': self.topic1.description,
+            'as_revision': True
+        }
+
+        statement1 = factory.create_statement(topic=self.topic1)
+        statement1_origin_changed = statement1.changed
+        self.client.post(reverse('topic_edit_from_statement', args=[self.topic1.id, statement1.id]), params, follow=True)
+
+        statement1 = Statement.objects.get(id=statement1.id)
+
+        self.assertTrue(statement1.changed > statement1_origin_changed and statement1.changed >= self.topic1.changed)
+
+        statement2 = factory.create_statement(topic=self.topic2)
+        statement2_origin_changed = statement2.changed
+        response = self.client.post(reverse('topic_edit_from_statement', args=[self.topic1.id, statement2.id]), params, follow=True)
+
+        self.assertEqual(404, response.status_code)
+        self.assertEqual(statement2.changed, statement2_origin_changed)
+
+
 
     def test_post_edit_without_revision(self):
 
@@ -465,6 +488,9 @@ class TestCreateTopic(TestEditTopic):
 
         after_count = self.topic1.topicrevision_set.count()
         self.assertEqual(1, after_count)
+
+    def test_edit_post_from_statement(self):
+        pass
 
 
 class TestDeleteTopic(TestDeleteDomain):

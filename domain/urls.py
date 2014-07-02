@@ -9,6 +9,7 @@ urlpatterns = patterns('domain.views',
 
     url(r'^topic/create/$', 'topic_create', name='topic_create'),
     url(r'^topic/(?P<topic_id>\d+)/edit/$', 'topic_edit', name='topic_edit'),
+    url(r'^topic/(?P<topic_id>\d+)/edit/from/(?P<statement_id>\d+)/$', 'topic_edit_from_statement', name='topic_edit_from_statement'),
     url(r'^topic/(?P<topic_id>\d+)/$', 'topic_detail', name='topic_detail'),
 
     url(r'^tags/(?P<tags_id>\d+)/$', 'tags_detail', name='tags_detail'),

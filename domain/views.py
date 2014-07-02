@@ -1,13 +1,12 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.core.urlresolvers import reverse
 from django.forms.formsets import formset_factory
 from django.http import Http404, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-from common.constants import STATUS_PUBLISHED, STATUS_PENDING
+from common.constants import STATUS_PUBLISHED
 from common.decorators import statistic
 from common.functions import people_render_reference, topic_render_reference, statement_render_reference, process_status, \
     get_success_message
@@ -181,6 +180,17 @@ def topic_edit(request, topic_id=None):
     topic = get_object_or_404(Topic, pk=topic_id)
     return topic_create(request, topic)
 
+
+@login_required
+def topic_edit_from_statement(request, topic_id, statement_id):
+
+    statement = get_object_or_404(Statement, pk=statement_id, topic_id=topic_id)
+    response = topic_edit(request, topic_id)
+
+    if response.status_code == 302:
+        statement.save()
+
+    return response
 
 def topic_detail(request, topic_id):
     return HttpResponse('Fixed me !!')
