@@ -283,8 +283,11 @@ class TestEditTopic(TestCase):
         # Define for override
         self.check_initial = True
         self.topic1 = factory.create_topic(created_by=self.staff1)
+        self.statement1 = factory.create_statement(topic=self.topic1)
+
         self.url1 = reverse('topic_edit', args=[self.topic1.id])
         self.url2 = reverse('topic_edit', args=[self.topic2.id])
+        self.url_from_statement = reverse('topic_edit_from_statement', args=[self.topic1.id, self.statement1.id])
         self.message_success = _('Your %s settings has been updated. View this %s <a href="%s">here</a>.') % (
             _('topic'),
             _('topic'),
@@ -394,13 +397,12 @@ class TestEditTopic(TestCase):
             'as_revision': 1
         }
 
-        statement1 = factory.create_statement(topic=self.topic1)
-        statement1_origin_changed = statement1.changed
-        self.client.post(reverse('topic_edit_from_statement', args=[self.topic1.id, statement1.id]), params, follow=True)
+        statement1_origin_changed = self.statement1.changed
+        self.client.post(self.url_from_statement, params, follow=True)
 
-        statement1 = Statement.objects.get(id=statement1.id)
+        self.statement1 = Statement.objects.get(id=self.statement1.id)
 
-        self.assertTrue(statement1.changed > statement1_origin_changed and statement1.changed >= self.topic1.changed)
+        self.assertTrue(self.statement1.changed > statement1_origin_changed and self.statement1.changed >= self.topic1.changed)
 
         statement2 = factory.create_statement(topic=self.topic2)
         statement2_origin_changed = statement2.changed
@@ -416,11 +418,11 @@ class TestEditTopic(TestCase):
             'as_revision': 0
         }
 
-        statement1_origin_changed = statement1.changed
-        self.client.post(reverse('topic_edit_from_statement', args=[self.topic1.id, statement1.id]), params, follow=True)
-        statement1 = Statement.objects.get(id=statement1.id)
+        statement1_origin_changed = self.statement1.changed
+        self.client.post(self.url_from_statement, params, follow=True)
+        self.statement1 = Statement.objects.get(id=self.statement1.id)
 
-        self.assertEqual(statement1.changed, statement1_origin_changed)
+        self.assertEqual(self.statement1.changed, statement1_origin_changed)
 
 
 
