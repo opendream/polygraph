@@ -204,6 +204,8 @@ FILES_WIDGET_TEMP_DIR = 'temp/files_widget/'
 #FILES_WIDGET_JQUERY_UI_PATH = 'libs/jquery-ui/js/jquery-ui-1.10.4.min.js'
 
 DEFAULT_IMAGE = '%simages/default.png' % STATIC_URL
+UPTODATE_DAYS = 7
+GREATEST_FUNCTION = 'GREATEST'
 
 TAGGING_AUTOCOMPLETE_JQUERY_UI_FILE = 'libs/jquery-ui/js/jquery-ui-1.10.4.min.js'
 TAGGING_AUTOCOMPLETE_MAX_TAGS = 9999
@@ -224,3 +226,4 @@ if 'test' in sys.argv:
     MEDIA_ROOT = os.path.join(BASE_PATH, 'test_media')
     MEDIA_URL = '/test_media/'
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    GREATEST_FUNCTION = 'MAX'

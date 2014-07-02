@@ -1,4 +1,3 @@
-import distutils
 from django.conf import settings
 from django.contrib.auth import models as auth_models
 from django.contrib.auth.management import create_superuser
@@ -119,3 +118,4 @@ post_syncdb.connect(
     sender=common_models,
     dispatch_uid='common.management'
 )
+

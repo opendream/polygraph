@@ -1,4 +1,5 @@
 from datetime import timedelta
+from django.conf import settings
 from django.test import TestCase
 from django.db import IntegrityError, transaction
 from django.utils import timezone
@@ -312,6 +313,24 @@ class TestStatement(TestCase):
 
         except IntegrityError:
             pass
+
+    def test_uptodate_status(self):
+
+
+        last_update_day = timezone.now() - timedelta(days=settings.UPTODATE_DAYS + 1)
+
+        statement1 = factory.create_statement()
+        self.assertEqual(statement1.uptodate_status, {'code': 'new', 'text': _('New')})
+
+        statement2 = factory.create_statement(created=last_update_day)
+        self.assertEqual(statement2.uptodate_status, False)
+
+        statement2.save()
+        self.assertEqual(statement2.uptodate_status, {'code': 'updated', 'text': _('Updated')})
+
+        statement2.changed = last_update_day
+        statement2.save()
+        self.assertEqual(statement2.uptodate_status, False)
 
 
 class TestMeter(TestCase):

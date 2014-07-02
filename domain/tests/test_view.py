@@ -1,3 +1,4 @@
+from datetime import timedelta
 from django.core.urlresolvers import reverse
 from django.http import Http404, HttpRequest
 from django.utils import timezone
@@ -986,6 +987,22 @@ class TestPublishStatement(TestCase):
         self.assertNotContains(response, 'name="status" type="radio" value="%s"' % STATUS_PUBLISHED)
 
         self.client.logout()
+
+
+class TestStatementList(TestCase):
+
+    def test_ordering(self):
+
+        now = timezone.now()
+
+        statement1 = factory.create_statement(created=now, changed=now)
+        statement2 = factory.create_statement(created=now-timedelta(days=1), changed=None)
+        statement3 = factory.create_statement(created=now-timedelta(days=4), changed=now-timedelta(days=3))
+        statement4 = factory.create_statement(created=now-timedelta(days=10), changed=now-timedelta(days=2))
+
+        response = self.client.get(reverse('statement_list'))
+
+        self.assertEqual([statement1, statement2, statement4, statement3], list(response.context['statement_list']))
 
 
 class TestStatistic(TestCase):

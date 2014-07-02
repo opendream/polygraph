@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -303,7 +304,7 @@ def statement_edit(request, statement_id=None):
 
 def statement_list(request):
 
-    statement_list = Statement.objects.all()
+    statement_list = Statement.objects.all().extra(select={'uptodate': '%s(COALESCE(created, "1000-01-01"), COALESCE(changed, "1000-01-01"))' % settings.GREATEST_FUNCTION}).order_by('-uptodate')
 
     paginator = Paginator(statement_list, 10)
 

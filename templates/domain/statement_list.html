@@ -27,8 +27,8 @@
                 </header>
 
                 {% for statement in statement_list %}
-                 <article class="row block block-no-border polygraph-list-block new">
-                    <span>New</span>
+                 <article class="row block block-no-border polygraph-list-block new{% if statement.uptodate_status %} {{ statement.uptodate_status.code }}{% endif %}">
+                    {% if statement.uptodate_status %}<span>{{ statement.uptodate_status.text }}</span>{% endif %}
                     <div class="block-content col-lg-12">
 
                         <div class="text-brown quote lead">
@@ -49,108 +49,6 @@
                 </article>
                 {% endfor %}
 
-                <article class="row block block-no-border polygraph-list-block updated">
-                    <span>Updated</span>
-                    <div class="block-content col-lg-12">
-                        <p class="text-brown quote lead"><a href="/statement/detail/1">“ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอเอ็กซ์เพรสคาแร็คเตอร์ชะโป่าไม้สระโงกอ่อนด้อยเทอร์โบบ็อกซ์ ฟลุกแทงโก้สะกอม <strong>ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอเอ็กซ์เพรสคาแร็คเตอร์ชะโป่าไม้สระโงกอ่อนด้อยเทอร์โบบ็อกซ์</strong> ฟลุกแทงโก้สะกอม ฮิแฟ็กซ์"</a></p>
-                        <div class="media">
-                            <a class="pull-left" href="#">
-                                <img class="media-object" src="/static/css/images/people-3-sm.png" alt="...">
-                            </a>
-                            <div class="media-body">
-                                <a href="/" class="media-heading">สุเทพ เทือกสุบรรณ</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="meter-md">
-                        <img src="/static/css/images/false-md.png" alt="false image large" />
-                    </div>
-                </article>
-                 <article class="row block block-no-border polygraph-list-block updated">
-                    <span>Updated</span>
-                    <div class="block-content col-lg-12">
-                        <p class="text-brown quote lead"><a href="/statement/detail/1">“ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอเอ็กซ์เพรสคาแร็คเตอร์ชะโป่าไม้สระโงกอ่อนด้อยเทอร์โบบ็อกซ์ ฟลุกแทงโก้สะกอม <strong>ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอเอ็กซ์เพรสคาแร็คเตอร์ชะโป่าไม้สระโงกอ่อนด้อยเทอร์โบบ็อกซ์</strong> ฟลุกแทงโก้สะกอม ฮิแฟ็กซ์"</a></p>
-                        <div class="media">
-                            <a class="pull-left" href="#">
-                                <img class="media-object" src="/static/css/images/people-3-sm.png" alt="...">
-                            </a>
-                            <div class="media-body">
-                                <a href="/" class="media-heading">สุเทพ เทือกสุบรรณ</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="meter-md">
-                        <img src="/static/css/images/false-md.png" alt="false image large" />
-                    </div>
-                </article>
-                 <article class="row block block-no-border polygraph-list-block updated">
-                    <span>Updated</span>
-                    <div class="block-content col-lg-12">
-                        <p class="text-brown quote lead"><a href="/statement/detail/1">“ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอเอ็กซ์เพรสคาแร็คเตอร์ชะโป่าไม้สระโงกอ่อนด้อยเทอร์โบบ็อกซ์ ฟลุกแทงโก้สะกอม <strong>ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอเอ็กซ์เพรสคาแร็คเตอร์ชะโป่าไม้สระโงกอ่อนด้อยเทอร์โบบ็อกซ์</strong> ฟลุกแทงโก้สะกอม ฮิแฟ็กซ์"</a></p>
-                        <div class="media">
-                            <a class="pull-left" href="#">
-                                <img class="media-object" src="/static/css/images/people-3-sm.png" alt="...">
-                            </a>
-                            <div class="media-body">
-                                <a href="/" class="media-heading">สุเทพ เทือกสุบรรณ</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="meter-md">
-                        <img src="/static/css/images/false-md.png" alt="false image large" />
-                    </div>
-                </article>
-                 <article class="row block block-no-border polygraph-list-block updated">
-                    <span>Updated</span>
-                    <div class="block-content col-lg-12">
-                        <p class="text-brown quote lead"><a href="/statement/detail/1">“ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอเอ็กซ์เพรสคาแร็คเตอร์ชะโป่าไม้สระโงกอ่อนด้อยเทอร์โบบ็อกซ์ ฟลุกแทงโก้สะกอม <strong>ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอเอ็กซ์เพรสคาแร็คเตอร์ชะโป่าไม้สระโงกอ่อนด้อยเทอร์โบบ็อกซ์</strong> ฟลุกแทงโก้สะกอม ฮิแฟ็กซ์"</a></p>
-                        <div class="media">
-                            <a class="pull-left" href="#">
-                                <img class="media-object" src="/static/css/images/people-3-sm.png" alt="...">
-                            </a>
-                            <div class="media-body">
-                                <a href="/" class="media-heading">สุเทพ เทือกสุบรรณ</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="meter-md">
-                        <img src="/static/css/images/false-md.png" alt="false image large" />
-                    </div>
-                </article>
-                 <article class="row block block-no-border polygraph-list-block updated">
-                    <span>Updated</span>
-                    <div class="block-content col-lg-12">
-                        <p class="text-brown quote lead"><a href="/statement/detail/1">“ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอเอ็กซ์เพรสคาแร็คเตอร์ชะโป่าไม้สระโงกอ่อนด้อยเทอร์โบบ็อกซ์ ฟลุกแทงโก้สะกอม <strong>ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอเอ็กซ์เพรสคาแร็คเตอร์ชะโป่าไม้สระโงกอ่อนด้อยเทอร์โบบ็อกซ์</strong> ฟลุกแทงโก้สะกอม ฮิแฟ็กซ์"</a></p>
-                        <div class="media">
-                            <a class="pull-left" href="#">
-                                <img class="media-object" src="/static/css/images/people-3-sm.png" alt="...">
-                            </a>
-                            <div class="media-body">
-                                <a href="/" class="media-heading">สุเทพ เทือกสุบรรณ</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="meter-md">
-                        <img src="/static/css/images/false-md.png" alt="false image large" />
-                    </div>
-                </article>
-                 <article class="row block block-no-border polygraph-list-block updated">
-                    <span>Updated</span>
-                    <div class="block-content col-lg-12">
-                        <p class="text-brown quote lead"><a href="/statement/detail/1">“ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอเอ็กซ์เพรสคาแร็คเตอร์ชะโป่าไม้สระโงกอ่อนด้อยเทอร์โบบ็อกซ์ ฟลุกแทงโก้สะกอม <strong>ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอเอ็กซ์เพรสคาแร็คเตอร์ชะโป่าไม้สระโงกอ่อนด้อยเทอร์โบบ็อกซ์</strong> ฟลุกแทงโก้สะกอม ฮิแฟ็กซ์"</a></p>
-                        <div class="media">
-                            <a class="pull-left" href="#">
-                                <img class="media-object" src="/static/css/images/people-3-sm.png" alt="...">
-                            </a>
-                            <div class="media-body">
-                                <a href="/" class="media-heading">สุเทพ เทือกสุบรรณ</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="meter-md">
-                        <img src="/static/css/images/false-md.png" alt="false image large" />
-                    </div>
-                </article>
             </section>
         </section >
     </div>
