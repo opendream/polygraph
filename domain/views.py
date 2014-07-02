@@ -2,12 +2,13 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.db.models import Q
 from django.forms.formsets import formset_factory
 from django.http import Http404, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-from common.constants import STATUS_PUBLISHED
+from common.constants import STATUS_PUBLISHED, STATUS_DRAFT, STATUS_PENDING
 from common.decorators import statistic
 from common.functions import people_render_reference, topic_render_reference, statement_render_reference, process_status, \
     get_success_message
@@ -304,7 +305,25 @@ def statement_edit(request, statement_id=None):
 
 def statement_list(request):
 
-    statement_list = Statement.objects.all().extra(select={'uptodate': '%s(COALESCE(created, "1000-01-01"), COALESCE(changed, "1000-01-01"))' % settings.GREATEST_FUNCTION}).order_by('-uptodate')
+    statement_list = Statement.objects.all()
+
+    if request.user.is_anonymous():
+        statement_list = statement_list.exclude(status__in=[STATUS_DRAFT, STATUS_PENDING])
+
+        statement_list = statement_list.extra(select={'uptodate': '%s(COALESCE(created, "1000-01-01"), COALESCE(changed, "1000-01-01"))' % settings.GREATEST_FUNCTION}).order_by('-uptodate')
+
+
+    else:
+
+        if request.user.is_staff:
+            statement_list = statement_list.filter(Q(status__in=[STATUS_PUBLISHED, STATUS_PENDING])|Q(created_by=request.user))
+
+        else:
+            statement_list = statement_list.filter(Q(status__in=[STATUS_PUBLISHED])|Q(created_by=request.user, status__in=[STATUS_DRAFT, STATUS_PENDING]))
+
+
+
+        statement_list = statement_list.extra(select={'uptodate': '%s(COALESCE(created_raw, "1000-01-01"), COALESCE(created, "1000-01-01"), COALESCE(changed, "1000-01-01"))' % settings.GREATEST_FUNCTION}).order_by('-uptodate')
 
     paginator = Paginator(statement_list, 10)
 

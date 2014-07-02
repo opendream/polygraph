@@ -334,9 +334,10 @@ class TestStatement(TestCase):
 
         # test flow draft to published
         statement3 = factory.create_statement(status=STATUS_DRAFT)
+
         self.assertEqual(statement3.created, None)
         self.assertEqual(statement3.changed, None)
-        self.assertEqual(statement3.uptodate_status, False)
+        self.assertEqual(statement3.uptodate_status, {'code': 'draft', 'text': _('Your Draft')})
 
         last_update_statement3 = timezone.now()
         statement3.status = STATUS_PENDING

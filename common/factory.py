@@ -158,7 +158,7 @@ def create_meter(permalink=None, title='', description='', point=0, order=0, ima
     return meter
 
 
-def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', references=None, status=STATUS_PENDING, topic=None, tags='hello world', meter=None, relate_statements=[], relate_peoples=[], published=None, published_by=None, source='', created=None, changed=None):
+def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', references=None, status=STATUS_PENDING, topic=None, tags='hello world', meter=None, relate_statements=[], relate_peoples=[], published=None, published_by=None, source='', created=None, created_raw=None, changed=None):
 
     created_by_list = list(Staff.objects.all()) or [None]
     created_by = created_by or random.choice(created_by_list) or create_staff()
@@ -193,6 +193,7 @@ def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', 
         published_by=published_by,
         source=source,
         created=created,
+        created_raw=created_raw,
         changed=changed
     )
 

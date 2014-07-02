@@ -991,19 +991,56 @@ class TestPublishStatement(TestCase):
 
 class TestStatementList(TestCase):
 
+
     def test_ordering(self):
+
+        editor = factory.create_staff(password='password', is_staff=True)
+        writer1 = factory.create_staff(password='password')
+        writer2 = factory.create_staff(password='password')
 
         now = timezone.now()
 
-        statement1 = factory.create_statement(created=now, changed=now)
-        statement2 = factory.create_statement(created=now-timedelta(days=1), changed=None)
-        statement3 = factory.create_statement(created=now-timedelta(days=4), changed=now-timedelta(days=3))
-        statement4 = factory.create_statement(created=now-timedelta(days=10), changed=now-timedelta(days=2))
+        statement1 = factory.create_statement(status=STATUS_PUBLISHED, created=now, created_raw=now, changed=now)
+        statement2 = factory.create_statement(status=STATUS_PUBLISHED, created=now-timedelta(days=1), created_raw=now-timedelta(days=1), changed=None)
+        statement3 = factory.create_statement(status=STATUS_PUBLISHED, created=now-timedelta(days=4), created_raw=now-timedelta(days=4), changed=now-timedelta(days=3))
+        statement4 = factory.create_statement(status=STATUS_PUBLISHED, created=now-timedelta(days=10), created_raw=now-timedelta(days=10), changed=now-timedelta(days=2))
+
+        statement5 = factory.create_statement(status=STATUS_PENDING, created_by=factory.create_staff())
+
+        statement6 = factory.create_statement(status=STATUS_PENDING, created_by=writer1)
+        statement7 = factory.create_statement(status=STATUS_PENDING, created_by=writer2)
+
+        statement8 = factory.create_statement(created=now, status=STATUS_DRAFT, created_by=writer1)
+        statement9 = factory.create_statement(created=now, status=STATUS_DRAFT, created_by=writer2)
+        statement10 = factory.create_statement(created=now, status=STATUS_DRAFT, created_by=editor)
+
+
 
         response = self.client.get(reverse('statement_list'))
-
         self.assertEqual([statement1, statement2, statement4, statement3], list(response.context['statement_list']))
 
+        self.client.login(username=writer1.username, password='password')
+        response = self.client.get(reverse('statement_list'))
+
+        #print [statement8.id, statement6.id, statement1.id, statement2.id, statement4.id, statement3.id]
+        #print [s.id for s in response.context['statement_list']]
+
+
+        self.assertEqual([statement8.id, statement6.id, statement1.id, statement2.id, statement4.id, statement3.id], [s.id for s in response.context['statement_list']])
+
+        self.client.logout()
+
+        self.client.login(username=writer2.username, password='password')
+        response = self.client.get(reverse('statement_list'))
+        self.assertEqual([statement9.id, statement7.id, statement1.id, statement2.id, statement4.id, statement3.id], [s.id for s in response.context['statement_list']])
+
+        self.client.logout()
+
+        self.client.login(username=editor.username, password='password')
+        response = self.client.get(reverse('statement_list'))
+        self.assertEqual([statement10.id, statement7.id, statement6.id, statement5.id, statement1.id, statement2.id, statement4.id, statement3.id], [s.id for s in response.context['statement_list']])
+
+        self.client.logout()
 
 class TestStatistic(TestCase):
 
