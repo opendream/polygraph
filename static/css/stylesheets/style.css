@@ -927,39 +927,96 @@ input + .errors {
   color: #7f5d3d;
 }
 
-/* line 641, ../sass/style.scss */
+/* line 640, ../sass/style.scss */
+.nav.full-width {
+  margin: 10px 0;
+}
+/* line 642, ../sass/style.scss */
+.nav.full-width li.dropdown {
+  width: 100%;
+  border: 1px solid #CCC;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+}
+/* line 646, ../sass/style.scss */
+.nav.full-width li.dropdown a {
+  background-color: #FFF;
+}
+/* line 648, ../sass/style.scss */
+.nav.full-width li.dropdown a:hover {
+  background-color: #FFF;
+}
+/* line 649, ../sass/style.scss */
+.nav.full-width li.dropdown a.dropdown-toggle {
+  font-size: 1.5em;
+}
+/* line 650, ../sass/style.scss */
+.nav.full-width li.dropdown a .caret {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  margin-top: -4px;
+  border-top: 8px solid;
+  border-right: 8px solid transparent;
+  border-left: 8px solid transparent;
+}
+/* line 660, ../sass/style.scss */
+.nav.full-width li.dropdown.open a {
+  color: #7f5d3d;
+}
+/* line 661, ../sass/style.scss */
+.nav.full-width li.dropdown ul.dropdown-menu {
+  width: 100%;
+}
+/* line 665, ../sass/style.scss */
+.nav.full-width li.dropdown ul.dropdown-menu li.active a,
+.nav.full-width li.dropdown ul.dropdown-menu li:hover a {
+  color: #FFF;
+  background-color: #cd5e26;
+}
+
+@media (min-width: 992px) {
+  /* line 675, ../sass/style.scss */
+  .nav-color {
+    float: right;
+  }
+}
+/* line 681, ../sass/style.scss */
 .polygraph-list > header {
   position: relative;
   z-index: 2;
   overflow: visible;
 }
-/* line 642, ../sass/style.scss */
+/* line 682, ../sass/style.scss */
 .polygraph-list > section {
   position: relative;
   z-index: 1;
 }
-/* line 643, ../sass/style.scss */
+/* line 683, ../sass/style.scss */
 .polygraph-list .statement-list {
   overflow: hidden;
 }
-/* line 644, ../sass/style.scss */
+/* line 684, ../sass/style.scss */
 .polygraph-list .block {
   margin-bottom: 1.2em;
 }
-/* line 648, ../sass/style.scss */
+/* line 688, ../sass/style.scss */
 .polygraph-list .polygraph-list-before .block-content {
   overflow: hidden;
 }
-/* line 649, ../sass/style.scss */
+/* line 689, ../sass/style.scss */
 .polygraph-list .polygraph-list-before span {
   margin-bottom: 10px;
   display: block;
 }
-/* line 654, ../sass/style.scss */
+/* line 694, ../sass/style.scss */
 .polygraph-list .polygraph-list-block {
   position: relative;
 }
-/* line 656, ../sass/style.scss */
+/* line 696, ../sass/style.scss */
 .polygraph-list .polygraph-list-block > span {
   display: block;
   padding: 5px 0;
@@ -972,92 +1029,92 @@ input + .errors {
   top: 10px;
   text-transform: uppercase;
 }
-/* line 668, ../sass/style.scss */
+/* line 708, ../sass/style.scss */
 .polygraph-list .polygraph-list-block.updated span {
   background-color: #ff9933;
 }
-/* line 671, ../sass/style.scss */
+/* line 711, ../sass/style.scss */
 .polygraph-list .polygraph-list-block .block-content {
   padding-top: 50px;
 }
-/* line 672, ../sass/style.scss */
+/* line 712, ../sass/style.scss */
 .polygraph-list .polygraph-list-block .quote {
   line-height: 1.8em;
 }
 
-/* line 677, ../sass/style.scss */
+/* line 717, ../sass/style.scss */
 .polygraph-list-block .block-content.float-right-img {
   padding-right: 250px;
 }
-/* line 679, ../sass/style.scss */
+/* line 719, ../sass/style.scss */
 .polygraph-list-block .block-content.float-right-img img {
   width: 40px;
   height: 40px;
 }
-/* line 682, ../sass/style.scss */
+/* line 722, ../sass/style.scss */
 .polygraph-list-block .meter-md {
   position: absolute;
   bottom: 20px;
   right: 0;
 }
 
-/* line 689, ../sass/style.scss */
+/* line 729, ../sass/style.scss */
 .statement-list .block-content {
   padding-bottom: 0;
   border-bottom: 75px solid #F2F2F2;
   position: initial;
 }
-/* line 693, ../sass/style.scss */
+/* line 733, ../sass/style.scss */
 .statement-list .block-content .quote {
   font-size: 18px;
 }
-/* line 696, ../sass/style.scss */
+/* line 736, ../sass/style.scss */
 .statement-list .block-content .media {
   position: absolute;
   bottom: 10px;
 }
-/* line 699, ../sass/style.scss */
+/* line 739, ../sass/style.scss */
 .statement-list .block-content .media a.pull-left {
   width: 40px;
   height: 40px;
 }
-/* line 703, ../sass/style.scss */
+/* line 743, ../sass/style.scss */
 .statement-list .block-content .media img {
   width: 100%;
 }
-/* line 706, ../sass/style.scss */
+/* line 746, ../sass/style.scss */
 .statement-list .meter-md {
   height: 95px;
   right: 20px;
   bottom: 10px;
 }
-/* line 710, ../sass/style.scss */
+/* line 750, ../sass/style.scss */
 .statement-list .meter-md img {
   height: 100%;
 }
 
 @media (max-width: 991px) {
-  /* line 716, ../sass/style.scss */
+  /* line 756, ../sass/style.scss */
   .statement-list .polygraph-list-block .meter-md {
     position: absolute;
     bottom: 10px;
     right: 20px;
   }
-  /* line 720, ../sass/style.scss */
+  /* line 760, ../sass/style.scss */
   .statement-list .polygraph-list-block .meter-md img {
     height: 100%;
   }
 }
 @media (min-width: 992px) {
-  /* line 730, ../sass/style.scss */
+  /* line 770, ../sass/style.scss */
   .polygraph-list .polygraph-list-before {
     display: table;
   }
-  /* line 732, ../sass/style.scss */
+  /* line 772, ../sass/style.scss */
   .polygraph-list .polygraph-list-before .block-content {
     display: table-row;
   }
-  /* line 734, ../sass/style.scss */
+  /* line 774, ../sass/style.scss */
   .polygraph-list .polygraph-list-before .block-content > div {
     display: table-cell;
     float: none;
@@ -1066,48 +1123,48 @@ input + .errors {
   }
 }
 @media (max-width: 991px) {
-  /* line 748, ../sass/style.scss */
+  /* line 788, ../sass/style.scss */
   .polygraph-list-block .block-content.float-right-img {
     padding-right: 20px;
     padding-bottom: 150px;
   }
-  /* line 752, ../sass/style.scss */
+  /* line 792, ../sass/style.scss */
   .polygraph-list-block .block-content .media {
     position: absolute;
     bottom: 20px;
   }
-  /* line 757, ../sass/style.scss */
+  /* line 797, ../sass/style.scss */
   .polygraph-list-block .meter-md {
     position: absolute;
     bottom: 20px;
     right: 0;
   }
-  /* line 761, ../sass/style.scss */
+  /* line 801, ../sass/style.scss */
   .polygraph-list-block .meter-md img {
     height: 150px;
   }
 }
 @media (max-width: 767px) {
-  /* line 771, ../sass/style.scss */
+  /* line 811, ../sass/style.scss */
   .polygraph-list-block .block-content.float-right-img {
     padding-bottom: 110px;
   }
-  /* line 775, ../sass/style.scss */
+  /* line 815, ../sass/style.scss */
   .polygraph-list-block .meter-md {
     right: 20px;
   }
-  /* line 777, ../sass/style.scss */
+  /* line 817, ../sass/style.scss */
   .polygraph-list-block .meter-md img {
     height: 100px;
   }
 }
-/* line 784, ../sass/style.scss */
+/* line 824, ../sass/style.scss */
 .btn-group-custom {
   position: absolute;
   top: -45px;
   right: 0;
 }
-/* line 788, ../sass/style.scss */
+/* line 828, ../sass/style.scss */
 .btn-group-custom .btn {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -1116,97 +1173,97 @@ input + .errors {
   border-radius: 0;
 }
 
-/* line 794, ../sass/style.scss */
+/* line 834, ../sass/style.scss */
 .about-statement h3 {
   margin-top: 0;
 }
-/* line 795, ../sass/style.scss */
+/* line 835, ../sass/style.scss */
 .about-statement p {
   margin-bottom: 2em;
 }
 
-/* line 799, ../sass/style.scss */
+/* line 839, ../sass/style.scss */
 .tag-list a {
   margin-bottom: 10px;
   margin-right: 10px;
 }
 
-/* line 805, ../sass/style.scss */
+/* line 845, ../sass/style.scss */
 footer {
   background-color: #cd5e26;
 }
-/* line 807, ../sass/style.scss */
+/* line 847, ../sass/style.scss */
 footer * {
   color: #FFF;
   line-height: 60px;
 }
-/* line 808, ../sass/style.scss */
+/* line 848, ../sass/style.scss */
 footer .container {
   margin-bottom: 0;
 }
-/* line 809, ../sass/style.scss */
+/* line 849, ../sass/style.scss */
 footer .footer-logo {
   font-size: 30px;
 }
-/* line 811, ../sass/style.scss */
+/* line 851, ../sass/style.scss */
 footer .footer-menu div {
   text-align: right;
 }
-/* line 813, ../sass/style.scss */
+/* line 853, ../sass/style.scss */
 footer .footer-menu div a:hover {
   color: #4c0000;
 }
 
 @media (max-width: 767px) {
-  /* line 820, ../sass/style.scss */
+  /* line 860, ../sass/style.scss */
   footer .footer-menu div {
     text-align: left;
   }
 }
-/* line 830, ../sass/style.scss */
+/* line 870, ../sass/style.scss */
 .sidebar-right .form-normal .form-control {
   padding: 6px 12px;
   height: 34px;
   font-size: 14px;
 }
-/* line 836, ../sass/style.scss */
+/* line 876, ../sass/style.scss */
 .sidebar-right ol {
   padding-left: 2em;
 }
-/* line 838, ../sass/style.scss */
+/* line 878, ../sass/style.scss */
 .sidebar-right ol li.form-group input.form-control {
   display: inline-block;
 }
-/* line 841, ../sass/style.scss */
+/* line 881, ../sass/style.scss */
 .sidebar-right form h1, .sidebar-right form h2 {
   margin-bottom: 30px;
 }
-/* line 843, ../sass/style.scss */
+/* line 883, ../sass/style.scss */
 .sidebar-right .add_more {
   float: right;
 }
 
-/* line 846, ../sass/style.scss */
+/* line 886, ../sass/style.scss */
 .sidebar .form-group textarea {
   max-width: 100%;
 }
 
-/* line 849, ../sass/style.scss */
+/* line 889, ../sass/style.scss */
 .add-another-inline-input-list {
   overflow: hidden;
   margin-top: 20px;
 }
-/* line 854, ../sass/style.scss */
+/* line 894, ../sass/style.scss */
 .add-another-inline-input-list .form-group {
   overflow: hidden;
 }
 
-/* line 858, ../sass/style.scss */
+/* line 898, ../sass/style.scss */
 .inline-reference-wrapper {
   position: relative;
 }
 
-/* line 862, ../sass/style.scss */
+/* line 902, ../sass/style.scss */
 #inline_overlay {
   background: url(../images/body-bg.png);
   opacity: 0.8;
@@ -1221,7 +1278,7 @@ footer .footer-menu div a:hover {
   border: solid 1px #DDD;
 }
 
-/* line 879, ../sass/style.scss */
+/* line 919, ../sass/style.scss */
 .autocomplete-light-widget .deck > span[data-value] {
   position: relative;
   width: 100%;
@@ -1236,66 +1293,66 @@ footer .footer-menu div a:hover {
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
-/* line 888, ../sass/style.scss */
+/* line 928, ../sass/style.scss */
 .autocomplete-light-widget .deck > span[data-value] img {
   margin: 0 0 0 0;
 }
-/* line 889, ../sass/style.scss */
+/* line 929, ../sass/style.scss */
 .autocomplete-light-widget .deck > span[data-value] .remove {
   background-position-y: 3px;
   height: 17px;
 }
-/* line 893, ../sass/style.scss */
+/* line 933, ../sass/style.scss */
 .autocomplete-light-widget .deck > span[data-value] .remove:hover {
   background-position-y: 3px;
 }
-/* line 896, ../sass/style.scss */
+/* line 936, ../sass/style.scss */
 .autocomplete-light-widget .deck > span[data-value] .reference-span {
   margin-left: 10px;
 }
 
-/* line 903, ../sass/style.scss */
+/* line 943, ../sass/style.scss */
 .form-group ul.tagit {
   width: 100%;
 }
 
-/* line 906, ../sass/style.scss */
+/* line 946, ../sass/style.scss */
 .field-container {
   overflow: hidden;
 }
 
-/* line 909, ../sass/style.scss */
+/* line 949, ../sass/style.scss */
 .sidebar .radio {
   padding-left: 0;
 }
 
-/* line 912, ../sass/style.scss */
+/* line 952, ../sass/style.scss */
 .tagit-hidden-field {
   display: none;
 }
 
-/* line 915, ../sass/style.scss */
+/* line 955, ../sass/style.scss */
 .media-list .prettyradio {
   display: table-row;
 }
 
-/* line 919, ../sass/style.scss */
+/* line 959, ../sass/style.scss */
 .media-list .prettyradio > * {
   display: table-cell;
 }
 
-/* line 923, ../sass/style.scss */
+/* line 963, ../sass/style.scss */
 .statement-meter .radio {
   padding-left: 0;
 }
 
-/* line 926, ../sass/style.scss */
+/* line 966, ../sass/style.scss */
 .statement-meter .radio .image-wrapper {
   margin-top: -11px;
   margin-right: 5px;
 }
 
-/* line 931, ../sass/style.scss */
+/* line 971, ../sass/style.scss */
 .statement-meter .prettyradio {
   padding-top: 11px;
   padding-left: 7px;
@@ -1305,7 +1362,7 @@ footer .footer-menu div a:hover {
   border-right: solid 5px #ffc092;
   margin-right: 5px;
 }
-/* line 938, ../sass/style.scss */
+/* line 980, ../sass/style.scss */
 .statement-meter .prettyradio label {
   margin-left: 2px;
 }

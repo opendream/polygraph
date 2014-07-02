@@ -637,6 +637,46 @@ input + .errors{
 	}
 }
 
+.nav.full-width {
+	margin: 10px 0;
+	li.dropdown {
+		width: 100%;
+		border: 1px solid #CCC;
+		@include border-radius(5px);
+		a {
+			background-color: #FFF;
+			&:hover { background-color: #FFF; } 
+			&.dropdown-toggle { font-size: 1.5em; }
+			.caret {
+				position: absolute;
+				right: 15px;
+				top: 50%;
+				margin-top: -4px;
+				border-top: 8px solid;
+				border-right: 8px solid transparent;
+				border-left: 8px solid transparent;
+			}
+		}
+		&.open a { color: $text-brown; }
+		ul.dropdown-menu {
+			width: 100%;
+			li.active,
+			li:hover {
+				a { 
+					color: #FFF;
+					background-color: $base_orange;
+				}
+			} 
+		}
+	}
+}
+
+@media (min-width: 992px) {
+	.nav-color {
+		float: right;
+	}
+}
+
 .polygraph-list {
 	&>header { position: relative; z-index: 2; overflow: visible; }
 	&>section { position: relative; z-index: 1; }
