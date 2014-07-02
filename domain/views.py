@@ -128,6 +128,10 @@ def topic_create(request, topic=None):
     topic = topic or Topic()
 
     if request.method == 'POST':
+
+        if request.POST.get('as_revision') is None or not int(request.POST.get('as_revision')):
+            request.POST['as_revision'] = None
+
         form = TopicEditForm(topic, Topic, request.POST)
 
         is_new = form.is_new()
@@ -137,7 +141,7 @@ def topic_create(request, topic=None):
             topic.description = form.cleaned_data['description']
             topic.created_by = request.user
 
-            as_revision = bool(form.cleaned_data['as_revision'])
+            as_revision = form.cleaned_data['as_revision']
             without_revision = not as_revision
 
             topic.save(without_revision=without_revision)
@@ -187,7 +191,7 @@ def topic_edit_from_statement(request, topic_id, statement_id):
     statement = get_object_or_404(Statement, pk=statement_id, topic_id=topic_id)
     response = topic_edit(request, topic_id)
 
-    if response.status_code == 302:
+    if response.status_code == 302 and request.POST.get('as_revision'):
         statement.save()
 
     return response

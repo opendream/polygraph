@@ -382,13 +382,16 @@ class TestEditTopic(TestCase):
 
         }
 
+        response = self.client.post(self.url1, params, follow=True)
+        self.assertContains(response, self.message_success)
+
 
     def test_edit_post_from_statement(self):
 
         params = {
             'title': self.topic1.title,
             'description': self.topic1.description,
-            'as_revision': True
+            'as_revision': 1
         }
 
         statement1 = factory.create_statement(topic=self.topic1)
@@ -407,13 +410,26 @@ class TestEditTopic(TestCase):
         self.assertEqual(statement2.changed, statement2_origin_changed)
 
 
+        params = {
+            'title': self.topic1.title,
+            'description': self.topic1.description,
+            'as_revision': 0
+        }
+
+        statement1_origin_changed = statement1.changed
+        self.client.post(reverse('topic_edit_from_statement', args=[self.topic1.id, statement1.id]), params, follow=True)
+        statement1 = Statement.objects.get(id=statement1.id)
+
+        self.assertEqual(statement1.changed, statement1_origin_changed)
+
+
 
     def test_post_edit_without_revision(self):
 
         params = {
             'title': self.topic1.title,
             'description': self.topic1.description,
-            'as_revision': False
+            'as_revision': 0
         }
 
         before_count = self.topic1.topicrevision_set.count()
@@ -470,7 +486,7 @@ class TestCreateTopic(TestEditTopic):
         params = {
             'title': self.topic1.title,
             'description': self.topic1.description,
-            'as_revision': False
+            'as_revision': 0
         }
 
         response = self.client.post(self.url1, params, follow=True)

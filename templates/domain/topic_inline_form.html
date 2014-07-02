@@ -87,7 +87,12 @@
 
             var params = {'_inline': '1'};
             input_list.each(function () {
-                params[$(this).attr('name')] = $(this).val();
+                if ($(this).attr('type') == 'checkbox') {
+                    params[$(this).attr('name')] = 0+$(this).prop('checked');
+                }
+                else {
+                    params[$(this).attr('name')] = $(this).val();
+                }
             });
 
             var topic_post_url = '{% if form.is_new %}{% url 'topic_create' %}{% else %}{% url 'topic_edit' form.inst.id %}{% endif %}';
