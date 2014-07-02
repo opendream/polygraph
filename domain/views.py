@@ -318,10 +318,12 @@ def statement_list(request):
         # If page is out of range (e.g. 9999), deliver last page of results.
         statement_list = paginator.page(paginator.num_pages)
 
+    from tagging.models import Tag
 
     return render(request, 'domain/statement_list.html', {
         'statement_list': statement_list,
-        'meter_list': Meter.objects.all().order_by('order')
+        'meter_list': Meter.objects.all().order_by('order'),
+        'tags_list': Tag.objects.all()
     })
 
 @statistic

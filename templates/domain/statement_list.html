@@ -53,95 +53,68 @@
         </section >
     </div>
 
+
+    {% if statement_list.paginator.page_range %}
     <ul class="pagination">
-        <li><a href="#">&laquo;</a></li>
-        <li><a href="#">‹</a></li>
-        <li class="active"><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#">›</a></li>
-        <li><a href="#">&raquo;</a></li>
+
+        {% if statement_list.has_previous %}
+        <li><a href="?page={{ statement_list.paginator.page_range|first }}">&laquo;</a></li>
+        <li><a href="?page={{ statement_list.previous_page_number }}">‹</a></li>
+        {% endif %}
+
+        {% for page_num in statement_list.paginator.page_range %}
+        {% if page_num <= statement_list.number|add:"2" and page_num >= statement_list.number|add:"-2" %}
+        <li{% if page_num == statement_list.number %} class="active"{% endif %}><a href="?page={{ page_num }}">{{ page_num }}</a></li>
+        {% endif %}
+        {% endfor %}
+
+        {% if statement_list.has_next %}
+        <li><a href="?page={{ statement_list.next_page_number }}">›</a></li>
+        <li><a href="?page={{ statement_list.paginator.page_range|last }}">&raquo;</a></li>
+        {% endif %}
     </ul>
+    {% endif %}
 
 {% endblock %}
 
 {% block sidebar %}
 
+    {% if tags_list.count %}
     <section>
         <header>
-            <h2>Block title 1</h2>
+            <h2>{% trans "Tags" %}</h2>
         </header>
         <div class="tag-list">
-            <a href="/" class="btn btn-default"><strong>จำนำข้าว</strong></a>
-            <a href="/" class="btn btn-default"><strong>รฟม.</strong></a>
-            <a href="/" class="btn btn-default"><strong>ธกส.</strong></a>
-            <a href="/" class="btn btn-default"><strong>สหยูเนี่ยน</strong></a>
-            <a href="/" class="btn btn-default"><strong>รถไฟความเร้วสูง</strong></a>
-            <a href="/" class="btn btn-default"><strong>จำนำข้าว</strong></a>
-            <a href="/" class="btn btn-default"><strong>รฟม.</strong></a>
-            <a href="/" class="btn btn-default"><strong>ธกส.</strong></a> 
-            <a href="/" class="btn btn-default"><strong>สหยูเนี่ยน</strong></a>
-            <a href="/" class="btn btn-default"><strong>รถไฟความเร้วสูง</strong></a>
-            <a href="/" class="btn btn-default"><strong>จำนำข้าว</strong></a>
-            <a href="/" class="btn btn-default"><strong>รฟม.</strong></a>
-            <a href="/" class="btn btn-default"><strong>ธกส.</strong></a> 
+            {% for tags in tags_list %}
+            <a href="{% url 'tags_detail' tags.id %}" class="btn btn-default"><strong>{{ tags.name }}</strong></a>
+            {% endfor %}
         </div>
     </section>
+    {% endif %}
 
+    {% if meter_list.count %}
     <section class="filter-by-status">
         <header>
             <h2>By Status</h2>
         </header>
         <div class="block">
             <ul class="media-list item-list block-content row">
+                {% for meter in meter_list %}
                 <li class="media">
                     <div class="item-inner">
-                        <a class="pull-left" href="#">
-                            <img class="media-object" src="/static/css/images/true-sm.png" alt="...">
+                        <a class="pull-left" href="{% url 'meter_detail' meter.permalink %}">
+                            {% image_render meter.image_small '87x105' meter.title %}
                         </a>
                         <div class="media-body">
-                            <h3 class="media-heading">True</h3>
-                            <a href="/people/2">ดูคำพูด "True" ทั้งหมด</a>
+                            <h3 class="media-heading">{{ meter.title }}</h3>
+                            <a href="{% url 'meter_detail' meter.permalink %}">{% trans "See all" %} "{{ meter.title }}" {% trans "statements" %}</a>
                         </div>
                     </div>
                 </li>
-                <li class="media">
-                    <div class="item-inner">
-                        <a class="pull-left" href="#">
-                            <img class="media-object" src="/static/css/images/false-sm.png" alt="...">
-                        </a>
-                        <div class="media-body">
-                            <h3 class="media-heading">False</h3>
-                            <a href="/people/2">ดูคำพูด "False" ทั้งหมด</a>
-                        </div>
-                    </div>
-                </li>
-                <li class="media">
-                    <div class="item-inner">
-                        <a class="pull-left" href="#">
-                            <img class="media-object" src="/static/css/images/tricky-sm.png" alt="...">
-                        </a>
-                        <div class="media-body">
-                            <h3 class="media-heading">Tricky</h3>
-                            <a href="/people/2">ดูคำพูด "Tricky" ทั้งหมด</a>
-                        </div>
-                    </div>
-                </li>
-                <li class="media">
-                    <div class="item-inner">
-                        <a class="pull-left" href="#">
-                            <img class="media-object" src="/static/css/images/cant-prove-sm.png" alt="...">
-                        </a>
-                        <div class="media-body">
-                            <h3 class="media-heading">Can't Prove</h3>
-                            <a href="/people/2">ดูคำพูด "Can't Prove" ทั้งหมด</a>
-                        </div>
-                    </div>
-                </li>
+                {% endfor %}
             </ul>
         </div>
     </section>
+    {% endif %}
 
 {% endblock %}
