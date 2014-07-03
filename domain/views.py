@@ -322,9 +322,8 @@ def statement_list(request):
         else:
             statement_list = statement_list.filter(Q(status__in=[STATUS_PUBLISHED])|Q(created_by=request.user, status__in=[STATUS_DRAFT, STATUS_PENDING]))
 
-
-
         statement_list = statement_list.extra(select={'uptodate': '%s(COALESCE(created_raw, "1000-01-01"), COALESCE(created, "1000-01-01"), COALESCE(changed, "1000-01-01"))' % settings.GREATEST_FUNCTION}).order_by('-uptodate')
+
 
     paginator = Paginator(statement_list, 10)
 

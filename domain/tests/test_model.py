@@ -338,14 +338,14 @@ class TestStatement(TestCase):
 
         self.assertEqual(statement3.created, None)
         self.assertEqual(statement3.changed, None)
-        self.assertEqual(statement3.uptodate_status, {'code': 'draft', 'text': _('Your Draft')})
+        self.assertEqual(statement3.uptodate_status, {'code': 'draft', 'text': _('Draft')})
 
         last_update_statement3 = timezone.now()
         statement3.status = STATUS_PENDING
         statement3.save()
         self.assertTrue(statement3.created >= last_update_statement3)
         self.assertEqual(statement3.changed, None)
-        self.assertEqual(statement3.uptodate_status, {'code': 'pending', 'text': _('Pending Review')})
+        self.assertEqual(statement3.uptodate_status, {'code': 'pending', 'text': _('Pending')})
 
         last_update_statement3 = statement3.created
         statement3.status = STATUS_PUBLISHED
@@ -360,7 +360,7 @@ class TestStatement(TestCase):
         statement4 = factory.create_statement(status=STATUS_PENDING)
         self.assertTrue(statement4.created >= last_update_statement3)
         self.assertEqual(statement4.changed, None)
-        self.assertEqual(statement4.uptodate_status, {'code': 'pending', 'text': _('Pending Review')})
+        self.assertEqual(statement4.uptodate_status, {'code': 'pending', 'text': _('Pending')})
 
         last_update_statement4 = timezone.now()
         statement4.status = STATUS_PUBLISHED
