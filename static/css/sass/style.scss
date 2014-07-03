@@ -747,10 +747,10 @@ input + .errors{
 		right: 20px;
 	}
 }
-.statement-list {
+.polygraph-list.statement-list {
 	.block-content {
 		padding-bottom: 0;
-		border-bottom: 75px solid #F2F2F2;
+		border-bottom: 85px solid #F2F2F2;
 		position: initial;
 		.quote {
 			font-size: 18px;
@@ -758,18 +758,13 @@ input + .errors{
 		.media {
 			position: absolute;
 			bottom: 10px;
-			a.pull-left {
-				width: 40px;
-				height: 40px;
-			}
-			img { width: 100%; }
+			width: 100%;
+			padding-right: 160px;
 		}
 	}
 	.meter-md {
-		height: 95px;
 		right: 20px;
 		bottom: 10px;
-		img { height: 100%; }
 	}
 }
 @media (max-width: 991px) {
@@ -848,7 +843,15 @@ input + .errors{
 @media (max-width: 400px) {
 	.float-right-img {
 		.pull-left { width: 100%; }
-		// .media-body { float: left; }
+	}
+	.statement-list .polygraph-list-block {
+		.block-content { border-bottom: 115px solid #F2F2F2; }
+		.block-content .media { 
+			position: relative;
+			padding-right: 0;
+			bottom: 0;
+			margin-bottom: 15px;
+		}
 	} 
 }
 .btn-group-custom {
