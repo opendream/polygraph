@@ -205,11 +205,23 @@ FILES_WIDGET_TEMP_DIR = 'temp/files_widget/'
 #FILES_WIDGET_JQUERY_UI_PATH = 'libs/jquery-ui/js/jquery-ui-1.10.4.min.js'
 
 DEFAULT_IMAGE = '%simages/default.png' % STATIC_URL
-UPTODATE_DAYS = 7
+
 GREATEST_FUNCTION = 'GREATEST'
 
 TAGGING_AUTOCOMPLETE_JQUERY_UI_FILE = 'libs/jquery-ui/js/jquery-ui-1.10.4.min.js'
 TAGGING_AUTOCOMPLETE_MAX_TAGS = 9999
+
+
+# CUSTOM POLYGRAPH PROJECT #############################
+
+UPTODATE_DAYS = 7
+CONTACT_HTML = '''
+<header>
+    <h2>Contact Us</h2>
+</header>
+<p>Please, edit me. We don't know who you are<a href="mailto:webmaster@example.com">info@polygraph.ex</a></p>
+'''
+
 
 # DEBUG MODE ##################################################################
 if DEBUG:

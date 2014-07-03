@@ -14,7 +14,7 @@ from common.decorators import statistic
 from common.functions import people_render_reference, topic_render_reference, statement_render_reference, process_status, \
     get_success_message
 from domain.forms import PeopleEditForm, TopicEditForm, StatementEditForm, ReferenceForm
-from domain.models import People, Topic, Statement, Meter
+from domain.models import People, Topic, Statement, Meter, PeopleCategory
 
 
 # =============================
@@ -76,7 +76,7 @@ def home(request):
 
     statement_list = statement_list.exclude(id__in=[s.id for s in hilight_statement]).order_by('-promote', '-uptodate')
 
-    meter_statement_list = [(False, statement_list[0:4])]
+    meter_statement_list = [({'title': 'Latest'}, statement_list[0:4])]
     for meter in meter_list:
 
         meter_statement = statement_list.filter(meter=meter)[0:3]
@@ -91,6 +91,7 @@ def home(request):
         'meter_statement_count': meter_statement_count,
         'meter_statement_list': meter_statement_list,
         'tags_list': tags_list,
+        'contact_html': settings.CONTACT_HTML
     })
 
 
@@ -168,17 +169,21 @@ def people_edit(request, people_id=None):
 
 def people_detail(request, people_permalink):
 
-    #people = get_object_or_404(Statement, permalink=people_permalink)
+    people = get_object_or_404(Statement, permalink=people_permalink)
 
     return render(request, 'domain/people_detail.html', {
-        'people': None
+        'people': people
     })
 
 
 def people_list(request):
 
+    people_list = People.objects.all().order_by('-quoted_by__created')
+    category_list = PeopleCategory.objects.all()
+
     return render(request, 'domain/people_list.html', {
-        'people_list': []
+        'people_list': people_list,
+        'category_list': category_list
     })
 
 
