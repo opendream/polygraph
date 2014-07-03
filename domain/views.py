@@ -112,6 +112,11 @@ def people_detail(request, people_id):
 
     return HttpResponse('Fix me !!')
 
+def people_list(request):
+
+    return render(request, 'domain/people_list.html', {
+        people_list: []
+    })
 
 
 def tags_detail(request, tags_id):
@@ -304,6 +309,17 @@ def statement_edit(request, statement_id=None):
     return statement_create(request, statement)
 
 
+@statistic
+def statement_detail(request, statement_permalink):
+
+    statement = get_object_or_404(Statement, permalink=statement_permalink)
+
+    return render(request, 'domain/statement_detail.html', {
+        'statement': statement,
+        'meter_list': Meter.objects.all().order_by('order')
+    })
+
+
 def statement_list(request):
 
     statement_list = Statement.objects.all()
@@ -343,14 +359,4 @@ def statement_list(request):
         'statement_list': statement_list,
         'meter_list': Meter.objects.all().order_by('order'),
         'tags_list': Tag.objects.all()
-    })
-
-@statistic
-def statement_detail(request, statement_permalink):
-
-    statement = get_object_or_404(Statement, permalink=statement_permalink)
-
-    return render(request, 'domain/statement_detail.html', {
-        'statement': statement,
-        'meter_list': Meter.objects.all().order_by('order')
     })
