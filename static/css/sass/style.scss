@@ -1035,6 +1035,18 @@ footer {
     }
 }
 
+.people-list {
+	.dropdown {
+		position: absolute;
+		top: 30px;
+		right: 0;
+	}
+	.pull-left { margin-right: 20px; }
+	.media-body h3 { margin-top: 0; }
+	ul li {
+		margin: 15px 0;
+	}
+
 .inst-frontpage {
     border: solid 1px #c6c6c6;
     border-radius: 4px;

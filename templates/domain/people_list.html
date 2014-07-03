@@ -5,5 +5,57 @@
 {% block title %}{% trans "People List" %}{% endblock %}
 
 {% block content %}
-Fix me!!
+
+
+	<div class="row people-list">
+
+		<div class="dropdown">
+		  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+		    All
+		    <span class="caret"></span>
+		  </button>
+		  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+		    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Politician</a></li>
+		    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Goverment Officer</a></li>
+		    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Citizen</a></li>
+		  </ul>
+		</div>
+
+		<ul class="list-unstyled">
+			<li class="col-xs-12 col-md-6">
+				<div class="block block-no-border">
+    	            <div class="media block-content">
+    	                <a class="pull-left" href="#">
+    	                    <img class="media-object" src="/static/css/images/people-1-lg.png" alt="..." width="122" height="122">
+    	                </a>
+    	                <div class="media-body">
+    	                    <h3><a href="/" class="media-heading">สุเทพ เทือกสุบรรณ</a></h3>
+    	                    <p>หัวหน้าพรรครักประเทศไทย<p>
+    	                </div>
+    	            </div>
+				</div>
+			</li>
+			<li class="col-xs-12 col-md-6">
+				<div class="block block-no-border">
+    	            <div class="media block-content">
+    	                <a class="pull-left" href="#">
+    	                    <img class="media-object" src="/static/css/images/people-1-lg.png" alt="...">
+    	                </a>
+    	                <div class="media-body">
+    	                    <h3><a href="/" class="media-heading">สุเทพ เทือกสุบรรณ</a></h3>
+    	                    <p>หัวหน้าพรรครักประเทศไทย<p>
+    	                </div>
+    	            </div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<ul class="pagination">
+		<li class="active"><a href="?page=1">1</a></li>
+		<li><a href="?page=2">2</a></li>
+		<li><a href="?page=3">3</a></li>
+		<li><a href="?page=2">›</a></li>
+        <li><a href="?page=4">»</a></li>
+    </ul>
+
 {% endblock %}
