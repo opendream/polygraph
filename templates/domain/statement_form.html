@@ -6,7 +6,15 @@
 {% include 'autocomplete_light/static.html' %}
 {% endblock %}
 
-{% block title %}{% if form.is_new %}{% trans "Create" %}{% else %}{% trans "Edit" %}{% endif %} {{ form.inst.inst_name }}{% endblock %}
+{% block title %}
+{% if form.is_new %}{% trans "Create" %}{% else %}{% trans "Edit" %}{% endif %}{{ form.inst.inst_name }}
+{% if not form.is_new %}
+<a href="{% url 'statement_detail' form.inst.permalink %}" class="btn btn-default btn-xs btn-view">
+    <span class="glyphicon glyphicon-eye-open"></span> {% trans "View result" %}
+</a>
+{% endif %}
+
+{% endblock %}
 
 {% block before_wrapper %}
 <form method="post" role="form" enctype="multipart/form-data">
@@ -251,7 +259,7 @@
 <div class="controls form-group">
     <div class="col-sm-offset-2-bnk field-container form-action">
         <button class="btn btn-primary" type="submit">{% if form.is_new %}{% trans "Save new" %}{% else %}{% trans "Save changes" %}{% endif %}</button>
-        <a href="{% url 'home' %}" class="btn btn-cancle flat-btn">{% trans "Cancel" %}</a>
+        <a href="." class="btn btn-cancle flat-btn">{% trans "Cancel" %}</a>
 
         {% if not form.is_new %}
         <a class="btn btn-delete" href="{% url 'domain_delete' 'topic' form.inst.id %}">{% trans "Delete" %}</a>

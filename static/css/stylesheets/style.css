@@ -1397,3 +1397,9 @@ footer .footer-menu div a:hover {
   padding: 10px 15px;
   border-bottom: solid 1px #c6c6c6;
 }
+
+/* line 1016, ../sass/style.scss */
+.btn-view {
+  float: right;
+  margin-top: 12px;
+}
