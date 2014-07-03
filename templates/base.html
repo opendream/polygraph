@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load activelink %}
 {% load common_tags %}
 <!doctype html>
 <html>
@@ -63,10 +64,10 @@
                     </div>
                     <div class="navbar-collapse collapse" style="height: 1px;">
                         <ul class="nav navbar-nav navbar-right">
-                            <li class="active"><a href="{% url 'home' %}">{% trans "Home" %}</a></li>
-                            <li><a href="{% url 'statement_list' %}">{% trans "Statement" %}</a></li>
-                            <li><a href="/">{% trans "People" %}</a></li>
-                            <li><a href="/">{% trans "Polygraph" %}</a></li>
+                            <li{% ifactive 'home' %} class="active"{% endifactive %}><a href="{% url 'home' %}">{% trans "Home" %}</a></li>
+                            <li{% ifactive 'statement_list' %} class="active"{% endifactive %}><a href="{% url 'statement_list' %}">{% trans "Statement" %}</a></li>
+                            <li{% ifactive 'people_list' %} class="active"{% endifactive %}><a href="{% url 'people_list' %}">{% trans "People" %}</a></li>
+                            <li{% ifactive 'meter_list' %} class="active"{% endifactive %}><a href="{% url 'meter_list' %}">{% trans "Polygraph" %}</a></li>
                         </ul>
                         <ul class="nav navbar-nav sec-menu visible-xs">
                             <li class="active"><a href="/">About us</a></li>
