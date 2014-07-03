@@ -106,16 +106,19 @@ def people_edit(request, people_id=None):
     return people_create(request, people)
 
 
-def people_detail(request, people_id):
+def people_detail(request, people_permalink):
 
-    people = get_object_or_404(Statement, permalink=people_permalink)
+    #people = get_object_or_404(Statement, permalink=people_permalink)
 
-    return HttpResponse('Fix me !!')
+    return render(request, 'domain/people_detail.html', {
+        'people': None
+    })
+
 
 def people_list(request):
 
     return render(request, 'domain/people_list.html', {
-        people_list: []
+        'people_list': []
     })
 
 
