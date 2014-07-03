@@ -527,7 +527,7 @@ input + .errors{
 	position: relative;
 	overflow: hidden;
 	background-color: $soft_orange;
-	&.block-content { padding: 15px 20px 20px 20px; }
+	&.block-content { padding: 15px 20px 0 20px; }
 	.media {
 		overflow: hidden;
 		margin-top: 20px;
@@ -536,30 +536,21 @@ input + .errors{
 	.meter {
 		text-align: right;
 		padding-right: 0;
-		// margin-bottom: -20px;
-		
+		margin-top: 20px;
 		// img { height: 100%; max-height: 140px;}
-	}
-}
-@media (max-width: 768px) {
-	.who-said {
-		.meter {
-			// padding-right: 0;
-			// height: 100%;
-			// img {width: 95%;}
-		}	
 	}
 }
 @media (max-width: 600px) {
 	.who-said {
 		&.block-content { padding: 25px 20px 0 20px; }
+		.media { margin-top: 10px; }
+		.meter { margin-top: 0; }
 	}
 }
 @media (max-width: 540px) {
 	.who-said {
 		.media {
 			padding-left: 0;
-			margin-top: 0;
 			a.pull-left {
 				width: 75px;
 				img { width: 100% }
@@ -568,6 +559,25 @@ input + .errors{
 				margin-top: 0;
 				font-size: 95%;
 			}
+		}
+	}
+}
+// hilight statement landscape iPhone
+@media (max-width: 479px) {
+	.highlight-statement {
+		.block-quote {
+			padding: 30px 0 30px;
+			* { line-height: 1.5; }
+		}
+	}
+	.who-said {
+		.media { 
+			width: 100%;
+			padding: 0 15px 15px 0; }
+		.meter { 
+			width: 100%; 
+			padding-left: 0;
+			text-align: center;
 		}
 	}
 }
@@ -727,7 +737,7 @@ input + .errors{
 .polygraph-list-block {
 	.block-content {
 		&.float-right-img {
-			padding-right: 250px;
+			padding-right: 270px;
 			img { width: 40px; height: 40px; }
 		}
 	}
@@ -804,6 +814,8 @@ input + .errors{
 			.media {
 				position: absolute;
 				bottom: 20px;
+				width: 100%;
+				padding-right: 160px;
 			}
 		}
 		.meter-md {
@@ -815,6 +827,7 @@ input + .errors{
 			}
 		}
 	}
+	.polygraph-list-before .desc { padding: 0; }
 }
 
 @media (max-width: 767px) {
@@ -832,7 +845,12 @@ input + .errors{
 		}
 	}
 }
-
+@media (max-width: 400px) {
+	.float-right-img {
+		.pull-left { width: 100%; }
+		// .media-body { float: left; }
+	} 
+}
 .btn-group-custom {
 	position: absolute;
 	top: -45px;
