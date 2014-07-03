@@ -160,7 +160,7 @@ def create_meter(permalink=None, title='', description='', point=0, order=0, ima
     return meter
 
 
-def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', references=None, status=STATUS_PENDING, topic=None, tags='hello world', meter=None, relate_statements=[], relate_peoples=[], published=None, published_by=None, source='', created=None, created_raw=None, changed=None, use_log_description=False):
+def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', references=None, status=STATUS_PENDING, topic=None, tags='hello world', meter=None, relate_statements=[], relate_peoples=[], published=None, published_by=None, source='', created=None, created_raw=None, changed=None, use_log_description=False, hilight=False, promote=False):
 
     created_by_list = list(Staff.objects.all()) or [None]
     created_by = created_by or random.choice(created_by_list) or create_staff()
@@ -196,7 +196,9 @@ def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', 
         source=source,
         created=created,
         created_raw=created_raw,
-        changed=changed
+        changed=changed,
+        hilight=hilight,
+        promote=promote
     )
 
     for relate_statement in relate_statements:

@@ -1374,13 +1374,26 @@ footer .footer-menu div a:hover {
   right: 0;
   padding: 10px 10px 0 10px;
   color: #555;
+  z-index: 1;
 }
-/* line 993, ../sass/style.scss */
+/* line 994, ../sass/style.scss */
 .staff-link-wrapper ul {
   list-style: none;
   padding-left: 0px;
 }
-/* line 998, ../sass/style.scss */
+/* line 999, ../sass/style.scss */
 .staff-link-wrapper a {
   color: #555;
+}
+
+/* line 1004, ../sass/style.scss */
+.inst-frontpage {
+  border: solid 1px #c6c6c6;
+  border-radius: 4px;
+}
+/* line 1008, ../sass/style.scss */
+.inst-frontpage > label {
+  display: block;
+  padding: 10px 15px;
+  border-bottom: solid 1px #c6c6c6;
 }

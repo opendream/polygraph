@@ -204,7 +204,25 @@
                 {% endif %}
             </div>
         </div>
-        
+
+        <div class="controls form-group inst-frontpage">
+            <label>{% trans "Front page settings" %}</label>
+            <div class="field-container checkbox">
+                <input{% if form.hilight.value %} checked=checked{% endif %} id="id_{{ form.hilight.name }}" type="checkbox" name="{{ form.hilight.name }}" value="1" />
+                <label for="id_{{ form.hilight.name }}">{% trans "Hilight" %}</label>
+                {% if form.hilight.errors %}
+                <div class="errors alert alert-danger">{{ form.hilight.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="field-container checkbox">
+                <input{% if form.promote.value %} checked=checked{% endif %} id="id_{{ form.promote.name }}" type="checkbox" name="{{ form.promote.name }}" value="1" />
+                <label for="id_{{ form.promote.name }}">{% trans "Promote" %}</label>
+                {% if form.promote.errors %}
+                <div class="errors alert alert-danger">{{ form.promote.errors }}</div>
+                {% endif %}
+            </div>
+        </div>
+
     </div>
 
 </section>

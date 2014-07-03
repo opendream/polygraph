@@ -989,6 +989,7 @@ footer {
     right: 0;
     padding: 10px 10px 0 10px;
     color: #555;
+    z-index: 1;
 
     ul {
         list-style: none;
@@ -997,5 +998,17 @@ footer {
     }
     a {
         color: #555;
+    }
+}
+
+.inst-frontpage {
+    border: solid 1px #c6c6c6;
+    border-radius: 4px;
+
+    &>label {
+        display: block;
+
+        padding: 10px 15px;
+        border-bottom: solid 1px #c6c6c6;
     }
 }

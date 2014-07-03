@@ -187,5 +187,11 @@ class StatisitcAccess(models.Model):
 
         super(StatisitcAccess, self).save(*args, **kwargs)
 
+'''
+class Variable(models.Model):
 
+    name = models.CharField(max_length=60, unique=True)
+    value = models.TextField(null=True, blank=True)
+
+'''
 

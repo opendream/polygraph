@@ -608,6 +608,9 @@ class TestEditStatement(TestCase):
         self.assertContains(response, 'name="relate_statements"')
         self.assertContains(response, 'name="relate_peoples"')
         self.assertContains(response, 'name="status"')
+        self.assertContains(response, 'name="hilight"')
+        self.assertContains(response, 'name="promote"')
+
         self.assertContains(response, self.title)
         self.assertContains(response, self.button)
 
@@ -654,7 +657,10 @@ class TestEditStatement(TestCase):
             'relate_statements': [relate_statement.id for relate_statement in self.relate_statements1],
             'relate_peoples': [relate_people.id for relate_people in self.relate_peoples1],
             'status': self.statement1.status,
-            'source': self.statement1.source
+            'source': self.statement1.source,
+            'hilight': self.statement1.hilight,
+            'promote': self.statement1.promote,
+
         }
         params.update(self.references2)
 
@@ -676,6 +682,9 @@ class TestEditStatement(TestCase):
         self.assertEqual(int(response.context['form'].initial['status']), self.statement1.status)
         self.assertEqual(int(response.context['form'].initial['topic']), self.statement1.topic_id)
         self.assertEqual(int(response.context['form'].initial['meter']), self.statement1.meter_id)
+        self.assertEqual(int(response.context['form'].initial['hilight']), self.statement1.hilight)
+        self.assertEqual(int(response.context['form'].initial['promote']), self.statement1.promote)
+
         self.assertEqual(list(response.context['form'].initial['relate_statements']), self.relate_statements1)
         self.assertEqual(list(response.context['form'].initial['relate_peoples']), self.relate_peoples1)
 
