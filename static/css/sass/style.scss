@@ -1032,3 +1032,16 @@ footer {
         color: #555;
     }
 }
+
+.people-list {
+	.dropdown {
+		position: absolute;
+		top: 30px;
+		right: 0;
+	}
+	.pull-left { margin-right: 20px; }
+	.media-body h3 { margin-top: 0; }
+	ul li {
+		margin: 15px 0;
+	}
+}

@@ -1426,3 +1426,22 @@ footer .footer-menu div a:hover {
 .staff-link-wrapper a {
   color: #555;
 }
+
+/* line 1037, ../sass/style.scss */
+.people-list .dropdown {
+  position: absolute;
+  top: 30px;
+  right: 0;
+}
+/* line 1042, ../sass/style.scss */
+.people-list .pull-left {
+  margin-right: 20px;
+}
+/* line 1043, ../sass/style.scss */
+.people-list .media-body h3 {
+  margin-top: 0;
+}
+/* line 1044, ../sass/style.scss */
+.people-list ul li {
+  margin: 15px 0;
+}
