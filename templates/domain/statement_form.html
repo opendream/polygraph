@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block title %}
-{% if form.is_new %}{% trans "Create" %}{% else %}{% trans "Edit" %}{% endif %}{{ form.inst.inst_name }}
+{% if form.is_new %}{% trans "Create" %}{% else %}{% trans "Edit" %}{% endif %} {{ form.inst.inst_name }}
 {% if not form.is_new %}
 <a href="{% url 'statement_detail' form.inst.permalink %}" class="btn btn-default btn-xs btn-view">
     <span class="glyphicon glyphicon-eye-open"></span> {% trans "View result" %}

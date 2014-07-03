@@ -2,12 +2,13 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.db.models import Q
+from django.db.models import Q, Count
 from django.forms.formsets import formset_factory
 from django.http import Http404, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from tagging.models import Tag, TaggedItem
 from common.constants import STATUS_PUBLISHED, STATUS_DRAFT, STATUS_PENDING
 from common.decorators import statistic
 from common.functions import people_render_reference, topic_render_reference, statement_render_reference, process_status, \
@@ -15,10 +16,6 @@ from common.functions import people_render_reference, topic_render_reference, st
 from domain.forms import PeopleEditForm, TopicEditForm, StatementEditForm, ReferenceForm
 from domain.models import People, Topic, Statement, Meter
 
-
-def home(request):
-
-    return render(request, 'domain/home.html', {})
 
 # =============================
 # Global
@@ -36,6 +33,65 @@ def domain_delete(request, inst_name, id):
 
     messages.success(request, _('Your %s has been deleted.') % inst_name)
     return redirect('home')
+
+
+
+def statement_query_base(is_anonymous=True, is_staff=False, user=None):
+
+    statement_list = Statement.objects.all()
+
+    if is_anonymous:
+        statement_list = statement_list.exclude(status__in=[STATUS_DRAFT, STATUS_PENDING])
+
+        statement_list = statement_list.extra(select={'uptodate': '%s(COALESCE(created, "1000-01-01"), COALESCE(changed, "1000-01-01"))' % settings.GREATEST_FUNCTION})
+
+
+    else:
+
+        if is_staff:
+            statement_list = statement_list.filter(Q(status__in=[STATUS_PUBLISHED, STATUS_PENDING])|Q(created_by=user))
+
+        else:
+            statement_list = statement_list.filter(Q(status__in=[STATUS_PUBLISHED])|Q(created_by=user, status__in=[STATUS_DRAFT, STATUS_PENDING]))
+
+        statement_list = statement_list.extra(select={'uptodate': '%s(COALESCE(created_raw, "1000-01-01"), COALESCE(created, "1000-01-01"), COALESCE(changed, "1000-01-01"))' % settings.GREATEST_FUNCTION})
+
+    return statement_list
+
+
+# =============================
+# Home
+# =============================
+
+def home(request):
+
+    statement_list = statement_query_base(is_anonymous=True)
+
+    hilight_statement = statement_list.order_by('-hilight', '-promote', '-uptodate')[0:1]
+
+
+    meter_list = Meter.objects.all().order_by('order')
+
+    meter_statement_count = [(meter, meter.statement_set.count()) for meter in meter_list]
+
+    statement_list = statement_list.exclude(id__in=[s.id for s in hilight_statement]).order_by('-promote', '-uptodate')
+
+    meter_statement_list = [(False, statement_list[0:4])]
+    for meter in meter_list:
+
+        meter_statement = statement_list.filter(meter=meter)[0:3]
+        meter_statement_list.append((meter, meter_statement))
+
+    tags_list = Tag.objects.usage_for_model(Statement, counts=True)
+    tags_list.sort(key=Count, reverse=True)
+    tags_list = tags_list[0:15]
+
+    return render(request, 'domain/home.html', {
+        'hilight_statement': hilight_statement,
+        'meter_statement_count': meter_statement_count,
+        'meter_statement_list': meter_statement_list,
+        'tags_list': tags_list,
+    })
 
 
 # =============================
@@ -359,26 +415,12 @@ def statement_detail(request, statement_permalink):
     })
 
 
+
+
 def statement_list(request):
 
-    statement_list = Statement.objects.all()
-
-    if request.user.is_anonymous():
-        statement_list = statement_list.exclude(status__in=[STATUS_DRAFT, STATUS_PENDING])
-
-        statement_list = statement_list.extra(select={'uptodate': '%s(COALESCE(created, "1000-01-01"), COALESCE(changed, "1000-01-01"))' % settings.GREATEST_FUNCTION}).order_by('-uptodate')
-
-
-    else:
-
-        if request.user.is_staff:
-            statement_list = statement_list.filter(Q(status__in=[STATUS_PUBLISHED, STATUS_PENDING])|Q(created_by=request.user))
-
-        else:
-            statement_list = statement_list.filter(Q(status__in=[STATUS_PUBLISHED])|Q(created_by=request.user, status__in=[STATUS_DRAFT, STATUS_PENDING]))
-
-        statement_list = statement_list.extra(select={'uptodate': '%s(COALESCE(created_raw, "1000-01-01"), COALESCE(created, "1000-01-01"), COALESCE(changed, "1000-01-01"))' % settings.GREATEST_FUNCTION}).order_by('-uptodate')
-
+    statement_list = statement_query_base(request.user.is_anonymous(), request.user.is_staff, request.user)
+    statement_list.order_by('-uptodate')
 
     paginator = Paginator(statement_list, 10)
 
