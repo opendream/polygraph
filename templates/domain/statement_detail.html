@@ -20,11 +20,17 @@
     <article class="block">
         <section class="highlight-statement block-content">
 
+            {% if user.is_staff or user == statement.created_by %}
             <div class="staff-link-wrapper">
                 <ul>
-                    <li><a href="{% url 'statement_edit' statement.id %}">{% trans "Edit" %}</a></li>
+                    <li>
+                        <a href="{% url 'statement_edit' statement.id %}" class="btn btn-default btn-xs">
+                            <span class="glyphicon glyphicon-edit"></span> {% trans "Edit" %}
+                        </a>
+                    </li>
                 </ul>
             </div>
+            {% endif %}
 
             <header>
                 <h2 class="hidden">{% trans "Statement" %}</h2>

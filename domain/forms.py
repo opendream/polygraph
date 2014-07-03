@@ -93,4 +93,5 @@ class StatementEditForm(PermalinkForm):
     )
 
     status = forms.ChoiceField(required=False, widget=forms.RadioSelect(attrs={'id': 'id_status'}), choices=STATUS_CHOICES)
-
+    hilight = forms.NullBooleanField(required=False, widget=forms.CheckboxInput(attrs={'id': 'id_hilight'}))
+    promote = forms.NullBooleanField(required=False, widget=forms.CheckboxInput(attrs={'id': 'id_promote'}))

@@ -20,9 +20,9 @@ def home(request):
 
     return render(request, 'domain/home.html', {})
 
-
-
-# Staff form ===========================================================================
+# =============================
+# Global
+# =============================
 
 @login_required
 def domain_delete(request, inst_name, id):
@@ -37,6 +37,10 @@ def domain_delete(request, inst_name, id):
     messages.success(request, _('Your %s has been deleted.') % inst_name)
     return redirect('home')
 
+
+# =============================
+# People
+# =============================
 
 @login_required
 def people_create(request, people=None):
@@ -122,15 +126,38 @@ def people_list(request):
     })
 
 
+# =============================
+# Tags
+# =============================
+
 def tags_detail(request, tags_id):
 
-    return HttpResponse('Fix me !!')
+    return render(request, 'domain/tags_detail.html', {
+        'tags': None,
+        'statement_list': []
+    })
 
+
+# =============================
+# Meter
+# =============================
 
 def meter_detail(request, meter_permalink):
 
-    return HttpResponse('Fix me !!')
+    return render(request, 'domain/meter_detail.html', {
+        'meter': None,
+        'statement_list': []
+    })
 
+
+def meter_list(request):
+
+    return meter_detail(request, '')
+
+
+# =============================
+# Topic
+# =============================
 
 @login_required
 def topic_create(request, topic=None):
@@ -211,6 +238,10 @@ def topic_detail(request, topic_id):
     return HttpResponse('Fixed me !!')
 
 
+# =============================
+# Statement
+# =============================
+
 @login_required
 def statement_create(request, statement=None):
 
@@ -239,6 +270,9 @@ def statement_create(request, statement=None):
 
             status = int(form.cleaned_data['status'])
             statement.status = process_status(request.user, status) if not statement.published else status
+
+            statement.hilight = form.cleaned_data['hilight']
+            statement.promote = form.cleaned_data['promote']
 
             if not statement.published and statement.status == STATUS_PUBLISHED:
                 statement.published = timezone.now()
@@ -286,6 +320,8 @@ def statement_create(request, statement=None):
             'topic': statement.topic_id,
             'tags': statement.tags,
             'meter': statement.meter_id or Meter.objects.get(permalink='unverifiable').id,
+            'hilight': statement.hilight,
+            'promote': statement.promote
         }
 
         if statement.id:

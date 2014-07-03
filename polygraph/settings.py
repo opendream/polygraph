@@ -48,7 +48,7 @@ INSTALLED_APPS = (
     'autocomplete_light',
     'tagging',
     'tagging_autocomplete_tagit',
-
+    'activelink',
 
     # Project
     'common',
@@ -75,6 +75,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     'django.core.context_processors.tz',
     'django.contrib.messages.context_processors.messages',
+    'django.core.context_processors.request',
 
     'common.context_processors.helper'
 )

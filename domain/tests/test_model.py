@@ -235,7 +235,9 @@ class TestStatement(TestCase):
             topic=self.topic1,
             tags='hello, world',
             meter=self.meter1,
-            source='jupiter page 13'
+            source='jupiter page 13',
+            hilight=False,
+            promote=True
         )
         for relate_statement in self.relate_statements1:
             statement1.relate_statements.add(relate_statement)
@@ -256,6 +258,8 @@ class TestStatement(TestCase):
         self.assertEqual(statement1.published, None)
         self.assertEqual(statement1.published_by, None)
         self.assertEqual(statement1.source, 'jupiter page 13')
+        self.assertEqual(statement1.hilight, False)
+        self.assertEqual(statement1.promote, True)
 
 
 
@@ -276,8 +280,9 @@ class TestStatement(TestCase):
             topic=self.topic2,
             tags='hello, new year',
             meter=self.meter2,
-            source='sun page 10010'
-
+            source='sun page 10010',
+            hilight=True,
+            promote=False
         )
         for relate_sattement in self.relate_statements2:
             statement2.relate_statements.add(relate_sattement)
@@ -298,6 +303,8 @@ class TestStatement(TestCase):
         self.assertEqual(statement2.published, None)
         self.assertEqual(statement2.published_by, None)
         self.assertEqual(statement2.source, 'sun page 10010')
+        self.assertEqual(statement2.hilight, True)
+        self.assertEqual(statement2.promote, False)
 
         self.assertEqual(4, TaggedItem.objects.filter(content_type__name='statement').count())
         self.assertEqual(3, Tag.objects.all().count())

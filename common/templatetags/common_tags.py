@@ -2,7 +2,7 @@ from django import template
 from django.utils import translation
 from common.functions import topic_render_reference, image_render
 from domain.models import Topic
-from common.constants import THAI_MONTH_NAME, THAI_MONTH_ABBR_NAME
+from common.constants import *
 
 
 register = template.Library()
@@ -44,21 +44,28 @@ def do_image_render(image, size, alt='no alt'):
 
 @register.filter(name='format_date')
 def do_format_date(datetime):
-    if translation.get_language() == 'th':
-        try:
-            return unicode('%d %s %d', 'utf-8') % (datetime.day, unicode(THAI_MONTH_NAME[datetime.month], 'utf-8'), datetime.year + 543)
-        except:
-            return ''
-    else:
+
+    try:
+        lcode = translation.get_language().upper()
+        code_month_name = eval('%s_MONTH_NAME' % lcode)
+        code_year_plus = eval('%s_YEAR_PLUS' % lcode)
+
+        return unicode('%d %s %d', 'utf-8') % (datetime.day, unicode(code_month_name[datetime.month], 'utf-8'), datetime.year + code_year_plus)
+
+    except:
+
         return datetime.strftime('%B %d, %Y')
 
 
 @register.filter(name='format_abbr_date')
 def do_format_abbr_date(datetime):
-    if translation.get_language() == 'th':
-        try:
-            return unicode('%d %s %d', 'utf-8') % (datetime.day, unicode(THAI_MONTH_ABBR_NAME[datetime.month], 'utf-8'), (datetime.year + 543)%100)
-        except:
-            return ''
-    else:
+
+    try:
+        lcode = translation.get_language().upper()
+        code_month_name = eval('%_MONTH_ABBR_NAME' % lcode)
+        code_year_plus = eval('%s_YEAR_PLUS' % lcode)
+
+        return unicode('%d %s %d', 'utf-8') % (datetime.day, unicode(code_month_name[datetime.month], 'utf-8'), (datetime.year + code_year_plus)%100)
+
+    except:
         return datetime.strftime('%b %d, %Y')

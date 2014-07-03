@@ -6,7 +6,15 @@
 {% include 'autocomplete_light/static.html' %}
 {% endblock %}
 
-{% block title %}{% if form.is_new %}{% trans "Create" %}{% else %}{% trans "Edit" %}{% endif %} {{ form.inst.inst_name }}{% endblock %}
+{% block title %}
+{% if form.is_new %}{% trans "Create" %}{% else %}{% trans "Edit" %}{% endif %}{{ form.inst.inst_name }}
+{% if not form.is_new %}
+<a href="{% url 'statement_detail' form.inst.permalink %}" class="btn btn-default btn-xs btn-view">
+    <span class="glyphicon glyphicon-eye-open"></span> {% trans "View result" %}
+</a>
+{% endif %}
+
+{% endblock %}
 
 {% block before_wrapper %}
 <form method="post" role="form" enctype="multipart/form-data">
@@ -204,7 +212,25 @@
                 {% endif %}
             </div>
         </div>
-        
+
+        <div class="controls form-group inst-frontpage">
+            <label>{% trans "Front page settings" %}</label>
+            <div class="field-container checkbox">
+                <input{% if form.hilight.value %} checked=checked{% endif %} id="id_{{ form.hilight.name }}" type="checkbox" name="{{ form.hilight.name }}" value="1" />
+                <label for="id_{{ form.hilight.name }}">{% trans "Hilight" %}</label>
+                {% if form.hilight.errors %}
+                <div class="errors alert alert-danger">{{ form.hilight.errors }}</div>
+                {% endif %}
+            </div>
+            <div class="field-container checkbox">
+                <input{% if form.promote.value %} checked=checked{% endif %} id="id_{{ form.promote.name }}" type="checkbox" name="{{ form.promote.name }}" value="1" />
+                <label for="id_{{ form.promote.name }}">{% trans "Promote" %}</label>
+                {% if form.promote.errors %}
+                <div class="errors alert alert-danger">{{ form.promote.errors }}</div>
+                {% endif %}
+            </div>
+        </div>
+
     </div>
 
 </section>
@@ -233,7 +259,7 @@
 <div class="controls form-group">
     <div class="col-sm-offset-2-bnk field-container form-action">
         <button class="btn btn-primary" type="submit">{% if form.is_new %}{% trans "Save new" %}{% else %}{% trans "Save changes" %}{% endif %}</button>
-        <a href="{% url 'home' %}" class="btn btn-cancle flat-btn">{% trans "Cancel" %}</a>
+        <a href="." class="btn btn-cancle flat-btn">{% trans "Cancel" %}</a>
 
         {% if not form.is_new %}
         <a class="btn btn-delete btn-md" href="{% url 'domain_delete' 'topic' form.inst.id %}"><span class="glyphicon glyphicon-remove"></span>{% trans "Delete" %}</a>
