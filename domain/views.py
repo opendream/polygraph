@@ -106,12 +106,20 @@ def people_edit(request, people_id=None):
     return people_create(request, people)
 
 
-def people_detail(request, people_id):
+def people_detail(request, people_permalink):
 
-    people = get_object_or_404(Statement, permalink=people_permalink)
+    #people = get_object_or_404(Statement, permalink=people_permalink)
 
-    return HttpResponse('Fix me !!')
+    return render(request, 'domain/people_detail.html', {
+        'people': None
+    })
 
+
+def people_list(request):
+
+    return render(request, 'domain/people_list.html', {
+        'people_list': []
+    })
 
 
 def tags_detail(request, tags_id):
@@ -194,6 +202,7 @@ def topic_edit_from_statement(request, topic_id, statement_id):
     response = topic_edit(request, topic_id)
 
     if response.status_code == 302 and request.POST.get('as_revision'):
+
         statement.save()
 
     return response
@@ -303,6 +312,17 @@ def statement_edit(request, statement_id=None):
     return statement_create(request, statement)
 
 
+@statistic
+def statement_detail(request, statement_permalink):
+
+    statement = get_object_or_404(Statement, permalink=statement_permalink)
+
+    return render(request, 'domain/statement_detail.html', {
+        'statement': statement,
+        'meter_list': Meter.objects.all().order_by('order')
+    })
+
+
 def statement_list(request):
 
     statement_list = Statement.objects.all()
@@ -321,9 +341,8 @@ def statement_list(request):
         else:
             statement_list = statement_list.filter(Q(status__in=[STATUS_PUBLISHED])|Q(created_by=request.user, status__in=[STATUS_DRAFT, STATUS_PENDING]))
 
-
-
         statement_list = statement_list.extra(select={'uptodate': '%s(COALESCE(created_raw, "1000-01-01"), COALESCE(created, "1000-01-01"), COALESCE(changed, "1000-01-01"))' % settings.GREATEST_FUNCTION}).order_by('-uptodate')
+
 
     paginator = Paginator(statement_list, 10)
 
@@ -343,14 +362,4 @@ def statement_list(request):
         'statement_list': statement_list,
         'meter_list': Meter.objects.all().order_by('order'),
         'tags_list': Tag.objects.all()
-    })
-
-@statistic
-def statement_detail(request, statement_permalink):
-
-    statement = get_object_or_404(Statement, permalink=statement_permalink)
-
-    return render(request, 'domain/statement_detail.html', {
-        'statement': statement,
-        'meter_list': Meter.objects.all().order_by('order')
     })

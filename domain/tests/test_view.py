@@ -284,7 +284,7 @@ class TestEditTopic(TestCase):
         # Define for override
         self.check_initial = True
         self.topic1 = factory.create_topic(created_by=self.staff1)
-        self.statement1 = factory.create_statement(topic=self.topic1)
+        self.statement1 = factory.create_statement(topic=self.topic1, status=STATUS_PUBLISHED)
 
         self.url1 = reverse('topic_edit', args=[self.topic1.id])
         self.url2 = reverse('topic_edit', args=[self.topic2.id])
@@ -399,6 +399,12 @@ class TestEditTopic(TestCase):
         }
 
         statement1_origin_changed = self.statement1.changed
+        self.statement1.save()
+
+        self.assertIsNone(statement1_origin_changed)
+
+        statement1_origin_changed = self.statement1.changed
+
         self.client.post(self.url_from_statement, params, follow=True)
 
         self.statement1 = Statement.objects.get(id=self.statement1.id)
