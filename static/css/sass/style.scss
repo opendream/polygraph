@@ -436,6 +436,7 @@ input + .errors{
 	.left {
 		img { max-width: 80px; width: 100%; }
 	}
+
 }
 .amount {
 	height: 10px;
@@ -482,6 +483,7 @@ input + .errors{
 	display: block;
 	border-left: 0;
 	padding: 20px 25px 0 25px;
+	word-wrap: break-word;
 	&:before,
 	&:after {
 		content: "";
@@ -506,7 +508,7 @@ input + .errors{
 	max-width: 270px;
 	font-size: 3.5em;
 	font-weight: bold;
-	line-height: 1.2em;
+	line-height: 1.38em;
 	&:after {
 		top: 0; right: 0;
 	}	
@@ -517,12 +519,15 @@ input + .errors{
 		margin-bottom: 30px;
 	}
 }
+@media (max-width: 560px) {
+	.block-quote-alt { font-size: 2.8em; }
+}
 
 .who-said {
 	position: relative;
 	overflow: hidden;
 	background-color: $soft_orange;
-	&.block-content { padding: 15px 20px 20px 20px; }
+	&.block-content { padding: 15px 20px 0 20px; }
 	.media {
 		overflow: hidden;
 		margin-top: 20px;
@@ -530,19 +535,22 @@ input + .errors{
 	}
 	.meter {
 		text-align: right;
+		padding-right: 0;
+		margin-top: 20px;
+		// img { height: 100%; max-height: 140px;}
 	}
 }
 @media (max-width: 600px) {
 	.who-said {
 		&.block-content { padding: 25px 20px 0 20px; }
+		.media { margin-top: 10px; }
+		.meter { margin-top: 0; }
 	}
-
 }
 @media (max-width: 540px) {
 	.who-said {
 		.media {
 			padding-left: 0;
-			margin-top: 0;
 			a.pull-left {
 				width: 75px;
 				img { width: 100% }
@@ -552,10 +560,24 @@ input + .errors{
 				font-size: 95%;
 			}
 		}
-		.meter {
-			padding-right: 0;
-			height: 100%;
-			img {width: 95%;}
+	}
+}
+// hilight statement landscape iPhone
+@media (max-width: 479px) {
+	.highlight-statement {
+		.block-quote {
+			padding: 30px 0 30px;
+			* { line-height: 1.5; }
+		}
+	}
+	.who-said {
+		.media { 
+			width: 100%;
+			padding: 0 15px 15px 0; }
+		.meter { 
+			width: 100%; 
+			padding-left: 0;
+			text-align: center;
 		}
 	}
 }
@@ -715,20 +737,20 @@ input + .errors{
 .polygraph-list-block {
 	.block-content {
 		&.float-right-img {
-			padding-right: 250px;
+			padding-right: 270px;
 			img { width: 40px; height: 40px; }
 		}
 	}
 	.meter-md {
 		position: absolute;
 		bottom: 20px;
-		right: 0;
+		right: 20px;
 	}
 }
-.statement-list {
+.polygraph-list.statement-list {
 	.block-content {
 		padding-bottom: 0;
-		border-bottom: 75px solid #F2F2F2;
+		border-bottom: 85px solid #F2F2F2;
 		position: initial;
 		.quote {
 			font-size: 18px;
@@ -736,18 +758,13 @@ input + .errors{
 		.media {
 			position: absolute;
 			bottom: 10px;
-			a.pull-left {
-				width: 40px;
-				height: 40px;
-			}
-			img { width: 100%; }
+			width: 100%;
+			padding-right: 160px;
 		}
 	}
 	.meter-md {
-		height: 95px;
 		right: 20px;
 		bottom: 10px;
-		img { height: 100%; }
 	}
 }
 @media (max-width: 991px) {
@@ -792,6 +809,8 @@ input + .errors{
 			.media {
 				position: absolute;
 				bottom: 20px;
+				width: 100%;
+				padding-right: 160px;
 			}
 		}
 		.meter-md {
@@ -803,6 +822,7 @@ input + .errors{
 			}
 		}
 	}
+	.polygraph-list-before .desc { padding: 0; }
 }
 
 @media (max-width: 767px) {
@@ -820,7 +840,20 @@ input + .errors{
 		}
 	}
 }
-
+@media (max-width: 400px) {
+	.float-right-img {
+		.pull-left { width: 100%; }
+	}
+	.statement-list .polygraph-list-block {
+		.block-content { border-bottom: 115px solid #F2F2F2; }
+		.block-content .media { 
+			position: relative;
+			padding-right: 0;
+			bottom: 0;
+			margin-bottom: 15px;
+		}
+	} 
+}
 .btn-group-custom {
 	position: absolute;
 	top: -45px;
@@ -981,6 +1014,7 @@ footer {
         margin-left: 2px;
     }
 }
+
 
 .staff-link-wrapper {
 
