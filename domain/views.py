@@ -194,6 +194,7 @@ def topic_edit_from_statement(request, topic_id, statement_id):
     response = topic_edit(request, topic_id)
 
     if response.status_code == 302 and request.POST.get('as_revision'):
+
         statement.save()
 
     return response

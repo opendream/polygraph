@@ -96,7 +96,7 @@ def create_people(permalink=None, first_name='', last_name='', occupation='', de
     return people
 
 
-def create_topic(created_by=None, title='', description='', created=None):
+def create_topic(created_by=None, title='', description='', created=None, use_log_description=False):
 
     created_by = created_by or create_staff()
     title = title or randstr()
@@ -113,8 +113,10 @@ def create_topic(created_by=None, title='', description='', created=None):
 <p>ถนนทางหลวง 241,080 ล้านบาท คิดเป็น 12.1%  ถนนทางหลวงชนบท 34,309 ล้านบาท คิดเป็น 1.7%  สถานีขนส่งสินค้า 14,093 ล้านบาท คิดเป็น 0.7%  ท่าเรือ 29,581 ล้านบาท คิดเป็น 1.5%  ด่านศุลกากร 12,545 ล้านบาท คิดเป็น 0.6%</p><p>ปรับปรุงระบบรถไฟ (เพิ่มเครื่องกั้น ซ่อมบำรุงรางที่เสียหาย) 23,236 ล้านบาท คิดเป็น 1.2%  รถไฟทางคู่ และทางคู่เส้นทางใหม่ 383,891 ล้านบาท คิดเป็น 19.2%  ค่าสำรองเผื่อฉุกเฉิน (ความผันผวนราคาวัสดุ การติดตามและประเมินผล) 21,050 ล้านบาท คิดเป็น 1.0% ซึ่งแม้ตัวเลขจะคลาดเคลื่อนจากในเอกสารประกอบร่างพระราชบัญญัติไปบ้าง แต่ก็มีความใกล้เคียง</p>
 <p>ทั้งนี้ทั้งนั้นก่อนหน้านี้ในปี 2554 ได้มีตัวเลขประมาณการงบประมาณการสร้างรถไฟฟ้า 10 สายในเขตกรุงเทพว่ารวมๆ แล้วจะต้องใช้งบลงทุนประมาณ 668,593 ล้านบาท (รวมค่าเวนคืน-ก่อสร้าง-งานระบบ)</p>
 '''
-
-    description = description or '%s %s' % (long_description, randstr())
+    if use_log_description:
+        description = description or '%s %s' % (long_description, randstr())
+    else:
+        description = description or randstr()
 
     topic = Topic.objects.create(
         title  = title,
@@ -158,7 +160,7 @@ def create_meter(permalink=None, title='', description='', point=0, order=0, ima
     return meter
 
 
-def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', references=None, status=STATUS_PENDING, topic=None, tags='hello world', meter=None, relate_statements=[], relate_peoples=[], published=None, published_by=None, source='', created=None, created_raw=None, changed=None):
+def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', references=None, status=STATUS_PENDING, topic=None, tags='hello world', meter=None, relate_statements=[], relate_peoples=[], published=None, published_by=None, source='', created=None, created_raw=None, changed=None, use_log_description=False):
 
     created_by_list = list(Staff.objects.all()) or [None]
     created_by = created_by or random.choice(created_by_list) or create_staff()
@@ -170,7 +172,7 @@ def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', 
     meter_list = list(Meter.objects.all()) or [None]
     meter = meter or random.choice(meter_list) or create_meter()
 
-    topic = topic or create_topic(created_by=created_by)
+    topic = topic or create_topic(created_by=created_by, use_log_description=use_log_description)
 
     permalink = permalink or randstr()
 
