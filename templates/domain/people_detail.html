@@ -5,9 +5,36 @@
 {% block title %}{% trans "People" %}{% endblock %}
 
 {% block content %}
-Fix me!!
+
+
+
 {% endblock %}
 
 {% block sidebar %}
-Fix me!!
+
+    {% if meter_list.count %}
+    <section class="filter-by-status">
+        <header>
+            <h2>By Status</h2>
+        </header>
+        <div class="block">
+            <ul class="media-list item-list block-content row">
+                {% for meter in meter_list %}
+                <li class="media">
+                    <div class="item-inner">
+                        <a class="pull-left" href="{% url 'meter_detail' meter.permalink %}">
+                            {% image_render meter.image_small '87x105' meter.title %}
+                        </a>
+                        <div class="media-body">
+                            <h3 class="media-heading">{{ meter.title }}</h3>
+                            <a href="{% url 'meter_detail' meter.permalink %}">{% trans "See all" %} "{{ meter.title }}" {% trans "statements" %}</a>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </section>
+    {% endif %}
+
 {% endblock %}
