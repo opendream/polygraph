@@ -1563,3 +1563,13 @@ footer .footer-menu div a:hover {
   float: right;
   margin-top: 12px;
 }
+
+/* line 1142, ../sass/style.scss */
+ul.nav-tabs li.active .caret {
+  display: inline-block;
+}
+
+/* line 1145, ../sass/style.scss */
+ul.nav-tabs li .caret {
+  display: none;
+}
