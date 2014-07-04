@@ -79,15 +79,17 @@
                 <li class="item col-md-12 col-xs-6 first">
 					<div class="item-inner row">
 						<figure class="col-md-3 col-xs-3 left">
-                            {% image_render meter.image_small '82x105' meter.title %}
+                            <a href="{% url 'meter_detail' meter.permalink %}">
+                                {% image_render meter.image_small '82x105' meter.title %}
+                            </a>
 						</figure>
 						<div class="col-md-9 col-xs-9 right">
 							<div class="amount-wrapper">
-								<h3>{{ meter.title }}</h3>
+								<h3><a href="{% url 'meter_detail' meter.permalink %}">{{ meter.title }}</a></h3>
 								<div class="amount-bar"><div class="amount"></div></div>
 							</div>
 							<div class="amount-num">
-								<span class="text-large">{{ count }}</span>
+								<a href="{% url 'meter_detail' meter.permalink %}"><span class="text-large">{{ count }}</span></a>
 							</div>
 						</div>
 					</div>
@@ -225,33 +227,23 @@
 
 <section class="region row">
 		<header>
-			<h2 class="hidden">Other Information</h2>
+			<h2 class="hidden">{% trans "Other Information" %}</h2>
 		</header>
 		<aside class="col-md-8 pull-right">
 			<header>
-				<h2>Tags</h2>
+				<h2>{% trans "Tags" %}</h2>
 			</header>
 			<div class="tag-list">
-				<a href="/" class="btn btn-default"><strong>จำนำข้าว</strong></a>
-				<a href="/" class="btn btn-default"><strong>รฟม.</strong></a>
-				<a href="/" class="btn btn-default"><strong>ธกส.</strong></a>
-				<a href="/" class="btn btn-default"><strong>สหยูเนี่ยน</strong></a>
-				<a href="/" class="btn btn-default"><strong>รถไฟความเร้วสูง</strong></a>
-				<a href="/" class="btn btn-default"><strong>จำนำข้าว</strong></a>
-				<a href="/" class="btn btn-default"><strong>รฟม.</strong></a>
-				<a href="/" class="btn btn-default"><strong>ธกส.</strong></a>	
-				<a href="/" class="btn btn-default"><strong>สหยูเนี่ยน</strong></a>
-				<a href="/" class="btn btn-default"><strong>รถไฟความเร้วสูง</strong></a>
-				<a href="/" class="btn btn-default"><strong>จำนำข้าว</strong></a>
-				<a href="/" class="btn btn-default"><strong>รฟม.</strong></a>
-				<a href="/" class="btn btn-default"><strong>ธกส.</strong></a>	
+                {% for tags in tags_list %}
+                <a href="{% url 'tags_detail' tags.id %}" class="btn btn-default"><strong>{{ tags.name }}</strong></a>
+                {% endfor %}
 			</div>
 		</aside>
 		<aside class="col-md-4 pull-left">
 			<header>
-				<h2>Contact Us</h2>
+				<h2>{% trans "Contact Us" %}</h2>
 			</header>
-			<p>“ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอดี้ เอ็กซ์เพรสคาแร็คเตอร์ชะโนดป่าไม้สวีท ระโงกอ่อนด้อยอมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ <a href="mailto:webmaster@example.com">info@jabted.com</a> เตอร์ชะโนดป่าไม้สวีท ระโงกอ่อนด้อย</p>
+            {{ contact_footer }}
 		</aside>
 </section>
 
