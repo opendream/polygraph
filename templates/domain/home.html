@@ -124,30 +124,38 @@
 			<div class="col-md-4">
 				<h2><span class="dialog-ic-bw"></span>Polygraph</h2>
 			</div>
-			<div class="col-md-8 hidden-xs">
-				<ul class="nav nav-pills nav-color">
-					<li><a href="#">Updated</a></li>
-				  	<li class="active"><a href="#">True</a><span class="caret"></span></li>
-				  	<li><a href="#">Lie</a></li>
-				  	<li><a href="#">Half Truth</a></li>
-				  	<li><a href="#">Unverifiable</a></li>
-				</ul>
-			</div>
-			<div class="col-xs-12 visible-xs"> 
-				<ul class="nav nav-pills full-width">
-				  <li class="dropdown">
-				    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Updated<span class="caret"></span></a>
-				    <ul class="dropdown-menu" role="menu">
-						<li><a href="#">Updated</a></li>
-					  	<li class="active"><a href="#">True</a></li>
-					  	<li><a href="#">Lie</a></li>
-					  	<li><a href="#">Half Truth</a></li>
-					  	<li><a href="#">Unverifiable</a></li>
-				    </ul>
-				  </li>
-				</ul>
+			<div class="col-md-8 col-xs-12">
+				<ul class="nav nav-tabs nav-pills nav-color full-width" role="tablist">
+					<li class="hidden-xs"><a href="#">Updated</a></li>
+				  	<li class="hidden-xs active"><a href="#home" role="tab" data-toggle="tab">True</a><span class="caret"></span></li>
+				  	<li class="hidden-xs"><a href="#profile" role="tab" data-toggle="tab">Lie</a></li>
+				  	<li class="hidden-xs"><a href="#messages" role="tab" data-toggle="tab">Half Truth</a></li>
+				  	<li class="hidden-xs"><a href="#settings" role="tab" data-toggle="tab">Unverifiable</a></li>
+					<li class="dropdown visible-xs">
+        				<a href="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown">Updated <span class="caret"></span></a>
+        				<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
+        			  		<li class=""><a href="#updated-pane" tabindex="-1" role="tab" data-toggle="tab">Updated</a></li>
+        			  		<li class=""><a href="#true-pane" tabindex="-1" role="tab" data-toggle="tab">True</a></li>
+        			  		<li class=""><a href="#lie-pane" tabindex="-1" role="tab" data-toggle="tab">Lie</a></li>
+        			  		<li class=""><a href="#half_truth-pane" tabindex="-1" role="tab" data-toggle="tab">Half Truth</a></li>
+        			  		<li class=""><a href="#unverifiable-pane" tabindex="-1" role="tab" data-toggle="tab">Unverifiable</a></li>
+        				</ul>
+      				</li>
+				</ul>				
 			</div>
 		</header>
+		<div class="tab-content">
+			<div class="tab-pane fade in active" id="updated-pane">
+			</div>
+			<div class="tab-pane fade" id="true-pane">
+			</div>
+			<div class="tab-pane fade" id="lie-pane">
+			</div>
+			<div class="tab-pane fade" id="half_truth-pane">
+			</div>
+			<div class="tab-pane fade" id="unverifiable-pane">
+			</div>
+		</div>	
 		<section class="col-md-12">
 			<header>
 				<h3 class="hidden">Metor Description</h3>
@@ -163,8 +171,8 @@
 					</div>
 				</div>				
 			</div>
-		</section>
-    	<section class="col-md-12">
+			</section>
+    		<section class="col-md-12">
 			<header>
 				<h3 class="hidden">Polygraph List Item</h3>
 			</header>
@@ -219,7 +227,7 @@
     	            <img src="/static/css/images/status-half-truth-md.png" alt="false image large" />
     	        </div>
     	    </article>
-    	</section>
+    		</section>
 
 		<a href="/people/2" class="btn btn-default">ดูคำพูด "จริง" ทั้งหมด <span class="glyphicon glyphicon-chevron-right"></span></a>
 	</section>
