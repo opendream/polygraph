@@ -71,74 +71,29 @@
 
 	<section class="col-md-4 summary">
 		<header>
-			<h2>Summary</h2>
+			<h2>{% trans "Summary" %}</h2>
 		</header>
 		<div class="block block-bg-transparent">
 			<ul class="block-content item-list shuffle-bg row">
-				<li class="item col-md-12 col-xs-6 first">
+				{% for meter, count in meter_statement_count %}
+                <li class="item col-md-12 col-xs-6 first">
 					<div class="item-inner row">
 						<figure class="col-md-3 col-xs-3 left">
-							<img src="/static/css/images/status-true-xs.png" alt="true image small" />
+                            {% image_render meter.image_small '82x105' meter.title %}
 						</figure>
 						<div class="col-md-9 col-xs-9 right">
 							<div class="amount-wrapper">
-								<h3>True</h3>
+								<h3>{{ meter.title }}</h3>
 								<div class="amount-bar"><div class="amount"></div></div>
 							</div>
 							<div class="amount-num">
-								<span class="text-large">6</span>คำพูด
+								<span class="text-large">{{ count }}</span>
 							</div>
 						</div>
 					</div>
 				</li>
-				<li class="item col-md-12 col-xs-6">
-					<div class="item-inner row">
-						<figure class="col-md-3 col-xs-3 left">
-							<img src="/static/css/images/status-lie-xs.png" alt="false image small" />
-						</figure>
-						<div class="col-md-9 col-xs-9 right">
-							<div class="amount-wrapper">
-								<h3>Lie</h3>
-								<div class="amount-bar"><div class="amount"></div></div>
-							</div>
-							<div class="amount-num">
-								<span class="text-large">85</span>คำพูด
-							</div>
-						</div>
-					</div>
-				</li>
-				<li class="item col-md-12 col-xs-6">
-					<div class="item-inner row">
-						<figure class="col-md-3 col-xs-3 left">
-							<img src="/static/css/images/status-half-truth-xs.png" alt="tricky image small" />
-						</figure>
-						<div class="col-md-9 col-xs-9 right">
-							<div class="amount-wrapper">
-								<h3>Half Truth</h3>
-								<div class="amount-bar"><div class="amount"></div></div>
-							</div>
-							<div class="amount-num">
-								<span class="text-large">105</span>คำพูด
-							</div>
-						</div>
-					</div>
-				</li>
-				<li class="item col-md-12 col-xs-6 last">
-					<div class="item-inner row">
-						<figure class="col-md-3 col-xs-3 left">
-							<img src="/static/css//images/status-unverifiable-xs.png" alt="can not prove image small" />
-						</figure>
-						<div class="col-md-9 col-xs-9 right">
-							<div class="amount-wrapper">
-								<h3>Unverifiable</h3>
-								<div class="amount-bar"><div class="amount"></div></div>
-							</div>
-							<div class="amount-num">
-								<span class="text-large">15</span>คำพูด
-							</div>
-						</div>
-					</div>
-				</li>
+                {% endfor %}
+
 			</ul>
 		</div>
 	</section>
