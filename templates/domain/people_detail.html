@@ -1,7 +1,7 @@
 {% extends 'base_sidebar.html' %}
 {% load i18n %}
 {% load common_tags %}
-
+{% load domain_tags %}
 
         'people': people,
         'meter_statement_count': meter_statement_count,
@@ -11,9 +11,133 @@
 {% block title %}{% trans "People" %}{% endblock %}
 
 {% block content %}
-Fix me!!
+
+    <div>
+
+        <section class="people-detail">
+            <header>
+                <h3 class="hidden">{% trans "People Detail" %}</h3>
+            </header>
+            <div class="block">
+				<div class="media block-content">
+    	            <a class="pull-left" href="/people/e6bac7110/">
+                        <img src="/media/cache/07/e6/07e6e8c1c28f3d6c1037f522c89186e1.png" width="120" height="120" alt="e6bac88c0 e6bac9350">
+                    </a>
+                    <div class="media-body">
+                    	<p>อดีตอธิบดีกรมสอบสวนคดีพิเศษ, อดีตเลขาธิการคณะกรรมการป้องกันและปราบปรามการทุจริตในภาครัฐ, อดีตอัยการจังหวัดประจำกรม สำนักงานคณะกรรมการอัยการ</p>
+    	            </div>
+    	    	</div>
+				<div class="block-content">
+    	            <p>ก่อนรับราชการอัยการ ธาริตเป็นผู้ช่วยอาจารย์สอนกฎหมาย จนกระทั่งได้พบกับคณิต ณ นคร ในฐานะอาจารย์พิเศษจึงแนะนำให้ธาริตไปสอบอัยการหลังเรียนจบนิติศาสตร์ มหาบัณฑิต และธาริตก็สอบได้เป็นอัยการ[6] จนกระทั่งพ.ต.ท.ทักษิณ ชินวัตรได้ก่อตั้ง พรรคไทยรักไทย ได้ระดมนักกฎหมายหลายคน เช่น คณิต ณ นคร เรวัติ ฉ่ำเฉลิม ร่วมก่อตั้งพรรค ซึ่งในจำนวนนั้นมีธาริตอยู่ด้วยทำให้หลังจากที่พรรคไทยรักไทยชนะการ เลือกตั้ง ธาริตจึงได้รับแต่งตั้งให้ช่วยราชการสำนักนายกรัฐมนตรี โดยทำงานกับนพ. พรหมินทร์ เลิศสุริย์เดช รองนายกรัฐมนตรีขณะเดียวกันธาริตยังเป็นเป็นคณะที่ปรึกษา ของพันศักดิ์ วิญญรัตน์อีกด้วย</p>
+    	            <p>เมื่อมีการจัดตั้งกรมสอบสวนคดีพิเศษ (DSI) ในรัฐบาลพ.ต.ท.ทักษิณ ชินวัตร ธาริต ได้โอนมาดำรงตำแหน่งรองอธิบดีและต่อมาก็ได้รับแต่งตั้งเป็นเลขาธิการคณะ กรรมการป้องกันและปราบปรามการทุจริตในภาครัฐ กรมสอบสวนคดีพิเศษแทน พ.ต.อ.ทวี สอดส่อง ในรัฐบาลอภิสิทธิ์ เวชชาชีวะ</p>
+    	            <p>ธาริต เป็นหนึ่งในคณะกรรมการศูนย์อำนวยการแก้ไขสถานการณ์ฉุกเฉิน (ศอฉ.) เมื่อครั้งมีการชุมนุมของแนวร่วมประชาธิปไตยต่อต้านเผด็จการแห่งชาติ ขับไล่รัฐบาล นายอภิสิทธิ์ เวชชาชีวะ ในปี พ.ศ. 2553 แต่ไม่ได้เป็นคณะกรรมการด้านยุทธการ นอกจากนี้ธาริตยังมีส่วนสำคัญในการดำเนินคดีทางการเมืองหลายคดี ปัจจุบัน ธาริต เป็นหนึ่งในคณะกรรมศูนย์อำนวยการรักษาความสงบในสมัยรัฐบาล ยิ่งลักษณ์ ชินวัตร</p>
+    	    	</div>
+            </div>
+        </section>
+
+        <section class="polygraph-list statement-list">
+            <section class="col-md-12">
+                <header class="row">
+                    <h3>{% trans "Polygraph List Item" %}</h3>
+                </header>
+                {% if statement_list %}
+                {% for statement in statement_list %}
+                {{ statement|statement_item }}
+                {% endfor %}
+                {% else %}
+                {% if user.is_authenticated %}
+                <div class="text-center">
+                    <a class="btn btn-primary text-center" href="{% url 'statement_create' %}">
+                        <span class="glyphicon glyphicon-pencil"></span> {% trans "Create Statement" %}
+                    </a>
+                </div>
+                {% else %}
+                <div class="text-center">{% trans "No Statement" %}</div>
+                {% endif %}
+                {% endif %}
+
+            </section>
+        </section>
+    </div>
+
 {% endblock %}
 
 {% block sidebar %}
-Fix me!!
+
+	<div class="row">
+		<section class="col-md-12 summary">
+			<header>
+				<h2>Summary</h2>
+			</header>
+			<div class="block block-bg-transparent">
+				<ul class="block-content item-list shuffle-bg row">
+					<li class="item col-md-12 col-xs-6 first">
+						<div class="item-inner row">
+							<figure class="col-md-3 col-xs-3 left">
+								<img src="/static/css/images/status-true-xs.png" alt="true image small" />
+							</figure>
+							<div class="col-md-9 col-xs-9 right">
+								<div class="amount-wrapper">
+									<h3>True</h3>
+									<div class="amount-bar"><div class="amount"></div></div>
+								</div>
+								<div class="amount-num">
+									<span class="text-large">6</span>คำพูด
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="item col-md-12 col-xs-6">
+						<div class="item-inner row">
+							<figure class="col-md-3 col-xs-3 left">
+								<img src="/static/css/images/status-lie-xs.png" alt="false image small" />
+							</figure>
+							<div class="col-md-9 col-xs-9 right">
+								<div class="amount-wrapper">
+									<h3>Lie</h3>
+									<div class="amount-bar"><div class="amount"></div></div>
+								</div>
+								<div class="amount-num">
+									<span class="text-large">85</span>คำพูด
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="item col-md-12 col-xs-6">
+						<div class="item-inner row">
+							<figure class="col-md-3 col-xs-3 left">
+								<img src="/static/css/images/status-half-truth-xs.png" alt="tricky image small" />
+							</figure>
+							<div class="col-md-9 col-xs-9 right">
+								<div class="amount-wrapper">
+									<h3>Half Truth</h3>
+									<div class="amount-bar"><div class="amount"></div></div>
+								</div>
+								<div class="amount-num">
+									<span class="text-large">105</span>คำพูด
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="item col-md-12 col-xs-6 last">
+						<div class="item-inner row">
+							<figure class="col-md-3 col-xs-3 left">
+								<img src="/static/css//images/status-unverifiable-xs.png" alt="can not prove image small" />
+							</figure>
+							<div class="col-md-9 col-xs-9 right">
+								<div class="amount-wrapper">
+									<h3>Unverifiable</h3>
+									<div class="amount-bar"><div class="amount"></div></div>
+								</div>
+								<div class="amount-num">
+									<span class="text-large">15</span>คำพูด
+								</div>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</section>
+	</div>
+
 {% endblock %}

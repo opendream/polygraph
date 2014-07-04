@@ -1,8 +1,10 @@
 {% load common_tags %}
 <article class="row block block-no-border polygraph-list-block{% if statement.uptodate_status %} {{ statement.uptodate_status.code }}{% endif %}">
-    {% if statement.uptodate_status %}<span>{{ statement.uptodate_status.text }}</span>{% endif %}
-    <div class="block-content col-lg-12">
 
+    {% if statement.uptodate_status %}<span>{{ statement.uptodate_status.text }}</span>{% endif %}
+
+    <div class="block-content col-lg-12">
+        {% if statement.uptodate_status %}<span>{{ statement.uptodate_status.text }}</span>{% endif %}
         <div class="text-brown quote lead">
             <a href="{% url 'statement_detail' statement.permalink %}">&ldquo; {{ statement.quote|removetags:'p'|safe }} &rdquo;</a>
         </div>
