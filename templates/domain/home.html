@@ -1,49 +1,73 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load common_tags %}
+{% load domain_tags %}
 
 {% block base_content %}
 
 <div class="container">
 
 <div class="region row">
+
 	<section class="col-md-8" >
-		<header>
+
+        <header>
 			<h2><span class="dialog-ic-color"></span>{% trans "Hilight statement" %}</h2>
 		</header>
 		<article class="block">
+
+            {% if hilight_statement %}
 			<section class="highlight-statement block-content">
 				<header>
-					<h3 class="hidden">statement</h3>
+					<h3 class="hidden">{% trans "statement" %}</h3>
 				</header>
 				<div class="block-quote lead">
-						<p><strong>เป้าหมายสูงสุดของโครงการรับจำนำข้าว มิใช่คะแนนนิยมของรัฐบาล</strong> แต่คือการยกระดับและรักษาความมั่นคงของรายได้ เพื่อชีวิตความเป็นอยู่ที่ดีขึ้นของชาวนา เพื่ออนาคตที่ดีกว่าของลูกหลาน และเพื่อให้อาชีพปลูกข้าวให้คนกิน หมายถึงปลูกอนาคตตัวเองลงบนผืนแผ่นดิน โดยไม่กระทบกับวินัยทางการเงินของประเทศ</p>
+                    {{ hilight_statement.quote }}
 				</div>
 				<span class="triangle"></span>
 			</section>
 			<section class="who-said block-content">
 				<header>
-					<h3 class="hidden">Who's said??</h3>
+					<h3 class="hidden">{% trans "Who's said??" %}</h3>
 				</header>
 
     	        <div class="media col-lg-8 col-xs-8">
-    	            <a class="pull-left" href="#">
-    	                <img class="media-object" src="/static/css/images/people-1-md.png" alt="...">
+    	            <a class="pull-left" href="{% url 'people_detail' hilight_statement.quoted_by.permalink %}">
+                        {% image_render hilight_statement.quoted_by.image '160x80' hilight_statement.quoted_by.get_full_name %}
     	            </a>
     	            <div class="media-body">
-    	                <a href="/people/1" class="media-heading">ยิ่งลักษณ์ ชินวัตร</a>
-    	                <p>นายกรัฐมนตรี</p>
+    	                <a href="{% url 'people_detail' hilight_statement.quoted_by.permalink %}" class="media-heading">{{ hilight_statement.quoted_by.get_full_name }}</a>
+    	                <p>{{ hilight_statement.quoted_by.occupation }}</p>
     	            </div>
     	        </div>
 
 				<div class="meter col-lg-4 col-xs-4">
-					<h4 class="hidden">false</h4>
+					<h4 class="hidden">{{ hilight_statement.meter.title }}</h4>
 					<figure>
-						<img src="/static/css/images/status-lie-sm.png" alt="false image medium" />
+                        {% image_render hilight_statement.meter.image_small_text '212x152' hilight_statement.meter.title %}
 					</figure>
 				</div>
 			</section>
+
+            {% else %}
+
+            {% if user.is_authenticated %}
+            <div class="text-center">
+                <a class="btn btn-primary text-center" href="{% url 'statement_create' %}">
+                    <span class="glyphicon glyphicon-pencil"></span> {% trans "Create Hilight Statement" %}
+                </a>
+            </div>
+            {% else %}
+            <div class="text-center">{% trans "No Hilight Statement" %}</div>
+            {% endif %}
+
+            {% endif %}
+
 		</article>
+
+
 	</section >
+
 	<section class="col-md-4 summary">
 		<header>
 			<h2>Summary</h2>

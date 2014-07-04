@@ -1,0 +1,4 @@
+<header>
+    <h2>Contact Us</h2>
+</header>
+<p>Please, edit me. We don't know who you are<a href="mailto:webmaster@example.com">info@polygraph.ex</a></p>

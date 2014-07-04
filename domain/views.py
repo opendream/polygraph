@@ -6,6 +6,7 @@ from django.db.models import Q, Count
 from django.forms.formsets import formset_factory
 from django.http import Http404, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
+from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from tagging.models import Tag, TaggedItem
@@ -69,12 +70,16 @@ def home(request):
 
     hilight_statement = statement_list.order_by('-hilight', '-promote', '-uptodate')[0:1]
 
-
     meter_list = Meter.objects.all().order_by('order')
 
     meter_statement_count = [(meter, meter.statement_set.count()) for meter in meter_list]
 
     statement_list = statement_list.exclude(id__in=[s.id for s in hilight_statement]).order_by('-promote', '-uptodate')
+
+    hilight_statement = list(hilight_statement)
+    hilight_statement.append(None)
+    hilight_statement = hilight_statement[0]
+
 
     meter_statement_list = [({'title': 'Latest'}, statement_list[0:4])]
     for meter in meter_list:
@@ -91,7 +96,7 @@ def home(request):
         'meter_statement_count': meter_statement_count,
         'meter_statement_list': meter_statement_list,
         'tags_list': tags_list,
-        'contact_html': settings.CONTACT_HTML
+        'contact_footer': render_to_string('contact_footer.txt')
     })
 
 
