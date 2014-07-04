@@ -82,11 +82,20 @@ def create_common(app, created_models, verbosity, **kwargs):
         'description': 'This is politician description. Please, edit me on the admin site.'
     })
 
+    PeopleCategory.objects.get_or_create(permalink = 'government', defaults={
+        'title': 'Government',
+        'description': 'This is government description. Please, edit me on the admin site.',
+    })
+
+    PeopleCategory.objects.get_or_create(permalink = 'public-figure', defaults={
+        'title': 'Public Figure',
+        'description': 'This is public figure description. Please, edit me on the admin site.',
+    })
+
     PeopleCategory.objects.get_or_create(permalink = 'military', defaults={
         'title': 'Military',
         'description': 'This is military description. Please, edit me on the admin site.',
     })
-
 
     try:
         Staff.objects.get(username='admin')

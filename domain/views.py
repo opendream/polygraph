@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Q, Count
+from django.db.models.query import QuerySet
 from django.forms.formsets import formset_factory
 from django.http import Http404, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
@@ -174,7 +175,7 @@ def people_edit(request, people_id=None):
 
 def people_detail(request, people_permalink):
 
-    people = get_object_or_404(Statement, permalink=people_permalink)
+    people = get_object_or_404(People, permalink=people_permalink)
 
     return render(request, 'domain/people_detail.html', {
         'people': people
@@ -183,7 +184,14 @@ def people_detail(request, people_permalink):
 
 def people_list(request):
 
-    people_list = People.objects.all().order_by('-quoted_by__created')
+    # Force MYSQL Distinct
+    query = People.objects.all().order_by('-quoted_by__created').query
+    query_str = query.__str__()
+    query_str = query_str.replace('SELECT', 'SELECT DISTINCT')
+
+    people_list = People.objects.raw(query_str)
+
+
     category_list = PeopleCategory.objects.all()
 
     return render(request, 'domain/people_list.html', {

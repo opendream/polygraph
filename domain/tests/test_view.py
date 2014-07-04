@@ -1032,13 +1032,10 @@ class TestStatementList(TestCase):
 
 
         response = self.client.get(reverse('statement_list'))
-        self.assertEqual([statement1, statement2, statement4, statement3], list(response.context['statement_list']))
+        self.assertEqual([statement1.id, statement2.id, statement4.id, statement3.id], list([s.id for s in response.context['statement_list']]))
 
         self.client.login(username=writer1.username, password='password')
         response = self.client.get(reverse('statement_list'))
-
-        #print [statement8.id, statement6.id, statement1.id, statement2.id, statement4.id, statement3.id]
-        #print [s.id for s in response.context['statement_list']]
 
 
         self.assertEqual([statement8.id, statement6.id, statement1.id, statement2.id, statement4.id, statement3.id], [s.id for s in response.context['statement_list']])

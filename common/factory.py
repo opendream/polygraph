@@ -74,7 +74,9 @@ def create_people(permalink=None, first_name='', last_name='', occupation='', de
     description = description or randstr()
     homepage_url = homepage_url or randstr()
     image = image or '%sdefault/default-people.png' % settings.FILES_WIDGET_TEMP_DIR
-    category = category or create_people_category()
+
+    category_list = list(PeopleCategory.objects.all()) or [None]
+    category = category or random.choice(category_list) or create_people_category()
 
     people = People.objects.create(
         permalink = permalink,

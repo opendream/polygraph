@@ -16,6 +16,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
+        for i in range(1, 12):
+            factory.create_people()
+
         for i in range(1, 30):
             outdate = timezone.now() - timedelta(days=settings.UPTODATE_DAYS + 1 + i)
             factory.create_statement(status=STATUS_PUBLISHED, created=outdate, created_raw=outdate, use_log_description=True)
