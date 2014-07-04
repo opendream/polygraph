@@ -177,8 +177,17 @@ def people_detail(request, people_permalink):
 
     people = get_object_or_404(People, permalink=people_permalink)
 
+    meter_list = Meter.objects.all().order_by('order')
+    meter_statement_count = [(meter, meter.statement_set.filter(quoted_by=people).count()) for meter in meter_list]
+
+    statement_list = statement_query_base(request.user.is_anonymous(), request.user.is_staff, request.user)
+    statement_list = statement_list.filter(quoted_by=people).order_by('-uptodate')
+
+
     return render(request, 'domain/people_detail.html', {
-        'people': people
+        'people': people,
+        'meter_statement_count': meter_statement_count,
+        'statement_list': statement_list
     })
 
 
