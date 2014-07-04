@@ -623,12 +623,6 @@ input + .errors{
 	li {
 		padding: 0 10px; margin: 0;
 		text-align: center;
-		&:after {
-			content: "•";
-			position: absolute;
-			top: 0.8em;
-			right: -3px;
-		}
 		.caret {
 			border-top: none;
 			border-bottom: 12px solid #F2F2F2;
@@ -636,9 +630,17 @@ input + .errors{
 			border-left: 12px solid transparent;
 			margin-bottom: -8px;
 		}
-		&:last-child {
+		&.last,
+		&.dropdown {
+			padding-right: 0;
 			&:after { display: none; }
 		}
+	}
+	> li:after {
+		content: "•";
+		position: absolute;
+		top: 0.8em;
+		right: -3px;
 	}
 	li a {
 		@include border-radius(20px);
@@ -652,22 +654,29 @@ input + .errors{
 	li.active a {
 		background-color: $bright_orange;
 		color: #FFFFFF;
+		border: none;
 		&:hover {
 			background-color: $soft_orange;
 			color: $text_brown;
+			border: none;
 		}
 	}
 }
 
 .nav.full-width {
-	margin: 10px 0;
+	border-bottom: 0;
 	li.dropdown {
 		width: 100%;
-		border: 1px solid #CCC;
 		@include border-radius(5px);
+		padding: 0;
+		margin: 0;
 		a {
+			@include border-radius(5px);
 			background-color: #FFF;
-			&:hover { background-color: #FFF; } 
+			border: 1px solid #CCC;
+			margin: 0;
+			text-align: left;
+			&:hover { background-color: #FFF; border: 1px solid #CCC; } 
 			&.dropdown-toggle { font-size: 1.5em; }
 			.caret {
 				position: absolute;
@@ -677,11 +686,16 @@ input + .errors{
 				border-top: 8px solid;
 				border-right: 8px solid transparent;
 				border-left: 8px solid transparent;
+				border-bottom: 0 solid transparent;
 			}
 		}
-		&.open a { color: $text-brown; }
+		&.open a { border: 1px solid #CCC; color: $text-brown; }
 		ul.dropdown-menu {
 			width: 100%;
+			li { 
+				padding: 0; 
+			}
+			li a { @include border-radius(0); border: none; } 
 			li.active,
 			li:hover {
 				a { 
@@ -696,6 +710,11 @@ input + .errors{
 @media (min-width: 992px) {
 	.nav-color {
 		float: right;
+	}
+}
+@media (max-width: 768px) {
+	.nav.full-width {
+		margin: 15px 0;
 	}
 }
 
