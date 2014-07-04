@@ -22,6 +22,7 @@
 					<h3 class="hidden">{% trans "statement" %}</h3>
 				</header>
 				<div class="block-quote lead">
+                    <a href="{% url 'statement_detail' hilight_statement.permalink %}">
                     {{ hilight_statement.quote }}
 				</div>
 				<span class="triangle"></span>
