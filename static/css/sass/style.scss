@@ -1137,3 +1137,16 @@ footer {
     float: right;
     margin-top: 12px;
 }
+
+
+
+// ##########################
+// DEV
+// ##########################
+
+ul.nav-tabs  li.active .caret {
+    display: inline-block;
+}
+ul.nav-tabs li .caret {
+    display: none;
+}

@@ -71,222 +71,179 @@
 
 	<section class="col-md-4 summary">
 		<header>
-			<h2>Summary</h2>
+			<h2>{% trans "Summary" %}</h2>
 		</header>
 		<div class="block block-bg-transparent">
 			<ul class="block-content item-list shuffle-bg row">
-				<li class="item col-md-12 col-xs-6 first">
+				{% for meter, count in meter_statement_count %}
+                <li class="item col-md-12 col-xs-6 first">
 					<div class="item-inner row">
 						<figure class="col-md-3 col-xs-3 left">
-							<img src="/static/css/images/status-true-xs.png" alt="true image small" />
+                            <a href="{% url 'meter_detail' meter.permalink %}">
+                                {% image_render meter.image_small '82x105' meter.title %}
+                            </a>
 						</figure>
 						<div class="col-md-9 col-xs-9 right">
 							<div class="amount-wrapper">
-								<h3>True</h3>
+								<h3><a href="{% url 'meter_detail' meter.permalink %}">{{ meter.title }}</a></h3>
 								<div class="amount-bar"><div class="amount"></div></div>
 							</div>
 							<div class="amount-num">
-								<span class="text-large">6</span>คำพูด
+								<a href="{% url 'meter_detail' meter.permalink %}"><span class="text-large">{{ count }}</span></a>
 							</div>
 						</div>
 					</div>
 				</li>
-				<li class="item col-md-12 col-xs-6">
-					<div class="item-inner row">
-						<figure class="col-md-3 col-xs-3 left">
-							<img src="/static/css/images/status-lie-xs.png" alt="false image small" />
-						</figure>
-						<div class="col-md-9 col-xs-9 right">
-							<div class="amount-wrapper">
-								<h3>Lie</h3>
-								<div class="amount-bar"><div class="amount"></div></div>
-							</div>
-							<div class="amount-num">
-								<span class="text-large">85</span>คำพูด
-							</div>
-						</div>
-					</div>
-				</li>
-				<li class="item col-md-12 col-xs-6">
-					<div class="item-inner row">
-						<figure class="col-md-3 col-xs-3 left">
-							<img src="/static/css/images/status-half-truth-xs.png" alt="tricky image small" />
-						</figure>
-						<div class="col-md-9 col-xs-9 right">
-							<div class="amount-wrapper">
-								<h3>Half Truth</h3>
-								<div class="amount-bar"><div class="amount"></div></div>
-							</div>
-							<div class="amount-num">
-								<span class="text-large">105</span>คำพูด
-							</div>
-						</div>
-					</div>
-				</li>
-				<li class="item col-md-12 col-xs-6 last">
-					<div class="item-inner row">
-						<figure class="col-md-3 col-xs-3 left">
-							<img src="/static/css//images/status-unverifiable-xs.png" alt="can not prove image small" />
-						</figure>
-						<div class="col-md-9 col-xs-9 right">
-							<div class="amount-wrapper">
-								<h3>Unverifiable</h3>
-								<div class="amount-bar"><div class="amount"></div></div>
-							</div>
-							<div class="amount-num">
-								<span class="text-large">15</span>คำพูด
-							</div>
-						</div>
-					</div>
-				</li>
+                {% endfor %}
+
 			</ul>
 		</div>
 	</section>
 </div>
+
 <div class="region row">
-	<section class="polygraph-list col-md-12" >
+
+    <section class="polygraph-list col-md-12" >
+
 		<header class="row">
 			<div class="col-md-4">
-				<h2><span class="dialog-ic-bw"></span>Polygraph</h2>
+				<h2><span class="dialog-ic-bw"></span>{% trans "Polygraph" %}</h2>
 			</div>
 			<div class="col-md-8 col-xs-12">
 				<ul class="nav nav-tabs nav-pills nav-color full-width" role="tablist">
-					<li class="first hidden-xs"><a href="#">Updated</a></li>
-				  	<li class="hidden-xs active"><a href="#home" role="tab" data-toggle="tab">True</a><span class="caret"></span></li>
-				  	<li class="hidden-xs"><a href="#profile" role="tab" data-toggle="tab">Lie</a></li>
-				  	<li class="hidden-xs"><a href="#messages" role="tab" data-toggle="tab">Half Truth</a></li>
-				  	<li class="last hidden-xs"><a href="#settings" role="tab" data-toggle="tab">Unverifiable</a></li>
+                    {% for meter, meter_statement in meter_statement_list %}
+				  	<li class="hidden-xs{% if forloop.first %} first{% endif %}{% if forloop.last %} last{% endif %}">
+                        <a class="tabable" href="#meter-{{ meter.permalink }}" role="tab" data-toggle="tab">
+                            {{ meter.title }}
+                        </a>
+                        <span class="caret"></span>
+                    </li>
+                    {% endfor %}
+
 					<li class="dropdown visible-xs">
-        				<a href="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown">Updated <span class="caret"></span></a>
-        				<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
-        			  		<li class=""><a href="#updated-pane" tabindex="-1" role="tab" data-toggle="tab">Updated</a></li>
-        			  		<li class=""><a href="#true-pane" tabindex="-1" role="tab" data-toggle="tab">True</a></li>
-        			  		<li class=""><a href="#lie-pane" tabindex="-1" role="tab" data-toggle="tab">Lie</a></li>
-        			  		<li class=""><a href="#half_truth-pane" tabindex="-1" role="tab" data-toggle="tab">Half Truth</a></li>
-        			  		<li class=""><a href="#unverifiable-pane" tabindex="-1" role="tab" data-toggle="tab">Unverifiable</a></li>
+        				<a href="#" id="meter-tab-drop" class="dropdown-toggle" data-toggle="dropdown">Updated <span class="caret"></span></a>
+        				<ul class="dropdown-menu" role="menu" aria-labelledby="meter-tab-drop">
+                            {% for meter, meter_statement in meter_statement_list %}
+        			  		<li{% if forloop.first %} class="first"{% endif %}{% if forloop.last %} class="last"{% endif %}>
+                                <a href="#meter-{{ meter.permalink }}" tabindex="-1" role="tab" data-toggle="tab">
+                                    {{ meter.title }}
+                                </a>
+                            </li>
+                            {% endfor %}
         				</ul>
       				</li>
 				</ul>				
 			</div>
 		</header>
 		<div class="tab-content">
-			<div class="tab-pane fade in active" id="updated-pane">
-			</div>
-			<div class="tab-pane fade" id="true-pane">
-			</div>
-			<div class="tab-pane fade" id="lie-pane">
-			</div>
-			<div class="tab-pane fade" id="half_truth-pane">
-			</div>
-			<div class="tab-pane fade" id="unverifiable-pane">
-			</div>
-		</div>	
-		<section class="col-md-12">
-			<header>
-				<h3 class="hidden">Metor Description</h3>
-			</header>
-			<div class="row block block-bg-grey polygraph-list-before">
-				<div class="block-content">
-					<div class="col-lg-3 col-md-4 text-center">
-						<h4 class="block-quote-alt">Unverifiable</h4>
-					</div>
-					<div class="col-lg-9 col-md-8 text-left desc">
-						<span>Description :</span>
-						<p>“ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอเอ็กซ์เพรสคาแร็คเตอร์ชะโป่าไม้สระโงกอ่อนด้อยเทอร์โบบ็อกซ์ ฟลุกแทงโก้สะกอม ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอเอ็กซ์เพรสคาแร็คเตอร์ชะโป่าไม้สระโงกอ่อนด้อยเทอร์โบบ็อกซ์ ฟลุกแทงโก้สะกอม ฮิแฟ็กซ์.</p>
-					</div>
-				</div>				
-			</div>
-			</section>
-    		<section class="col-md-12">
-			<header>
-				<h3 class="hidden">Polygraph List Item</h3>
-			</header>
-    	    <article class="row block block-no-border polygraph-list-block new">
-    	    	<span>New</span>
-    	        <div class="block-content float-right-img col-lg-12">
-    	            <p class="text-brown quote lead"><a href="/statement/i-want-to-ruin-the-world/">“ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอเอ็กซ์เพรสคาแร็คเตอร์ชะโป่าไม้สระโงกอ่อนด้อยเทอร์โบบ็อกซ์ ฟลุกแทงโก้สะกอม <strong>ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอเอ็กซ์เพรสคาแร็คเตอร์ชะโป่าไม้สระโงกอ่อนด้อยเทอร์โบบ็อกซ์</strong> ฟลุกแทงโก้สะกอม ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอเอ็กซ์เพรสคาแร็คเตอร์ชะโป่าไม้สระโงกอ่อนด้อยเทอร์โบบ็อกซ์ ฟลุกแทงโก้สะกอม”</a></p>
-    	            <div class="media">
-    	                <a class="pull-left" href="#">
-    	                    <img class="media-object" src="/static/css/images/people-3-sm.png" alt="...">
-    	                </a>
-    	                <div class="media-body">
-    	                    <a href="/" class="media-heading">สุเทพ เทือกสุบรรณ</a>
-    	                </div>
-    	            </div>
-    	        </div>
-    	        <div class="meter-md">
-    	            <img src="/static/css/images/status-true-md.png" alt="false image large" />
-    	        </div>
-    	    </article>
-    	    <article class="row block block-no-border polygraph-list-block new">
-    	    	<span>New</span>
-    	        <div class="block-content float-right-img col-lg-12">
-    	            <p class="text-brown quote lead"><a href="/statement/detail/1">“<strong>ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอเอ็กซ์เพรสคาแร็คเตอร์ชะโป่าไม้สระโงกอ่อนด้อยเทอร์โบบ็อกซ์</strong> ฟลุกแทงโก้สะกอม ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอเอ็กซ์เพรสคาแร็คเตอร์ชะโป่าไม้สระโงกอ่อนด้อยเทอร์โบบ็อกซ์ ฟลุกแทงโก้สะกอม”</a></p>
-    	            <div class="media">
-    	                <a class="pull-left" href="#">
-    	                    <img class="media-object" src="/static/css/images/people-3-sm.png" alt="...">
-    	                </a>
-    	                <div class="media-body">
-    	                    <a href="/" class="media-heading">สุเทพ เทือกสุบรรณ</a>
-    	                </div>
-    	            </div>
-    	        </div>
-    	        <div class="meter-md">
-    	            <img src="/static/css/images/status-lie-md.png" alt="false image large" />
-    	        </div>
-    	    </article>
-    	    <article class="row block block-no-border polygraph-list-block updated">
-    	    	<span>Updated</span>
-    	        <div class="block-content float-right-img col-lg-12">
-    	            <p class="text-brown quote lead"><a href="/statement/detail/1">“ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอเอ็กซ์เพรสคาแร็คเตอร์ชะโป่าไม้สระโงกอ่อนด้อยเทอร์โบบ็อกซ์ ฟลุกแทงโก้สะกอม <strong>ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอเอ็กซ์เพรสคาแร็คเตอร์ชะโป่าไม้สระโงกอ่อนด้อยเทอร์โบบ็อกซ์</strong> ฟลุกแทงโก้สะกอม ฮิแฟ็กซ์"</a></p>
-    	            <div class="media">
-    	                <a class="pull-left" href="#">
-    	                    <img class="media-object" src="/static/css/images/people-3-sm.png" alt="...">
-    	                </a>
-    	                <div class="media-body">
-    	                    <a href="/" class="media-heading">สุเทพ เทือกสุบรรณ</a>
-    	                </div>
-    	            </div>
-    	        </div>
-    	        <div class="meter-md">
-    	            <img src="/static/css/images/status-half-truth-md.png" alt="false image large" />
-    	        </div>
-    	    </article>
-    		</section>
+            {% for meter, meter_statement in meter_statement_list %}
+            <div class="tab-pane fade" id="meter-{{ meter.permalink }}">
 
-		<a href="/people/2" class="btn btn-default">ดูคำพูด "จริง" ทั้งหมด <span class="glyphicon glyphicon-chevron-right"></span></a>
+                {% if meter.description %}
+                <section class="col-md-12">
+                    <header>
+                        <h3 class="hidden">{% trans "Meter Description" %}</h3>
+                    </header>
+                    <div class="row block block-bg-grey polygraph-list-before">
+                        <div class="block-content">
+                            <div class="col-lg-3 col-md-4 text-center">
+                                <h4 class="block-quote-alt">{{ meter.title }}</h4>
+                            </div>
+                            <div class="col-lg-9 col-md-8 text-left desc">
+                                <span>{% trans "Description" %} :</span>
+                                {{ meter.description }}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                {% endif %}
+
+
+                {% if meter_statement %}
+                <section class="col-md-12">
+                    <header>
+                        <h3 class="hidden">{% trans "Polygraph List Item" %}</h3>
+                    </header>
+
+                    {% for statement in meter_statement %}
+                    <article class="row block block-no-border polygraph-list-block{% if statement.uptodate_status %} {{ statement.uptodate_status.code }}{% endif %}">
+                        {% if statement.uptodate_status %}<span>{{ statement.uptodate_status.text }}</span>{% endif %}
+                        <div class="block-content float-right-img col-lg-12">
+                            <div class="text-brown quote lead">
+                                <a href="{% url 'statement_detail' statement.permalink %}">
+                                    {{ statement.quote }}
+                                </a>
+                            </div>
+                            <div class="media">
+                                <a class="pull-left" href="#">
+                                    {% image_render statement.quoted_by.image '40x40' statement.quoted_by.get_full_name %}
+                                </a>
+                                <div class="media-body">
+                                    <a href="{% url 'people_detail' statement.quoted_by.permalink %}" class="media-heading">{{ statement.quoted_by.get_full_name }}</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="meter-md">
+                            {% image_render statement.meter.image_medium_text '225x200' statement.meter.title %}
+                        </div>
+                    </article>
+                    {% endfor %}
+
+                    <a href="{% url 'meter_detail' meter.permalink %}" class="btn btn-default">
+                        {% trans "See all" %} "{{ meter.title }}" {% trans "statements" %}<span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+
+
+                </section>
+                {% else %}
+
+                <section class="col-md-12">
+
+                    {% if user.is_authenticated %}
+                    <div class="text-center">
+                        <a class="btn btn-primary text-center" href="{% url 'statement_create' %}">
+                            <span class="glyphicon glyphicon-pencil"></span> {% trans "Create" %} {{ meter.title }} {% trans "Statement" %}
+                        </a>
+                    </div>
+                    {% else %}
+                    <div class="text-center">{% trans "No" %} {{ meter.title }} {% trans "Statement" %}</div>
+                    {% endif %}
+
+                </section>
+
+                {% endif %}
+
+
+			</div>
+            {% endfor %}
+
+		</div>	
+
+
+
 	</section>
+
 </div>
 
 <section class="region row">
 		<header>
-			<h2 class="hidden">Other Information</h2>
+			<h2 class="hidden">{% trans "Other Information" %}</h2>
 		</header>
 		<aside class="col-md-8 pull-right">
 			<header>
-				<h2>Tags</h2>
+				<h2>{% trans "Tags" %}</h2>
 			</header>
 			<div class="tag-list">
-				<a href="/" class="btn btn-default"><strong>จำนำข้าว</strong></a>
-				<a href="/" class="btn btn-default"><strong>รฟม.</strong></a>
-				<a href="/" class="btn btn-default"><strong>ธกส.</strong></a>
-				<a href="/" class="btn btn-default"><strong>สหยูเนี่ยน</strong></a>
-				<a href="/" class="btn btn-default"><strong>รถไฟความเร้วสูง</strong></a>
-				<a href="/" class="btn btn-default"><strong>จำนำข้าว</strong></a>
-				<a href="/" class="btn btn-default"><strong>รฟม.</strong></a>
-				<a href="/" class="btn btn-default"><strong>ธกส.</strong></a>	
-				<a href="/" class="btn btn-default"><strong>สหยูเนี่ยน</strong></a>
-				<a href="/" class="btn btn-default"><strong>รถไฟความเร้วสูง</strong></a>
-				<a href="/" class="btn btn-default"><strong>จำนำข้าว</strong></a>
-				<a href="/" class="btn btn-default"><strong>รฟม.</strong></a>
-				<a href="/" class="btn btn-default"><strong>ธกส.</strong></a>	
+                {% for tags in tags_list %}
+                <a href="{% url 'tags_detail' tags.id %}" class="btn btn-default"><strong>{{ tags.name }}</strong></a>
+                {% endfor %}
 			</div>
 		</aside>
 		<aside class="col-md-4 pull-left">
 			<header>
-				<h2>Contact Us</h2>
+				<h2>{% trans "Contact Us" %}</h2>
 			</header>
-			<p>“ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอดี้ เอ็กซ์เพรสคาแร็คเตอร์ชะโนดป่าไม้สวีท ระโงกอ่อนด้อยอมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ <a href="mailto:webmaster@example.com">info@jabted.com</a> เตอร์ชะโนดป่าไม้สวีท ระโงกอ่อนด้อย</p>
+            {{ contact_footer }}
 		</aside>
 </section>
 

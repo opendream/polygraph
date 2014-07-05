@@ -93,6 +93,13 @@ $(document).ready(function () {
         $(this).remove();
     });
 
+    // front tab
+    $('.tabable').click(function (e) {
+        e.preventDefault()
+        $(this).tab('show')
+    });
+    $('.first .tabable').tab('show')
+
 });
 
 /*
