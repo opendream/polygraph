@@ -50,11 +50,12 @@ class TestPeople(TestCase):
 
     def test_create(self):
 
-        people1 = factory.create_people('dream.p', 'Dream', 'Politic', 'Prime Minister', 'Black shirt', 'http://dream.politic.com', category=self.people_category1, created_by=self.staff1)
+        people1 = factory.create_people('dream.p', 'Dream', 'Politic', 'Prime Minister', 'Black shirt', 'http://dream.politic.com', category=self.people_category1, created_by=self.staff1, summary='Summary Prime Minister')
         self.assertEqual(people1.first_name, 'Dream')
         self.assertEqual(people1.last_name, 'Politic')
         self.assertEqual(people1.permalink, 'dream.p')
         self.assertEqual(people1.occupation, 'Prime Minister')
+        self.assertEqual(people1.summary, 'Summary Prime Minister')
         self.assertEqual(people1.description, 'Black shirt')
         self.assertEqual(people1.homepage_url, 'http://dream.politic.com')
         self.assertEqual(people1.get_full_name(), 'Dream Politic')
@@ -67,12 +68,13 @@ class TestPeople(TestCase):
         self.assertEqual(people1.status, STATUS_PUBLISHED)
         self.assertEqual(people1.__unicode__(), 'Dream Politic')
 
-        people2 = factory.create_people('open.p', 'Open', 'Politic', 'Minister', 'White shirt', 'http://open.politic.com', category=self.people_category2, status=STATUS_DRAFT, created_by=self.staff2)
+        people2 = factory.create_people('open.p', 'Open', 'Politic', 'Minister', 'White shirt', 'http://open.politic.com', category=self.people_category2, status=STATUS_DRAFT, created_by=self.staff2, summary='Summary White shirt')
         self.assertEqual(people2.first_name, 'Open')
         self.assertEqual(people2.last_name, 'Politic')
         self.assertEqual(people2.permalink, 'open.p')
         self.assertEqual(people2.occupation, 'Minister')
         self.assertEqual(people2.description, 'White shirt')
+        self.assertEqual(people2.summary, 'Summary White shirt')
         self.assertEqual(people2.homepage_url, 'http://open.politic.com')
         self.assertEqual(people2.get_full_name(), 'Open Politic')
         self.assertEqual(people2.get_short_name(), 'Open.P')
