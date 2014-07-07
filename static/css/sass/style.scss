@@ -11,10 +11,6 @@ $text_brown : #7f5d3d; // text brown
 $text_normal : #333333; // text normal
 $block_border : #CCCCCC;
 
-img {
-	border: 1px solid red;
-}
-
 body {
   padding-top: 140px;
   background: url(../images/body-bg.png);
@@ -496,7 +492,7 @@ input + .errors{
 		height: 18px;
 		background: url(../images/quote.png) transparent no-repeat 0 0;
 		position: absolute;
-		z-index: 999;
+		z-index: 1;
 	}
 	&:before {
 		top: 0; left: 0;
@@ -521,7 +517,7 @@ input + .errors{
 @media (max-width: 992px) {
 	.block-quote-alt {
 		max-width: 100%;
-		margin-bottom: 30px;
+		margin-bottom: 10px;
 	}
 }
 @media (max-width: 560px) {
@@ -688,7 +684,7 @@ input + .errors{
 				right: 15px;
 				top: 50%;
 				margin-top: -4px;
-				border-top: 8px solid;
+				border-top: 8px solid $text-brown;
 				border-right: 8px solid transparent;
 				border-left: 8px solid transparent;
 				border-bottom: 0 solid transparent;
@@ -697,6 +693,7 @@ input + .errors{
 		&.open a { border: 1px solid #CCC; color: $text-brown; }
 		ul.dropdown-menu {
 			width: 100%;
+			z-index: 2;
 			li { 
 				padding: 0; 
 			}
@@ -720,6 +717,11 @@ input + .errors{
 @media (max-width: 768px) {
 	.nav.full-width {
 		margin: 15px 0;
+		> li.active {
+			a { 
+				color: $text-brown;
+			} 
+		}
 	}
 }
 
@@ -875,7 +877,7 @@ input + .errors{
 @media (max-width: 991px) {
 	.polygraph-list-before .desc { padding: 0; }
 }
-////////////////////////////////////////////////
+// ###########################
 
 .about-statement {
 	h3 {  margin-top: 0; }
@@ -1140,7 +1142,9 @@ footer {
 ul.nav-tabs  li.active .caret {
     display: inline-block;
 }
-ul.nav-tabs li .caret {
-    display: none;
+@media (min-width: 768px) {
+	ul.nav-tabs li .caret {
+	    display: none;
+	}
 }
 ul.nav-tabs li.first .caret { border-bottom-color: #FFF; }
