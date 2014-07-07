@@ -89,6 +89,7 @@ class AbstractPeopleField(models.Model):
     last_name = models.CharField(max_length=255, null=True, blank=True)
 
     occupation = models.CharField(max_length=255, null=True, blank=True)
+    summary = models.TextField(null=True, blank=True)
     description = RichTextField(null=True, blank=True)
     homepage_url = models.CharField(max_length=255, null=True, blank=True)
 

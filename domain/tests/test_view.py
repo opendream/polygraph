@@ -78,7 +78,7 @@ class TestEditPeople(TestCase):
 
         # Define for override
         self.check_initial = True
-        self.people1 = factory.create_people('crosalot',' Crosalot', 'Opendream ', 'Developer', 'Opensource', 'http://opendream.co.th', category=self.people_category2, status=STATUS_DRAFT)
+        self.people1 = factory.create_people('crosalot',' Crosalot', 'Opendream ', 'Developer', 'Opensource', 'http://opendream.co.th', category=self.people_category2, status=STATUS_DRAFT, summary='hello summary')
         self.url1 = reverse('people_edit', args=[self.people1.id])
         self.url2 = reverse('people_edit', args=[self.people2.id])
         self.message_success = _('Your %s settings has been updated. View this %s <a href="%s">here</a>.') % (
@@ -111,6 +111,7 @@ class TestEditPeople(TestCase):
         self.assertContains(response, 'name="first_name"')
         self.assertContains(response, 'name="last_name"')
         self.assertContains(response, 'name="occupation"')
+        self.assertContains(response, 'name="summary"')
         self.assertContains(response, 'name="description"')
         self.assertContains(response, 'name="homepage_url"')
         self.assertContains(response, 'name="image"')
@@ -126,6 +127,7 @@ class TestEditPeople(TestCase):
         self.assertContains(response, self.people1.first_name)
         self.assertContains(response, self.people1.last_name)
         self.assertContains(response, self.people1.occupation)
+        self.assertContains(response, self.people1.summary)
         self.assertContains(response, self.people1.description)
         self.assertContains(response, self.people1.homepage_url)
 
@@ -146,6 +148,7 @@ class TestEditPeople(TestCase):
             'first_name': self.people1.first_name,
             'last_name': self.people1.last_name,
             'occupation': self.people1.occupation,
+            'summary': self.people1.summary,
             'description': self.people1.description,
             'homepage_url': self.people1.homepage_url,
             'categories': [self.people_category1.id],
@@ -164,6 +167,7 @@ class TestEditPeople(TestCase):
         self.assertContains(response, self.people1.first_name)
         self.assertContains(response, self.people1.last_name)
         self.assertContains(response, self.people1.occupation)
+        self.assertContains(response, self.people1.summary)
         self.assertContains(response, self.people1.description)
         self.assertContains(response, self.people1.homepage_url)
         self.assertContains(response, self.message_success)
@@ -188,6 +192,7 @@ class TestEditPeople(TestCase):
             'first_name': '',
             'last_name': '',
             'occupation': '',
+            'summary': '',
             'description': '',
             'homepage_url': '',
             'categories': [],
@@ -204,6 +209,7 @@ class TestEditPeople(TestCase):
             'first_name': self.people1.first_name,
             'last_name': self.people1.last_name,
             'occupation': '',
+            'summary': '',
             'description': '',
             'homepage_url': '',
             'categories': [],
@@ -217,6 +223,7 @@ class TestEditPeople(TestCase):
             'first_name': self.people1.first_name,
             'last_name': self.people1.last_name,
             'occupation': '',
+            'summary': '',
             'description': '',
             'homepage_url': '',
             'categories': [],
@@ -252,6 +259,7 @@ class TestCreatePeople(TestEditPeople):
             'first_name': 'New',
             'last_name': 'Crosalot',
             'occupation': 'Designer',
+            'summary': 'Hello my is name',
             'description': 'Work on opendream',
             'homepage_url': 'http://opendream.co.th',
             'status': STATUS_DRAFT,

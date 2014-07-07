@@ -23,6 +23,7 @@ class PeopleEditForm(PermalinkForm):
     last_name = forms.CharField(max_length=255, widget=forms.TextInput())
 
     occupation = forms.CharField(required=False, max_length=255, widget=forms.TextInput())
+    summary = forms.CharField(required=False, widget=forms.Textarea())
     description = forms.CharField(required=False, widget=CKEditorWidget(config_name='minimal'))
     homepage_url = forms.CharField(required=False, max_length=255, widget=forms.TextInput())
 

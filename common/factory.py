@@ -64,25 +64,44 @@ def create_people_category(permalink=None, title='', description=''):
     return people_category
 
 
-def create_people(permalink=None, first_name='', last_name='', occupation='', description='', homepage_url='', image='', category='', status=STATUS_PUBLISHED, created_by=''):
+def create_people(permalink=None, first_name='', last_name='', occupation='', description='', homepage_url='', image='', category='', status=STATUS_PUBLISHED, created_by='', summary='', use_long_description=False):
 
     created_by = created_by or create_staff()
     permalink = permalink or randstr()
     first_name = first_name or randstr()
     last_name = last_name or randstr()
     occupation = occupation or randstr()
-    description = description or randstr()
+
     homepage_url = homepage_url or randstr()
     image = image or '%sdefault/default-people.png' % settings.FILES_WIDGET_TEMP_DIR
 
     category_list = list(PeopleCategory.objects.all()) or [None]
     category = category or random.choice(category_list) or create_people_category()
 
+    if use_long_description:
+        long_summary = '''
+<p>อดีตอธิบดีกรมสอบสวนคดีพิเศษ, อดีตเลขาธิการคณะกรรมการป้องกันและปราบปรามการทุจริตในภาครัฐ, อดีตอัยการจังหวัดประจำกรม สำนักงานคณะกรรมการอัยการ</p>
+'''
+
+        long_description = '''
+<p>ก่อนรับราชการอัยการ ธาริตเป็นผู้ช่วยอาจารย์สอนกฎหมาย จนกระทั่งได้พบกับคณิต ณ นคร ในฐานะอาจารย์พิเศษจึงแนะนำให้ธาริตไปสอบอัยการหลังเรียนจบนิติศาสตร์ มหาบัณฑิต และธาริตก็สอบได้เป็นอัยการ[6] จนกระทั่งพ.ต.ท.ทักษิณ ชินวัตรได้ก่อตั้ง พรรคไทยรักไทย ได้ระดมนักกฎหมายหลายคน เช่น คณิต ณ นคร เรวัติ ฉ่ำเฉลิม ร่วมก่อตั้งพรรค ซึ่งในจำนวนนั้นมีธาริตอยู่ด้วยทำให้หลังจากที่พรรคไทยรักไทยชนะการ เลือกตั้ง ธาริตจึงได้รับแต่งตั้งให้ช่วยราชการสำนักนายกรัฐมนตรี โดยทำงานกับนพ. พรหมินทร์ เลิศสุริย์เดช รองนายกรัฐมนตรีขณะเดียวกันธาริตยังเป็นเป็นคณะที่ปรึกษา ของพันศักดิ์ วิญญรัตน์อีกด้วย</p>
+<p>เมื่อมีการจัดตั้งกรมสอบสวนคดีพิเศษ (DSI) ในรัฐบาลพ.ต.ท.ทักษิณ ชินวัตร ธาริต ได้โอนมาดำรงตำแหน่งรองอธิบดีและต่อมาก็ได้รับแต่งตั้งเป็นเลขาธิการคณะ กรรมการป้องกันและปราบปรามการทุจริตในภาครัฐ กรมสอบสวนคดีพิเศษแทน พ.ต.อ.ทวี สอดส่อง ในรัฐบาลอภิสิทธิ์ เวชชาชีวะ</p>
+<p>ธาริต เป็นหนึ่งในคณะกรรมการศูนย์อำนวยการแก้ไขสถานการณ์ฉุกเฉิน (ศอฉ.) เมื่อครั้งมีการชุมนุมของแนวร่วมประชาธิปไตยต่อต้านเผด็จการแห่งชาติ ขับไล่รัฐบาล นายอภิสิทธิ์ เวชชาชีวะ ในปี พ.ศ. 2553 แต่ไม่ได้เป็นคณะกรรมการด้านยุทธการ นอกจากนี้ธาริตยังมีส่วนสำคัญในการดำเนินคดีทางการเมืองหลายคดี ปัจจุบัน ธาริต เป็นหนึ่งในคณะกรรมศูนย์อำนวยการรักษาความสงบในสมัยรัฐบาล ยิ่งลักษณ์ ชินวัตร</p>
+'''
+        summary = summary or '%s %s' % (long_summary, randstr())
+        description = description or '%s %s' % (long_description, randstr())
+    else:
+        summary = summary or randstr()
+        description = description or randstr()
+
+
+
     people = People.objects.create(
         permalink = permalink,
         first_name  = first_name,
         last_name = last_name,
         occupation = occupation,
+        summary=summary,
         description = description,
         homepage_url = homepage_url,
         image=image,
@@ -98,7 +117,7 @@ def create_people(permalink=None, first_name='', last_name='', occupation='', de
     return people
 
 
-def create_topic(created_by=None, title='', description='', created=None, use_log_description=False):
+def create_topic(created_by=None, title='', description='', created=None, use_long_description=False):
 
     created_by = created_by or create_staff()
     title = title or randstr()
@@ -115,7 +134,7 @@ def create_topic(created_by=None, title='', description='', created=None, use_lo
 <p>ถนนทางหลวง 241,080 ล้านบาท คิดเป็น 12.1%  ถนนทางหลวงชนบท 34,309 ล้านบาท คิดเป็น 1.7%  สถานีขนส่งสินค้า 14,093 ล้านบาท คิดเป็น 0.7%  ท่าเรือ 29,581 ล้านบาท คิดเป็น 1.5%  ด่านศุลกากร 12,545 ล้านบาท คิดเป็น 0.6%</p><p>ปรับปรุงระบบรถไฟ (เพิ่มเครื่องกั้น ซ่อมบำรุงรางที่เสียหาย) 23,236 ล้านบาท คิดเป็น 1.2%  รถไฟทางคู่ และทางคู่เส้นทางใหม่ 383,891 ล้านบาท คิดเป็น 19.2%  ค่าสำรองเผื่อฉุกเฉิน (ความผันผวนราคาวัสดุ การติดตามและประเมินผล) 21,050 ล้านบาท คิดเป็น 1.0% ซึ่งแม้ตัวเลขจะคลาดเคลื่อนจากในเอกสารประกอบร่างพระราชบัญญัติไปบ้าง แต่ก็มีความใกล้เคียง</p>
 <p>ทั้งนี้ทั้งนั้นก่อนหน้านี้ในปี 2554 ได้มีตัวเลขประมาณการงบประมาณการสร้างรถไฟฟ้า 10 สายในเขตกรุงเทพว่ารวมๆ แล้วจะต้องใช้งบลงทุนประมาณ 668,593 ล้านบาท (รวมค่าเวนคืน-ก่อสร้าง-งานระบบ)</p>
 '''
-    if use_log_description:
+    if use_long_description:
         description = description or '%s %s' % (long_description, randstr())
     else:
         description = description or randstr()
@@ -162,7 +181,7 @@ def create_meter(permalink=None, title='', description='', point=0, order=0, ima
     return meter
 
 
-def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', references=None, status=STATUS_PENDING, topic=None, tags='hello world', meter=None, relate_statements=[], relate_peoples=[], published=None, published_by=None, source='', created=None, created_raw=None, changed=None, use_log_description=False, hilight=False, promote=False):
+def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', references=None, status=STATUS_PENDING, topic=None, tags='hello world', meter=None, relate_statements=[], relate_peoples=[], published=None, published_by=None, source='', created=None, created_raw=None, changed=None, use_long_description=False, hilight=False, promote=False):
 
     created_by_list = list(Staff.objects.all()) or [None]
     created_by = created_by or random.choice(created_by_list) or create_staff()
@@ -174,7 +193,7 @@ def create_statement(created_by=None, quoted_by=None, permalink=None, quote='', 
     meter_list = list(Meter.objects.all()) or [None]
     meter = meter or random.choice(meter_list) or create_meter()
 
-    topic = topic or create_topic(created_by=created_by, use_log_description=use_log_description)
+    topic = topic or create_topic(created_by=created_by, use_long_description=use_long_description)
 
     permalink = permalink or randstr()
 

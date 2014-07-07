@@ -3,12 +3,7 @@
 {% load common_tags %}
 {% load domain_tags %}
 
-        'people': people,
-        'meter_statement_count': meter_statement_count,
-        'statement_list': statement_list
-        
-
-{% block title %}{% trans "People" %}{% endblock %}
+{% block title %}{{ people.get_full_name }}{% endblock %}
 
 {% block content %}
 
@@ -20,44 +15,60 @@
             </header>
             <div class="block block-no-border">
 				<div class="media block-content">
-    	            <a class="pull-left" href="/people/e6bac7110/">
-                        <img src="/media/cache/07/e6/07e6e8c1c28f3d6c1037f522c89186e1.png" width="120" height="120" alt="e6bac88c0 e6bac9350">
-                    </a>
+                    <span class="pull-left">
+                        {% image_render people.image '120x120' people.get_full_name %}
+                    </span>
+
                     <div class="media-body">
-                    	<p>อดีตอธิบดีกรมสอบสวนคดีพิเศษ, อดีตเลขาธิการคณะกรรมการป้องกันและปราบปรามการทุจริตในภาครัฐ, อดีตอัยการจังหวัดประจำกรม สำนักงานคณะกรรมการอัยการ</p>
+                    	<p>{{ people.summary|safe|default:people.occupation }}</p>
     	            </div>
     	    	</div>
+                {% if people.description|safe %}
 				<div class="block-content">
-    	            <p>ก่อนรับราชการอัยการ ธาริตเป็นผู้ช่วยอาจารย์สอนกฎหมาย จนกระทั่งได้พบกับคณิต ณ นคร ในฐานะอาจารย์พิเศษจึงแนะนำให้ธาริตไปสอบอัยการหลังเรียนจบนิติศาสตร์ มหาบัณฑิต และธาริตก็สอบได้เป็นอัยการ[6] จนกระทั่งพ.ต.ท.ทักษิณ ชินวัตรได้ก่อตั้ง พรรคไทยรักไทย ได้ระดมนักกฎหมายหลายคน เช่น คณิต ณ นคร เรวัติ ฉ่ำเฉลิม ร่วมก่อตั้งพรรค ซึ่งในจำนวนนั้นมีธาริตอยู่ด้วยทำให้หลังจากที่พรรคไทยรักไทยชนะการ เลือกตั้ง ธาริตจึงได้รับแต่งตั้งให้ช่วยราชการสำนักนายกรัฐมนตรี โดยทำงานกับนพ. พรหมินทร์ เลิศสุริย์เดช รองนายกรัฐมนตรีขณะเดียวกันธาริตยังเป็นเป็นคณะที่ปรึกษา ของพันศักดิ์ วิญญรัตน์อีกด้วย</p>
-    	            <p>เมื่อมีการจัดตั้งกรมสอบสวนคดีพิเศษ (DSI) ในรัฐบาลพ.ต.ท.ทักษิณ ชินวัตร ธาริต ได้โอนมาดำรงตำแหน่งรองอธิบดีและต่อมาก็ได้รับแต่งตั้งเป็นเลขาธิการคณะ กรรมการป้องกันและปราบปรามการทุจริตในภาครัฐ กรมสอบสวนคดีพิเศษแทน พ.ต.อ.ทวี สอดส่อง ในรัฐบาลอภิสิทธิ์ เวชชาชีวะ</p>
-    	            <p>ธาริต เป็นหนึ่งในคณะกรรมการศูนย์อำนวยการแก้ไขสถานการณ์ฉุกเฉิน (ศอฉ.) เมื่อครั้งมีการชุมนุมของแนวร่วมประชาธิปไตยต่อต้านเผด็จการแห่งชาติ ขับไล่รัฐบาล นายอภิสิทธิ์ เวชชาชีวะ ในปี พ.ศ. 2553 แต่ไม่ได้เป็นคณะกรรมการด้านยุทธการ นอกจากนี้ธาริตยังมีส่วนสำคัญในการดำเนินคดีทางการเมืองหลายคดี ปัจจุบัน ธาริต เป็นหนึ่งในคณะกรรมศูนย์อำนวยการรักษาความสงบในสมัยรัฐบาล ยิ่งลักษณ์ ชินวัตร</p>
+                    {{ people.description|safe }}
     	    	</div>
+                {% endif %}
             </div>
         </section>
 
-        <section class="polygraph-list statement-list">
+        {% if statement_list %}
+        <section class="polygraph-list statement-list" id="main">
             <section class="col-md-12">
                 <header class="row">
-                    <h3>{% trans "Polygraph List Item" %}</h3>
+                    <h3>{% trans "Statement related or said by" %} {{ people.get_short_name }}</h3>
                 </header>
-                {% if statement_list %}
                 {% for statement in statement_list %}
                 {{ statement|statement_item }}
                 {% endfor %}
-                {% else %}
-                {% if user.is_authenticated %}
-                <div class="text-center">
-                    <a class="btn btn-primary text-center" href="{% url 'statement_create' %}">
-                        <span class="glyphicon glyphicon-pencil"></span> {% trans "Create Statement" %}
-                    </a>
-                </div>
-                {% else %}
-                <div class="text-center">{% trans "No Statement" %}</div>
-                {% endif %}
-                {% endif %}
 
             </section>
         </section>
+        {% endif %}
+
+
+
+        {% if statement_list.paginator.page_range|length > 1 %}
+        <ul class="paginn">
+
+            {% if statement_list.has_previous %}
+            <li><a href="?page={{ statement_list.paginator.page_range|first }}">&laquo;</a></li>
+            <li><a href="?page={{ statement_list.previous_page_number }}">‹</a></li>
+            {% endif %}
+
+            {% for page_num in statement_list.paginator.page_range %}
+            {% if page_num <= statement_list.number|add:"2" and page_num >= statement_list.number|add:"-2" %}
+            <li{% if page_num == statement_list.number %} class="active"{% endif %}><a href="?page={{ page_num }}">{{ page_num }}</a></li>
+            {% endif %}
+            {% endfor %}
+
+            {% if statement_list.has_next %}
+            <li><a href="?page={{ statement_list.next_page_number }}">›</a></li>
+            <li><a href="?page={{ statement_list.paginator.page_range|last }}">&raquo;</a></li>
+            {% endif %}
+        </ul>
+        {% endif %}
+
+
     </div>
 
 {% endblock %}

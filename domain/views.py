@@ -120,6 +120,7 @@ def people_create(request, people=None):
             people.first_name = form.cleaned_data['first_name']
             people.last_name = form.cleaned_data['last_name']
             people.occupation = form.cleaned_data['occupation']
+            people.summary = form.cleaned_data['summary']
             people.description = form.cleaned_data['description']
             people.homepage_url = form.cleaned_data['homepage_url']
             people.image = form.cleaned_data['image']
@@ -148,6 +149,7 @@ def people_create(request, people=None):
             'first_name': people.first_name,
             'last_name': people.last_name,
             'occupation': people.occupation,
+            'summary': people.summary,
             'description': people.description,
             'homepage_url': people.homepage_url,
             'image': people.image,
@@ -184,6 +186,19 @@ def people_detail(request, people_permalink):
     statement_list = statement_list.filter(Q(quoted_by=people)|Q(relate_peoples=people)).order_by('-uptodate')
 
 
+    paginator = Paginator(statement_list, 5)
+
+    page = request.GET.get('page')
+    try:
+        statement_list = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        statement_list = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        statement_list = paginator.page(paginator.num_pages)
+
+
     return render(request, 'domain/people_detail.html', {
         'people': people,
         'meter_statement_count': meter_statement_count,
@@ -199,6 +214,20 @@ def people_list(request):
     query_str = query_str.replace('SELECT', 'SELECT DISTINCT')
 
     people_list = People.objects.raw(query_str)
+    people_list = People.objects.all().extra(select={'tmp': '*) FROM SELECT DISTINCT (id'})
+    print people_list.query
+
+    paginator = Paginator(people_list, 10)
+
+    page = request.GET.get('page')
+    try:
+        people_list = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        people_list = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        people_list = paginator.page(paginator.num_pages)
 
 
     category_list = PeopleCategory.objects.all()
@@ -227,9 +256,14 @@ def tags_detail(request, tags_id):
 
 def meter_detail(request, meter_permalink):
 
+    meter = get_object_or_404(Meter, permalink=meter_permalink)
+
+    statement_list = statement_query_base(request.user.is_anonymous(), request.user.is_staff, request.user)
+    statement_list = statement_list.filter(meter=meter).order_by('-uptodate')
+
     return render(request, 'domain/meter_detail.html', {
-        'meter': None,
-        'statement_list': []
+        'meter': meter,
+        'statement_list': statement_list
     })
 
 
