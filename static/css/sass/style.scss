@@ -655,11 +655,10 @@ input + .errors{
 	li.active a {
 		background-color: $bright_orange;
 		color: #FFFFFF;
-		border: none;
+		border-color: $bright_orange;
 		&:hover {
-			background-color: $soft_orange;
-			color: $text_brown;
-			border: none;
+			background-color: $bright_orange;
+			border-color: $bright_orange;
 		}
 	}
 }
@@ -721,6 +720,23 @@ input + .errors{
 			a { 
 				color: $text-brown;
 			} 
+		}
+	}
+}
+
+.polygraph-list.single {
+	.nav-color {
+		padding: 0;
+		margin-top: -45px;
+		margin-bottom: 30px;
+	}
+}
+@media (max-width: 991px) {
+	.polygraph-list.single {
+		.nav-color {
+			padding: 0;
+			margin-top: 15px;
+			margin-bottom: 15px;
 		}
 	}
 }

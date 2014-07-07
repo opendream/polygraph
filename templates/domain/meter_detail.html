@@ -7,112 +7,215 @@
 
 {% block content %}
 
-<div class="region row">
-
-    <section class="polygraph-list col-md-12" >
+<div class="row">
+    <section class="polygraph-list single col-md-12">
 
 		<header class="row">
-			<div class="col-md-4">
-				<h2 class="hidden"><span class="dialog-ic-bw"></span>{% trans "Polygraph" %}</h2>
+			<div class="col-md-4 hidden">
+				<h2 class="hidden"><span class="dialog-ic-bw"></span>Polygraph</h2>
 			</div>
-			<div class="col-md-8 col-xs-12">
-				<ul class="nav nav-tabs nav-pills nav-color full-width" role="tablist">
-                    {% for meter, meter_statement in meter_statement_list %}
-				  	<li class="hidden-xs{% if forloop.first %} first{% endif %}{% if forloop.last %} last{% endif %}">
-                        <a class="tabable" href="#meter-{{ meter.permalink }}" role="tab" data-toggle="tab">
-                            {{ meter.title }}
+			<div class="col-md-8 col-xs-12 pull-right">
+				<ul class="nav nav-pills nav-color full-width" role="tablist">
+                    
+				  	<li class="hidden-xs first active">
+                        <a class="tabable" href="#meter-latest" role="tab" data-toggle="tab">
+                            Latest
                         </a>
-                        <span class="caret"></span>
                     </li>
-                    {% endfor %}
-
+                    
+				  	<li class="hidden-xs">
+                        <a class="tabable" href="#meter-truth" role="tab" data-toggle="tab">
+                            Truth
+                        </a>
+                    </li>
+                    
+				  	<li class="hidden-xs">
+                        <a class="tabable" href="#meter-lie" role="tab" data-toggle="tab">
+                            Lie
+                        </a>
+                    </li>
+                    
+				  	<li class="hidden-xs">
+                        <a class="tabable" href="#meter-half-truth" role="tab" data-toggle="tab">
+                            Half True
+                        </a>
+                    </li>
+                    
+				  	<li class="hidden-xs last">
+                        <a class="tabable" href="#meter-unverifiable" role="tab" data-toggle="tab">
+                            Unverifiable
+                        </a>
+                    </li>
 					<li class="dropdown visible-xs">
         				<a href="#" id="meter-tab-drop" class="dropdown-toggle" data-toggle="dropdown">Updated <span class="caret"></span></a>
         				<ul class="dropdown-menu" role="menu" aria-labelledby="meter-tab-drop">
-                            {% for meter, meter_statement in meter_statement_list %}
-        			  		<li{% if forloop.first %} class="first"{% endif %}{% if forloop.last %} class="last"{% endif %}>
-                                <a href="#meter-{{ meter.permalink }}" tabindex="-1" role="tab" data-toggle="tab">
-                                    {{ meter.title }}
+                            
+        			  		<li class="first">
+                                <a href="#meter-latest" tabindex="-1" role="tab" data-toggle="tab">
+                                    Latest
                                 </a>
                             </li>
-                            {% endfor %}
+                            
+        			  		<li>
+                                <a href="#meter-truth" tabindex="-1" role="tab" data-toggle="tab">
+                                    Truth
+                                </a>
+                            </li>
+                            
+        			  		<li>
+                                <a href="#meter-lie" tabindex="-1" role="tab" data-toggle="tab">
+                                    Lie
+                                </a>
+                            </li>
+                            
+        			  		<li>
+                                <a href="#meter-half-truth" tabindex="-1" role="tab" data-toggle="tab">
+                                    Half True
+                                </a>
+                            </li>
+                            
+        			  		<li class="last">
+                                <a href="#meter-unverifiable" tabindex="-1" role="tab" data-toggle="tab">
+                                    Unverifiable
+                                </a>
+                            </li>
+                            
         				</ul>
       				</li>
 				</ul>				
 			</div>
 		</header>
 		<div class="tab-content">
-            {% for meter, meter_statement in meter_statement_list %}
-            <div class="tab-pane fade" id="meter-{{ meter.permalink }}">
+            
+            <div class="tab-pane active" id="meter-latest">
 
-                {% if meter.description %}
-                <section class="col-md-12 col-no-padding">
+				<section class="col-md-12 col-no-padding">
                     <header>
-                        <h3 class="hidden">{% trans "Meter Description" %}</h3>
+                        <h3 class="hidden">Meter Description</h3>
                     </header>
                     <div class="block block-bg-grey polygraph-list-before">
                         <div class="block-content">
                             <div class="col-md-12 col-no-padding">
                                 <div class="col-lg-4 col-md-4 text-center">
-                                    <h4 class="block-quote-alt">{{ meter.title }}</h4>
+                                    <h4 class="block-quote-alt">Truth</h4>
                                 </div>
                                 <div class="col-lg-8 col-md-8 text-left desc">
-                                    <span>{% trans "Description" %} :</span>
-                                    {{ meter.description }}
+                                    <span>Description :</span>
+                                    This is truth description. Please, edit me on the admin site.
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
-                {% endif %}
 
-
-                {% if meter_statement %}
                 <section class="col-md-12">
                     <header>
-                        <h3 class="hidden">{% trans "Polygraph List Item" %}</h3>
+                        <h3 class="hidden">Polygraph List Item</h3>
                     </header>
 
-                    {% for statement in meter_statement %}
-                    {{ statement|statement_item:'wide' }}
-                    {% endfor %}
+					<article class="row block block-no-border polygraph-list-block new">    
+					    <div class="block-content float-right-img col-lg-12">
+					        <span>New</span>
+					        <div class="text-brown quote lead">
+					            <a href="/statement/dafc490a0/">
+					                ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอเอ็กซ์เพรสคาแร็คเตอร์ชะโป่าไม้สระโงกอ่อนด้อยเทอร์โบบ็อกซ์ ฟลุกแทงโก้สะกอม ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอเอ็กซ์เพรสคาแร็คเตอร์ชะโป่าไม้สระโงกอ่อนด้อยเทอร์โบบ็อกซ์ ฟลุกแทงโก้สะกอม ฮิแฟ็กซ์ dafc4a4a0
+					            </a>
+					        </div>
+					        <div class="media">
+					            <a class="pull-left" href="#">
+					                <img src="/media/cache/c2/ea/c2ea3b5b9b8647d6e5e522f84442f594.png" width="40" height="40" alt="d9b43a610 d9b43af80">
+					            </a>
+					            <div class="media-body">
+					                <a href="/people/d9b439170/" class="media-heading">d9b43a610 d9b43af80</a>
+					            </div>
+					        </div>
+					    </div>
+					    <div class="meter-md">
+					        <img src="/media/cache/0d/87/0d8713a5e4b9b9e117ea63a9f6aab54e.png" width="214" height="195" alt="Unverifiable">
+					    </div>
+					</article>
 
-                    <div class="row">
-                        <a href="{% url 'meter_detail' meter.permalink %}" class="btn btn-default">
-                            {% trans "See all" %} "{{ meter.title }}" {% trans "statements" %}<span class="glyphicon glyphicon-chevron-right"></span>
-                        </a>
-                    </div>
+					<article class="row block block-no-border polygraph-list-block updated">    
+					    <div class="block-content float-right-img col-lg-12">
+					        <span>Updated</span>
+					        <div class="text-brown quote lead">
+					            <a href="/statement/da5b10450/">
+					                ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอเอ็กซ์เพรสคาแร็คเตอร์ชะโป่าไม้สระโงกอ่อนด้อยเทอร์โบบ็อกซ์ ฟลุกแทงโก้สะกอม ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอเอ็กซ์เพรสคาแร็คเตอร์ชะโป่าไม้สระโงกอ่อนด้อยเทอร์โบบ็อกซ์ ฟลุกแทงโก้สะกอม ฮิแฟ็กซ์ da5b118c0
+					            </a>
+					        </div>
+					        <div class="media">
+					            <a class="pull-left" href="#">
+					                <img src="/media/cache/c2/ea/c2ea3b5b9b8647d6e5e522f84442f594.png" width="40" height="40" alt="d9e6f7050 d9e6f7a30">
+					            </a>
+					            <div class="media-body">
+					                <a href="/people/d9e6f5a60/" class="media-heading">d9e6f7050 d9e6f7a30</a>
+					            </div>
+					        </div>
+					    </div>
+					    <div class="meter-md">
+					        <img src="/media/cache/0a/cc/0acce878a8fa68265390f0357f313565.png" width="225" height="197" alt="Half True">
+					    </div>
+					</article>
+                    
+					<article class="row block block-no-border polygraph-list-block">    
+					    <div class="block-content float-right-img col-lg-12">
+					        
+					        <div class="text-brown quote lead">
+					            <a href="/statement/da57bb910/">
+					                ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอเอ็กซ์เพรสคาแร็คเตอร์ชะโป่าไม้สระโงกอ่อนด้อยเทอร์โบบ็อกซ์ ฟลุกแทงโก้สะกอม ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอเอ็กซ์เพรสคาแร็คเตอร์ชะโป่าไม้สระโงกอ่อนด้อยเทอร์โบบ็อกซ์ ฟลุกแทงโก้สะกอม ฮิแฟ็กซ์ da57bd0c0
+					            </a>
+					        </div>
+					        <div class="media">
+					            <a class="pull-left" href="#">
+					                <img src="/media/cache/c2/ea/c2ea3b5b9b8647d6e5e522f84442f594.png" width="40" height="40" alt="d9ce93300 d9ce93cf0">
+					            </a>
+					            <div class="media-body">
+					                <a href="/people/d9ce91d10/" class="media-heading">d9ce93300 d9ce93cf0</a>
+					            </div>
+					        </div>
+					    </div>
+					    <div class="meter-md">
+					        <img src="/media/cache/ef/e4/efe4ba7825325d942b0190ea59e0819d.png" width="215" height="191" alt="Lie">
+					    </div>
+					</article>
 
+					<article class="row block block-no-border polygraph-list-block">    
+					    <div class="block-content float-right-img col-lg-12">
+					        
+					        <div class="text-brown quote lead">
+					            <a href="/statement/d9eab1e30/">
+					                ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอเอ็กซ์เพรสคาแร็คเตอร์ชะโป่าไม้สระโงกอ่อนด้อยเทอร์โบบ็อกซ์ ฟลุกแทงโก้สะกอม ฮิแฟ็กซ์ อมาตยาธิปไตยอีโรติก สหรัฐแก๊สโซฮอล์ สหรัฐบอเอ็กซ์เพรสคาแร็คเตอร์ชะโป่าไม้สระโงกอ่อนด้อยเทอร์โบบ็อกซ์ ฟลุกแทงโก้สะกอม ฮิแฟ็กซ์ d9eab38a0
+					            </a>
+					        </div>
+					        <div class="media">
+					            <a class="pull-left" href="#">
+					                <img src="/media/cache/c2/ea/c2ea3b5b9b8647d6e5e522f84442f594.png" width="40" height="40" alt="d9e6f7050 d9e6f7a30">
+					            </a>
+					            <div class="media-body">
+					                <a href="/people/d9e6f5a60/" class="media-heading">d9e6f7050 d9e6f7a30</a>
+					            </div>
+					        </div>
+					    </div>
+					    <div class="meter-md">
+					        <img src="/media/cache/0a/cc/0acce878a8fa68265390f0357f313565.png" width="225" height="197" alt="Half True">
+					    </div>
+					</article>
 
                 </section>
-                {% else %}
-
-                <section class="col-md-12">
-
-                    {% if user.is_authenticated %}
-                    <div class="text-center">
-                        <a class="btn btn-primary text-center" href="{% url 'statement_create' %}">
-                            <span class="glyphicon glyphicon-pencil"></span> {% trans "Create" %} {{ meter.title }} {% trans "Statement" %}
-                        </a>
-                    </div>
-                    {% else %}
-                    <div class="text-center">{% trans "No" %} {{ meter.title }} {% trans "Statement" %}</div>
-                    {% endif %}
-
-                </section>
-
-                {% endif %}
-
 
 			</div>
-            {% endfor %}
-
-		</div>	
-
-
+        </div>    
 
 	</section>
 
 </div>
+
+<ul class="pagination">
+	<li class="active"><a href="?page=1">1</a></li>
+   	<li><a href="?page=2">2</a></li>
+    <li><a href="?page=3">3</a></li>
+    <li><a href="?page=2">›</a></li>
+    <li><a href="?page=4">»</a></li>
+</ul>
 
 {% endblock %}
