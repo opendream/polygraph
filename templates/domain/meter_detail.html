@@ -1,9 +1,118 @@
 {% extends 'base_single.html' %}
 {% load i18n %}
 {% load common_tags %}
+{% load domain_tags %}
 
 {% block title %}{% trans "Polygraph" %}{% endblock %}
 
 {% block content %}
-Fix me!!
+
+<div class="region row">
+
+    <section class="polygraph-list col-md-12" >
+
+		<header class="row">
+			<div class="col-md-4">
+				<h2 class="hidden"><span class="dialog-ic-bw"></span>{% trans "Polygraph" %}</h2>
+			</div>
+			<div class="col-md-8 col-xs-12">
+				<ul class="nav nav-tabs nav-pills nav-color full-width" role="tablist">
+                    {% for meter, meter_statement in meter_statement_list %}
+				  	<li class="hidden-xs{% if forloop.first %} first{% endif %}{% if forloop.last %} last{% endif %}">
+                        <a class="tabable" href="#meter-{{ meter.permalink }}" role="tab" data-toggle="tab">
+                            {{ meter.title }}
+                        </a>
+                        <span class="caret"></span>
+                    </li>
+                    {% endfor %}
+
+					<li class="dropdown visible-xs">
+        				<a href="#" id="meter-tab-drop" class="dropdown-toggle" data-toggle="dropdown">Updated <span class="caret"></span></a>
+        				<ul class="dropdown-menu" role="menu" aria-labelledby="meter-tab-drop">
+                            {% for meter, meter_statement in meter_statement_list %}
+        			  		<li{% if forloop.first %} class="first"{% endif %}{% if forloop.last %} class="last"{% endif %}>
+                                <a href="#meter-{{ meter.permalink }}" tabindex="-1" role="tab" data-toggle="tab">
+                                    {{ meter.title }}
+                                </a>
+                            </li>
+                            {% endfor %}
+        				</ul>
+      				</li>
+				</ul>				
+			</div>
+		</header>
+		<div class="tab-content">
+            {% for meter, meter_statement in meter_statement_list %}
+            <div class="tab-pane fade" id="meter-{{ meter.permalink }}">
+
+                {% if meter.description %}
+                <section class="col-md-12 col-no-padding">
+                    <header>
+                        <h3 class="hidden">{% trans "Meter Description" %}</h3>
+                    </header>
+                    <div class="block block-bg-grey polygraph-list-before">
+                        <div class="block-content">
+                            <div class="col-md-12 col-no-padding">
+                                <div class="col-lg-4 col-md-4 text-center">
+                                    <h4 class="block-quote-alt">{{ meter.title }}</h4>
+                                </div>
+                                <div class="col-lg-8 col-md-8 text-left desc">
+                                    <span>{% trans "Description" %} :</span>
+                                    {{ meter.description }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                {% endif %}
+
+
+                {% if meter_statement %}
+                <section class="col-md-12">
+                    <header>
+                        <h3 class="hidden">{% trans "Polygraph List Item" %}</h3>
+                    </header>
+
+                    {% for statement in meter_statement %}
+                    {{ statement|statement_item:'wide' }}
+                    {% endfor %}
+
+                    <div class="row">
+                        <a href="{% url 'meter_detail' meter.permalink %}" class="btn btn-default">
+                            {% trans "See all" %} "{{ meter.title }}" {% trans "statements" %}<span class="glyphicon glyphicon-chevron-right"></span>
+                        </a>
+                    </div>
+
+
+                </section>
+                {% else %}
+
+                <section class="col-md-12">
+
+                    {% if user.is_authenticated %}
+                    <div class="text-center">
+                        <a class="btn btn-primary text-center" href="{% url 'statement_create' %}">
+                            <span class="glyphicon glyphicon-pencil"></span> {% trans "Create" %} {{ meter.title }} {% trans "Statement" %}
+                        </a>
+                    </div>
+                    {% else %}
+                    <div class="text-center">{% trans "No" %} {{ meter.title }} {% trans "Statement" %}</div>
+                    {% endif %}
+
+                </section>
+
+                {% endif %}
+
+
+			</div>
+            {% endfor %}
+
+		</div>	
+
+
+
+	</section>
+
+</div>
+
 {% endblock %}
