@@ -119,18 +119,20 @@
             <div class="tab-pane fade" id="meter-{{ meter.permalink }}">
 
                 {% if meter.description %}
-                <section class="col-md-12">
+                <section class="col-md-12 col-no-padding">
                     <header>
                         <h3 class="hidden">{% trans "Meter Description" %}</h3>
                     </header>
-                    <div class="row block block-bg-grey polygraph-list-before">
+                    <div class="block block-bg-grey polygraph-list-before">
                         <div class="block-content">
-                            <div class="col-lg-3 col-md-4 text-center">
-                                <h4 class="block-quote-alt">{{ meter.title }}</h4>
-                            </div>
-                            <div class="col-lg-9 col-md-8 text-left desc">
-                                <span>{% trans "Description" %} :</span>
-                                {{ meter.description }}
+                            <div class="col-md-12 col-no-padding">
+                                <div class="col-lg-4 col-md-4 text-center">
+                                    <h4 class="block-quote-alt">{{ meter.title }}</h4>
+                                </div>
+                                <div class="col-lg-8 col-md-8 text-left desc">
+                                    <span>{% trans "Description" %} :</span>
+                                    {{ meter.description }}
+                                </div>
                             </div>
                         </div>
                     </div>
