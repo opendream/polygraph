@@ -148,9 +148,11 @@
                     {{ statement|statement_item:'wide' }}
                     {% endfor %}
 
-                    <a href="{% url 'meter_detail' meter.permalink %}" class="btn btn-default">
-                        {% trans "See all" %} "{{ meter.title }}" {% trans "statements" %}<span class="glyphicon glyphicon-chevron-right"></span>
-                    </a>
+                    <div class="row">
+                        <a href="{% url 'meter_detail' meter.permalink %}" class="btn btn-default">
+                            {% trans "See all" %} "{{ meter.title }}" {% trans "statements" %}<span class="glyphicon glyphicon-chevron-right"></span>
+                        </a>
+                    </div>
 
 
                 </section>

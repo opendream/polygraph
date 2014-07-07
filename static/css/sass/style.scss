@@ -447,6 +447,7 @@ input + .errors{
 }
 .amount-wrapper {
 	padding-right: 80px;
+	a { text-color: $text_normal; }
 }
 .amount-num {
 	position: absolute;
