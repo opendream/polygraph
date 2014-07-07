@@ -26,6 +26,8 @@ body.request-popup {
     padding-top: 0;
 }
 
+.col-no-padding { padding: 0; }
+
 h1, h2, h3, h4, h5, h6,
 p {
 	color: $text_normal;
@@ -340,7 +342,6 @@ input + .errors{
 		padding: 20px;
 	}
 	ul.block-content {
-		// padding: 10px 20px 0 20px;
 		padding: 0;
 		li {
 			.item-inner {
@@ -355,6 +356,7 @@ input + .errors{
 				padding: 10px 5px 0 15px;
 			}
 			&.shuffle-bg {
+				li .item-inner { border: none; }
 				li,
 				li + li + li + li { background-color: $hover_orange; }
 				li + li,
@@ -447,6 +449,7 @@ input + .errors{
 }
 .amount-wrapper {
 	padding-right: 80px;
+	a { color: $text_normal; }
 }
 .amount-num {
 	position: absolute;
@@ -455,7 +458,7 @@ input + .errors{
 	width: 70px;
 	text-align: center;
 	padding-left: 0;
-	span { display: block; line-height: 35px;}
+	span { display: block; line-height: 35px; color: $text_normal; }
 }
 
 .highlight-statement {
@@ -727,13 +730,6 @@ input + .errors{
 	.block {
 		margin-bottom: 1.2em;
 	}
-	.polygraph-list-before { 
-		.block-content { overflow: hidden; }
-		span {
-			margin-bottom: 10px;
-			display: block;
-		}
-	}
 	.polygraph-list-block {
 		position: relative;
 		.block-content > span {
@@ -750,7 +746,6 @@ input + .errors{
 		&.updated span {
 			background-color: $hover_orange;
 		}
-		// .block-content { padding-top: 50px; }
 		.quote { line-height: 1.8em; }
 	}
 }
@@ -802,23 +797,6 @@ input + .errors{
 	}
 }
 
-@media (min-width: 992px) {
-	.polygraph-list {
-		.polygraph-list-before {
-			display: table;
-			.block-content {
-				display: table-row;
-				> div {
-					display: table-cell;
-					float: none;
-					vertical-align: middle;
-					padding: 20px;
-				}
-			}
-		}
-	}
-}
-
 @media (max-width: 991px) {
 	.polygraph-list-block {
 		.block-content {
@@ -839,10 +817,10 @@ input + .errors{
 			right: 0;
 			img {
 				height: 150px;
+				width: auto;
 			}
 		}
 	}
-	.polygraph-list-before .desc { padding: 0; }
 }
 
 @media (max-width: 767px) {
@@ -860,12 +838,11 @@ input + .errors{
 		}
 	}
 }
-@media (max-width: 400px) {
-	.float-right-img {
-		.pull-left { width: 100%; }
-	}
+@media (max-width: 460px) {
 	.statement-list .polygraph-list-block {
-		.block-content { border-bottom: 115px solid #F2F2F2; }
+		.block-content { 
+			border-bottom: 125px solid #F2F2F2; 
+		}
 		.block-content .media { 
 			position: relative;
 			padding-right: 0;
@@ -882,6 +859,23 @@ input + .errors{
 		@include border-radius(0);
 	}
 }
+
+/*
+ *  Polygraph List Before Style.
+ */
+.polygraph-list-before {
+	width: 100%;
+	.block-content { overflow: hidden; }
+	span {
+		margin-bottom: 10px;
+		display: block;
+	}
+	.desc { margin-top: 20px; }
+}
+@media (max-width: 991px) {
+	.polygraph-list-before .desc { padding: 0; }
+}
+////////////////////////////////////////////////
 
 .about-statement {
 	h3 {  margin-top: 0; }
@@ -1127,7 +1121,6 @@ footer {
 
     &>label {
         display: block;
-
         padding: 10px 15px;
         border-bottom: solid 1px #c6c6c6;
     }
@@ -1150,3 +1143,4 @@ ul.nav-tabs  li.active .caret {
 ul.nav-tabs li .caret {
     display: none;
 }
+ul.nav-tabs li.first .caret { border-bottom-color: #FFF; }
