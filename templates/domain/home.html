@@ -75,29 +75,7 @@
 			<h2>{% trans "Summary" %}</h2>
 		</header>
 		<div class="block block-bg-transparent">
-			<ul class="block-content item-list shuffle-bg row">
-				{% for meter, count in meter_statement_count %}
-                <li class="item col-md-12 col-xs-6 first">
-					<div class="item-inner row">
-						<figure class="col-md-3 col-xs-3 left">
-                            <a href="{% url 'meter_detail' meter.permalink %}">
-                                {% image_render meter.image_small '82x105' meter.title %}
-                            </a>
-						</figure>
-						<div class="col-md-9 col-xs-9 right">
-							<div class="amount-wrapper">
-								<h3><a href="{% url 'meter_detail' meter.permalink %}">{{ meter.title }}</a></h3>
-								<div class="amount-bar"><div class="amount"></div></div>
-							</div>
-							<div class="amount-num">
-								<a href="{% url 'meter_detail' meter.permalink %}"><span class="text-large">{{ count }}</span></a>
-							</div>
-						</div>
-					</div>
-				</li>
-                {% endfor %}
-
-			</ul>
+            {{ meter_statement_count|meter_count }}
 		</div>
 	</section>
 </div>
