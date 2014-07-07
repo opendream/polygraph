@@ -181,7 +181,7 @@ def people_detail(request, people_permalink):
     meter_statement_count = [(meter, meter.statement_set.filter(quoted_by=people).count()) for meter in meter_list]
 
     statement_list = statement_query_base(request.user.is_anonymous(), request.user.is_staff, request.user)
-    statement_list = statement_list.filter(quoted_by=people).order_by('-uptodate')
+    statement_list = statement_list.filter(Q(quoted_by=people)|Q(relate_peoples=people)).order_by('-uptodate')
 
 
     return render(request, 'domain/people_detail.html', {
@@ -447,7 +447,7 @@ def statement_detail(request, statement_permalink):
 def statement_list(request):
 
     statement_list = statement_query_base(request.user.is_anonymous(), request.user.is_staff, request.user)
-    statement_list.order_by('-uptodate')
+    statement_list = statement_list.order_by('-uptodate')
 
     paginator = Paginator(statement_list, 10)
 
