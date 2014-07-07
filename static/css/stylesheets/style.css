@@ -517,26 +517,30 @@ input + .errors {
 .block ul.block-content {
   padding: 0;
 }
-/* line 348, ../sass/style.scss */
+/* line 347, ../sass/style.scss */
 .block ul.block-content li .item-inner {
   margin: 0;
 }
-/* line 350, ../sass/style.scss */
+/* line 349, ../sass/style.scss */
 .block ul.block-content li .item-inner .left {
   padding-right: 0;
   padding-left: 0;
 }
-/* line 351, ../sass/style.scss */
+/* line 350, ../sass/style.scss */
 .block ul.block-content li .item-inner .right {
   padding-right: 0;
 }
-/* line 354, ../sass/style.scss */
+/* line 353, ../sass/style.scss */
 .block ul.block-content.item-list {
   margin-bottom: 0;
 }
-/* line 356, ../sass/style.scss */
+/* line 355, ../sass/style.scss */
 .block ul.block-content.item-list .item-inner {
   padding: 10px 5px 0 15px;
+}
+/* line 359, ../sass/style.scss */
+.block ul.block-content.item-list.shuffle-bg li .item-inner {
+  border: none;
 }
 /* line 361, ../sass/style.scss */
 .block ul.block-content.item-list.shuffle-bg li,

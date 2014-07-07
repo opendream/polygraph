@@ -342,7 +342,6 @@ input + .errors{
 		padding: 20px;
 	}
 	ul.block-content {
-		// padding: 10px 20px 0 20px;
 		padding: 0;
 		li {
 			.item-inner {
@@ -357,6 +356,7 @@ input + .errors{
 				padding: 10px 5px 0 15px;
 			}
 			&.shuffle-bg {
+				li .item-inner { border: none; }
 				li,
 				li + li + li + li { background-color: $hover_orange; }
 				li + li,
