@@ -8,8 +8,11 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        {% comment %}
         <meta name="description" content="">
         <meta name="author" content="">
+        {% endcomment %}
 
         <title>Fixed me Title</title>
 
@@ -18,8 +21,6 @@
         <link href="{{ STATIC_URL }}libs/prettycheckable/css/prettycheckable.css" rel="stylesheet">
         <link href="{{ STATIC_URL }}css/stylesheets/style.css" rel="stylesheet">
         {% block css %}{% endblock %}
-
-
 
         {% captureas js_content %}{% block js %}{% endblock %}{% endcaptureas %}
 
@@ -66,27 +67,33 @@
                     <div class="navbar-collapse collapse" style="height: 1px;">
                         <ul class="nav navbar-nav navbar-right">
                             <li{% ifactive 'home' %} class="active"{% endifactive %}><a href="{% url 'home' %}">{% trans "Home" %}</a></li>
-                            <li{% ifactive 'statement_list' %} class="active"{% endifactive %}><a href="{% url 'statement_list' %}">{% trans "Statement" %}</a></li>
-                            <li{% ifactive 'people_list' %} class="active"{% endifactive %}><a href="{% url 'people_list' %}">{% trans "People" %}</a></li>
-                            <li{% ifactive 'meter_list' %} class="active"{% endifactive %}><a href="{% url 'meter_detail' %}">{% trans "Polygraph" %}</a></li>
+                            <li{% ifstartswith 'statement_list' %} class="active"{% endifstartswith %}><a href="{% url 'statement_list' %}">{% trans "Statement" %}</a></li>
+                            <li{% ifstartswith 'people_list' %} class="active"{% endifstartswith %}><a href="{% url 'people_list' %}">{% trans "People" %}</a></li>
+                            <li{% ifstartswith 'meter_detail_default' %} class="active"{% endifstartswith %}><a href="{% url 'meter_detail_default' %}">{% trans "Polygraph" %}</a></li>
                         </ul>
+                        {% if static_page_list %}
                         <ul class="nav navbar-nav sec-menu visible-xs">
-                            <li class="active"><a href="/">About us</a></li>
-                            <li><a href="/">Contact us</a></li>
+                            {% for static_page in static_page_list %}
+                            <li class="active"><a href="{% url static_page.url_name %}">{{ static_page.title }}</a></li>
+                            {% endfor %}
                         </ul>
+                        {% endif %}
                     </div><!--/.nav-collapse -->
                 </div><!--/.container-fluid -->
             </nav>
         </header>
 
+        {% ifactive 'home' %}
+        {% else %}
         <section class="breadcrumb-wrapper container">
             <header><h2 class="hidden">Breadcrumbs</h2></header>
             <ol class="breadcrumb">
-              <li><a href="/">Home</a></li>
-              <li><a href="/statement/list/">Statement</a></li>
-              <li class="active">เป้าหมายสูงสุดของการรับจำนำข้าว</li>
+                <li><a href="{% url 'home' %}">{% trans "Home" %}</a></li>
+                {% block breadcrumb %}
+                {% endblock %}
             </ol>
         </section><!--/.nav-collapse -->
+        {% endifactive %}
 
         {% endif %}
 
@@ -112,8 +119,9 @@
                     <div class="col-md-4 col-xs-12 footer-logo">[Polygraph]</div>
                     <div class="col-md-3 col-md-offset-5 col-xs-12 footer-menu">
                         <div class="row">
-                            <div class="col-md-6 col-xs-6"><a href="#">About Us</a></div>
-                            <div class="col-md-6 col-xs-6"><a href="#">Contact Us</a></div>
+                            {% for static_page in static_page_list %}
+                            <div class="col-md-6 col-xs-6"><a href="{% url static_page.url_name %}">{{ static_page.title }}</a></div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -122,11 +130,11 @@
 
         {% endif %}
 
-    {% if request_pagination %}
-    <script type="text/javascript">
-        $.scrollTo('#main')
-    </script>
-    {% endif %}
+        {% if request_pagination %}
+        <script type="text/javascript">
+            $.scrollTo('#main')
+        </script>
+        {% endif %}
 
     </body>
 

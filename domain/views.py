@@ -61,6 +61,23 @@ def statement_query_base(is_anonymous=True, is_staff=False, user=None):
     return statement_list
 
 
+def pagination_build_query(request, item_list, ipp=10):
+
+    paginator = Paginator(item_list, ipp)
+
+    page = request.GET.get('page')
+    try:
+        item_list = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        item_list = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        item_list = paginator.page(paginator.num_pages)
+
+    return item_list
+
+
 # =============================
 # Home
 # =============================
@@ -91,6 +108,7 @@ def home(request):
     tags_list = Tag.objects.usage_for_model(Statement, counts=True)
     tags_list.sort(key=Count, reverse=True)
     tags_list = tags_list[0:15]
+
 
     return render(request, 'domain/home.html', {
         'hilight_statement': hilight_statement,
@@ -186,17 +204,7 @@ def people_detail(request, people_permalink):
     statement_list = statement_list.filter(Q(quoted_by=people)|Q(relate_peoples=people)).order_by('-uptodate')
 
 
-    paginator = Paginator(statement_list, 4)
-
-    page = request.GET.get('page')
-    try:
-        statement_list = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-        statement_list = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
-        statement_list = paginator.page(paginator.num_pages)
+    statement_list = pagination_build_query(request, statement_list, 5)
 
 
     return render(request, 'domain/people_detail.html', {
@@ -234,20 +242,9 @@ def people_list(request):
 
     people_list = QuerySet(query=query, model=People)
 
-    #print people_list.query
-    #print people_list.query
 
-    paginator = Paginator(people_list, 10)
+    people_list = pagination_build_query(request, people_list, 10)
 
-    page = request.GET.get('page')
-    try:
-        people_list = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-        people_list = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
-        people_list = paginator.page(paginator.num_pages)
 
 
     category_list = PeopleCategory.objects.all()
@@ -287,6 +284,8 @@ def meter_detail(request, meter_permalink=None):
 
     statement_list = statement_query_base(request.user.is_anonymous(), request.user.is_staff, request.user)
     statement_list = statement_list.filter(meter=meter).order_by('-uptodate')
+
+    statement_list = pagination_build_query(request, statement_list, 10)
 
 
     return render(request, 'domain/meter_detail.html', {
@@ -376,6 +375,10 @@ def topic_edit_from_statement(request, topic_id, statement_id):
     return response
 
 def topic_detail(request, topic_id):
+    return HttpResponse('Fixed me !!')
+
+
+def topic_list(request):
     return HttpResponse('Fixed me !!')
 
 
@@ -507,19 +510,8 @@ def statement_list(request):
     statement_list = statement_query_base(request.user.is_anonymous(), request.user.is_staff, request.user)
     statement_list = statement_list.order_by('-uptodate')
 
-    paginator = Paginator(statement_list, 10)
+    statement_list = pagination_build_query(request, statement_list, 10)
 
-    page = request.GET.get('page')
-    try:
-        statement_list = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-        statement_list = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
-        statement_list = paginator.page(paginator.num_pages)
-
-    from tagging.models import Tag
 
     return render(request, 'domain/statement_list.html', {
         'statement_list': statement_list,

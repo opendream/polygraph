@@ -131,7 +131,7 @@
                                 </div>
                                 <div class="col-lg-8 col-md-8 text-left desc">
                                     <span>{% trans "Description" %} :</span>
-                                    {{ meter.description }}
+                                    {{ meter.description|safe }}
                                 </div>
                             </div>
                         </div>
@@ -151,7 +151,8 @@
                     {% endfor %}
 
                     <div class="row">
-                        <a href="{% url 'meter_detail' meter.permalink %}" class="btn btn-default">
+
+                        <a href="{% if meter.id %}{% url 'meter_detail' meter.permalink %}{% else %}{% url 'statement_list' %}{% endif %}" class="btn btn-default">
                             {% trans "See all" %} "{{ meter.title }}" {% trans "statements" %}<span class="glyphicon glyphicon-chevron-right"></span>
                         </a>
                     </div>

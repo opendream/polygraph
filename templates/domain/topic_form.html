@@ -8,6 +8,16 @@
 {% block title %}{% if form.is_new %}{% trans "Create" %}{% else %}{% trans "Edit" %}{% endif %} {{ form.inst.inst_name }}{% endblock %}
 {% block content_class %} content-smart{% endblock %}
 
+{% block breadcrumb %}
+<li><a href="{% url 'topic_list' %}">{% trans "Topics" %}</a></li>
+{% if form.is_new %}
+<li class="active">{% trans "Create" %}</li>
+{% else %}
+<li><a href="{% url 'topic_detail' form.inst.id %}">{{ form.inst.title }}</a></li>
+<li class="active">{% trans "Edit" %}</li>
+{% endif %}
+{% endblock %}
+
 {% block content %}
 <form method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
     {% csrf_token %}

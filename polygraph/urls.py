@@ -16,8 +16,6 @@ urlpatterns = patterns('',
     url(r'^account/', include('account.urls')),
     url(r'^tagging_autocomplete_tagit/', include('tagging_autocomplete_tagit.urls')),
     url(r'^tagging_autocomplete_tagit/', include('tagging_autocomplete_tagit.urls')),
-    url(r'^about/$', TemplateView.as_view(template_name='about.html')),
-    url(r'^contact/$', TemplateView.as_view(template_name='contact.html')),
 
     url(r'', include('domain.urls', app_name='domain')),
 
@@ -28,8 +26,10 @@ for page in os.listdir(settings.PAGE_ROOT):
 
     if '.html' in page:
 
+        url_name = page.replace('.html', '')
+
         urlpatterns += patterns('',
-            url(r'^%s/$' % page.replace('.html', ''), TemplateView.as_view(template_name=page)),
+            url(r'^%s/$' % url_name.replace('_', '-'), TemplateView.as_view(template_name=page), name=url_name),
         )
 
 

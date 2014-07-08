@@ -2,10 +2,13 @@
 {% load i18n %}
 {% load common_tags %}
 
-{% block title %}{% trans "People List" %}{% endblock %}
+{% block title %}{% trans "People" %}{% endblock %}
+
+{% block breadcrumb %}
+<li class="active">{% trans "People" %}</li>
+{% endblock %}
 
 {% block content %}
-
 
 	<div class="row people-list">
 

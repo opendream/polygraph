@@ -23,6 +23,16 @@
 </form>
 {% endblock %}
 
+{% block breadcrumb %}
+<li><a href="{% url 'statement_list' %}">{% trans "Statements" %}</a></li>
+{% if form.is_new %}
+<li class="active">{% trans "Create" %}</li>
+{% else %}
+<li><a href="{% url 'statement_detail' form.inst.permalink %}">{{ form.inst.quote|truncatewords_html:10|safe }}</a></li>
+<li class="active">{% trans "Edit" %}</li>
+{% endif %}
+{% endblock %}
+
 
 {% block content %}
 

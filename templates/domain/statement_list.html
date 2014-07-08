@@ -3,7 +3,11 @@
 {% load common_tags %}
 {% load domain_tags %}
 
-{% block title %}{% trans "Statement List" %}{% endblock %}
+{% block title %}{% trans "Statements" %}{% endblock %}
+
+{% block breadcrumb %}
+<li class="active">{% trans "Statements" %}</li>
+{% endblock %}
 
 {% block content %}
 

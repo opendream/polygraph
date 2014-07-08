@@ -5,6 +5,11 @@
 
 {% block title %}{% trans "Statement" %}{% endblock %}
 
+{% block breadcrumb %}
+<li><a href="{% url 'statement_list' %}">{% trans "Statements" %}</a></li>
+<li class="active">{{ statement.quote|truncatewords_html:10|safe }}</li>
+{% endblock %}
+
 {% block content %}
     <div id="fb-root"></div>
     <script>(function(d, s, id) {

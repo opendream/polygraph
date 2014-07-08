@@ -5,6 +5,12 @@
 
 {% block title %}{{ people.get_full_name }}{% endblock %}
 
+{% block breadcrumb %}
+<li><a href="{% url 'people_list' %}">{% trans "People" %}</a></li>
+<li class="active">{{ people.get_full_name }}</li>
+{% endblock %}
+
+
 {% block content %}
 
     <div>

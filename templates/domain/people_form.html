@@ -15,6 +15,18 @@
 {% endblock %}
 {% block content_class %} content-smart{% endblock %}
 
+
+{% block breadcrumb %}
+<li><a href="{% url 'people_list' %}">{% trans "People" %}</a></li>
+{% if form.is_new %}
+<li class="active">{% trans "Create" %}</li>
+{% else %}
+<li><a href="{% url 'people_detail' form.inst.permalink %}">{{ form.inst.get_full_name }}</a></li>
+<li class="active">{% trans "Edit" %}</li>
+{% endif %}
+{% endblock %}
+
+
 {% block content %}
 <form method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
     {% csrf_token %}
