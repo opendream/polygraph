@@ -1133,6 +1133,10 @@ footer {
 	.media.block-content { background-color: #f5f5f5; }
 }
 
+.can-edit .people-summary p {
+    margin-right: 50px;
+}
+
 .inst-frontpage {
     border: solid 1px #c6c6c6;
     border-radius: 4px;
@@ -1164,3 +1168,16 @@ ul.nav-tabs  li.active .caret {
 	}
 }
 ul.nav-tabs li.first .caret { border-bottom-color: #FFF; }
+
+#main {
+    height: 140px;
+    margin-top: -140px;
+    width: 100%;
+}
+
+@media (max-width: 767px) {
+    #main {
+        height: 87px;
+        margin-top: -87px;
+    }
+}

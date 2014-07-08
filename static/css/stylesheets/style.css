@@ -1567,35 +1567,55 @@ footer .footer-menu div a:hover {
 }
 
 /* line 1136, ../sass/style.scss */
+.can-edit .people-summary p {
+  margin-right: 50px;
+}
+
+/* line 1140, ../sass/style.scss */
 .inst-frontpage {
   border: solid 1px #c6c6c6;
   border-radius: 4px;
 }
-/* line 1140, ../sass/style.scss */
+/* line 1144, ../sass/style.scss */
 .inst-frontpage > label {
   display: block;
   padding: 10px 15px;
   border-bottom: solid 1px #c6c6c6;
 }
 
-/* line 1147, ../sass/style.scss */
+/* line 1151, ../sass/style.scss */
 .btn-view {
   float: right;
   margin-top: 12px;
 }
 
-/* line 1158, ../sass/style.scss */
+/* line 1162, ../sass/style.scss */
 ul.nav-tabs li.active .caret {
   display: inline-block;
 }
 
 @media (min-width: 768px) {
-  /* line 1162, ../sass/style.scss */
+  /* line 1166, ../sass/style.scss */
   ul.nav-tabs li .caret {
     display: none;
   }
 }
-/* line 1166, ../sass/style.scss */
+/* line 1170, ../sass/style.scss */
 ul.nav-tabs li.first .caret {
   border-bottom-color: #FFF;
+}
+
+/* line 1172, ../sass/style.scss */
+#main {
+  height: 140px;
+  margin-top: -140px;
+  width: 100%;
+}
+
+@media (max-width: 767px) {
+  /* line 1179, ../sass/style.scss */
+  #main {
+    height: 87px;
+    margin-top: -87px;
+  }
 }

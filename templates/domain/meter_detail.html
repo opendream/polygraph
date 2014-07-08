@@ -12,73 +12,30 @@
 
 		<header class="row">
 			<div class="col-md-4 hidden">
-				<h2 class="hidden"><span class="dialog-ic-bw"></span>Polygraph</h2>
+				<h2 class="hidden"><span class="dialog-ic-bw"></span>{% trans "Polygraph" %}</h2>
 			</div>
 			<div class="col-md-8 col-xs-12 pull-right">
 				<ul class="nav nav-pills nav-color full-width" role="tablist">
-                    
-				  	<li class="hidden-xs first active">
-                        <a class="tabable" href="#meter-latest" role="tab" data-toggle="tab">
-                            Latest
+
+                    {% for meter in meter_list %}
+				  	<li class="hidden-xs{% if forloop.first %} first{% endif %}{% if forloop.last %} last{% endif %}{% if meter == request_meter %} active{% endif %}">
+                        <a href="{% url 'meter_detail' meter.permalink %}">
+                            {{ meter.title }}
                         </a>
                     </li>
-                    
-				  	<li class="hidden-xs">
-                        <a class="tabable" href="#meter-truth" role="tab" data-toggle="tab">
-                            Truth
-                        </a>
-                    </li>
-                    
-				  	<li class="hidden-xs">
-                        <a class="tabable" href="#meter-lie" role="tab" data-toggle="tab">
-                            Lie
-                        </a>
-                    </li>
-                    
-				  	<li class="hidden-xs">
-                        <a class="tabable" href="#meter-half-truth" role="tab" data-toggle="tab">
-                            Half True
-                        </a>
-                    </li>
-                    
-				  	<li class="hidden-xs last">
-                        <a class="tabable" href="#meter-unverifiable" role="tab" data-toggle="tab">
-                            Unverifiable
-                        </a>
-                    </li>
+                    {% endfor %}
+
 					<li class="dropdown visible-xs">
-        				<a href="#" id="meter-tab-drop" class="dropdown-toggle" data-toggle="dropdown">Updated <span class="caret"></span></a>
+        				<a href="#" id="meter-tab-drop" class="dropdown-toggle" data-toggle="dropdown">{{ request_meter.title }} <span class="caret"></span></a>
         				<ul class="dropdown-menu" role="menu" aria-labelledby="meter-tab-drop">
-                            
-        			  		<li class="first">
-                                <a href="#meter-latest" tabindex="-1" role="tab" data-toggle="tab">
-                                    Latest
+
+                            {% for meter in meter_list %}
+        			  		<li class="{% if forloop.first %} first{% endif %}{% if forloop.last %} last{% endif %}{% if meter == request_meter %} active{% endif %}">
+                                <a href="{% url 'meter_detail' meter.permalink %}" tabindex="-1">
+                                    {{ meter.title }}
                                 </a>
                             </li>
-                            
-        			  		<li>
-                                <a href="#meter-truth" tabindex="-1" role="tab" data-toggle="tab">
-                                    Truth
-                                </a>
-                            </li>
-                            
-        			  		<li>
-                                <a href="#meter-lie" tabindex="-1" role="tab" data-toggle="tab">
-                                    Lie
-                                </a>
-                            </li>
-                            
-        			  		<li>
-                                <a href="#meter-half-truth" tabindex="-1" role="tab" data-toggle="tab">
-                                    Half True
-                                </a>
-                            </li>
-                            
-        			  		<li class="last">
-                                <a href="#meter-unverifiable" tabindex="-1" role="tab" data-toggle="tab">
-                                    Unverifiable
-                                </a>
-                            </li>
+                            {% endfor %}
                             
         				</ul>
       				</li>

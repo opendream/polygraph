@@ -100,6 +100,10 @@ $(document).ready(function () {
     });
     $('.first .tabable').tab('show')
 
+    $('.dropdown-menu').on('click', 'li a', function(){
+        $('#meter-tab-drop .text').text($(this).text());
+    });
+
 });
 
 /*

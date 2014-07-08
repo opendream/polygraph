@@ -9,7 +9,7 @@
 
     <div>
 
-        <section class="people-detail">
+        <section class="people-detail{% if user.is_staff or user == people.created_by %} can-edit{% endif %}">
             <header>
                 <h3 class="hidden">{% trans "People Detail" %}</h3>
             </header>
@@ -32,8 +32,8 @@
                         {% image_render people.image '120x120' people.get_full_name %}
                     </span>
 
-                    <div class="media-body">
-                    	<p>{{ people.summary|safe|default:people.occupation }}</p>
+                    <div class="media-body people-summary">
+                    	<p>{{ people.summary|linebreaksbr|default:people.occupation }}</p>
     	            </div>
     	    	</div>
                 {% if people.description|safe %}
@@ -45,7 +45,8 @@
         </section>
 
         {% if statement_list %}
-        <section class="polygraph-list statement-list" id="main">
+        <div id="main"></div>
+        <section class="polygraph-list statement-list">
             <section class="col-md-12">
                 <header class="row">
                     <h3>{% trans "Statement related or said by" %} {{ people.get_short_name }}</h3>

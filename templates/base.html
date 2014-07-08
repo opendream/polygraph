@@ -37,6 +37,7 @@
 
         <script type="text/javascript" src="{{ STATIC_URL }}libs/bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="{{ STATIC_URL }}libs/jquery.popconfirm.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }}libs/jquery.scrollTo/jquery.scrollTo.min.js"></script>
         <script type="text/javascript" src="{{ STATIC_URL }}libs/prettycheckable/js/prettycheckable.js"></script>
         <script type="text/javascript" src="{{ STATIC_URL }}js/main.js"></script>
 
@@ -67,7 +68,7 @@
                             <li{% ifactive 'home' %} class="active"{% endifactive %}><a href="{% url 'home' %}">{% trans "Home" %}</a></li>
                             <li{% ifactive 'statement_list' %} class="active"{% endifactive %}><a href="{% url 'statement_list' %}">{% trans "Statement" %}</a></li>
                             <li{% ifactive 'people_list' %} class="active"{% endifactive %}><a href="{% url 'people_list' %}">{% trans "People" %}</a></li>
-                            <li{% ifactive 'meter_list' %} class="active"{% endifactive %}><a href="{% url 'meter_list' %}">{% trans "Polygraph" %}</a></li>
+                            <li{% ifactive 'meter_list' %} class="active"{% endifactive %}><a href="{% url 'meter_detail' %}">{% trans "Polygraph" %}</a></li>
                         </ul>
                         <ul class="nav navbar-nav sec-menu visible-xs">
                             <li class="active"><a href="/">About us</a></li>
@@ -121,10 +122,11 @@
 
         {% endif %}
 
-    {{ request_pagination }}
+    {% if request_pagination %}
     <script type="text/javascript">
-        {{ page_num }}
+        $.scrollTo('#main')
     </script>
+    {% endif %}
 
     </body>
 

@@ -186,7 +186,7 @@ def people_detail(request, people_permalink):
     statement_list = statement_list.filter(Q(quoted_by=people)|Q(relate_peoples=people)).order_by('-uptodate')
 
 
-    paginator = Paginator(statement_list, 5)
+    paginator = Paginator(statement_list, 4)
 
     page = request.GET.get('page')
     try:
@@ -226,7 +226,10 @@ def people_list(request):
 
     query = people_list.query
     query.group_by = ['id']
+
+    # SQL injection hack by developer for order MAX uptodate
     query.order_by.append('-is_deleted`, MAX(%s(COALESCE(`domain_statement.created, "1000-01-01"), COALESCE(domain_statement.changed, "1000-01-01")))' % settings.GREATEST_FUNCTION)
+
     query.order_by.reverse()
 
     people_list = QuerySet(query=query, model=People)
@@ -273,22 +276,24 @@ def tags_detail(request, tags_id):
 # Meter
 # =============================
 
-def meter_detail(request, meter_permalink):
+def meter_detail(request, meter_permalink=None):
 
-    meter = get_object_or_404(Meter, permalink=meter_permalink)
+    meter_list = Meter.objects.all().order_by('order')
+
+    if not meter_permalink:
+        meter = meter_list[0]
+    else:
+        meter = get_object_or_404(Meter, permalink=meter_permalink)
 
     statement_list = statement_query_base(request.user.is_anonymous(), request.user.is_staff, request.user)
     statement_list = statement_list.filter(meter=meter).order_by('-uptodate')
 
+
     return render(request, 'domain/meter_detail.html', {
-        'meter': meter,
+        'request_meter': meter,
+        'meter_list': meter_list,
         'statement_list': statement_list
     })
-
-
-def meter_list(request):
-
-    return meter_detail(request, '')
 
 
 # =============================
