@@ -257,17 +257,6 @@ def people_list(request):
     })
 
 
-# =============================
-# Tags
-# =============================
-
-def tags_detail(request, tags_id):
-
-    return render(request, 'domain/tags_detail.html', {
-        'tags': None,
-        'statement_list': []
-    })
-
 
 # =============================
 # Meter
@@ -504,10 +493,15 @@ def statement_detail(request, statement_permalink):
 
 
 
-
-def statement_list(request):
+def statement_list(request, tags_id=None):
 
     statement_list = statement_query_base(request.user.is_anonymous(), request.user.is_staff, request.user)
+
+    tags = None
+    if tags_id:
+        tags = get_object_or_404(Tag, id=tags_id)
+        statement_list = statement_list.filter(tags__contains=tags.name)
+
     statement_list = statement_list.order_by('-uptodate')
 
     statement_list = pagination_build_query(request, statement_list, 10)
@@ -516,5 +510,11 @@ def statement_list(request):
     return render(request, 'domain/statement_list.html', {
         'statement_list': statement_list,
         'meter_list': Meter.objects.all().order_by('order'),
-        'tags_list': Tag.objects.all()
+        'tags_list': Tag.objects.all(),
+        'request_tags': tags
     })
+
+
+def statement_tags_detail(request, tags_id):
+
+    return statement_list(request, tags_id)

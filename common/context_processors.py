@@ -21,6 +21,8 @@ def helper(request):
         'request_inline': bool(request.GET.get('_inline') or request.POST.get('_inline')),
         'request_pagination': request.GET.get('page'),
         'static_page_list': static_page_list,
+        'SITE_LOGO_URL': settings.SITE_LOGO_URL,
+        'SITE_NAME': settings.SITE_NAME,
         'STATUS_PUBLISHED': STATUS_PUBLISHED,
         'STATUS_PENDING': STATUS_PENDING,
         'STATUS_DRAFT': STATUS_DRAFT

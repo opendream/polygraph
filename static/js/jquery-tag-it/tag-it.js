@@ -22,7 +22,7 @@ function init_jQueryTagit(options){
         onTagRemoved: options.onTagRemoved,
         onTagClicked: options.onTagClicked,
         onMaxTagsExceeded: options.onMaxTagsExceeded,
-        allowSpaces: true
+        allowSpaces: false
     });
 }
         

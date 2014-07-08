@@ -14,7 +14,6 @@ urlpatterns = patterns('domain.views',
     url(r'^topic/(?P<topic_id>\d+)/$', 'topic_detail', name='topic_detail'),
     url(r'^topic/$', 'topic_list', name='topic_list'),
 
-    url(r'^tags/(?P<tags_id>\d+)/$', 'tags_detail', name='tags_detail'),
 
     url(r'^meter/$', 'meter_detail', name='meter_detail_default'),
     url(r'^meter/(?P<meter_permalink>[A-Za-z0-9-_.]+)/$', 'meter_detail', name='meter_detail'),
@@ -23,6 +22,7 @@ urlpatterns = patterns('domain.views',
     url(r'^statement/(?P<statement_id>\d+)/edit/$', 'statement_edit', name='statement_edit'),
     url(r'^statement/(?P<statement_permalink>[A-Za-z0-9-_.]+)/$', 'statement_detail', name='statement_detail'),
     url(r'^statement/$', 'statement_list', name='statement_list'),
+    url(r'^statement/tags/(?P<tags_id>\d+)/$', 'statement_tags_detail', name='statement_tags_detail'),
 
     url(r'^(?P<inst_name>[A-Za-z0-9-_.]+)/delete/(?P<id>\d+)/$', 'domain_delete', name='domain_delete'),
 

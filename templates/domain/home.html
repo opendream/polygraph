@@ -199,7 +199,7 @@
 			</header>
 			<div class="tag-list">
                 {% for tags in tags_list %}
-                <a href="{% url 'tags_detail' tags.id %}" class="btn btn-default"><strong>{{ tags.name }}</strong></a>
+                <a href="{% url 'statement_tags_detail' tags.id %}" class="btn btn-default"><strong>{{ tags.name }}</strong></a>
                 {% endfor %}
 			</div>
 		</aside>

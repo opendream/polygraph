@@ -3,7 +3,12 @@
 {% load common_tags %}
 {% load domain_tags %}
 
-{% block title %}{% trans "Statements" %}{% endblock %}
+{% block title %}
+{% trans "Statements" %}
+{% if request_tags %}
+<span class="active btn btn-default"><strong>{{ request_tags.name }}</strong></span>
+{% endif %}
+{% endblock %}
 
 {% block breadcrumb %}
 <li class="active">{% trans "Statements" %}</li>
@@ -70,7 +75,7 @@
         </header>
         <div class="tag-list">
             {% for tags in tags_list %}
-            <a href="{% url 'tags_detail' tags.id %}" class="btn btn-default"><strong>{{ tags.name }}</strong></a>
+            <a href="{% url 'statement_tags_detail' tags.id %}" class="btn btn-default{% if request_tags == tags %} active{% endif %}"><strong>{{ tags.name }}</strong></a>
             {% endfor %}
         </div>
     </section>

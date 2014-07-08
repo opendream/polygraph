@@ -177,7 +177,7 @@
         <div class="tag-list">
 
             {% for tag in statement.tag_set.all %}
-            <a href="{% url 'tags_detail' tag.id %}" type="button" class="btn btn-default"><strong>{{ tag.name }}</strong></a>
+            <a href="{% url 'statement_tags_detail' tag.id %}" type="button" class="btn btn-default"><strong>{{ tag.name }}</strong></a>
             {% endfor %}
 
         </div>

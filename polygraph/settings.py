@@ -218,7 +218,8 @@ TAGGING_AUTOCOMPLETE_MAX_TAGS = 9999
 # CUSTOM POLYGRAPH PROJECT #############################
 
 UPTODATE_DAYS = 7
-
+SITE_LOGO_URL = '%simages/logo.png' % STATIC_URL
+SITE_NAME = 'Polygraph'
 
 
 # DEBUG MODE ##################################################################
