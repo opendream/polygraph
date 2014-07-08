@@ -15,6 +15,19 @@
             </header>
             <div class="block block-no-border">
 				<div class="media block-content">
+
+                    {% if user.is_staff or user == people.created_by %}
+                    <div class="staff-link-wrapper">
+                        <ul>
+                            <li>
+                                <a href="{% url 'people_edit' people.id %}" class="btn btn-default btn-xs">
+                                    <span class="glyphicon glyphicon-edit"></span> {% trans "Edit" %}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    {% endif %}
+
                     <span class="pull-left">
                         {% image_render people.image '120x120' people.get_full_name %}
                     </span>
@@ -48,7 +61,7 @@
 
 
         {% if statement_list.paginator.page_range|length > 1 %}
-        <ul class="paginn">
+        <ul class="pagination">
 
             {% if statement_list.has_previous %}
             <li><a href="?page={{ statement_list.paginator.page_range|first }}">&laquo;</a></li>

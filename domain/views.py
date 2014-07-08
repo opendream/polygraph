@@ -2,7 +2,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.db.models import Q, Count
+from django.db.models import Q, Count, Max
 from django.db.models.query import QuerySet
 from django.forms.formsets import formset_factory
 from django.http import Http404, HttpResponse
@@ -214,8 +214,25 @@ def people_list(request):
     query_str = query_str.replace('SELECT', 'SELECT DISTINCT')
 
     people_list = People.objects.raw(query_str)
-    people_list = People.objects.all().extra(select={'tmp': '*) FROM SELECT DISTINCT (id'})
-    print people_list.query
+
+
+    people_list = People.objects.all().order_by('-quoted_by__created')
+
+    category = None
+    if request.GET.get('category'):
+        category = get_object_or_404(PeopleCategory, permalink=request.GET.get('category'))
+        people_list = people_list.filter(categories=category)
+
+
+    query = people_list.query
+    query.group_by = ['id']
+    query.order_by.append('-is_deleted`, MAX(%s(COALESCE(`domain_statement.created, "1000-01-01"), COALESCE(domain_statement.changed, "1000-01-01")))' % settings.GREATEST_FUNCTION)
+    query.order_by.reverse()
+
+    people_list = QuerySet(query=query, model=People)
+
+    #print people_list.query
+    #print people_list.query
 
     paginator = Paginator(people_list, 10)
 
@@ -234,7 +251,9 @@ def people_list(request):
 
     return render(request, 'domain/people_list.html', {
         'people_list': people_list,
-        'category_list': category_list
+        'category_list': category_list,
+        'request_category': category
+
     })
 
 

@@ -9,18 +9,25 @@
 
 	<div class="row people-list">
 
+        {% if category_list %}
 		<div class="dropdown">
-		  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-		    All
-		    <span class="caret"></span>
-		  </button>
-		  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-		    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Politician</a></li>
-		    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Goverment Officer</a></li>
-		    <li role="presentation" class="active"><a role="menuitem" tabindex="-1" href="#">Citizen</a></li>
-		  </ul>
-		</div>
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+            {% if request_category %}
+            {{ request_category.title }}
+            {% else %}
+            {% trans "All" %}
+            {% endif %}
+            <span class="caret"></span>
+            </button>
 
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li role="presentation"{% if not request_category %} class="active"{% endif %}><a role="menuitem" tabindex="-1" href="{% url 'people_list' %}">{% trans "All" %}</a></li>
+                {% for category in category_list %}
+                <li role="presentation"{% if category.permalink == request_category.permalink %} class="active"{% endif %}><a role="menuitem" tabindex="-1" href="{% url 'people_list' %}?category={{ category.permalink }}">{{ category.title }}</a></li>
+                {% endfor %}
+            </ul>
+		</div>
+        {% endif %}
 
         {% if people_list %}
         <ul class="list-unstyled">
@@ -54,12 +61,27 @@
 
 
 	</div>
-	<ul class="pagination">
-		<li class="active"><a href="?page=1">1</a></li>
-		<li><a href="?page=2">2</a></li>
-		<li><a href="?page=3">3</a></li>
-		<li><a href="?page=2">›</a></li>
-        <li><a href="?page=4">»</a></li>
+
+
+    {% if people_list.paginator.page_range|length > 1 %}
+    <ul class="pagination">
+
+        {% if people_list.has_previous %}
+        <li><a href="?page={{ people_list.paginator.page_range|first }}">&laquo;</a></li>
+        <li><a href="?page={{ people_list.previous_page_number }}">‹</a></li>
+        {% endif %}
+
+        {% for page_num in people_list.paginator.page_range %}
+        {% if page_num <= people_list.number|add:"2" and page_num >= people_list.number|add:"-2" %}
+        <li{% if page_num == people_list.number %} class="active"{% endif %}><a href="?page={{ page_num }}">{{ page_num }}</a></li>
+        {% endif %}
+        {% endfor %}
+
+        {% if people_list.has_next %}
+        <li><a href="?page={{ people_list.next_page_number }}">›</a></li>
+        <li><a href="?page={{ people_list.paginator.page_range|last }}">&raquo;</a></li>
+        {% endif %}
     </ul>
+    {% endif %}
 
 {% endblock %}
