@@ -286,7 +286,6 @@ a:hover {
 }
 /* line 178, ../sass/style.scss */
 .navbar-default .navbar-nav {
-  border-left: 1px solid #a34b21;
   margin-top: 60px;
 }
 /* line 181, ../sass/style.scss */
@@ -300,7 +299,6 @@ a:hover {
 /* line 183, ../sass/style.scss */
 .navbar-default .navbar-nav > li > a {
   color: #FFF;
-  border-right: 1px solid #a34b21;
   padding-top: 20px;
   padding-bottom: 20px;
   font-weight: bold;
