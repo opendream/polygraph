@@ -114,6 +114,7 @@ a:hover { text-decoration: underline; }
 .breadcrumb {
 	padding: 0;
 	background-color: transparent;
+	p { display: inline; color: #999; }
 }
 
 .pagination {
@@ -416,6 +417,7 @@ input + .errors{
 			overflow: hidden;
 			padding: 10px 0;
 			border-bottom: 1px dotted #333333;
+			&.no-border-bottom { border-bottom: none; }
 		}
 	}
 }
