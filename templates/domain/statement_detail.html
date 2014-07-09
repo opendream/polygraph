@@ -100,9 +100,11 @@
                         {% endfor %}
 
                     </ul>
+                    {% if statement.topic.topicrevision_set.all.count > 5 %}
                     <div class="load-more">
                         <a class="load-more-inline" href="#topicrevision-update-list">+ {% trans "See all update" %}</a>
                     </div>
+                    {% endif %}
                 </section>
                 {% endif %}
 
