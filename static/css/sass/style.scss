@@ -30,7 +30,8 @@ p {
 }
 p.border-bt { padding-bottom: 20px; border-bottom: 2px solid $block_border; }
 
-.text-brown { color: $text_brown; }
+.text-brown,
+.text-brown p { color: $text_brown; }
 
 a,
 a:hover { color: $text_brown; }
@@ -66,7 +67,7 @@ a:hover { text-decoration: underline; }
 	.hidden-640 { display: none !important; }
 	aside .item-list li { width: 100%; }
 }
-
+.glyphicon.margin-right { margin-right: 5px; }
 .region {margin-bottom: 30px;}
 
 .container { margin-bottom: 30px; }
@@ -113,6 +114,7 @@ a:hover { text-decoration: underline; }
 .breadcrumb {
 	padding: 0;
 	background-color: transparent;
+	p { display: inline; color: #999; }
 }
 
 .pagination {
@@ -282,9 +284,6 @@ a:hover { text-decoration: underline; }
 form {
   margin: 20px 0;
 }
-header {
-  overflow: hidden;
-}
 input.first {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
@@ -415,6 +414,7 @@ input + .errors{
 			overflow: hidden;
 			padding: 10px 0;
 			border-bottom: 1px dotted #333333;
+			&.no-border-bottom { border-bottom: none; }
 		}
 	}
 }
@@ -730,6 +730,15 @@ input + .errors{
 		margin-top: -45px;
 		margin-bottom: 30px;
 	}
+	.polygraph-list-before {
+		.block-quote-alt {max-width: 100%;}
+		.meter-image { margin-top: -80px; }
+		img {
+			width: 100%;
+			height: auto;
+			max-width: 249px;
+		}
+	}
 }
 @media (max-width: 991px) {
 	.polygraph-list.single {
@@ -739,6 +748,23 @@ input + .errors{
 			margin-bottom: 15px;
 		}
 	}
+}
+@media (max-width: 480px) {
+	.polygraph-list.single {
+		.polygraph-list-before {
+			.meter-title, .desc, .meter-image {
+				width: 100%;
+			}
+			.meter-title, .meter-image {
+				text-align: center;
+			}
+			.meter-image { margin-top: 20px; }
+			img {
+				max-width: 175px;
+				margin-left: -35px;
+			}
+		}
+	}		
 }
 
 .polygraph-list {

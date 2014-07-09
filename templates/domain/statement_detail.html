@@ -166,8 +166,8 @@
                 <ul class="item-list block-content row">
                     {% for reference in statement.references %}
                     <li>
-                        <div class="item-inner">
-                            <a href="{{ reference.url }}" target="_blank">{{ reference.title }}</a>
+                        <div class="item-inner no-border-bottom">
+                            <span class="glyphicon glyphicon-paperclip margin-right"></span><a href="{{ reference.url }}" target="_blank">{{ reference.title }}</a>
                         </div>
                     </li>
                     {% endfor %}

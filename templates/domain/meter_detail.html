@@ -59,19 +59,18 @@
                     <div class="block block-bg-grey polygraph-list-before">
                         <div class="block-content">
                             <div class="col-md-12 col-no-padding">
-                                <div class="col-lg-8 col-md-8 col-xs-12 text-left">
+                                <div class="col-lg-8 col-md-8 col-xs-8 text-left meter-title">
                                     <h4 class="block-quote-alt">{{ request_meter.title }}</h4>
                                 </div>
-                                <div class="col-lg-4 col-md-4 text-right pull-right">
-                                    <figure>
-                                    	{% image_render request_meter.image_large_text '300x329' request_meter.title %}
-                                    </figure>
-                                </div>
-                                <div class="col-lg-8 col-md-8 col-xs-12 text-left desc">
+                                <div class="col-lg-8 col-md-8 col-xs-7 text-left desc">
                                     <span>{% trans "Description" %} :</span>
                                     {{ request_meter.description|safe }}
                                 </div>
-
+                                <div class="col-lg-4 col-md-4 col-xs-5 text-right pull-right meter-image">
+                                    <figure>
+                                        {% image_render request_meter.image_large_text '300x329' request_meter.title %}
+                                    </figure>
+                                </div>
                             </div>
                         </div>
                     </div>
