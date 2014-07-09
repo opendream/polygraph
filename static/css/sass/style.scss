@@ -1215,6 +1215,19 @@ ul.nav-tabs li.first .caret { border-bottom-color: #FFF; }
     }
 }
 
-.block-highlight-statement {
-    min-height: 400px;
+.front-block-quote {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.highlight-statement {
+    display: table;
+    width: 100%;
+    min-height: 271px;
+}
+
+.highlight-statement {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

@@ -21,7 +21,7 @@
 				<header>
 					<h3 class="hidden">{% trans "statement" %}</h3>
 				</header>
-				<div class="block-quote lead">
+				<div class="block-quote lead front-block-quote">
                     <a href="{% url 'statement_detail' hilight_statement.permalink %}">
                         {{ hilight_statement.quote|safe }}
                     </a>
@@ -57,7 +57,7 @@
 				<header>
 					<h3 class="hidden">{% trans "statement" %}</h3>
 				</header>
-				<div class="block-quote lead">
+				<div class="block-quote lead front-block-quote">
 
 
                     {% if user.is_authenticated %}
@@ -78,9 +78,9 @@
 				</header>
 
     	        <div class="media col-lg-8 col-xs-8">
-    	            <a class="pull-left" href="{% url 'people_detail' hilight_statement.quoted_by.permalink %}">
+    	            <span class="pull-left"">
                         {% image_render None '80x80' '-' %}
-    	            </a>
+    	            </span>
     	        </div>
 
 				<div class="meter col-lg-4 col-xs-4">

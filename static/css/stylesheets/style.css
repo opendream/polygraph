@@ -1673,7 +1673,22 @@ ul.nav-tabs li.first .caret {
     margin-top: -87px;
   }
 }
-/* line 1211, ../sass/style.scss */
-.block-highlight-statement {
-  min-height: 400px;
+/* line 1218, ../sass/style.scss */
+.front-block-quote {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+/* line 1223, ../sass/style.scss */
+.highlight-statement {
+  display: table;
+  width: 100%;
+  min-height: 271px;
+}
+
+/* line 1229, ../sass/style.scss */
+.highlight-statement {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
