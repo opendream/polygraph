@@ -114,9 +114,9 @@ def create_common(app, created_models, verbosity, **kwargs):
     except Staff.DoesNotExist:
 
         Staff.objects.create_superuser(
-            username = 'writer',
+            username = 'editor',
             email = 'editor@polygraph.ex',
-            first_name = 'Writer',
+            first_name = 'Editor',
             last_name = 'Polygraph',
             password = 'password'
         )
