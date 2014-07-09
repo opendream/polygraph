@@ -68,6 +68,7 @@ a:hover { text-decoration: underline; }
 	aside .item-list li { width: 100%; }
 }
 .glyphicon.margin-right { margin-right: 5px; }
+.caret.margin-left { margin-left: 8px; }
 .region {margin-bottom: 30px;}
 
 .container { margin-bottom: 30px; }
@@ -416,6 +417,9 @@ input + .errors{
 			border-bottom: 1px dotted #333333;
 			&.no-border-bottom { border-bottom: none; }
 		}
+	}
+	&.icon-list { 
+		.item-inner a { display: block; padding-left: 25px; margin-top: -22px; }
 	}
 }
 @media (max-width: 640px) {
@@ -1096,7 +1100,7 @@ footer {
 .people-list {
 	.dropdown {
 		position: absolute;
-		top: 30px;
+		top: 10px;
 		right: 0;
 		width: 250px;
 		.btn {
@@ -1136,7 +1140,10 @@ footer {
 			}
 		}
 	}
-	.pull-left { margin-right: 20px; }
+	.pull-left {
+		margin-right: 20px;
+		height: 122px; overflow: hidden;
+	}
 	.media-body h3 { margin-top: 0; }
 	ul.list-unstyled {
 		li {
