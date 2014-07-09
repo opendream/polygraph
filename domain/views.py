@@ -298,6 +298,7 @@ def topic_create(request, topic=None):
     if request.method == 'POST':
 
         if request.POST.get('as_revision') is None or not int(request.POST.get('as_revision')):
+            request.POST = request.POST.copy()
             request.POST['as_revision'] = None
 
         form = TopicEditForm(topic, Topic, request.POST)

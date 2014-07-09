@@ -59,7 +59,7 @@ def do_format_date(datetime):
 
 @register.filter(name='format_abbr_date')
 def do_format_abbr_date(datetime):
-    return datetime.strftime('%b %d, %Y %H:%M:%S')
+
     try:
         lcode = translation.get_language().upper()
         code_month_name = eval('%_MONTH_ABBR_NAME' % lcode)
