@@ -532,9 +532,21 @@ def statement_detail(request, statement_permalink):
 
     return render(request, 'domain/statement_detail.html', {
         'statement': statement,
+        'topic': statement.topic,
         'meter_list': Meter.objects.all().order_by('order')
     })
 
+def statement_topicrevision_detail(request, statement_permalink, topicrevision_id):
+
+    statement = get_object_or_404(Statement, permalink=statement_permalink)
+    topicrevision = get_object_or_404(TopicRevision, id=topicrevision_id)
+
+
+    return render(request, 'domain/statement_detail.html', {
+        'statement': statement,
+        'topic': topicrevision,
+        'meter_list': Meter.objects.all().order_by('order')
+    })
 
 
 def statement_list(request, tags_id=None):

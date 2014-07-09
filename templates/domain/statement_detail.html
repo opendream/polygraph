@@ -1,6 +1,7 @@
 {% extends 'base_sidebar.html' %}
 {% load i18n %}
 {% load humanize %}
+{% load activelink %}
 {% load common_tags %}
 
 {% block title %}{% trans "Statement" %}{% endblock %}
@@ -83,7 +84,7 @@
                     <h2 class="hidden">{% trans "Statement Detail" %}</h2>
                 </header>
 
-                {{ statement.topic.description|safe }}
+                {{ topic.description|safe }}
 
                 {% if statement.topic.topicrevision_set.all.count > 1 %}
                 <section>
@@ -91,10 +92,17 @@
                     <ul id="topicrevision-update-list" class="item-list load-more-inline-wrapper">
 
                         {% for topicrevision in statement.topic.topicrevision_set.all %}
-                        <li class="item">
+                        <li class="item{% if topicrevision.id == topic.id %} current-revision active{% endif %}">
                             <div class="item-inner">
                                 <div><time>{{ topicrevision.created|format_abbr_date }}</time></div>
-                                <a href="{% url 'topicrevision_detail' statement.topic.id topicrevision.id %}">{{ topicrevision.title }}</a>
+
+                                <a{% if topicrevision.id == topic.id %} class="active"{% endif %} href="{% url 'statement_topicrevision_detail' statement.permalink topicrevision.id %}">
+                                    {{ topicrevision.title }}
+                                </a>
+                                {% if topicrevision.id == topic.id %}
+                                    <span class="glyphicon glyphicon-hand-left current-revision-icon"></span>
+                                {% endif %}
+
                             </div>
                         </li>
                         {% endfor %}
