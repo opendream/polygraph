@@ -77,8 +77,8 @@
                             <div class="btn-group">
                                 <a class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog margin-right"></span>{% trans "Account" %}<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">{% trans "Settings" %}</a></li>
-                                    <li><a href="#">{% trans "Logout" %}</a></li>
+                                    <li><a href="{% url 'account_edit' %}">{% trans "Settings" %}</a></li>
+                                    <li><a href="{% url 'account_logout' %}">{% trans "Logout" %}</a></li>
                                     {% if user.is_staff %}
                                     <li class="divider"></li>
                                     <li role="presentation" class="dropdown-header">{% trans "Editor" %}</li>
