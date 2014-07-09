@@ -14,7 +14,7 @@
         <header>
 			<h2><span class="dialog-ic-color"></span>{% trans "Hilight statement" %}</h2>
 		</header>
-		<article class="block">
+		<article class="block block-highlight-statement">
 
             {% if hilight_statement %}
 			<section class="highlight-statement block-content">
@@ -53,15 +53,42 @@
 
             {% else %}
 
-            {% if user.is_authenticated %}
-            <div class="text-center">
-                <a class="btn btn-primary text-center" href="{% url 'statement_create' %}">
-                    <span class="glyphicon glyphicon-pencil"></span> {% trans "Create Hilight Statement" %}
-                </a>
-            </div>
-            {% else %}
-            <div class="text-center">{% trans "No Hilight Statement" %}</div>
-            {% endif %}
+			<section class="highlight-statement block-content">
+				<header>
+					<h3 class="hidden">{% trans "statement" %}</h3>
+				</header>
+				<div class="block-quote lead">
+
+
+                    {% if user.is_authenticated %}
+                    <div class="text-center">
+                        <a class="btn btn-primary text-center" href="{% url 'statement_create' %}">
+                            <span class="glyphicon glyphicon-pencil"></span> {% trans "Create Hilight Statement" %}
+                        </a>
+                    </div>
+                    {% else %}
+                    <div class="text-center">{% trans "No Hilight Statement" %}</div>
+                    {% endif %}
+
+                </div>
+            </section>
+            <section class="who-said block-content">
+				<header>
+					<h3 class="hidden">{% trans "Who's said??" %}</h3>
+				</header>
+
+    	        <div class="media col-lg-8 col-xs-8">
+    	            <a class="pull-left" href="{% url 'people_detail' hilight_statement.quoted_by.permalink %}">
+                        {% image_render None '80x80' '-' %}
+    	            </a>
+    	        </div>
+
+				<div class="meter col-lg-4 col-xs-4">
+					<figure>
+                        {% image_render None '212x152' '-' %}
+					</figure>
+				</div>
+			</section>
 
             {% endif %}
 

@@ -1660,3 +1660,7 @@ ul.nav-tabs li.first .caret {
     margin-top: -87px;
   }
 }
+/* line 1211, ../sass/style.scss */
+.block-highlight-statement {
+  min-height: 400px;
+}
