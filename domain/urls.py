@@ -12,6 +12,8 @@ urlpatterns = patterns('domain.views',
     url(r'^topic/(?P<topic_id>\d+)/edit/$', 'topic_edit', name='topic_edit'),
     url(r'^topic/(?P<topic_id>\d+)/edit/from/(?P<statement_id>\d+)/$', 'topic_edit_from_statement', name='topic_edit_from_statement'),
     url(r'^topic/(?P<topic_id>\d+)/$', 'topic_detail', name='topic_detail'),
+    url(r'^topic/(?P<topic_id>\d+)/revision/(?P<topicrevision_id>\d+)/$', 'topicrevision_detail', name='topicrevision_detail'),
+    url(r'^topic/(?P<topic_id>\d+)/revision/(?P<topicrevision_id>\d+)/edit/$', 'topicrevision_edit', name='topicrevision_edit'),
     url(r'^topic/$', 'topic_list', name='topic_list'),
 
 

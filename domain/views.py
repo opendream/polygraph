@@ -16,7 +16,7 @@ from common.decorators import statistic
 from common.functions import people_render_reference, topic_render_reference, statement_render_reference, process_status, \
     get_success_message
 from domain.forms import PeopleEditForm, TopicEditForm, StatementEditForm, ReferenceForm
-from domain.models import People, Topic, Statement, Meter, PeopleCategory
+from domain.models import People, Topic, Statement, Meter, PeopleCategory, TopicRevision
 
 
 # =============================
@@ -26,7 +26,7 @@ from domain.models import People, Topic, Statement, Meter, PeopleCategory
 @login_required
 def domain_delete(request, inst_name, id):
 
-    inst = get_object_or_404(eval(inst_name.title()), pk=id)
+    inst = get_object_or_404(eval(inst_name.title()), id=id)
 
     if (hasattr(inst, 'created_by') and request.user.id == inst.created_by.id) or request.user.is_staff:
         inst.delete()
@@ -90,7 +90,7 @@ def home(request):
 
     meter_list = Meter.objects.all().order_by('order')
 
-    meter_statement_count = [(meter, meter.statement_set.count()) for meter in meter_list]
+    meter_statement_count = [(meter, meter.statement_set.filter(status=STATUS_PUBLISHED).count()) for meter in meter_list]
 
     statement_list = statement_list.exclude(id__in=[s.id for s in hilight_statement]).order_by('-promote', '-uptodate')
 
@@ -189,7 +189,7 @@ def people_create(request, people=None):
 @login_required
 def people_edit(request, people_id=None):
 
-    people = get_object_or_404(People, pk=people_id)
+    people = get_object_or_404(People, id=people_id)
     return people_create(request, people)
 
 
@@ -199,7 +199,7 @@ def people_detail(request, people_permalink):
     people = get_object_or_404(People, permalink=people_permalink)
 
     meter_list = Meter.objects.all().order_by('order')
-    meter_statement_count = [(meter, meter.statement_set.filter(quoted_by=people).count()) for meter in meter_list]
+    meter_statement_count = [(meter, meter.statement_set.filter(status=STATUS_PUBLISHED, quoted_by=people).count()) for meter in meter_list]
 
     statement_list = statement_query_base(request.user.is_anonymous(), request.user.is_staff, request.user)
     statement_list = statement_list.filter(Q(quoted_by=people)|Q(relate_peoples=people)).order_by('-uptodate')
@@ -349,14 +349,14 @@ def topic_create(request, topic=None):
 @login_required
 def topic_edit(request, topic_id=None):
 
-    topic = get_object_or_404(Topic, pk=topic_id)
+    topic = get_object_or_404(Topic, id=topic_id)
     return topic_create(request, topic)
 
 
 @login_required
 def topic_edit_from_statement(request, topic_id, statement_id):
 
-    statement = get_object_or_404(Statement, pk=statement_id, topic_id=topic_id)
+    statement = get_object_or_404(Statement, id=statement_id, topic_id=topic_id)
     response = topic_edit(request, topic_id)
 
     if response.status_code == 302 and request.POST.get('as_revision'):
@@ -367,12 +367,51 @@ def topic_edit_from_statement(request, topic_id, statement_id):
 
 
 @statistic
-def topic_detail(request, topic_id):
-    return HttpResponse('Fixed me !!')
+def topic_detail(request, topic_id, topicrevision_id=False):
+
+    origin = get_object_or_404(Topic, id=topic_id)
+
+    meter_list = Meter.objects.all().order_by('order')
+    meter_statement_count = [(meter, meter.statement_set.filter(status=STATUS_PUBLISHED).count()) for meter in meter_list]
+
+    statement_list = statement_query_base(request.user.is_anonymous(), request.user.is_staff, request.user)
+    statement_list = statement_list.filter(topic=origin).order_by('-uptodate')
+
+
+    statement_list = pagination_build_query(request, statement_list, 5)
+
+    if topicrevision_id:
+        topic = get_object_or_404(TopicRevision, origin=origin, id=topicrevision_id)
+    else:
+        topic = origin
+
+    return render(request, 'domain/topic_detail.html', {
+        'origin': origin,
+        'topic': topic,
+        'meter_statement_count': meter_statement_count,
+        'statement_list': statement_list,
+
+    })
 
 
 def topic_list(request):
     return HttpResponse('Fixed me !!')
+
+
+# =============================
+# Topic Revision
+# =============================
+
+def topicrevision_detail(request, topic_id, topicrevision_id):
+    return topic_detail(request, topic_id, topicrevision_id)
+
+
+@login_required
+def topicrevision_edit(request, topic_id, topicrevision_id):
+
+    topic = get_object_or_404(TopicRevision, origin__id=topic_id, id=topicrevision_id)
+    return topic_create(request, topic)
+
 
 
 # =============================
@@ -481,7 +520,7 @@ def statement_create(request, statement=None):
 @login_required
 def statement_edit(request, statement_id=None):
 
-    statement = get_object_or_404(Statement, pk=statement_id)
+    statement = get_object_or_404(Statement, id=statement_id)
     return statement_create(request, statement)
 
 

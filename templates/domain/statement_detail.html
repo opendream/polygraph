@@ -94,7 +94,7 @@
                         <li class="item">
                             <div class="item-inner">
                                 <div><time>{{ topicrevision.created|format_abbr_date }}</time></div>
-                                <a href="/">{{ topicrevision.title }}</a>
+                                <a href="{% url 'topicrevision_detail' statement.topic.id topicrevision.id %}">{{ topicrevision.title }}</a>
                             </div>
                         </li>
                         {% endfor %}

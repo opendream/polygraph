@@ -3,11 +3,11 @@
 {% load common_tags %}
 {% load domain_tags %}
 
-{% block title %}{{ people.get_full_name }}{% endblock %}
+{% block title %}{{ topic.title }}{% endblock %}
 
 {% block breadcrumb %}
-<li><a href="{% url 'people_list' %}">{% trans "People" %}</a></li>
-<li class="active">{{ people.get_full_name }}</li>
+<li><a href="{% url 'topic_list' %}">{% trans "Topics" %}</a></li>
+<li class="active">{{ topic.title }}</li>
 {% endblock %}
 
 
@@ -15,36 +15,29 @@
 
     <div>
 
-        <section class="people-detail{% if user.is_staff or user == people.created_by %} can-edit{% endif %}">
+        <section class="topic-detail{% if user.is_staff or user == topic.created_by %} can-edit{% endif %}">
             <header>
-                <h3 class="hidden">{% trans "People Detail" %}</h3>
+                <h3 class="hidden">{% trans "Topic Detail" %}</h3>
             </header>
             <div class="block block-no-border">
-				<div class="media block-content">
 
-                    {% if user.is_staff or user == people.created_by %}
+                {% if user.is_staff or user == topic.created_by %}
+				<div class="media block-content">
                     <div class="staff-link-wrapper">
                         <ul>
                             <li>
-                                <a href="{% url 'people_edit' people.id %}" class="btn btn-default btn-xs">
+                                <a href="{% url 'topic_edit' origin.id %}" class="btn btn-default btn-xs">
                                     <span class="glyphicon glyphicon-edit"></span> {% trans "Edit" %}
                                 </a>
                             </li>
                         </ul>
                     </div>
-                    {% endif %}
-
-                    <span class="pull-left">
-                        {% image_render people.image '120x120' people.get_full_name %}
-                    </span>
-
-                    <div class="media-body people-summary">
-                    	<p>{{ people.summary|linebreaksbr|default:people.occupation }}</p>
-    	            </div>
     	    	</div>
-                {% if people.description|safe %}
+                {% endif %}
+
+                {% if topic.description|safe %}
 				<div class="block-content">
-                    {{ people.description|safe }}
+                    {{ topic.description|safe }}
     	    	</div>
                 {% endif %}
             </div>
@@ -55,7 +48,7 @@
         <section class="polygraph-list statement-list">
             <section class="col-md-12">
                 <header class="row">
-                    <h3>{% trans "Statements related or said by" %} {{ people.get_short_name }}</h3>
+                    <h3>{% trans "Statements of" %} {{ topic.title }}</h3>
                 </header>
                 {% for statement in statement_list %}
                 {{ statement|statement_item }}

@@ -5,7 +5,15 @@
 {{ form.media }}
 {% endblock %}
 
-{% block title %}{% if form.is_new %}{% trans "Create" %}{% else %}{% trans "Edit" %}{% endif %} {{ form.inst.inst_name }}{% endblock %}
+{% block title %}
+{% if form.is_new %}{% trans "Create" %}{% else %}{% trans "Edit" %}{% endif %} {{ form.inst.inst_name }}
+{% if not form.is_new and not request_popup %}
+<a href="{% url 'topic_detail' form.inst.id %}" class="btn btn-default btn-xs btn-view">
+    <span class="glyphicon glyphicon-eye-open"></span> {% trans "View result" %}
+</a>
+{% endif %}
+{% endblock %}
+
 {% block content_class %} content-smart{% endblock %}
 
 {% block breadcrumb %}
