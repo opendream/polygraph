@@ -417,6 +417,9 @@ input + .errors{
 			&.no-border-bottom { border-bottom: none; }
 		}
 	}
+	&.icon-list { 
+		.item-inner a { display: block; padding-left: 25px; margin-top: -22px; }
+	}
 }
 @media (max-width: 640px) {
 	.item {

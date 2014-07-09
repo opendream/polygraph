@@ -161,11 +161,11 @@
 
                 {% if statement.references %}
                 <h3>{% trans "References" %}</h3>
-                <ul class="item-list block-content row">
+                <ul class="item-list icon-list block-content row">
                     {% for reference in statement.references %}
                     <li>
                         <div class="item-inner no-border-bottom">
-                            <span class="glyphicon glyphicon-paperclip margin-right"></span><a href="{{ reference.url }}" target="_blank">{{ reference.title }}</a>
+                            <span class="glyphicon glyphicon-link margin-right text-brown"></span><a href="{{ reference.url }}" target="_blank">{{ reference.title }}</a>
                         </div>
                     </li>
                     {% endfor %}
