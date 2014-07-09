@@ -67,7 +67,7 @@ a:hover { text-decoration: underline; }
 	.hidden-640 { display: none !important; }
 	aside .item-list li { width: 100%; }
 }
-
+.glyphicon.margin-right { margin-right: 5px; }
 .region {margin-bottom: 30px;}
 
 .container { margin-bottom: 30px; }
@@ -283,9 +283,6 @@ a:hover { text-decoration: underline; }
 }
 form {
   margin: 20px 0;
-}
-header {
-  overflow: hidden;
 }
 input.first {
   margin-bottom: -1px;

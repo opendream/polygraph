@@ -49,6 +49,27 @@
         {% if not request_popup %}
 
         <header>
+
+            <div class="admin-menu">
+                <div class="container">
+                    <div class="row">
+                        <div class="btn-group col-md-12">
+                          <a class="btn btn-default text-right" href="/statement/create"><span class="glyphicon glyphicon-plus margin-right"></span>Create statement</a>
+                          <a class="btn btn-default" href="/people/create"><span class="glyphicon glyphicon-plus margin-right"></span>Create people</a>
+                          <div class="btn-group">
+                            <a class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog margin-right"></span>Manage Statement <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                              <li><a href="#">Hilight</a></li>
+                              <li><a href="#">Another action</a></li>
+                              <li><a href="#">Something else here</a></li>
+                            </ul>
+                          </div>
+                          <a class="btn btn-default" href="/people/create"><span class="glyphicon glyphicon-off margin-right"></span>Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
                 <div class="container">
                     <div class="navbar-header">
