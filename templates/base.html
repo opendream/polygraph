@@ -60,7 +60,8 @@
                         </button>
                         <h1>
                             <a class="navbar-brand" href="{% url 'home' %}">
-                                <img src="{{ SITE_LOGO_URL }}" alt="{{ SITE_NAME }}" tiitle="Site Logo" />
+                                <img src="{{ SITE_LOGO_URL }}" alt="{{ SITE_NAME }}" title="Site Logo" />
+                                <span class="sr-only">{% trans "Polygraph" %}</span>
                             </a>
                         </h1>
                     </div>

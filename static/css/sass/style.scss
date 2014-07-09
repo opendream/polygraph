@@ -30,7 +30,8 @@ p {
 }
 p.border-bt { padding-bottom: 20px; border-bottom: 2px solid $block_border; }
 
-.text-brown { color: $text_brown; }
+.text-brown,
+.text-brown p { color: $text_brown; }
 
 a,
 a:hover { color: $text_brown; }
