@@ -81,10 +81,22 @@ $(document).ready(function () {
     });
 
     // load more inline
+    var found_current_revision = false;
+    var ilm_length = $('.load-more-inline-wrapper li').length
+
     $('.load-more-inline-wrapper li').each(function (i, item) {
-        if (i > 4) {
+
+        if (i > 4 && found_current_revision) {
             $(this).addClass('hidden');
         }
+
+        if ($(this).hasClass('current-revision')) {
+            found_current_revision = true;
+            if (i+1 == ilm_length) {
+                $('.load-more-inline').remove();
+            }
+        }
+
     });
 
     $('.load-more-inline').click(function (e) {

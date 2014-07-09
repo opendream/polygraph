@@ -108,11 +108,9 @@
                         {% endfor %}
 
                     </ul>
-                    {% if statement.topic.topicrevision_set.all.count > 5 %}
                     <div class="load-more">
                         <a class="load-more-inline" href="#topicrevision-update-list">+ {% trans "See all update" %}</a>
                     </div>
-                    {% endif %}
                 </section>
                 {% endif %}
 
@@ -156,9 +154,9 @@
         {% if statement.topic or statement.references %}
         <div class="block">
             <div class="block-content">
-                {% if statement.topic %}
+                {% if topic %}
                 <h3>{% trans "Topic" %}</h3>
-                <p>{{ statement.topic.title }}</p>
+                <p>{{ topic.title }}</p>
                 {% endif  %}
 
                 {% if statement.references %}
