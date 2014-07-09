@@ -1692,3 +1692,8 @@ ul.nav-tabs li.first .caret {
   flex-direction: column;
   justify-content: center;
 }
+
+/* line 1235, ../sass/style.scss */
+.polygraph-list .polygraph-list-block .quote {
+  min-height: 140px;
+}

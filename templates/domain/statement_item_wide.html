@@ -9,7 +9,7 @@
             </a>
         </div>
         <div class="media">
-            <a class="pull-left" href="#">
+            <a class="pull-left" href="{% url 'people_detail' statement.quoted_by.permalink %}">
                 {% image_render statement.quoted_by.image '40x40' statement.quoted_by.get_full_name %}
             </a>
             <div class="media-body">

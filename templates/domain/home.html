@@ -190,15 +190,34 @@
 
                 <section class="col-md-12">
 
-                    {% if user.is_authenticated %}
-                    <div class="text-center">
-                        <a class="btn btn-primary text-center" href="{% url 'statement_create' %}">
-                            <span class="glyphicon glyphicon-pencil"></span> {% trans "Create" %} {{ meter.title }} {% trans "Statement" %}
-                        </a>
-                    </div>
-                    {% else %}
-                    <div class="text-center">{% trans "No" %} {{ meter.title }} {% trans "Statement" %}</div>
-                    {% endif %}
+
+                    <article class="row block block-no-border polygraph-list-block{% if statement.uptodate_status %} {{ statement.uptodate_status.code }}{% endif %}">
+                        <div class="block-content float-right-img col-lg-12">
+                            <div class="text-brown quote lead">
+
+
+                                {% if user.is_authenticated %}
+                                <a class="btn btn-primary text-center" href="{% url 'statement_create' %}">
+                                    <span class="glyphicon glyphicon-pencil"></span> {% trans "Create" %} {{ meter.title }} {% trans "Statement" %}
+                                </a>
+                                {% else %}
+                                <p>{% trans "No" %} {{ meter.title }} {% trans "Statement" %}</p>
+                                {% endif %}
+
+                            </div>
+
+                            <div class="media">
+                                <span class="pull-left" href="#">
+                                    {% image_render None '40x40' '-' %}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="meter-md">
+                            {% image_render meter.image_medium_text '225x200' meter.title %}
+                        </div>
+
+                    </article>
+
 
                 </section>
 
@@ -225,9 +244,17 @@
 				<h2>{% trans "Tags" %}</h2>
 			</header>
 			<div class="tag-list">
+                {% if tags_list %}
                 {% for tags in tags_list %}
                 <a href="{% url 'statement_tags_detail' tags.id %}" class="btn btn-default"><strong>{{ tags.name }}</strong></a>
                 {% endfor %}
+                {% else %}
+                {% if user.is_authenticated %}
+                <a href="{% url 'statement_create' %}" class="btn btn-default"><strong>{% trans "Create Statement with Tags" %}</strong></a>
+                {% else %}
+                <span class="btn btn-default"><strong>{% trans "No Tags" %}</strong></span>
+                {% endif %}
+                {% endif %}
 			</div>
 		</aside>
 		<aside class="col-md-4 pull-left">
