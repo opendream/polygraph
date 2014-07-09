@@ -23,6 +23,7 @@ def helper(request):
         'static_page_list': static_page_list,
         'SITE_LOGO_URL': settings.SITE_LOGO_URL,
         'SITE_NAME': settings.SITE_NAME,
+        'SITE_FAVICON_URL': settings.SITE_FAVICON_URL,
         'STATUS_PUBLISHED': STATUS_PUBLISHED,
         'STATUS_PENDING': STATUS_PENDING,
         'STATUS_DRAFT': STATUS_DRAFT

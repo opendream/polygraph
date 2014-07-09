@@ -14,9 +14,10 @@
         <meta name="author" content="">
         {% endcomment %}
 
-        <title>Fixed me Title</title>
+        <title>{% ifactive 'home' %}{{ SITE_NAME }}{% else %}{% block title %}{% endblock %}|{{ SITE_NAME }}{% endifactive %}</title>
 
         <!-- Bootstrap core CSS -->
+        <link rel="shortcut icon" href="{{ SITE_FAVICON_URL }}" type="image/vnd.microsoft.icon">
         <link href="{{ STATIC_URL }}libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="{{ STATIC_URL }}libs/prettycheckable/css/prettycheckable.css" rel="stylesheet">
         <link href="{{ STATIC_URL }}css/stylesheets/style.css" rel="stylesheet">
