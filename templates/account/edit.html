@@ -4,10 +4,16 @@
 {% block title %}{% trans "Profile settings" %}{% endblock %}
 
 {% block js %}
-    {{ form.media }}
+{{ form.media }}
 {% endblock %}
 
 {% block content_class %} content-smart{% endblock %}
+
+
+{% block breadcrumb %}
+<li class="active">{% trans "Account Settings" %}</li>
+{% endblock %}
+
 
 {% block content %}
 {% if reset_password %}

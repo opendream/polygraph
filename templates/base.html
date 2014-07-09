@@ -50,25 +50,49 @@
 
         <header>
 
+            {% if user.is_authenticated %}
             <div class="admin-menu">
                 <div class="container">
                     <div class="row">
                         <div class="btn-group col-md-12">
-                          <a class="btn btn-default text-right" href="/statement/create"><span class="glyphicon glyphicon-plus margin-right"></span>Create statement</a>
-                          <a class="btn btn-default" href="/people/create"><span class="glyphicon glyphicon-plus margin-right"></span>Create people</a>
-                          <div class="btn-group">
-                            <a class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog margin-right"></span>Manage Statement <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                              <li><a href="#">Hilight</a></li>
-                              <li><a href="#">Another action</a></li>
-                              <li><a href="#">Something else here</a></li>
-                            </ul>
-                          </div>
-                          <a class="btn btn-default" href="/people/create"><span class="glyphicon glyphicon-off margin-right"></span>Logout</a>
+                            <a class="btn btn-default text-right" href="{% url 'statement_create' %}"><span class="glyphicon glyphicon-plus margin-right"></span>{% trans "Create Statement" %}</a>
+                            <a class="btn btn-default" href="{% url 'people_create' %}"><span class="glyphicon glyphicon-plus margin-right"></span>{% trans "Create People" %}</a>
+                            <div class="btn-group">
+                                <a class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog margin-right"></span>{% trans "Manage" %}<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">{% trans "My Statements" %}</a></li>
+                                    <li><a href="#">{% trans "My Peoples" %}</a></li>
+                                    {% if user.is_staff %}
+                                    <li class="divider"></li>
+                                    <li role="presentation" class="dropdown-header">{% trans "Editor" %}</li>
+                                    <li><a href="#">{% trans "Pending Review" %}</a></li>
+                                    <li><a href="#">{% trans "Hilight" %}</a></li>
+                                    <li><a href="#">{% trans "Promote" %}</a></li>
+                                    <li><a href="#">{% trans "All Statements" %}</a></li>
+                                    <li><a href="#">{% trans "All Peoples" %}</a></li>
+                                    {% endif %}
+
+                                </ul>
+                            </div>
+                            <div class="btn-group">
+                                <a class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog margin-right"></span>{% trans "Account" %}<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{% url 'account_edit' %}">{% trans "Settings" %}</a></li>
+                                    <li><a href="{% url 'account_logout' %}">{% trans "Logout" %}</a></li>
+                                    {% if user.is_staff %}
+                                    <li class="divider"></li>
+                                    <li role="presentation" class="dropdown-header">{% trans "Editor" %}</li>
+                                    <li><a href="#">{% trans "Invite" %}</a></li>
+                                    {% endif %}
+
+                                </ul>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
+            {% endif %}
 
             <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
                 <div class="container">
