@@ -12,7 +12,11 @@ def statistic(view_func=None):
         content_type = ''.join([c.title() for c in view_func.__name__.split('_')[0:-1]])
 
         content_type = ContentType.objects.get_by_natural_key(resolve(request.path).app_name, content_type.lower())
-        content_type_id_key = request.resolver_match.kwargs.keys()[0]
+        content_type_id_key = request.resolver_match.kwargs.keys()
+        if len(content_type_id_key):
+            content_type_id_key = content_type_id_key[0]
+        else:
+            return view_func(request, *args, **kwargs)
 
         object_id = request.resolver_match.kwargs[content_type_id_key]
 

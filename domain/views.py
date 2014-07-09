@@ -193,6 +193,7 @@ def people_edit(request, people_id=None):
     return people_create(request, people)
 
 
+@statistic
 def people_detail(request, people_permalink):
 
     people = get_object_or_404(People, permalink=people_permalink)
@@ -262,6 +263,7 @@ def people_list(request):
 # Meter
 # =============================
 
+@statistic
 def meter_detail(request, meter_permalink=None):
 
     meter_list = Meter.objects.all().order_by('order')
@@ -363,6 +365,8 @@ def topic_edit_from_statement(request, topic_id, statement_id):
 
     return response
 
+
+@statistic
 def topic_detail(request, topic_id):
     return HttpResponse('Fixed me !!')
 
