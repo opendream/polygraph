@@ -730,6 +730,14 @@ input + .errors{
 		margin-top: -45px;
 		margin-bottom: 30px;
 	}
+	.polygraph-list-before {
+		.meter-image { margin-top: -80px; }
+		img {
+			width: 100%;
+			height: auto;
+			max-width: 249px;
+		}
+	}
 }
 @media (max-width: 991px) {
 	.polygraph-list.single {
@@ -739,6 +747,23 @@ input + .errors{
 			margin-bottom: 15px;
 		}
 	}
+}
+@media (max-width: 480px) {
+	.polygraph-list.single {
+		.polygraph-list-before {
+			.col-xs-12, .col-xs-7, .col-xs-5 {
+				width: 100%;
+			}
+			.col-xs-12, .col-xs-5 {
+				text-align: center;
+			}
+			.meter-image { margin-top: 20px; }
+			img {
+				max-width: 175px;
+				margin-left: -35px;
+			}
+		}
+	}		
 }
 
 .polygraph-list {
