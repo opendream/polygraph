@@ -1,3 +1,4 @@
+from uuid import uuid1
 from ckeditor.widgets import CKEditorWidget
 from django import forms
 from django.contrib.auth import authenticate, get_user_model
@@ -50,7 +51,6 @@ class EmailAuthenticationForm(forms.Form):
 
 
 class ResetPasswordForm(PasswordResetForm):
-    #email = forms.EmailField(max_length=75)
 
     def clean_email(self):
 
@@ -62,6 +62,23 @@ class ResetPasswordForm(PasswordResetForm):
             UserModel.objects.get(email=email)
         except UserModel.DoesNotExist:
             raise forms.ValidationError(_('Your email address is not registered.'))
+
+        return email
+
+
+class InviteForm(PasswordResetForm):
+
+    def clean_email(self):
+
+        email = self.cleaned_data.get('email')
+
+        UserModel = get_user_model()
+
+        try:
+            UserModel.objects.get(email=email)
+        except UserModel.DoesNotExist:
+            password = str(uuid1())[0: 10].replace('-', '')
+            UserModel.objects.create_user(username=email, email=email, password=password)
 
         return email
 

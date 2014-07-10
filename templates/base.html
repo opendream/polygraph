@@ -83,7 +83,7 @@
                                     {% if user.is_staff %}
                                     <li class="divider"></li>
                                     <li role="presentation" class="dropdown-header">{% trans "Editor" %}</li>
-                                    <li><a href="#">{% trans "Invite" %}</a></li>
+                                    <li{% ifactive 'account_invite' %} class="active"{% endifactive %}><a href="{% url 'account_invite' %}">{% trans "Invite" %}</a></li>
                                     {% endif %}
 
                                 </ul>

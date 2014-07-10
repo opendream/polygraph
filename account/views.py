@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import authenticate, login as auth_login, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.tokens import default_token_generator
@@ -9,7 +10,7 @@ from django.shortcuts import redirect, render
 from django.utils.http import urlsafe_base64_decode
 from django.utils.translation import ugettext_lazy as _
 
-from account.forms import EmailAuthenticationForm, ResetPasswordForm, AccountEditForm
+from account.forms import EmailAuthenticationForm, ResetPasswordForm, AccountEditForm, InviteForm
 
 
 def account(request):
@@ -114,3 +115,18 @@ def account_edit(request):
         'form': form,
         'reset_password': required_password,
     })
+
+
+@staff_member_required
+def account_invite(request):
+    if request.GET.get('success'):
+        messages.success(request, _('The email invite has been send.'))
+        return redirect('account_invite')
+
+    return password_reset(request,
+        template_name='account/invite_form.html',
+        email_template_name='account/email/invite_email.html',
+        subject_template_name='account/email/invite_email_subject.txt',
+        password_reset_form=InviteForm,
+        post_reset_redirect='%s?success=1' % reverse('account_invite'),
+    )

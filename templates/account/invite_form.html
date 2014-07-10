@@ -1,0 +1,35 @@
+{% extends 'base_single.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Invite Staff" %}{% endblock %}
+
+{% block content_class %} content-thin{% endblock %}
+
+{% block breadcrumb %}
+<li class="active">{% trans "Invite staff" %}</li>
+{% endblock %}
+
+{% block content %}
+
+<form class="form-normal" role="form" method="post">
+
+    {% csrf_token %}
+    {% if form.non_field_errors %}
+    <div class="errors alert alert-danger">{{ form.non_field_errors }}</div>
+    {%  endif %}
+
+    <div class="controls">
+        <input name="email" type="email" class="form-control" placeholder="{% trans "Enter new email address" %}" value="{{ form.email.value|default_if_none:"" }}" required autofocus>
+        {% if form.email.errors %}
+        <div class="errors alert alert-danger">{{ form.email.errors }}</div>
+        {% endif %}
+
+    </div>
+
+    <div class="form-action">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">{% trans "Invite" %}</button>
+    </div>
+
+</form>
+
+{% endblock %}
