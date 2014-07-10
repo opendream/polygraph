@@ -1697,3 +1697,8 @@ ul.nav-tabs li.first .caret {
 .polygraph-list .polygraph-list-block .quote {
   min-height: 140px;
 }
+
+/* line 1241, ../sass/style.scss */
+td.quote {
+  width: 40%;
+}
