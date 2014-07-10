@@ -86,7 +86,8 @@ def account_edit(request):
             user.homepage_url = form.cleaned_data['homepage_url']
 
             # Use save_form_data like model form
-            user.image._field.save_form_data(user, form.cleaned_data['image'])
+            if user.image:
+                user.image._field.save_form_data(user, form.cleaned_data['image'])
 
             password = form.cleaned_data.get('password')
             if password:
