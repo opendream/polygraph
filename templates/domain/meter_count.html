@@ -1,6 +1,6 @@
 {% load common_tags %}
 <ul class="block-content item-list shuffle-bg row">
-    {% for meter, count in meter_statement_count %}
+    {% for meter, count, percent in meter_statement_count %}
     <li class="item col-md-12 col-xs-6 first">
         <div class="item-inner row">
             <figure class="col-md-3 col-xs-3 left">
@@ -11,7 +11,7 @@
             <div class="col-md-9 col-xs-9 right">
                 <div class="amount-wrapper">
                     <h3><a href="{% url 'meter_detail' meter.permalink %}">{{ meter.title }}</a></h3>
-                    <div class="amount-bar"><div class="amount"></div></div>
+                    <div class="amount-bar"><div class="amount" style="width:{{ percent }}%;"></div></div>
                 </div>
                 <div class="amount-num">
                     <a href="{% url 'meter_detail' meter.permalink %}"><span class="text-large">{{ count }}</span></a>
