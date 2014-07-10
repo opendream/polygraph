@@ -1680,14 +1680,14 @@ ul.nav-tabs li.first .caret {
 }
 
 /* line 1223, ../sass/style.scss */
-.highlight-statement {
+.front-highlight-statement {
   display: table;
   width: 100%;
   min-height: 320px;
 }
 
 /* line 1229, ../sass/style.scss */
-.highlight-statement {
+.front-highlight-statement {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1698,7 +1698,7 @@ ul.nav-tabs li.first .caret {
   min-height: 140px;
 }
 
-/* line 1241, ../sass/style.scss */
+/* line 1240, ../sass/style.scss */
 td.quote {
   width: 40%;
 }

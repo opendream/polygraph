@@ -535,10 +535,11 @@ def statement_edit(request, statement_id=None):
 def statement_detail(request, statement_permalink):
 
     statement = get_object_or_404(Statement, permalink=statement_permalink)
+    topicrevision = TopicRevision.objects.filter(origin=statement.topic).latest('id')
 
     return render(request, 'domain/statement_detail.html', {
         'statement': statement,
-        'topic': statement.topic,
+        'topic': topicrevision,
         'meter_list': Meter.objects.all().order_by('order')
     })
 

@@ -84,6 +84,10 @@ $(document).ready(function () {
     var found_current_revision = false;
     var ilm_length = $('.load-more-inline-wrapper li').length
 
+    if (ilm_length <= 4) {
+        $('.load-more-inline').remove();
+    }
+
     $('.load-more-inline-wrapper li').each(function (i, item) {
 
         if (i > 4 && found_current_revision) {
