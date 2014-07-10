@@ -62,10 +62,10 @@ def do_format_abbr_date(datetime):
 
     try:
         lcode = translation.get_language().upper()
-        code_month_name = eval('%_MONTH_ABBR_NAME' % lcode)
+        code_month_name = eval('%s_MONTH_ABBR_NAME' % lcode)
         code_year_plus = eval('%s_YEAR_PLUS' % lcode)
 
         return unicode('%d %s %d', 'utf-8') % (datetime.day, unicode(code_month_name[datetime.month], 'utf-8'), (datetime.year + code_year_plus)%100)
 
-    except:
+    except :
         return datetime.strftime('%b %d, %Y')

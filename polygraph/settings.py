@@ -49,6 +49,8 @@ INSTALLED_APPS = (
     'tagging',
     'tagging_autocomplete_tagit',
     'activelink',
+    'bootstrap3',
+    'django_tables2',
 
     # Project
     'common',

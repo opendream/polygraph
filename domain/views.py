@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Q, Count, Max
@@ -10,6 +11,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from django_tables2 import RequestConfig
 from tagging.models import Tag, TaggedItem
 from common.constants import STATUS_PUBLISHED, STATUS_DRAFT, STATUS_PENDING
 from common.decorators import statistic
@@ -22,6 +24,8 @@ from domain.models import People, Topic, Statement, Meter, PeopleCategory, Topic
 # =============================
 # Global
 # =============================
+from domain.tables import StatementTable, MyStatementTable, PeopleTable, MyPeopleTable
+
 
 @login_required
 def domain_delete(request, inst_name, id):
@@ -574,3 +578,83 @@ def statement_list(request, tags_id=None):
 def statement_tags_detail(request, tags_id):
 
     return statement_list(request, tags_id)
+
+
+# =============================
+# Manage
+# =============================
+@login_required
+def manage(request):
+    raise Http404('No Implement Yet.')
+
+
+@login_required
+def manage_my_statement(request):
+
+    item_list = Statement.objects.all().order_by('-created', '-id').filter(created_by=request.user)
+    table = MyStatementTable(item_list)
+    RequestConfig(request).configure(table)
+
+    return render(request, 'manage.html', {'table': table})
+
+
+@staff_member_required
+def manage_pending_statement(request):
+
+    item_list = Statement.objects.all().order_by('-created', '-id').filter(status=STATUS_PENDING)
+    table = StatementTable(item_list)
+    RequestConfig(request).configure(table)
+
+    return render(request, 'manage.html', {'table': table})
+
+
+@staff_member_required
+def manage_hilight_statement(request):
+
+    item_list = Statement.objects.all().order_by('-created', '-id').filter(hilight=True)
+    table = StatementTable(item_list)
+    RequestConfig(request).configure(table)
+
+    return render(request, 'manage.html', {'table': table})
+
+
+@staff_member_required
+def manage_promote_statement(request):
+
+    item_list = Statement.objects.all().order_by('-created', '-id').filter(promote=True)
+    table = StatementTable(item_list)
+    RequestConfig(request).configure(table)
+
+    return render(request, 'manage.html', {'table': table})
+
+
+@staff_member_required
+def manage_statement(request):
+
+    item_list = Statement.objects.all().order_by('-created', '-id')
+    table = StatementTable(item_list)
+    RequestConfig(request).configure(table)
+
+    return render(request, 'manage.html', {'table': table})
+
+
+@login_required
+def manage_my_people(request):
+
+    item_list = People.objects.all().order_by('-created', '-id').filter(created_by=request.user)
+    table = MyPeopleTable(item_list)
+    RequestConfig(request).configure(table)
+
+    return render(request, 'manage.html', {'table': table})
+
+
+@staff_member_required
+def manage_people(request):
+
+    item_list = People.objects.all().order_by('-created', '-id')
+    table = PeopleTable(item_list)
+    RequestConfig(request).configure(table)
+
+    return render(request, 'manage.html', {'table': table})
+
+

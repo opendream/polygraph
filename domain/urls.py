@@ -27,6 +27,19 @@ urlpatterns = patterns('domain.views',
     url(r'^statement/$', 'statement_list', name='statement_list'),
     url(r'^statement/tags/(?P<tags_id>\d+)/$', 'statement_tags_detail', name='statement_tags_detail'),
 
+    # Writer
+    url(r'^manage/$', 'manage', name='manage'),
+    url(r'^manage/my-statement/$', 'manage_my_statement', name='manage_my_statement'),
+    url(r'^manage/my-people/$', 'manage_my_people', name='manage_my_people'),
+
+    # Editor
+    url(r'^manage/pending-statement/$', 'manage_pending_statement', name='manage_pending_statement'),
+    url(r'^manage/hilight-statement/$', 'manage_hilight_statement', name='manage_hilight_statement'),
+    url(r'^manage/promote-statement/$', 'manage_promote_statement', name='manage_promote_statement'),
+    url(r'^manage/statement/$', 'manage_statement', name='manage_statement'),
+    url(r'^manage/people/$', 'manage_people', name='manage_people'),
+
+
     url(r'^(?P<inst_name>[A-Za-z0-9-_.]+)/delete/(?P<id>\d+)/$', 'domain_delete', name='domain_delete'),
 
 )

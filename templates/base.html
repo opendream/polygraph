@@ -56,21 +56,21 @@
                 <div class="container">
                     <div class="row">
                         <div class="btn-group col-md-12">
-                            <a class="btn btn-default text-right" href="{% url 'statement_create' %}"><span class="glyphicon glyphicon-plus margin-right"></span>{% trans "Create Statement" %}</a>
-                            <a class="btn btn-default" href="{% url 'people_create' %}"><span class="glyphicon glyphicon-plus margin-right"></span>{% trans "Create People" %}</a>
+                            <a class="{% ifactive 'statement_create' %}active {% endifactive %}btn btn-default text-right" href="{% url 'statement_create' %}"><span class="glyphicon glyphicon-plus margin-right"></span>{% trans "Create Statement" %}</a>
+                            <a class="{% ifactive 'people_create' %}active {% endifactive %}btn btn-default" href="{% url 'people_create' %}"><span class="glyphicon glyphicon-plus margin-right"></span>{% trans "Create People" %}</a>
                             <div class="btn-group">
-                                <a class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog margin-right"></span>{% trans "Manage" %}<span class="caret margin-left"></span></a>
+                                <a class="{% ifstartswith 'manage' %}active {% endifstartswith %}btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog margin-right"></span>{% trans "Manage" %}<span class="caret margin-left"></span></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">{% trans "My Statements" %}</a></li>
-                                    <li><a href="#">{% trans "My Peoples" %}</a></li>
+                                    <li><a{% ifactive 'home' %} class="active"{% endifactive %} href="{% url 'manage_my_statement' %}">{% trans "My Statements" %}</a></li>
+                                    <li><a href="{% url 'manage_my_people' %}">{% trans "My Peoples" %}</a></li>
                                     {% if user.is_staff %}
                                     <li class="divider"></li>
                                     <li role="presentation" class="dropdown-header">{% trans "Editor" %}</li>
-                                    <li><a href="#">{% trans "Pending Review" %}</a></li>
-                                    <li><a href="#">{% trans "Hilight" %}</a></li>
-                                    <li><a href="#">{% trans "Promote" %}</a></li>
-                                    <li><a href="#">{% trans "All Statements" %}</a></li>
-                                    <li><a href="#">{% trans "All Peoples" %}</a></li>
+                                    <li{% ifactive 'manage_pending_statement' %} class="active"{% endifactive %}><a href="{% url 'manage_pending_statement' %}">{% trans "Pending Review" %}</a></li>
+                                    <li{% ifactive 'manage_hilight_statement' %} class="active"{% endifactive %}><a href="{% url 'manage_hilight_statement' %}">{% trans "Hilight" %}</a></li>
+                                    <li{% ifactive 'manage_promote_statement' %} class="active"{% endifactive %}><a href="{% url 'manage_promote_statement' %}">{% trans "Promote" %}</a></li>
+                                    <li{% ifactive 'manage_statement' %} class="active"{% endifactive %}><a href="{% url 'manage_statement' %}#">{% trans "All Statements" %}</a></li>
+                                    <li{% ifactive 'manage_people' %} class="active"{% endifactive %}><a href="{% url 'manage_people' %}">{% trans "All Peoples" %}</a></li>
                                     {% endif %}
 
                                 </ul>
