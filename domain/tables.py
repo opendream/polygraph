@@ -1,8 +1,8 @@
-
+from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 
-from django_tables2.utils import A
+from django_tables2.utils import A, AttributeDict
 from common.constants import STATUS_CHOICES
 from common.functions import image_render
 from common.templatetags.common_tags import do_format_abbr_date
@@ -11,9 +11,16 @@ from domain.models import Statement, People
 import django_tables2 as tables
 
 class SafeLinkColumn(tables.LinkColumn):
-    def render(self, value, record, bound_column):
-        value = mark_safe(value)
-        return super(SafeLinkColumn, self).render(value, record, bound_column)
+    def render_link(self, uri, text, attrs=None):
+
+        attrs = AttributeDict(attrs if attrs is not None else
+                              self.attrs.get('a', {}))
+        attrs['href'] = uri
+        html = '<a {attrs}>{text}</a>'.format(
+            attrs=attrs.as_html(),
+            text=text.encode('utf-8')
+        )
+        return mark_safe(html)
 
 class ImageColumn(tables.Column):
     def render(self, value):
