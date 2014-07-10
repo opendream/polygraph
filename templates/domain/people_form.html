@@ -97,7 +97,7 @@
     <div class="controls form-group">
         <label for="id_summary" class="col-sm-2 control-label">{% trans "Summary" %}</label>
         <div class="col-sm-10">
-            <textarea name="summary" class="form-control">{{ form.summary.value }}</textarea>
+            <textarea name="summary" class="form-control">{{ form.summary.value|default_if_none:"" }}</textarea>
             {% if form.summary.errors %}
             <div class="errors alert alert-danger">{{ form.summary.errors }}</div>
             {% endif %}

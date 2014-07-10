@@ -148,7 +148,9 @@ def people_create(request, people=None):
             people.image = form.cleaned_data['image']
 
             # Use save_form_data like model form
-            people.image._field.save_form_data(people, form.cleaned_data['image'])
+            if people.image:
+                people.image._field.save_form_data(people, form.cleaned_data['image'])
+
             people.status = int(STATUS_PUBLISHED if form.cleaned_data['status'] == '' else form.cleaned_data['status'])
             people.created_by = request.user
             people.save()
