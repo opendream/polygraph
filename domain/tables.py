@@ -2,15 +2,18 @@
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 
-import django_tables2 as tables
+from django_tables2.utils import A
 from common.constants import STATUS_CHOICES
 from common.functions import image_render
 from common.templatetags.common_tags import do_format_abbr_date
 from domain.models import Statement, People
 
-class SafeColumn(tables.Column):
-    def render(self, value):
-        return mark_safe(value)
+import django_tables2 as tables
+
+class SafeLinkColumn(tables.LinkColumn):
+    def render(self, value, record, bound_column):
+        value = mark_safe(value)
+        return super(SafeLinkColumn, self).render(value, record, bound_column)
 
 class ImageColumn(tables.Column):
     def render(self, value):
@@ -24,13 +27,17 @@ class DateColumn(tables.Column):
     def render(self, value):
         return do_format_abbr_date(value)
 
+class MultipleColum(tables.Column):
+    def render(self, value):
+        return ', '.join([ v.__unicode__() for v in value.all()])
+
 
 class StatementTable(tables.Table):
     created_by = tables.Column(accessor='created_by.get_full_name', verbose_name=_('Writer'))
-    quote = SafeColumn()
-    topic = tables.Column(accessor='topic.title')
-    quoted_by = tables.Column(accessor='quoted_by.get_full_name', verbose_name=_('Said by'))
-    meter = ImageColumn(accessor='meter.image_small_text', verbose_name=_('Meter'))
+    quote = SafeLinkColumn('statement_edit', args=[A('id')])
+    topic = SafeLinkColumn('topic_edit', args=[A('id')], accessor='topic.title')
+    quoted_by = SafeLinkColumn('people_edit', args=[A('id')], accessor='quoted_by.get_full_name', verbose_name=_('Said by'))
+    meter = tables.Column(accessor='meter.title', verbose_name=_('Meter'))
     status = StatusColumn()
     created = DateColumn()
 
@@ -48,8 +55,8 @@ class MyStatementTable(StatementTable):
 class PeopleTable(tables.Table):
     created_by = tables.Column(accessor='created_by.get_full_name', verbose_name=_('Writer'))
     image = ImageColumn()
-    name = tables.Column(accessor='get_full_name', verbose_name=_('Name'))
-    categories = tables.Column()
+    name = SafeLinkColumn('people_edit', args=[A('id')], accessor='get_full_name', verbose_name=_('Name'))
+    categories = MultipleColum()
     status = StatusColumn()
     created = DateColumn()
 

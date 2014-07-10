@@ -603,7 +603,7 @@ def manage_my_statement(request):
 @staff_member_required
 def manage_pending_statement(request):
 
-    item_list = Statement.objects.all().order_by('-created', '-id').filter(status=STATUS_PENDING)
+    item_list = Statement.objects.all().order_by('-created', '-id').filter(status=STATUS_PENDING).exclude(status=STATUS_DRAFT)
     table = StatementTable(item_list)
     RequestConfig(request).configure(table)
 
@@ -613,7 +613,7 @@ def manage_pending_statement(request):
 @staff_member_required
 def manage_hilight_statement(request):
 
-    item_list = Statement.objects.all().order_by('-created', '-id').filter(hilight=True)
+    item_list = Statement.objects.all().order_by('-created', '-id').filter(hilight=True).exclude(status=STATUS_DRAFT)
     table = StatementTable(item_list)
     RequestConfig(request).configure(table)
 
@@ -623,7 +623,7 @@ def manage_hilight_statement(request):
 @staff_member_required
 def manage_promote_statement(request):
 
-    item_list = Statement.objects.all().order_by('-created', '-id').filter(promote=True)
+    item_list = Statement.objects.all().order_by('-created', '-id').filter(promote=True).exclude(status=STATUS_DRAFT)
     table = StatementTable(item_list)
     RequestConfig(request).configure(table)
 
@@ -633,7 +633,7 @@ def manage_promote_statement(request):
 @staff_member_required
 def manage_statement(request):
 
-    item_list = Statement.objects.all().order_by('-created', '-id')
+    item_list = Statement.objects.all().order_by('-created', '-id').exclude(status=STATUS_DRAFT)
     table = StatementTable(item_list)
     RequestConfig(request).configure(table)
 
@@ -653,7 +653,7 @@ def manage_my_people(request):
 @staff_member_required
 def manage_people(request):
 
-    item_list = People.objects.all().order_by('-created', '-id')
+    item_list = People.objects.all().order_by('-created', '-id').exclude(status=STATUS_DRAFT)
     table = PeopleTable(item_list)
     RequestConfig(request).configure(table)
 
