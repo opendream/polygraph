@@ -167,7 +167,7 @@
                     <div class="col-md-3 col-md-offset-5 col-xs-12 footer-menu">
                         <div class="row">
                             {% for static_page in static_page_list %}
-                            <div class="col-md-6 col-xs-6"><a href="{% url static_page.url_name %}">{{ static_page.title }}</a></div>
+                            <div class="col-md-6 col-xs-6"><a{% ifactive static_page.url_name %} class="active"{% endifactive %} href="{% url static_page.url_name %}">{{ static_page.title }}</a></div>
                             {% endfor %}
                         </div>
                     </div>
