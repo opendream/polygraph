@@ -8,6 +8,9 @@ from common.functions import image_render
 from common.templatetags.common_tags import do_format_abbr_date
 from domain.models import Statement, People
 
+class SafeColumn(tables.Column):
+    def render(self, value):
+        return mark_safe(value)
 
 class ImageColumn(tables.Column):
     def render(self, value):
@@ -24,6 +27,7 @@ class DateColumn(tables.Column):
 
 class StatementTable(tables.Table):
     created_by = tables.Column(accessor='created_by.get_full_name', verbose_name=_('Writer'))
+    quote = SafeColumn()
     topic = tables.Column(accessor='topic.title')
     quoted_by = tables.Column(accessor='quoted_by.get_full_name', verbose_name=_('Said by'))
     meter = ImageColumn(accessor='meter.image_small_text', verbose_name=_('Meter'))
