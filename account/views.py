@@ -4,13 +4,16 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.views import login, password_reset, password_reset_done
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import redirect, render
 from django.utils.http import urlsafe_base64_decode
 from django.utils.translation import ugettext_lazy as _
 
 from account.forms import EmailAuthenticationForm, ResetPasswordForm, AccountEditForm
-from files_widget.fields import save_all_data
+
+
+def account(request):
+    raise Http404('No Implement Yet.')
 
 
 def account_login(request):

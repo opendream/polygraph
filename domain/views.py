@@ -595,7 +595,7 @@ def manage_my_statement(request):
     table = MyStatementTable(item_list)
     RequestConfig(request).configure(table)
 
-    return render(request, 'manage.html', {'table': table})
+    return render(request, 'manage.html', {'table': table, 'page_title': _('Manage My Statements')})
 
 
 @staff_member_required
@@ -605,7 +605,7 @@ def manage_pending_statement(request):
     table = StatementTable(item_list)
     RequestConfig(request).configure(table)
 
-    return render(request, 'manage.html', {'table': table})
+    return render(request, 'manage.html', {'table': table, 'page_title': _('Manage Pending Statements')})
 
 
 @staff_member_required
@@ -615,7 +615,7 @@ def manage_hilight_statement(request):
     table = StatementTable(item_list)
     RequestConfig(request).configure(table)
 
-    return render(request, 'manage.html', {'table': table})
+    return render(request, 'manage.html', {'table': table, 'page_title': _('Manage Hilight Statements')})
 
 
 @staff_member_required
@@ -625,7 +625,7 @@ def manage_promote_statement(request):
     table = StatementTable(item_list)
     RequestConfig(request).configure(table)
 
-    return render(request, 'manage.html', {'table': table})
+    return render(request, 'manage.html', {'table': table, 'page_title': _('Manage Promote Statements')})
 
 
 @staff_member_required
@@ -635,7 +635,7 @@ def manage_statement(request):
     table = StatementTable(item_list)
     RequestConfig(request).configure(table)
 
-    return render(request, 'manage.html', {'table': table})
+    return render(request, 'manage.html', {'table': table, 'page_title': _('Manage All Statements')})
 
 
 @login_required
@@ -645,7 +645,7 @@ def manage_my_people(request):
     table = MyPeopleTable(item_list)
     RequestConfig(request).configure(table)
 
-    return render(request, 'manage.html', {'table': table})
+    return render(request, 'manage.html', {'table': table, 'page_title': _('Manage My People')})
 
 
 @staff_member_required
@@ -655,6 +655,6 @@ def manage_people(request):
     table = PeopleTable(item_list)
     RequestConfig(request).configure(table)
 
-    return render(request, 'manage.html', {'table': table})
+    return render(request, 'manage.html', {'table': table, 'page_title': _('Manage All People')})
 
 
