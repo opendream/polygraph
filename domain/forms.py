@@ -51,6 +51,8 @@ class StatementEditForm(PermalinkForm):
 
     quote = forms.CharField(widget=CKEditorWidget(config_name='bold'))
 
+    short_detail = forms.CharField(required=False, widget=CKEditorWidget(config_name='minimal'))
+
     quoted_by = forms.ModelChoiceField(
         queryset=People.objects.all(),
         widget=autocomplete_light.ChoiceWidget(PeopleAutocomplete,

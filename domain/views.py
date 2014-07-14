@@ -444,6 +444,7 @@ def statement_create(request, statement=None):
         if form.is_valid() and reference_formset.is_valid():
             statement.permalink = form.cleaned_data['permalink']
             statement.quote = form.cleaned_data['quote']
+            statement.short_detail = form.cleaned_data['short_detail']
             statement.created_by = request.user
             statement.quoted_by_id = form.cleaned_data['quoted_by'].id
             statement.source = form.cleaned_data['source']
@@ -497,6 +498,7 @@ def statement_create(request, statement=None):
         initial = {
             'permalink': statement.permalink,
             'quote': statement.quote,
+            'short_detail': statement.short_detail,
             'status': statement.status,
             'quoted_by': statement.quoted_by_id,
             'source': statement.source,
@@ -535,7 +537,10 @@ def statement_edit(request, statement_id=None):
 def statement_detail(request, statement_permalink):
 
     statement = get_object_or_404(Statement, permalink=statement_permalink)
-    topicrevision = TopicRevision.objects.filter(origin=statement.topic).latest('id')
+    try:
+        topicrevision = TopicRevision.objects.filter(origin=statement.topic).latest('id')
+    except TopicRevision.DoesNotExist:
+        topicrevision = None
 
     return render(request, 'domain/statement_detail.html', {
         'statement': statement,

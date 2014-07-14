@@ -66,6 +66,16 @@
     </div>
 
     <div class="controls form-group">
+        <label for="id_short_detail" class="field-container control-label">{% trans "Quote detail" %}</label>
+        <div class="field-container">
+            {{ form.short_detail }}
+            {% if form.short_detail.errors %}
+            <div class="errors alert alert-danger">{{ form.short_detail.errors }}</div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="controls form-group">
         <label for="id_quoted_by" class="field-container control-label">{% trans "Quoted by" %}</label>
         <div class="field-container">
             {{ form.quoted_by }}
