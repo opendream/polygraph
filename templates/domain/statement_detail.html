@@ -167,7 +167,7 @@
                     {% for reference in statement.references %}
                     <li>
                         <div class="item-inner no-border-bottom">
-                            <span class="glyphicon glyphicon-link margin-right text-brown"></span><a href="{{ reference.url }}" target="_blank">{{ reference.title }}</a>
+                            <span class="glyphicon glyphicon-link margin-right text-brown"></span><a href="{{ reference.url }}" target="_blank">{% if reference.title %}{{ reference.title }}{% else %}{{ reference.url }}{% endif %}</a>
                         </div>
                     </li>
                     {% endfor %}
