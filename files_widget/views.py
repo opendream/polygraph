@@ -4,12 +4,12 @@ from django.http import Http404, HttpResponse, HttpResponseBadRequest
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.template.loader import render_to_string
-from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.decorators import permission_required, login_required
 
 from files import save_upload
 from controllers import FilePath, ImagePath
 
-@permission_required('files_widget.can_upload_files')
+@login_required
 def upload(request):
     if not request.method == 'POST':
         raise Http404
@@ -52,7 +52,7 @@ def upload(request):
         'thumbnailPath': render_to_string('files_widget/includes/thumbnail.html', locals()),
     }))
 
-@permission_required('files_widget.can_upload_files')
+@login_required
 def thumbnail_url(request):
     if not 'img' in request.GET or not 'preview_size' in request.GET:
         raise Http404
