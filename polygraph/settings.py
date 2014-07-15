@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
 
     # Library
+    'south',
     'ckeditor',
     'sorl.thumbnail',
     'files_widget',

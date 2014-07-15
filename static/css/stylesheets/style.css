@@ -1694,11 +1694,16 @@ ul.nav-tabs li.first .caret {
 }
 
 /* line 1235, ../sass/style.scss */
+.front-no-highlight-statement .meter img {
+  height: 103px;
+}
+
+/* line 1239, ../sass/style.scss */
 .polygraph-list .polygraph-list-block .quote {
   min-height: 140px;
 }
 
-/* line 1240, ../sass/style.scss */
+/* line 1244, ../sass/style.scss */
 td.quote {
   width: 40%;
 }

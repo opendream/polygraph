@@ -282,7 +282,7 @@
         <a href="." class="btn btn-cancle flat-btn">{% trans "Cancel" %}</a>
 
         {% if not form.is_new %}
-        <a class="btn btn-delete btn-md" href="{% url 'domain_delete' 'topic' form.inst.id %}"><span class="glyphicon glyphicon-remove"></span> {% trans "Delete" %}</a>
+        <a class="btn btn-delete btn-md" href="{% url 'domain_delete' 'statement' form.inst.id %}"><span class="glyphicon glyphicon-remove"></span> {% trans "Delete" %}</a>
         {% endif %}
 
     </div>

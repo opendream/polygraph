@@ -1,2 +1,8 @@
 pip install -r requirements.txt
-pip install git+git://github.com/TND/django-files-widget.git
+python manage.py syncdb
+python manage.py migrate account
+python manage.py migrate domain
+python manage.py initial
+
+# optional
+python manage.py makesample
