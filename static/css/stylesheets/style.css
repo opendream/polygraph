@@ -1707,3 +1707,9 @@ ul.nav-tabs li.first .caret {
 td.quote {
   width: 40%;
 }
+
+/* line 1248, ../sass/style.scss */
+.statement-detail img {
+  max-width: 100%;
+  height: auto !important;
+}
