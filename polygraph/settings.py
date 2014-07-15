@@ -99,8 +99,6 @@ TEMPLATE_DIRS = (
 
 )
 
-LOCALE_PATHS = TEMPLATE_DIRS
-
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
@@ -118,6 +116,10 @@ DATABASES = {
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
+
+LOCALE_PATHS = (
+    os.path.join(BASE_PATH, 'locale'),
+)
 
 LANGUAGE_CODE = 'en'
 

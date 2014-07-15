@@ -40,7 +40,6 @@ msgid "username"
 msgstr "ชื่อผู้ใช้"
 
 #: account/models.py:16
-#, fuzzy
 msgid ""
 "Required 30 characters or fewer. Letters, numbers and @/./+/-/_ characters"
 msgstr "ต้องยาวไม่เกิน 30 พยัญชนะ ได้แก่ a-z, ตัวเลข และ เครื่องหมาย @/./+/-/_"
@@ -131,7 +130,6 @@ msgid "Enter a valid permalink."
 msgstr "ใสลิงก์ถาวรไม่ถูกต้อง"
 
 #: common/forms.py:34 common/models.py:138
-#, fuzzy
 msgid ""
 "Required unique 30 characters or fewer. Letters, numbers and ./@/+/-/_ "
 "characters"
@@ -150,7 +148,6 @@ msgstr "%s ได้ถูกสร้างใหม่เรียบร้อ
 
 #: common/functions.py:50 domain/tests/test_view.py:84
 #: domain/tests/test_view.py:300 domain/tests/test_view.py:559
-#, fuzzy, python-format
 msgid ""
 "Your %s settings has been updated. View this %s <a href=\"%s\">here</a>."
 msgstr "%s ได้ถูกสร้างใหม่เรียบร้อยแล้ว ดู %sนี้ <a href=\"%s\">ที่นี่</a>"
@@ -202,12 +199,10 @@ msgid "Manage Pending Statements"
 msgstr "จัดการคำพูดที่กำลังอยู่ในการพิจารณา"
 
 #: domain/views.py:626
-#, fuzzy
 msgid "Manage Highlight Statements"
 msgstr "จัดการคำพูดไฮไลต์"
 
 #: domain/views.py:636
-#, fuzzy
 msgid "Manage Promote Statements"
 msgstr "จัดการคำพูดที่กำลังอยู่ในการพิจารณา"
 
@@ -573,7 +568,6 @@ msgstr ""
 "คุณได้รับอีเมล์ฉบับนี้ เนื่องจากคุณส่งคำร้องขอเปลี่ยนรหัสผ่านสำหรับบัญชีผู้ใช้ของคุณที่ %(site_name)s"
 
 #: templates/domain/home.html:15
-#, fuzzy
 msgid "Highlight statement"
 msgstr "คำพูดไฮไลต์"
 
@@ -583,12 +577,10 @@ msgid "Who's said??"
 msgstr "ใครเป็นคนพูด"
 
 #: templates/domain/home.html:66
-#, fuzzy
 msgid "Create Highlight Statement"
 msgstr "สร้างคำพูดไฮไลต์"
 
 #: templates/domain/home.html:70
-#, fuzzy
 msgid "No Highlight Statement"
 msgstr "ไม่มีคำพูดไฮไลต์"
 
@@ -700,7 +692,7 @@ msgstr "ทั้งหมด"
 
 #: templates/domain/people_list.html:61
 msgid "No People"
-msgstr ""
+msgstr "ไม่มีผู้คน"
 
 #: templates/domain/statement_detail.bnk.html:4
 msgid "Statement detail"
@@ -753,7 +745,6 @@ msgid "References"
 msgstr "อ้างอิง"
 
 #: templates/domain/statement_detail.html:206
-#, fuzzy
 msgid "View By Status"
 msgstr "ดูตามสถานะ"
 
