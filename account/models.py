@@ -13,8 +13,7 @@ class Staff(AbstractPeopleField, AbstractBaseUser, PermissionsMixin):
 
 
     username = models.CharField(_('username'), max_length=30, unique=True,
-        help_text=_('Required. 30 characters or fewer. Letters, numbers and '
-                    '@/./+/-/_ characters'),
+        help_text=_('Required 30 characters or fewer. Letters, numbers and @/./+/-/_ characters'),
         validators=[
             validators.RegexValidator(re.compile('^[\w.@+-]+$'), _('Enter a valid username.'), 'invalid')
         ])

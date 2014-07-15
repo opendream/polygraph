@@ -31,8 +31,7 @@ class PermalinkForm(CommonForm):
         for field_name in self.PERMALINK_FIELDS:
             self.fields[field_name].max_length = 255
             self.fields[field_name].validators = [validators.RegexValidator(re.compile('^[\w.@+-]+$'), _('Enter a valid permalink.'), 'invalid')]
-            self.fields[field_name].help_text = _('Required unique 30 characters or fewer. Letters, numbers and '
-                                                  './@/+/-/_ characters')
+            self.fields[field_name].help_text = _('Required unique 30 characters or fewer. Letters, numbers and ./@/+/-/_ characters')
 
     def clean(self):
 

@@ -135,8 +135,7 @@ class AbstractPermalink(CommonModel):
         abstract = True
 
     permalink = models.CharField(max_length=255, unique=True,
-        help_text=_('Required unique 30 characters or fewer. Letters, numbers and '
-                    './+/-/_ characters'),
+        help_text=_('Required unique 30 characters or fewer. Letters, numbers and ./@/+/-/_ characters'),
         validators=[
             validators.RegexValidator(re.compile('^[\w.+-]+$'), _('Enter a valid permalink.'), 'invalid')
         ])

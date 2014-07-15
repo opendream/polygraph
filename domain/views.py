@@ -623,7 +623,7 @@ def manage_hilight_statement(request):
     table = StatementTable(item_list)
     RequestConfig(request).configure(table)
 
-    return render(request, 'manage.html', {'table': table, 'page_title': _('Manage Hilight Statements')})
+    return render(request, 'manage.html', {'table': table, 'page_title': _('Manage Highlight Statements')})
 
 
 @staff_member_required

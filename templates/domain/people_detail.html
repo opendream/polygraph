@@ -55,7 +55,7 @@
         <section class="polygraph-list statement-list">
             <section class="col-md-12">
                 <header class="row">
-                    <h3>{% trans "Statements related or said by" %} {{ people.get_short_name }}</h3>
+                    <h3>{% trans "Statements related or said by this people" %}</h3>
                 </header>
                 {% for statement in statement_list %}
                 {{ statement|statement_item }}
