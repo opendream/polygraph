@@ -87,7 +87,7 @@ class TestLogin(TestCase):
         }
         response = self.client.post(reverse('account_login'), params)
 
-        self.assertContains(response, _('This account not activated'))
+        self.assertContains(response, _('This account not activated.'))
         self.assertNotIn('_auth_user_id', self.client.session)
 
 

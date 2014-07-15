@@ -62,6 +62,7 @@ INSTALLED_APPS = (
 MIDDLEWARE_CLASSES = (
     'common.middleware.ForceDefaultLanguageMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -97,6 +98,8 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_PATH, 'files_widget/templates'),
 
 )
+
+LOCALE_PATHS = TEMPLATE_DIRS
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
