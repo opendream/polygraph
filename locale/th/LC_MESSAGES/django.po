@@ -587,7 +587,7 @@ msgstr "ไม่มีคำพูดไฮไลต์"
 #: templates/domain/home.html:102 templates/domain/people_detail.html:101
 #: templates/domain/people_form.html:98 templates/domain/topic_detail.html:94
 msgid "Summary"
-msgstr "ใจความสรุป"
+msgstr "สรุป"
 
 #: templates/domain/home.html:130
 msgid "Latest"
