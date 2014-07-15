@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-15 10:08+0000\n"
+"POT-Creation-Date: 2014-07-15 11:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -148,6 +148,7 @@ msgstr "%s ได้ถูกสร้างใหม่เรียบร้อ
 
 #: common/functions.py:50 domain/tests/test_view.py:84
 #: domain/tests/test_view.py:300 domain/tests/test_view.py:559
+#, python-format
 msgid ""
 "Your %s settings has been updated. View this %s <a href=\"%s\">here</a>."
 msgstr "%s ได้ถูกสร้างใหม่เรียบร้อยแล้ว ดู %sนี้ <a href=\"%s\">ที่นี่</a>"
