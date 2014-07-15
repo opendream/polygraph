@@ -70,9 +70,13 @@
             <header>
                 <h3 class="hidden">{% trans "Meta Statement" %}</h3>
             </header>
+            
+            {% if statement.source %}
             <div class="submit">
                 <p><strong>{% trans "Source" %}&nbsp;&nbsp;</strong>{{ statement.source }}</p>
             </div>
+            {% endif %}
+
             <div class="share-btn pull-left">
                 <div class="fb-share-button" data-href="{% url 'statement_detail' statement.permalink %}" data-type="button_count"></div>
                 <a href="https://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a>
@@ -85,10 +89,12 @@
                 </header>
 
                 {{ statement.short_detail|safe }}
+                <p>&nbsp;</p>
 
                 {{ topic.description|safe }}
 
                 {% if statement.topic.topicrevision_set.all.count > 1 %}
+                <p>&nbsp;</p>
                 <section>
                     <header><h4>{% trans "Update" %}</h4></header>
                     <ul id="topicrevision-update-list" class="item-list load-more-inline-wrapper">
