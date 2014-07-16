@@ -175,7 +175,8 @@
     {% if form.is_new %}
     generatePermalink($('textarea[name=quote]'));
     {% endif %}
-    controlPermalink()
+    controlPermalink();
+    preventScrollReload();
 </script>
 
 {% endblock %}

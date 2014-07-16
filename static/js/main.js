@@ -229,6 +229,12 @@ function controlPermalink() {
     });
 }
 
+function preventScrollReload() {
+    $(window).on('beforeunload', function() {
+        $(window).scrollTop(0);
+    });
+}
+
 $(document).ready(function () {
     // checknox radio style
     $('input[type=checkbox], input[type=radio]').each(function () {
@@ -333,49 +339,36 @@ $(document).ready(function () {
         $('#meter-tab-drop .text').text($(this).text());
     });
 
-});
 
-/*
-$(window).on('scroll', function() {
+    CKEDITOR.on( 'instanceReady', function( evt ) {
 
-    var offset = $(this).scrollTop();
+        $('.cke_top').each(function () {
 
-    $('.cke_inner > .cke_top').each(function () {
-
-        var tool = $(this);
-        var inner = tool.parent();
-        var toolOffset = tool.offset().top;
-        var toolwidth = inner.width();
-        var toolheight = tool.height();
-
-        var nav_fixed_height = $('.navbar-fixed-top').height();
+            var calLimit = function () {
 
 
-        console.log('offset', offset+ $('.navbar-fixed-top').height() );
-        console.log('toolOffset', toolOffset);
-        console.log('nav_fixed_height', nav_fixed_height);
+                var container = $('.' + $(this).attr('id').replace('_top', ''));
+                var limit = container.offset().top + container.outerHeight() - 50;
 
-        if (offset + nav_fixed_height > toolOffset && tool.css('position') != 'fixed') {
-            inner.css({'padding-top': toolheight});
-            tool.css({
-                position: 'fixed',
-                top: nav_fixed_height,
-                width: toolwidth,
-                'z-index': 1000000
-            });
-        }
-        else {
-            inner.css({'padding-top': 0});
-            tool.css({
-                position: 'static',
-                top: nav_fixed_height,
-                width: 'auto'
-            });
-        }
+                return limit;
+            }
+
+            var options = {
+                marginTop: function () { return $('.navbar-fixed-top').outerHeight(); },
+                limit: calLimit,
+                removeOffsets: true
+            };
+
+            $(this).scrollToFixed(options);
+        });
+
     });
 
+
+
 });
-*/
+
+
 
 /*
 if (typeof CKEDITOR != 'undefined') {
