@@ -47,6 +47,10 @@
     <div class="controls form-group">
         <label for="id_permalink" class="field-container control-label">{% trans "Permalink" %}</label>
         <div class="field-container ">
+
+            <input disabled="disabled" readonly="readonly" id="id_permalink_readonly" name="permalink_readonly" type="text" class="form-control" value="{{ form.permalink.value|default_if_none:"" }}">
+            <a id="edit-permalink" href="#id_permalink">{% trans "edit" %}</a>
+
             <input id="id_permalink" name="permalink" type="text" class="form-control" value="{{ form.permalink.value|default_if_none:"" }}" required>
             <span class="help-block">{{ form.permalink.help_text }}</span>
             {% if form.permalink.errors %}
@@ -154,6 +158,26 @@
 
 
 </div>
+
+
+<script type="text/javascript">
+
+    if (CKEDITOR.instances.id_quote) {
+        var editor = CKEDITOR.instances.id_quote;
+        editor.on('contentDom', function () {
+
+            editor.document.on('keyup', function () {
+                $('#id_quote').val(editor.getData()).trigger('keyup');
+            });
+        });
+    }
+
+    {% if form.is_new %}
+    generatePermalink($('textarea[name=quote]'));
+    {% endif %}
+    controlPermalink()
+</script>
+
 {% endblock %}
 
 

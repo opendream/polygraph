@@ -1713,3 +1713,15 @@ td.quote {
   max-width: 100%;
   height: auto !important;
 }
+
+/* line 1253, ../sass/style.scss */
+#id_permalink_readonly {
+  display: inline-block;
+  margin-right: -50px;
+  padding-right: 60px;
+}
+
+/* line 1259, ../sass/style.scss */
+#edit-permalink {
+  position: relative;
+}

@@ -47,7 +47,7 @@ class CommonModel(models.Model):
 
     @property
     def inst_name(self):
-        return _(self.__class__.__name__)
+        return self.__class__.__name__
 
     class Meta:
         abstract = True
