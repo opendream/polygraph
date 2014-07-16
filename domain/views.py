@@ -16,7 +16,7 @@ from tagging.models import Tag, TaggedItem
 from common.constants import STATUS_PUBLISHED, STATUS_DRAFT, STATUS_PENDING
 from common.decorators import statistic
 from common.functions import people_render_reference, topic_render_reference, statement_render_reference, process_status, \
-    get_success_message
+    get_success_message, image_render
 from domain.forms import PeopleEditForm, TopicEditForm, StatementEditForm, ReferenceForm
 from domain.models import People, Topic, Statement, Meter, PeopleCategory, TopicRevision
 
@@ -542,10 +542,12 @@ def statement_detail(request, statement_permalink):
     except TopicRevision.DoesNotExist:
         topicrevision = None
 
+
     return render(request, 'domain/statement_detail.html', {
         'statement': statement,
         'topic': topicrevision,
-        'meter_list': Meter.objects.all().order_by('order')
+        'meter_list': Meter.objects.all().order_by('order'),
+        'meter_image': statement.meter.image_small_text.thumbnail_200x200()
     })
 
 def statement_topicrevision_detail(request, statement_permalink, topicrevision_id):
