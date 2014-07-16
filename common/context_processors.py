@@ -21,6 +21,7 @@ def helper(request):
         'request_inline': bool(request.GET.get('_inline') or request.POST.get('_inline')),
         'request_pagination': request.GET.get('page'),
         'static_page_list': static_page_list,
+        'BASE_URL': request.build_absolute_uri('/')[0:-1],
         'SITE_LOGO_URL': settings.SITE_LOGO_URL,
         'SITE_NAME': settings.SITE_NAME,
         'SITE_FAVICON_URL': settings.SITE_FAVICON_URL,
