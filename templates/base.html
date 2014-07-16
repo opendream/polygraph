@@ -13,7 +13,7 @@
         {% captureas description_content %}{% block description %}{% endblock %}{% endcaptureas %}
         {% captureas image_content %}{% block image %}{% endblock %}{% endcaptureas %}
 
-        <meta name="og:title" content="{{ title_content }}">
+        <meta name="og:title" content="{{ title_content|striptags }}">
         <meta name="og:site_name" content="{{ SITE_NAME }}">
         {% if description_content %}
         <meta name="og:description" content="{{ description_content }}">
