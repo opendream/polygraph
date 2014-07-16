@@ -339,30 +339,32 @@ $(document).ready(function () {
         $('#meter-tab-drop .text').text($(this).text());
     });
 
+    if (typeof CKEDITOR != 'undefined') {
 
-    CKEDITOR.on( 'instanceReady', function( evt ) {
+        CKEDITOR.on( 'instanceReady', function( evt ) {
 
-        $('.cke_top').each(function () {
+            $('.cke_top').each(function () {
 
-            var calLimit = function () {
+                var calLimit = function () {
 
 
-                var container = $('.' + $(this).attr('id').replace('_top', ''));
-                var limit = container.offset().top + container.outerHeight() - 50;
+                    var container = $('.' + $(this).attr('id').replace('_top', ''));
+                    var limit = container.offset().top + container.outerHeight() - 50;
 
-                return limit;
-            }
+                    return limit;
+                }
 
-            var options = {
-                marginTop: function () { return $('.navbar-fixed-top').outerHeight(); },
-                limit: calLimit,
-                removeOffsets: true
-            };
+                var options = {
+                    marginTop: function () { return $('.navbar-fixed-top').outerHeight(); },
+                    limit: calLimit,
+                    removeOffsets: true
+                };
 
-            $(this).scrollToFixed(options);
+                $(this).scrollToFixed(options);
+            });
+
         });
-
-    });
+    };
 
 
 
