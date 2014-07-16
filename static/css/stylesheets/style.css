@@ -1714,14 +1714,31 @@ td.quote {
   height: auto !important;
 }
 
-/* line 1253, ../sass/style.scss */
+/* line 1254, ../sass/style.scss */
 #id_permalink_readonly {
   display: inline-block;
   margin-right: -50px;
   padding-right: 60px;
 }
 
-/* line 1259, ../sass/style.scss */
+/* line 1260, ../sass/style.scss */
 #edit-permalink {
   position: relative;
+}
+
+/* line 1265, ../sass/style.scss */
+.inline-media {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 30px;
+  height: 0;
+  overflow: hidden;
+}
+/* line 1271, ../sass/style.scss */
+.inline-media iframe, .inline-media object, .inline-media embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }

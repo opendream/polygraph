@@ -170,12 +170,13 @@ CKEDITOR_CONFIGS = {
             ['NumberedList', 'BulletedList'],
             ['Link', 'Unlink'],
             ['Image', 'Table'],
+            ['MediaEmbed']
         ],
         'width': 'auto',
         'height': '200',
         'format_tags': 'h3;h4;h5',
         'removePlugins': 'resize',
-        'extraPlugins': 'autogrow',
+        'extraPlugins': 'autogrow,mediaembed',
         'forcePasteAsPlainText': True,
 
 

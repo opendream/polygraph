@@ -208,7 +208,7 @@ function generatePermalink(selector) {
 
         var text = $(this).val();
 
-        text = convertToSlug(url_slug($(text).text()));
+        text = convertToSlug(url_slug($('<div>' + text + '</div>').text()));
 
         permalink.val(text).html(text);
     });
@@ -341,29 +341,52 @@ $(document).ready(function () {
 
     if (typeof CKEDITOR != 'undefined') {
 
-        CKEDITOR.on( 'instanceReady', function( evt ) {
+        var editor_fixtop = {};
+
+        CKEDITOR.on( 'instanceReady', function( ev ) {
 
             $('.cke_top').each(function () {
 
-                var calLimit = function () {
+                if (!editor_fixtop[$(this).attr('id')]) {
 
+                    var calLimit = function () {
 
-                    var container = $('.' + $(this).attr('id').replace('_top', ''));
-                    var limit = container.offset().top + container.outerHeight() - 50;
+                        var container = $('.' + $(this).attr('id').replace('_top', ''));
+                        var limit = container.offset().top + container.outerHeight() - 50;
 
-                    return limit;
+                        return limit;
+                    }
+
+                    var options = {
+                        marginTop: function () { return $('.navbar-fixed-top').outerHeight(); },
+                        limit: calLimit,
+                        removeOffsets: true
+                    };
+
+                    $(this).scrollToFixed(options);
+
+                    editor_fixtop[$(this).attr('id')] = true;
                 }
+            });
 
-                var options = {
-                    marginTop: function () { return $('.navbar-fixed-top').outerHeight(); },
-                    limit: calLimit,
-                    removeOffsets: true
-                };
 
-                $(this).scrollToFixed(options);
+
+            ev.editor.dataProcessor.htmlFilter.addRules({
+               elements: {
+                   $: function (element) {
+                       // Add inline-media class name to embedded media
+                       if (element.name == 'div' && element.children[0].name == 'iframe') {
+                           element.attributes.class = 'inline-media';
+                           return element;
+                       }
+                   }
+               }
             });
 
         });
+
+
+
     };
 
 
