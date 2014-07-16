@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from datetime import timedelta
 from django.core.urlresolvers import reverse
 from django.http import Http404, HttpRequest

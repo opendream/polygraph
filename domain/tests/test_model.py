@@ -60,7 +60,7 @@ class TestPeople(TestCase):
         self.assertEqual(people1.homepage_url, 'http://dream.politic.com')
         self.assertEqual(people1.get_full_name(), 'Dream Politic')
         self.assertEqual(people1.get_short_name(), 'Dream.P')
-        self.assertEqual(people1.inst_name, _('People'))
+        self.assertEqual(people1.inst_name, 'People')
         #self.assertEqual(people1.image, 'test.jpg')
         self.assertEqual(people1.created_by, self.staff1)
 
@@ -78,7 +78,7 @@ class TestPeople(TestCase):
         self.assertEqual(people2.homepage_url, 'http://open.politic.com')
         self.assertEqual(people2.get_full_name(), 'Open Politic')
         self.assertEqual(people2.get_short_name(), 'Open.P')
-        self.assertEqual(people2.inst_name, _('People'))
+        self.assertEqual(people2.inst_name, 'People')
         #self.assertEqual(people2.image, 'test.jpg')
         self.assertEqual(people2.created_by, self.staff2)
         self.assertEqual(list(people2.categories.all()), [self.people_category2])

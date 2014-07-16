@@ -45,6 +45,6 @@ class PermalinkForm(CommonForm):
                 if not self._errors.has_key(field_name):
                     self._errors[field_name] = ErrorList()
 
-                self._errors[field_name].append(_('This %s is already in use.') % field_name)
+                self._errors[field_name].append(_('This %s is already in use.') % _(field_name))
 
         return cleaned_data

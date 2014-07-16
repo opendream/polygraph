@@ -52,6 +52,9 @@ msgstr "ใส่ชื่อผู้ใช้ไม่ถูกต้อง"
 msgid "email address"
 msgstr "อีเมล"
 
+msgid "email"
+msgstr "อีเมล"
+
 #: account/models.py:27
 msgid "staff status"
 msgstr "สถานะสมาชิก"
@@ -669,6 +672,9 @@ msgstr "ดูผลลัพธ์"
 #: templates/domain/people_form.html:39
 #: templates/domain/statement_form.html:48
 msgid "Permalink"
+msgstr "ลิงก์ถาวร"
+
+msgid "permalink"
 msgstr "ลิงก์ถาวร"
 
 #: templates/domain/people_form.html:80

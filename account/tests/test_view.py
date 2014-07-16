@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os
 import shutil
 from django.conf import settings
@@ -6,7 +8,7 @@ from django.core import mail
 from django.core.urlresolvers import reverse
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext as _
 from django.test import TestCase
 from account.models import Staff
 
@@ -129,8 +131,9 @@ class TestResetPassword(TestCase):
         uid = urlsafe_base64_encode(force_bytes(self.staff.id))
         token = default_token_generator.make_token(self.staff)
 
+
         self.assertEquals(len(mail.outbox), 1)
-        self.assertIn(_('Reset password on').encode('utf-8'), mail.outbox[0].subject)
+        self.assertIn(_('Reset password on'), mail.outbox[0].subject)
         self.assertIn(reverse('account_reset_password_confirm', args=[uid, token, ]), mail.outbox[0].body)
 
 
