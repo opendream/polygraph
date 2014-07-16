@@ -9,12 +9,20 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        {% comment %}
-        <meta name="description" content="">
-        <meta name="author" content="">
-        {% endcomment %}
-
         {% captureas title_content %}{% block title %}{% endblock %}{% endcaptureas %}
+        {% captureas description_content %}{% block description %}{% endblock %}{% endcaptureas %}
+        {% captureas image_content %}{% block image %}{% endblock %}{% endcaptureas %}
+
+        <meta name="og:title" content="{{ title_content }}">
+        <meta name="og:site_name" content="{{ SITE_NAME }}">
+        {% if description_content %}
+        <meta name="og:description" content="{{ description_content }}">
+        {% endif %}
+        {% if image_content %}
+        <meta name="og:image" content="{{ image_content }}">
+        {% endif %}
+
+
 
         <title>{% ifactive 'home' %}{{ SITE_NAME }}{% else %}{{ title_content|striptags }}|{{ SITE_NAME }}{% endifactive %}</title>
 
