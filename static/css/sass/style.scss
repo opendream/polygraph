@@ -1244,7 +1244,15 @@ ul.nav-tabs li.first .caret { border-bottom-color: #FFF; }
 td.quote {
     width: 40%;
 }
-
+td.created {
+    min-width: 90px;
+}
+td.status {
+    min-width: 200px;
+}
+td.meter {
+    min-width: 50px;
+}
 .statement-detail img {
     max-width: 100%;
     height: auto !important;

@@ -1708,25 +1708,40 @@ td.quote {
   width: 40%;
 }
 
-/* line 1248, ../sass/style.scss */
+/* line 1247, ../sass/style.scss */
+td.created {
+  min-width: 90px;
+}
+
+/* line 1250, ../sass/style.scss */
+td.status {
+  min-width: 200px;
+}
+
+/* line 1253, ../sass/style.scss */
+td.meter {
+  min-width: 50px;
+}
+
+/* line 1256, ../sass/style.scss */
 .statement-detail img {
   max-width: 100%;
   height: auto !important;
 }
 
-/* line 1254, ../sass/style.scss */
+/* line 1262, ../sass/style.scss */
 #id_permalink_readonly {
   display: inline-block;
   margin-right: -50px;
   padding-right: 60px;
 }
 
-/* line 1260, ../sass/style.scss */
+/* line 1268, ../sass/style.scss */
 #edit-permalink {
   position: relative;
 }
 
-/* line 1265, ../sass/style.scss */
+/* line 1273, ../sass/style.scss */
 .inline-media {
   position: relative;
   padding-bottom: 56.25%;
@@ -1734,7 +1749,7 @@ td.quote {
   height: 0;
   overflow: hidden;
 }
-/* line 1271, ../sass/style.scss */
+/* line 1279, ../sass/style.scss */
 .inline-media iframe, .inline-media object, .inline-media embed {
   position: absolute;
   top: 0;
@@ -1743,7 +1758,7 @@ td.quote {
   height: 100%;
 }
 
-/* line 1280, ../sass/style.scss */
+/* line 1288, ../sass/style.scss */
 .reference-wrapper .glyphicon {
   color: #65BF61;
 }
