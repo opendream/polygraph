@@ -249,3 +249,6 @@ if 'test' in sys.argv:
     MEDIA_URL = '/test_media/'
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     GREATEST_FUNCTION = 'MAX'
+
+if 'runserver' in sys.argv:
+    DEBUG = True

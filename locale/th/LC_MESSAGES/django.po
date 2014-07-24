@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-15 11:21+0000\n"
+"POT-Creation-Date: 2014-07-24 08:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,20 +18,20 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: account/forms.py:37 account/tests/test_view.py:67
-#: account/tests/test_view.py:77
+#: account/forms.py:37 account/tests/test_view.py:69
+#: account/tests/test_view.py:79
 msgid "Please, enter correct email/username and password."
 msgstr "กรุณาใส่ อีเมล/ชื่อผู้ใช้ และ รหัสผ่าน ให้ถูกต้อง"
 
-#: account/forms.py:39 account/tests/test_view.py:90
+#: account/forms.py:39 account/tests/test_view.py:92
 msgid "This account not activated."
 msgstr "บัญชีผู้ใช้นี้ยังไม่สามารถใช้งานได้"
 
-#: account/forms.py:64 account/tests/test_view.py:149
+#: account/forms.py:64 account/tests/test_view.py:152
 msgid "Your email address is not registered."
 msgstr "อีเมลที่คุณใส่ ยังไม่ได้ทำการลงทะเบียน"
 
-#: account/forms.py:114 account/tests/test_view.py:311
+#: account/forms.py:114 account/tests/test_view.py:314
 msgid "Password mismatch."
 msgstr "รหัสผ่านไม่ถูกต้อง"
 
@@ -50,9 +50,6 @@ msgstr "ใส่ชื่อผู้ใช้ไม่ถูกต้อง"
 
 #: account/models.py:22
 msgid "email address"
-msgstr "อีเมล"
-
-msgid "email"
 msgstr "อีเมล"
 
 #: account/models.py:27
@@ -77,8 +74,8 @@ msgstr "กำหนดให้ผู้ใช้สามารถใช้ง
 msgid "date joined"
 msgstr "วันที่เข้าร่วม"
 
-#: account/views.py:98 account/tests/test_view.py:242
-#: account/tests/test_view.py:337
+#: account/views.py:98 account/tests/test_view.py:245
+#: account/tests/test_view.py:340
 msgid "Your account profile has been updated."
 msgstr "ข้อมูลผู้ใช้ของคุณได้ทำการปรับปรุงเรียบร้อยแล้ว"
 
@@ -86,32 +83,32 @@ msgstr "ข้อมูลผู้ใช้ของคุณได้ทำก
 msgid "The email invite has been send."
 msgstr "อีเมลเชิญชวนได้ทำการส่งเรียบร้อยแล้ว"
 
-#: account/tests/test_view.py:133
+#: account/tests/test_view.py:136
 msgid "Reset password on"
 msgstr "ตั้งค่ารหัสผ่านใหมที่"
 
-#: account/tests/test_view.py:142
+#: account/tests/test_view.py:145
 msgid "Enter a valid email address."
 msgstr "ใส่อีเมลไม่ถูกต้อง"
 
-#: account/tests/test_view.py:157 templates/account/edit.html:22
+#: account/tests/test_view.py:160 templates/account/edit.html:22
 msgid "Please, change your password"
 msgstr "กรุณาเปลี่ยนรหัสผ่านของคุณ"
 
-#: account/tests/test_view.py:303 account/tests/test_view.py:304
-#: domain/tests/test_view.py:201 domain/tests/test_view.py:202
+#: account/tests/test_view.py:306 account/tests/test_view.py:307
 #: domain/tests/test_view.py:203 domain/tests/test_view.py:204
-#: domain/tests/test_view.py:386 domain/tests/test_view.py:752
-#: domain/tests/test_view.py:753 domain/tests/test_view.py:754
-#: domain/tests/test_view.py:755
+#: domain/tests/test_view.py:205 domain/tests/test_view.py:206
+#: domain/tests/test_view.py:388 domain/tests/test_view.py:754
+#: domain/tests/test_view.py:755 domain/tests/test_view.py:756
+#: domain/tests/test_view.py:757
 msgid "This field is required."
 msgstr "ฟิลด์นี้ต้องใส่"
 
-#: account/tests/test_view.py:323
+#: account/tests/test_view.py:326
 msgid "This username is already in use."
 msgstr "ชื่อผู้ใช้นี้ได้ถูกใช้งานแล้ว"
 
-#: account/tests/test_view.py:324
+#: account/tests/test_view.py:327
 msgid "This email is already in use."
 msgstr "อีเมลนี้ได้ถูกใช้งานแล้ว"
 
@@ -119,7 +116,7 @@ msgstr "อีเมลนี้ได้ถูกใช้งานแล้ว
 msgid "Published"
 msgstr "ตีพิมพ์"
 
-#: common/constants.py:11 templates/base.html:72
+#: common/constants.py:11 templates/base.html:79
 msgid "Pending Review"
 msgstr "อยู่ในระหว่างการตรวจสอบ"
 
@@ -127,8 +124,8 @@ msgstr "อยู่ในระหว่างการตรวจสอบ"
 msgid "Draft"
 msgstr "ร่าง"
 
-#: common/forms.py:33 common/models.py:140 domain/tests/test_view.py:232
-#: domain/tests/test_view.py:782
+#: common/forms.py:33 common/models.py:140 domain/tests/test_view.py:234
+#: domain/tests/test_view.py:784
 msgid "Enter a valid permalink."
 msgstr "ใสลิงก์ถาวรไม่ถูกต้อง"
 
@@ -143,20 +140,22 @@ msgstr "ต้องยาวไม่เกิน 30 พยัญชนะ ไ�
 msgid "This %s is already in use."
 msgstr "%sนี้ได้ถูกใช้งานแล้ว"
 
-#: common/functions.py:44 domain/tests/test_view.py:269
-#: domain/tests/test_view.py:483 domain/tests/test_view.py:821
+#: common/functions.py:44 domain/tests/test_view.py:271
+#: domain/tests/test_view.py:485 domain/tests/test_view.py:823
 #, python-format
 msgid "New %s has been created. View this %s <a href=\"%s\">here</a>."
 msgstr "%s ได้ถูกสร้างใหม่เรียบร้อยแล้ว ดู %sนี้ <a href=\"%s\">ที่นี่</a>"
 
-#: common/functions.py:50 domain/tests/test_view.py:84
-#: domain/tests/test_view.py:300 domain/tests/test_view.py:559
+#: common/functions.py:50 domain/tests/test_view.py:86
+#: domain/tests/test_view.py:302 domain/tests/test_view.py:561
 #, python-format
 msgid ""
 "Your %s settings has been updated. View this %s <a href=\"%s\">here</a>."
 msgstr "%s ได้ถูกสร้างใหม่เรียบร้อยแล้ว ดู %sนี้ <a href=\"%s\">ที่นี่</a>"
 
 #: common/functions.py:65 common/functions.py:83 common/functions.py:124
+#: templates/domain/people_form.html:45
+#: templates/domain/statement_form.html:52
 msgid "edit"
 msgstr "แก้ไข"
 
@@ -164,12 +163,12 @@ msgstr "แก้ไข"
 msgid "by"
 msgstr "โดย"
 
-#: domain/forms.py:44 templates/domain/statement_form.html:177
+#: domain/forms.py:44 templates/domain/statement_form.html:202
 #: templates/domain/topic_inline_form.html:5
 msgid "Title"
 msgstr "ชื่อเรื่อง"
 
-#: domain/forms.py:45 templates/domain/statement_form.html:181
+#: domain/forms.py:45 templates/domain/statement_form.html:206
 msgid "URL"
 msgstr "URL"
 
@@ -189,46 +188,38 @@ msgstr "ตัววัด"
 msgid "Name"
 msgstr "ชื่อ"
 
-#: domain/views.py:40 domain/tests/test_view.py:37
+#: domain/views.py:40 domain/tests/test_view.py:39
 #, python-format
 msgid "Your %s has been deleted."
 msgstr "%s ของคุณ ได้ถูกลบเรียบร้อยแล้ว"
 
-#: domain/views.py:606
+#: domain/views.py:608
 msgid "Manage My Statements"
 msgstr "จัดการคำพูดที่ฉันสร้าง"
 
-#: domain/views.py:616
+#: domain/views.py:618
 msgid "Manage Pending Statements"
 msgstr "จัดการคำพูดที่กำลังอยู่ในการพิจารณา"
 
-#: domain/views.py:626
+#: domain/views.py:628
 msgid "Manage Highlight Statements"
 msgstr "จัดการคำพูดไฮไลต์"
 
-#: domain/views.py:636
+#: domain/views.py:638
 msgid "Manage Promote Statements"
 msgstr "จัดการคำพูดที่กำลังอยู่ในการพิจารณา"
 
-#: domain/views.py:646
+#: domain/views.py:648
 msgid "Manage All Statements"
 msgstr "จัดการคำพูดทั้งหมด"
 
-#: domain/views.py:656
+#: domain/views.py:658
 msgid "Manage My People"
 msgstr "จัดการผู้คนที่ฉันสร้าง"
 
-#: domain/views.py:666
+#: domain/views.py:668
 msgid "Manage All People"
 msgstr "จัดการผู้คนทั้งหมด"
-
-#: domain/tests/test_model.py:63 domain/tests/test_model.py:81
-#: domain/tests/test_view.py:89 domain/tests/test_view.py:274
-#: templates/base.html:121 templates/domain/people_detail.html:9
-#: templates/domain/people_form.html:20 templates/domain/people_list.html:5
-#: templates/domain/people_list.html:8
-msgid "People"
-msgstr "ผู้คน"
 
 #: domain/tests/test_model.py:332 domain/tests/test_model.py:364
 #: domain/tests/test_model.py:379
@@ -243,63 +234,70 @@ msgstr "ปรับปรุง"
 msgid "Pending"
 msgstr "กำลังอยู่ในการพิจารณา"
 
-#: domain/tests/test_view.py:85 domain/tests/test_view.py:86
-#: domain/tests/test_view.py:270 domain/tests/test_view.py:271
+#: domain/tests/test_view.py:87 domain/tests/test_view.py:88
+#: domain/tests/test_view.py:272 domain/tests/test_view.py:273
 msgid "people"
 msgstr "ผู้คน"
 
-#: domain/tests/test_view.py:89 domain/tests/test_view.py:305
-#: domain/tests/test_view.py:565
+#: domain/tests/test_view.py:91 domain/tests/test_view.py:307
+#: domain/tests/test_view.py:567
 #, python-format
 msgid "Edit %s"
 msgstr "แก้ไข %s"
 
-#: domain/tests/test_view.py:90 domain/tests/test_view.py:306
-#: domain/tests/test_view.py:566 templates/account/edit.html:146
-#: templates/domain/people_form.html:157
-#: templates/domain/statement_form.html:281
+#: domain/tests/test_view.py:91 domain/tests/test_view.py:276
+#: templates/base.html:128 templates/domain/people_detail.html:9
+#: templates/domain/people_form.html:20 templates/domain/people_list.html:5
+#: templates/domain/people_list.html:8
+msgid "People"
+msgstr "ผู้คน"
+
+#: domain/tests/test_view.py:92 domain/tests/test_view.py:308
+#: domain/tests/test_view.py:568 templates/account/edit.html:146
+#: templates/domain/people_form.html:163
+#: templates/domain/statement_form.html:306
 #: templates/domain/topic_inline_form.html:39
 msgid "Save changes"
 msgstr "บันทึกการเปลี่ยนแปลง"
 
-#: domain/tests/test_view.py:218 domain/tests/test_view.py:769
+#: domain/tests/test_view.py:220 domain/tests/test_view.py:771
 msgid "This permalink is already in use."
 msgstr "ลิงก์ถาวรนี้ได้ถูกใช้งานแล้ว"
 
-#: domain/tests/test_view.py:274 domain/tests/test_view.py:488
-#: domain/tests/test_view.py:827
+#: domain/tests/test_view.py:276 domain/tests/test_view.py:490
+#: domain/tests/test_view.py:829
 #, python-format
 msgid "Create %s"
 msgstr "สร้าง %s"
 
-#: domain/tests/test_view.py:275 domain/tests/test_view.py:489
-#: domain/tests/test_view.py:828 templates/domain/people_form.html:157
-#: templates/domain/statement_form.html:281
+#: domain/tests/test_view.py:277 domain/tests/test_view.py:491
+#: domain/tests/test_view.py:830 templates/domain/people_form.html:163
+#: templates/domain/statement_form.html:306
 #: templates/domain/topic_inline_form.html:39
 msgid "Save new"
 msgstr "บันทึกใหม่"
 
-#: domain/tests/test_view.py:301 domain/tests/test_view.py:302
-#: domain/tests/test_view.py:484 domain/tests/test_view.py:485
+#: domain/tests/test_view.py:303 domain/tests/test_view.py:304
+#: domain/tests/test_view.py:486 domain/tests/test_view.py:487
 msgid "topic"
 msgstr "หัวข้อ"
 
-#: domain/tests/test_view.py:305 domain/tests/test_view.py:488
-#: templates/domain/statement_detail.html:166
-#: templates/domain/statement_form.html:123
+#: domain/tests/test_view.py:307 domain/tests/test_view.py:490
+#: templates/domain/statement_detail.html:174
+#: templates/domain/statement_form.html:127
 msgid "Topic"
 msgstr "หัวข้อ"
 
-#: domain/tests/test_view.py:560 domain/tests/test_view.py:561
-#: domain/tests/test_view.py:822 domain/tests/test_view.py:823
+#: domain/tests/test_view.py:562 domain/tests/test_view.py:563
+#: domain/tests/test_view.py:824 domain/tests/test_view.py:825
 #: templates/domain/home.html:22 templates/domain/home.html.py:58
 msgid "statement"
 msgstr "คำพูด"
 
-#: domain/tests/test_view.py:565 domain/tests/test_view.py:827
-#: templates/base.html:120 templates/domain/home.html:201
+#: domain/tests/test_view.py:567 domain/tests/test_view.py:829
+#: templates/base.html:127 templates/domain/home.html:201
 #: templates/domain/home.html.py:204 templates/domain/statement_detail.html:7
-#: templates/domain/statement_detail.html:42
+#: templates/domain/statement_detail.html:50
 msgid "Statement"
 msgstr "คำพูด"
 
@@ -356,70 +354,70 @@ msgstr "เกี่ยวกับเรา"
 msgid "Contact Us"
 msgstr "ติดต่อเรา"
 
-#: templates/base.html:62 templates/domain/statement_list.html:33
+#: templates/base.html:69 templates/domain/statement_list.html:33
 msgid "Create Statement"
 msgstr "สร้างคำพูด"
 
-#: templates/base.html:63 templates/domain/people_list.html:57
+#: templates/base.html:70 templates/domain/people_list.html:57
 msgid "Create People"
 msgstr "สร้างคน"
 
-#: templates/base.html:65
+#: templates/base.html:72
 msgid "Manage"
 msgstr "จัดการ"
 
-#: templates/base.html:67
+#: templates/base.html:74
 msgid "My Statements"
 msgstr "คำพูดที่ฉันสร้าง"
 
-#: templates/base.html:68
+#: templates/base.html:75
 msgid "My Peoples"
 msgstr "ผู้คนที่ฉันสร้าง"
 
-#: templates/base.html:71 templates/base.html.py:88
+#: templates/base.html:78 templates/base.html.py:95
 msgid "Editor"
 msgstr "บรรณาธิการ"
 
-#: templates/base.html:73 templates/domain/statement_form.html:240
+#: templates/base.html:80 templates/domain/statement_form.html:265
 msgid "Highlight"
 msgstr "ไฮไลต์"
 
-#: templates/base.html:74 templates/domain/statement_form.html:247
+#: templates/base.html:81 templates/domain/statement_form.html:272
 msgid "Promote"
 msgstr "นำเสนอ"
 
-#: templates/base.html:75
+#: templates/base.html:82
 msgid "All Statements"
 msgstr "คำพูดทั้งหมด"
 
-#: templates/base.html:76
+#: templates/base.html:83
 msgid "All Peoples"
 msgstr "ผู้คนทั้งหมด"
 
-#: templates/base.html:82
+#: templates/base.html:89
 msgid "Account"
 msgstr "บัญชีผู้ใช้"
 
-#: templates/base.html:84
+#: templates/base.html:91
 msgid "Settings"
 msgstr "ตั้งค่า"
 
-#: templates/base.html:85
+#: templates/base.html:92
 msgid "Logout"
 msgstr "ออกจากระบบ"
 
-#: templates/base.html:89 templates/account/invite_form.html:30
+#: templates/base.html:96 templates/account/invite_form.html:30
 msgid "Invite"
 msgstr "เชิญชวน"
 
-#: templates/base.html:113 templates/base.html.py:122
+#: templates/base.html:120 templates/base.html.py:129
 #: templates/domain/home.html:116 templates/domain/meter_detail.html:6
 #: templates/domain/meter_detail.html:9 templates/domain/meter_detail.html:21
-#: templates/domain/statement_form.html:97
+#: templates/domain/statement_form.html:101
 msgid "Polygraph"
 msgstr "เครื่องจับเท็จ"
 
-#: templates/base.html:119 templates/base.html.py:141
+#: templates/base.html:126 templates/base.html.py:148
 msgid "Home"
 msgstr "หน้าแรก"
 
@@ -447,34 +445,34 @@ msgstr "รหัสผ่าน"
 msgid "Confirm password"
 msgstr "ยืนยันรหัสผ่าน"
 
-#: templates/account/edit.html:85 templates/domain/people_form.html:50
+#: templates/account/edit.html:85 templates/domain/people_form.html:56
 msgid "First name"
 msgstr "ชื่อ"
 
-#: templates/account/edit.html:95 templates/domain/people_form.html:60
+#: templates/account/edit.html:95 templates/domain/people_form.html:66
 msgid "Last name"
 msgstr "นามสกุล"
 
-#: templates/account/edit.html:105 templates/domain/people_form.html:70
+#: templates/account/edit.html:105 templates/domain/people_form.html:76
 msgid "Occupation"
 msgstr "อาชีพ"
 
 #: templates/account/edit.html:115 templates/domain/home.html:160
-#: templates/domain/meter_detail.html:66 templates/domain/people_form.html:108
+#: templates/domain/meter_detail.html:66 templates/domain/people_form.html:114
 #: templates/domain/topic_inline_form.html:15
 msgid "Description"
 msgstr "รายละเอียด"
 
-#: templates/account/edit.html:125 templates/domain/people_form.html:118
+#: templates/account/edit.html:125 templates/domain/people_form.html:124
 msgid "Homepage"
 msgstr "เว็บไซต์"
 
-#: templates/account/edit.html:135 templates/domain/people_form.html:129
+#: templates/account/edit.html:135 templates/domain/people_form.html:135
 msgid "Picture"
 msgstr "รูปจริง"
 
-#: templates/account/edit.html:147 templates/domain/people_form.html:159
-#: templates/domain/statement_form.html:282
+#: templates/account/edit.html:147 templates/domain/people_form.html:165
+#: templates/domain/statement_form.html:307
 #: templates/domain/topic_inline_form.html:40
 msgid "Cancel"
 msgstr "ยกเลิก"
@@ -576,7 +574,7 @@ msgid "Highlight statement"
 msgstr "คำพูดไฮไลต์"
 
 #: templates/domain/home.html:33 templates/domain/home.html.py:77
-#: templates/domain/statement_detail.html:50
+#: templates/domain/statement_detail.html:58
 msgid "Who's said??"
 msgstr "ใครเป็นคนพูด"
 
@@ -589,7 +587,7 @@ msgid "No Highlight Statement"
 msgstr "ไม่มีคำพูดไฮไลต์"
 
 #: templates/domain/home.html:102 templates/domain/people_detail.html:101
-#: templates/domain/people_form.html:98 templates/domain/topic_detail.html:94
+#: templates/domain/people_form.html:104 templates/domain/topic_detail.html:94
 msgid "Summary"
 msgstr "สรุป"
 
@@ -606,12 +604,12 @@ msgstr "รายละเอียดตัววัด"
 msgid "Polygraph List Item"
 msgstr "รายการของเครื่องจับเท็จ"
 
-#: templates/domain/home.html:183 templates/domain/statement_detail.html:219
+#: templates/domain/home.html:183 templates/domain/statement_detail.html:227
 #: templates/domain/statement_list.html:99
 msgid "See all"
 msgstr "ดูทั้งหมด"
 
-#: templates/domain/home.html:183 templates/domain/statement_detail.html:219
+#: templates/domain/home.html:183 templates/domain/statement_detail.html:227
 #: templates/domain/statement_list.html:99
 msgid "statements"
 msgstr "คำพูด"
@@ -632,8 +630,8 @@ msgstr "ไม่มี"
 msgid "Other Information"
 msgstr "ข้อมูลอื่นๆ"
 
-#: templates/domain/home.html:244 templates/domain/statement_detail.html:191
-#: templates/domain/statement_form.html:204
+#: templates/domain/home.html:244 templates/domain/statement_detail.html:199
+#: templates/domain/statement_form.html:229
 #: templates/domain/statement_list.html:74
 msgid "Tags"
 msgstr "แท็ก"
@@ -652,7 +650,7 @@ msgstr "รายละเอียดบุคคล"
 
 #: templates/domain/people_detail.html:30 templates/domain/people_form.html:9
 #: templates/domain/people_form.html:25
-#: templates/domain/statement_detail.html:34
+#: templates/domain/statement_detail.html:42
 #: templates/domain/statement_form.html:10
 #: templates/domain/statement_form.html:32
 #: templates/domain/topic_detail.html:30 templates/domain/topic_form.html:9
@@ -674,21 +672,18 @@ msgstr "ดูผลลัพธ์"
 msgid "Permalink"
 msgstr "ลิงก์ถาวร"
 
-msgid "permalink"
-msgstr "ลิงก์ถาวร"
-
-#: templates/domain/people_form.html:80
+#: templates/domain/people_form.html:86
 msgid "Categories"
 msgstr "หมวดหมู่"
 
-#: templates/domain/people_form.html:140
-#: templates/domain/statement_form.html:264
+#: templates/domain/people_form.html:146
+#: templates/domain/statement_form.html:289
 msgid "Status"
 msgstr "สถานะ"
 
-#: templates/domain/people_form.html:162
-#: templates/domain/statement_form.html:187
-#: templates/domain/statement_form.html:285
+#: templates/domain/people_form.html:168
+#: templates/domain/statement_form.html:212
+#: templates/domain/statement_form.html:310
 #: templates/domain/topic_inline_form.html:43
 msgid "Delete"
 msgstr "ลบ"
@@ -712,87 +707,93 @@ msgstr "รายละเอียดคำพูด"
 msgid "Statements"
 msgstr "คำพูด"
 
-#: templates/domain/statement_detail.html:71
+#: templates/domain/statement_detail.html:79
 msgid "Meta Statement"
 msgstr "ข้อมูลคำพูด"
 
-#: templates/domain/statement_detail.html:76
-#: templates/domain/statement_form.html:111
+#: templates/domain/statement_detail.html:84
+#: templates/domain/statement_form.html:115
 msgid "Source"
 msgstr "ที่มา"
 
-#: templates/domain/statement_detail.html:84
+#: templates/domain/statement_detail.html:92
 msgid "Views"
 msgstr "Views"
 
-#: templates/domain/statement_detail.html:88
+#: templates/domain/statement_detail.html:96
 msgid "Statement Detail"
 msgstr "รายละเอียดคำพูด"
 
-#: templates/domain/statement_detail.html:99
+#: templates/domain/statement_detail.html:107
 msgid "Update"
 msgstr "ปรับปรุง"
 
-#: templates/domain/statement_detail.html:120
+#: templates/domain/statement_detail.html:128
 msgid "See all update"
 msgstr "ดูรายการปรับปรุงทั้งหมด"
 
-#: templates/domain/statement_detail.html:131
+#: templates/domain/statement_detail.html:139
 msgid "Related Statement"
 msgstr "คำพูดที่เกี่ยวข้อง"
 
-#: templates/domain/statement_detail.html:159
-#: templates/domain/statement_form.html:163
+#: templates/domain/statement_detail.html:167
+#: templates/domain/statement_form.html:188
 msgid "About Statement"
 msgstr "เกี่ยวกับคำพูด"
 
-#: templates/domain/statement_detail.html:171
-#: templates/domain/statement_form.html:169
+#: templates/domain/statement_detail.html:179
+#: templates/domain/statement_form.html:194
 msgid "References"
 msgstr "อ้างอิง"
 
-#: templates/domain/statement_detail.html:206
+#: templates/domain/statement_detail.html:214
+#: templates/domain/statement_list.html:87
 msgid "View By Status"
 msgstr "ดูตามสถานะ"
 
-#: templates/domain/statement_form.html:59
+#: templates/domain/statement_form.html:63
 msgid "Quote"
 msgstr "พูดว่า"
 
-#: templates/domain/statement_form.html:69
+#: templates/domain/statement_form.html:73
 msgid "Quote detail"
 msgstr "รายละเอียดคำพูด"
 
-#: templates/domain/statement_form.html:79
+#: templates/domain/statement_form.html:83
 msgid "Quoted by"
 msgstr "พูดโดย"
 
-#: templates/domain/statement_form.html:86
+#: templates/domain/statement_form.html:88
+#: templates/domain/statement_form.html:138
+msgid "or"
+msgstr "หรือ"
+
+#: templates/domain/statement_form.html:90
 msgid "create people"
 msgstr "สร้างบุคคล"
 
-#: templates/domain/statement_form.html:87
-#: templates/domain/statement_form.html:137
+#: templates/domain/statement_form.html:91
+#: templates/domain/statement_form.html:141
 msgid "Add another"
-msgstr ""
+msgstr "เพิ่มอีก"
 
-#: templates/domain/statement_form.html:136
+#: templates/domain/statement_form.html:140
 msgid "create topic"
-msgstr ""
+msgstr "สร้างหัวข้อ"
 
-#: templates/domain/statement_form.html:194
+#: templates/domain/statement_form.html:219
 msgid "Add More"
 msgstr "เพิ่มอีก"
 
-#: templates/domain/statement_form.html:216
+#: templates/domain/statement_form.html:241
 msgid "Relate Statements"
 msgstr "คำพูดที่เกี่ยวข้อง"
 
-#: templates/domain/statement_form.html:227
+#: templates/domain/statement_form.html:252
 msgid "Relate Peoples"
 msgstr "ผู้คนที่เกี่ยวข้อง"
 
-#: templates/domain/statement_form.html:237
+#: templates/domain/statement_form.html:262
 msgid "Front page settings"
 msgstr "ตั้งค่าหน้าแรก"
 
@@ -819,3 +820,18 @@ msgstr "การปรับปรุงใหม่"
 #: templates/domain/topic_inline_form.html:29
 msgid "Save as new revision"
 msgstr "บันทึกเป็นการปรับปรุงใหม่"
+
+#: templates/domain/topic_inline_form.html:115
+#, fuzzy
+msgid "Delete Item"
+msgstr "ลบ"
+
+#: templates/domain/topic_inline_form.html:116
+msgid "Are you sure you want to delete this item?"
+msgstr "คุณแน่ใจใช่หรือไม่ว่าต้องการลบสิ่งนี้จริงๆ"
+
+msgid "email"
+msgstr "อีเมล"
+
+msgid "permalink"
+msgstr "ลิงก์ถาวร"

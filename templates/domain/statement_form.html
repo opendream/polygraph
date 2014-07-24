@@ -85,7 +85,7 @@
             {{ form.quoted_by }}
 
             <div class="popup-create-link-wrapper">
-                or
+                {% trans "or" %}
                 <a href="{% url 'people_create' %}?_popup=1" class="autocomplete-add-another" id="add_id_quoted_by">
                     {% trans "create people" %}
                     <img src="/static/admin/img/icon_addlink.gif" width="10" height="10" alt="{%  trans "Add another" %}">
@@ -135,7 +135,7 @@
                     {% endif %}
 
                     <div class="inline-create-link-wrapper">
-                        or
+                        {% trans "or" %}
                         <a href="{% url 'topic_create' %}?_inline=1" class="add-another-inline" id="add_id_topic" target="topic_inline">
                             {% trans "create topic" %}
                             <img src="/static/admin/img/icon_addlink.gif" width="10" height="10" alt="{%  trans 'Add another' %}">

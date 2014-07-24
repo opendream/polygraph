@@ -62,7 +62,7 @@ def people_render_reference(people, display_edit_link=True, field_name='quoted_b
         html = '<img class="reference-span" src="%s" /> %s' % (people.image.thumbnail_100x100().url, html)
 
     if display_edit_link:
-        html = '%s <a class="reference-span autocomplete-add-another" id="edit_id_%s" href="%s?_popup=1">%s</a>' % (html, field_name, reverse('people_edit', args=[people.id]), _('edit'))
+        html = '%s <a class="reference-span autocomplete-add-another" id="edit_id_%s" href="%s?_popup=1"><span class="glyphicon glyphicon-edit"></span> %s</a>' % (html, field_name, reverse('people_edit', args=[people.id]), _('edit'))
 
     html = '<span class="people-reference-wrapper reference-wrapper">%s</span>' % html
 
@@ -80,7 +80,7 @@ def topic_render_reference(topic, display_edit_link=True, field_name='topic'):
         html = '%s<span class="reference-span">-- %s %s</span>' % (html, _('by'), used_to)
 
     if display_edit_link:
-        html = '%s <a class="reference-span add-another-inline" id="edit_id_%s" href="%s?_inline=1" target="topic_inline">%s</a>' % (html, field_name, reverse('topic_edit', args=[topic.id]), _('edit'))
+        html = '%s <a class="reference-span add-another-inline" id="edit_id_%s" href="%s?_inline=1" target="topic_inline"><span class="glyphicon glyphicon-edit"></span> %s</a>' % (html, field_name, reverse('topic_edit', args=[topic.id]), _('edit'))
 
     html = '<span class="topic-reference-wrapper reference-wrapper">%s</span>' % html
 
@@ -121,7 +121,7 @@ def statement_render_reference(statement, display_edit_link=True, field_name='re
     html = '<span class="reference-span">%s</span>' % remove_newlines(strip_tags(statement.quote))
 
     if display_edit_link:
-        html = '%s <a class="reference-span autocomplete-add-another" id="edit_id_%s" href="%s?_popup=1">%s</a>' % (html, field_name, reverse('statement_edit', args=[statement.id]), _('edit'))
+        html = '%s <a class="reference-span autocomplete-add-another" id="edit_id_%s" href="%s?_popup=1"><span class="glyphicon glyphicon-edit"></span> %s</a>' % (html, field_name, reverse('statement_edit', args=[statement.id]), _('edit'))
 
     html = '<span class="statement-reference-wrapper reference-wrapper">%s</span>' % html
 
