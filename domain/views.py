@@ -500,11 +500,11 @@ def statement_create(request, statement=None):
             'quote': statement.quote,
             'short_detail': statement.short_detail,
             'status': statement.status,
-            'quoted_by': statement.quoted_by and statement.quoted_by.id,
+            'quoted_by': statement.quoted_by_id,
             'source': statement.source,
-            'topic': statement.topic and statement.topic.id,
+            'topic': statement.topic_id,
             'tags': statement.tags,
-            'meter': statement.meter and (statement.meter.id or Meter.objects.get(permalink='unverifiable').id),
+            'meter': statement.meter_id or Meter.objects.get(permalink='unverifiable').id,
             'hilight': statement.hilight,
             'promote': statement.promote
         }
