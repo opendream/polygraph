@@ -67,7 +67,7 @@
 </div>
 {% endblock table %}
 
-{% if table.page %}
+{% if table.page and table.rows|length > 25 %}
     {% block pagination %}
         {% bootstrap_pagination table.page %}
     {% endblock pagination %}
