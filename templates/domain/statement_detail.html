@@ -142,7 +142,7 @@
             {% for relate_statement in statement.relate_statements.all %}
             <article class="col-md-6">
                 <div class="block block-bg-color">
-                    <a href="{% url 'statement_detail' relate_statement.permalink %}">"{{ relate_statement.quote|striptags }}"</a>
+                    <a href="{% url 'statement_detail' relate_statement.permalink %}">"{{ relate_statement.quote|striptags|safe }}"</a>
                 </div>
                 <div class="media">
                     <a class="pull-left" href="{% url 'people_detail' relate_statement.quoted_by.permalink %}">

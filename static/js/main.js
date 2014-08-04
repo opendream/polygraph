@@ -396,12 +396,13 @@ $(document).ready(function () {
 
 
     // navigation scroll
-    $('#navbar-scroll-up-show').headroom({
-        'tolerance': 5,
-        'offset': 205
+    if (window.location.href.indexOf('edit')  >= 0 && window.location.href.indexOf('create') >= 0) {
+        $('#navbar-scroll-up-show').headroom({
+            'tolerance': 5,
+            'offset': 205
 
-    });
-
+        });
+    }
 
 });
 
