@@ -103,7 +103,7 @@ def home(request):
     hilight_statement = hilight_statement[0]
 
 
-    meter_statement_list = [({'title': 'Latest', 'permalink': 'latest'}, statement_list[0:4])]
+    meter_statement_list = [({'title': _('Latest'), 'permalink': 'latest'}, statement_list[0:4])]
     for meter in meter_list:
 
         meter_statement = statement_list.filter(meter=meter)[0:3]
