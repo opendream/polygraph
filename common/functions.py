@@ -2,6 +2,7 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.utils.html import strip_tags
 from django.utils.translation import ugettext_lazy as _
+from django.db.models.query import QuerySet
 
 
 from django import template
@@ -71,9 +72,15 @@ def people_render_reference(people, display_edit_link=True, field_name='quoted_b
 
 def topic_render_reference(topic, display_edit_link=True, field_name='topic'):
 
-    html = '<span class="reference-span">%s</span>' % topic.title
+    from domain.models import Statement
 
-    used_to = [statement.quoted_by.get_short_name() for statement in topic.statement_set.order_by('-created')[0:3]]
+    html = '<span class="reference-span">%s</span>' % topic.title
+    
+    query = topic.statement_set.order_by('-created').query
+    query.group_by = ['quoted_by_id']
+    used_to = QuerySet(query=query, model=Statement)
+
+    used_to = [statement.quoted_by.get_short_name() for statement in used_to[0:3]]
 
     if used_to:
         used_to = ', '.join(used_to)
