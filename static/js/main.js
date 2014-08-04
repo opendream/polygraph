@@ -236,6 +236,7 @@ function preventScrollReload() {
 }
 
 $(document).ready(function () {
+
     // checknox radio style
     $('input[type=checkbox], input[type=radio]').each(function () {
         $(this).prettyCheckable();
@@ -393,6 +394,13 @@ $(document).ready(function () {
 
     };
 
+
+    // navigation scroll
+    $('#navbar-scroll-up-show').headroom({
+        'tolerance': 5,
+        'offset': 205
+
+    });
 
 
 });
