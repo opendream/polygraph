@@ -56,7 +56,7 @@ class StatementEditForm(PermalinkForm):
     quoted_by = forms.ModelChoiceField(
         queryset=People.objects.all(),
         widget=autocomplete_light.ChoiceWidget(PeopleAutocomplete,
-            attrs={'placeholder': 'Type for search people by name', 'class': 'form-control'}
+            attrs={'placeholder': _('Type for search people by name'), 'class': 'form-control'}
         )
     )
 
@@ -66,7 +66,7 @@ class StatementEditForm(PermalinkForm):
         required=False,
         queryset=Topic.objects.all(),
         widget=autocomplete_light.ChoiceWidget(TopicAutocomplete,
-            attrs={'placeholder': 'Type for search topic by title', 'class': 'form-control'}
+            attrs={'placeholder': _('Type for search topic by title'), 'class': 'form-control'}
         )
     )
 
@@ -83,7 +83,7 @@ class StatementEditForm(PermalinkForm):
         required=False,
         queryset=Statement.objects.all(),
         widget=autocomplete_light.MultipleChoiceWidget(StatementAutocomplete,
-            attrs={'placeholder': 'Type for search statement by quote or topic title ', 'class': 'form-control'}
+            attrs={'placeholder': _('Type for search statement by quote or topic title'), 'class': 'form-control'}
         )
     )
 
@@ -91,7 +91,7 @@ class StatementEditForm(PermalinkForm):
         required=False,
         queryset=People.objects.all(),
         widget=autocomplete_light.MultipleChoiceWidget(PeopleAutocomplete,
-            attrs={'placeholder': 'Type for search people by name', 'class': 'form-control'}
+            attrs={'placeholder': _('Type for search people by name'), 'class': 'form-control'}
         )
     )
 

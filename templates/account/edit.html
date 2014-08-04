@@ -35,7 +35,7 @@
     {% endif %}
 
     <div class="controls form-group">
-        <label for="id_username" class="col-sm-3 control-label">{% trans "Username" %}</label>
+        <label for="id_username" class="col-sm-3 control-label">{% trans "Username" %} *</label>
         <div class="col-sm-7">
             <input id="id_username" name="username" type="text" class="form-control" value="{{ form.username.value|default_if_none:"" }}" required>
             {% if form.username.errors %}
@@ -45,7 +45,7 @@
     </div>
 
     <div class="controls form-group">
-        <label for="id_email" class="col-sm-3 control-label">{% trans "Email" %}</label>
+        <label for="id_email" class="col-sm-3 control-label">{% trans "Email" %} *</label>
         <div class="col-sm-7">
             <input id="id_email" name="email" type="email" class="form-control" value="{{ form.email.value|default_if_none:"" }}" required>
             {% if form.email.errors %}

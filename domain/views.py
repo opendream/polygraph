@@ -152,7 +152,9 @@ def people_create(request, people=None):
                 people.image._field.save_form_data(people, form.cleaned_data['image'])
 
             people.status = int(STATUS_PUBLISHED if form.cleaned_data['status'] == '' else form.cleaned_data['status'])
-            people.created_by = request.user
+            if not people.created_by_id:
+                people.created_by = request.user
+
             people.save()
 
             people.categories.clear()
@@ -445,7 +447,8 @@ def statement_create(request, statement=None):
             statement.permalink = form.cleaned_data['permalink']
             statement.quote = form.cleaned_data['quote']
             statement.short_detail = form.cleaned_data['short_detail']
-            statement.created_by = request.user
+            if not statement.created_by_id:
+                statement.created_by = request.user
             statement.quoted_by_id = form.cleaned_data['quoted_by'].id
             statement.source = form.cleaned_data['source']
             statement.topic_id = form.cleaned_data['topic'].id if form.cleaned_data['topic'] else None

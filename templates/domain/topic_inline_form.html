@@ -2,7 +2,7 @@
 {% load common_tags %}
 
 <div class="controls form-group">
-    <label for="id_title" class="{% if not request_inline %}col-sm-2 {% endif %}control-label">{% trans "Title" %}</label>
+    <label for="id_title" class="{% if not request_inline %}col-sm-2 {% endif %}control-label">{% trans "Title" %} *</label>
     <div class="{% if not request_inline %}col-sm-10{% endif %}">
         <input id="id_title" name="title" type="text" class="form-control" value="{{ form.title.value|default_if_none:"" }}">
         {% if form.title.errors %}

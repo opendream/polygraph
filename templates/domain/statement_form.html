@@ -45,7 +45,7 @@
     {% endif %}
 
     <div class="controls form-group">
-        <label for="id_permalink" class="field-container control-label">{% trans "Permalink" %}</label>
+        <label for="id_permalink" class="field-container control-label">{% trans "Permalink" %} *</label>
         <div class="field-container ">
 
             <input disabled="disabled" readonly="readonly" id="id_permalink_readonly" name="permalink_readonly" type="text" class="form-control" value="{{ form.permalink.value|default_if_none:"" }}">
@@ -60,9 +60,12 @@
     </div>
 
     <div class="controls form-group">
-        <label for="id_quote" class="field-container control-label">{% trans "Quote" %}</label>
+        <label for="id_quote" class="field-container control-label">{% trans "Quote" %} *</label>
         <div class="field-container">
             {{ form.quote }}
+            <span class="help-block">
+            {% trans "This people said." %}
+            </span>
             {% if form.quote.errors %}
             <div class="errors alert alert-danger">{{ form.quote.errors }}</div>
             {% endif %}
@@ -73,6 +76,9 @@
         <label for="id_short_detail" class="field-container control-label">{% trans "Quote detail" %}</label>
         <div class="field-container">
             {{ form.short_detail }}
+            <span class="help-block">
+            {% trans "This people didn't said but describe by you." %}
+            </span>
             {% if form.short_detail.errors %}
             <div class="errors alert alert-danger">{{ form.short_detail.errors }}</div>
             {% endif %}
@@ -80,7 +86,7 @@
     </div>
 
     <div class="controls form-group">
-        <label for="id_quoted_by" class="field-container control-label">{% trans "Quoted by" %}</label>
+        <label for="id_quoted_by" class="field-container control-label">{% trans "Quoted by" %} *</label>
         <div class="field-container">
             {{ form.quoted_by }}
 
@@ -115,6 +121,9 @@
         <label for="id_source" class="field-container control-label">{% trans "Source" %}</label>
         <div class="field-container">
             <input id="id_source" name="source" type="text" class="form-control" value="{{ form.source.value|default_if_none:"" }}">
+            <span class="help-block">
+                {% trans "For example <em> Thairath 4/6/2014 page 2. </em>" %}
+            </span>
             {% if form.source.errors %}
             <div class="errors alert alert-danger">{{ form.source.errors }}</div>
             {% endif %}
@@ -230,7 +239,9 @@
             <div class="field-container">
 
                 {{ form.tags }}
-
+                <span class="help-block">
+                {% trans "Separate by comma, space, tab or enter" %}
+                </span>
                 {% if form.tags.errors %}
                 <div class="errors alert alert-danger">{{ form.tags.errors }}</div>
                 {% endif %}
@@ -241,6 +252,9 @@
             <label for="id_relate_statements" class="field-container control-label">{% trans "Relate Statements" %}</label>
             <div class="field-container">
                 {{ form.relate_statements }}
+                <span class="help-block">
+                    {% trans "Display relate statements on the bottom of this statement detail page." %}
+                </span>
                 {% if form.relate_statements.errors %}
                 <div class="errors alert alert-danger">{{ form.relate_statements.errors }}</div>
                 {% endif %}
@@ -252,6 +266,9 @@
             <label for="id_relate_peoples" class="field-container control-label">{% trans "Relate Peoples" %}</label>
             <div class="field-container">
                 {{ form.relate_peoples }}
+                <span class="help-block">
+                    {% trans "Display this statement on detail page of relate people." %}
+                </span>
                 {% if form.relate_peoples.errors %}
                 <div class="errors alert alert-danger">{{ form.relate_peoples.errors }}</div>
                 {% endif %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-24 08:50+0000\n"
+"POT-Creation-Date: 2014-08-04 06:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -140,37 +140,49 @@ msgstr "ต้องยาวไม่เกิน 30 พยัญชนะ ไ�
 msgid "This %s is already in use."
 msgstr "%sนี้ได้ถูกใช้งานแล้ว"
 
-#: common/functions.py:44 domain/tests/test_view.py:271
+#: common/functions.py:45 domain/tests/test_view.py:271
 #: domain/tests/test_view.py:485 domain/tests/test_view.py:823
 #, python-format
 msgid "New %s has been created. View this %s <a href=\"%s\">here</a>."
 msgstr "%s ได้ถูกสร้างใหม่เรียบร้อยแล้ว ดู %sนี้ <a href=\"%s\">ที่นี่</a>"
 
-#: common/functions.py:50 domain/tests/test_view.py:86
+#: common/functions.py:51 domain/tests/test_view.py:86
 #: domain/tests/test_view.py:302 domain/tests/test_view.py:561
 #, python-format
 msgid ""
 "Your %s settings has been updated. View this %s <a href=\"%s\">here</a>."
 msgstr "%s ได้ถูกสร้างใหม่เรียบร้อยแล้ว ดู %sนี้ <a href=\"%s\">ที่นี่</a>"
 
-#: common/functions.py:65 common/functions.py:83 common/functions.py:124
+#: common/functions.py:66 common/functions.py:90 common/functions.py:131
 #: templates/domain/people_form.html:45
 #: templates/domain/statement_form.html:52
 msgid "edit"
 msgstr "แก้ไข"
 
-#: common/functions.py:80
+#: common/functions.py:87
 msgid "by"
 msgstr "โดย"
 
-#: domain/forms.py:44 templates/domain/statement_form.html:202
+#: domain/forms.py:44 templates/domain/statement_form.html:211
 #: templates/domain/topic_inline_form.html:5
 msgid "Title"
 msgstr "ชื่อเรื่อง"
 
-#: domain/forms.py:45 templates/domain/statement_form.html:206
+#: domain/forms.py:45 templates/domain/statement_form.html:215
 msgid "URL"
 msgstr "URL"
+
+#: domain/forms.py:59 domain/forms.py:94
+msgid "Type for search people by name"
+msgstr "พิมพ์เพื่อค้นหาบุคคลด้วยชื่อ"
+
+#: domain/forms.py:69
+msgid "Type for search topic by title"
+msgstr "พิมพ์เพื่อค้นหาหัวข้อด้วยชื่อเรื่อง"
+
+#: domain/forms.py:86
+msgid "Type for search statement by quote or topic title"
+msgstr "พิมพ์เพื่อค้นหาคำพูดด้วย ข้อความในคำพูด หรือ ชื่อเรื่องของหัวข้อ"
 
 #: domain/tables.py:43 domain/tables.py:63
 msgid "Writer"
@@ -193,31 +205,31 @@ msgstr "ชื่อ"
 msgid "Your %s has been deleted."
 msgstr "%s ของคุณ ได้ถูกลบเรียบร้อยแล้ว"
 
-#: domain/views.py:608
+#: domain/views.py:611
 msgid "Manage My Statements"
 msgstr "จัดการคำพูดที่ฉันสร้าง"
 
-#: domain/views.py:618
+#: domain/views.py:621
 msgid "Manage Pending Statements"
 msgstr "จัดการคำพูดที่กำลังอยู่ในการพิจารณา"
 
-#: domain/views.py:628
+#: domain/views.py:631
 msgid "Manage Highlight Statements"
 msgstr "จัดการคำพูดไฮไลต์"
 
-#: domain/views.py:638
+#: domain/views.py:641
 msgid "Manage Promote Statements"
 msgstr "จัดการคำพูดที่กำลังอยู่ในการพิจารณา"
 
-#: domain/views.py:648
+#: domain/views.py:651
 msgid "Manage All Statements"
 msgstr "จัดการคำพูดทั้งหมด"
 
-#: domain/views.py:658
+#: domain/views.py:661
 msgid "Manage My People"
 msgstr "จัดการผู้คนที่ฉันสร้าง"
 
-#: domain/views.py:668
+#: domain/views.py:671
 msgid "Manage All People"
 msgstr "จัดการผู้คนทั้งหมด"
 
@@ -254,8 +266,8 @@ msgstr "ผู้คน"
 
 #: domain/tests/test_view.py:92 domain/tests/test_view.py:308
 #: domain/tests/test_view.py:568 templates/account/edit.html:146
-#: templates/domain/people_form.html:163
-#: templates/domain/statement_form.html:306
+#: templates/domain/people_form.html:176
+#: templates/domain/statement_form.html:323
 #: templates/domain/topic_inline_form.html:39
 msgid "Save changes"
 msgstr "บันทึกการเปลี่ยนแปลง"
@@ -271,8 +283,8 @@ msgid "Create %s"
 msgstr "สร้าง %s"
 
 #: domain/tests/test_view.py:277 domain/tests/test_view.py:491
-#: domain/tests/test_view.py:830 templates/domain/people_form.html:163
-#: templates/domain/statement_form.html:306
+#: domain/tests/test_view.py:830 templates/domain/people_form.html:176
+#: templates/domain/statement_form.html:323
 #: templates/domain/topic_inline_form.html:39
 msgid "Save new"
 msgstr "บันทึกใหม่"
@@ -284,7 +296,7 @@ msgstr "หัวข้อ"
 
 #: domain/tests/test_view.py:307 domain/tests/test_view.py:490
 #: templates/domain/statement_detail.html:174
-#: templates/domain/statement_form.html:127
+#: templates/domain/statement_form.html:136
 msgid "Topic"
 msgstr "หัวข้อ"
 
@@ -378,11 +390,11 @@ msgstr "ผู้คนที่ฉันสร้าง"
 msgid "Editor"
 msgstr "บรรณาธิการ"
 
-#: templates/base.html:80 templates/domain/statement_form.html:265
+#: templates/base.html:80 templates/domain/statement_form.html:282
 msgid "Highlight"
 msgstr "ไฮไลต์"
 
-#: templates/base.html:81 templates/domain/statement_form.html:272
+#: templates/base.html:81 templates/domain/statement_form.html:289
 msgid "Promote"
 msgstr "นำเสนอ"
 
@@ -413,7 +425,7 @@ msgstr "เชิญชวน"
 #: templates/base.html:120 templates/base.html.py:129
 #: templates/domain/home.html:116 templates/domain/meter_detail.html:6
 #: templates/domain/meter_detail.html:9 templates/domain/meter_detail.html:21
-#: templates/domain/statement_form.html:101
+#: templates/domain/statement_form.html:107
 msgid "Polygraph"
 msgstr "เครื่องจับเท็จ"
 
@@ -458,21 +470,21 @@ msgid "Occupation"
 msgstr "อาชีพ"
 
 #: templates/account/edit.html:115 templates/domain/home.html:160
-#: templates/domain/meter_detail.html:66 templates/domain/people_form.html:114
+#: templates/domain/meter_detail.html:66 templates/domain/people_form.html:118
 #: templates/domain/topic_inline_form.html:15
 msgid "Description"
 msgstr "รายละเอียด"
 
-#: templates/account/edit.html:125 templates/domain/people_form.html:124
+#: templates/account/edit.html:125 templates/domain/people_form.html:131
 msgid "Homepage"
 msgstr "เว็บไซต์"
 
-#: templates/account/edit.html:135 templates/domain/people_form.html:135
+#: templates/account/edit.html:135 templates/domain/people_form.html:145
 msgid "Picture"
 msgstr "รูปจริง"
 
-#: templates/account/edit.html:147 templates/domain/people_form.html:165
-#: templates/domain/statement_form.html:307
+#: templates/account/edit.html:147 templates/domain/people_form.html:178
+#: templates/domain/statement_form.html:324
 #: templates/domain/topic_inline_form.html:40
 msgid "Cancel"
 msgstr "ยกเลิก"
@@ -587,7 +599,7 @@ msgid "No Highlight Statement"
 msgstr "ไม่มีคำพูดไฮไลต์"
 
 #: templates/domain/home.html:102 templates/domain/people_detail.html:101
-#: templates/domain/people_form.html:104 templates/domain/topic_detail.html:94
+#: templates/domain/people_form.html:105 templates/domain/topic_detail.html:94
 msgid "Summary"
 msgstr "สรุป"
 
@@ -631,7 +643,7 @@ msgid "Other Information"
 msgstr "ข้อมูลอื่นๆ"
 
 #: templates/domain/home.html:244 templates/domain/statement_detail.html:199
-#: templates/domain/statement_form.html:229
+#: templates/domain/statement_form.html:238
 #: templates/domain/statement_list.html:74
 msgid "Tags"
 msgstr "แท็ก"
@@ -672,18 +684,42 @@ msgstr "ดูผลลัพธ์"
 msgid "Permalink"
 msgstr "ลิงก์ถาวร"
 
-#: templates/domain/people_form.html:86
+#: templates/domain/people_form.html:79
+msgid "Display on the people list page."
+msgstr "แสดงที่หน้ารายการบุคคล"
+
+#: templates/domain/people_form.html:87
 msgid "Categories"
 msgstr "หมวดหมู่"
 
-#: templates/domain/people_form.html:146
-#: templates/domain/statement_form.html:289
+#: templates/domain/people_form.html:109
+msgid ""
+"The text should not lengthy for display on the top of people detail page. "
+"Automatically display occupation field instead of blank summary."
+msgstr ""
+"ข้อความไม่ควรยาวเกินไป เพื่อนำไปแสดงที่ส่วนบอนของหน้ารายละเอียดบุคคล และ "
+"ระบบจะแสดงอาชีพแทนค่าสรุปที่ว่างให้อัตโนมัติ"
+
+#: templates/domain/people_form.html:122
+msgid "History of work, education, business, family,  ..."
+msgstr "ประวัติของ การทำงาน การศึกษา ธุรกิจ ครอบครัว ..."
+
+#: templates/domain/people_form.html:135
+msgid "URL of people homapage. Include http:// on this field."
+msgstr "URL โฮมเพจของบุคคล และ ต้องมี http:// อยู่ที่ฟิลด์นี้ด้วย"
+
+#: templates/domain/people_form.html:149
+msgid "Should be square photo and face on the center."
+msgstr "ควรจะเป็นรูปถ่ายสี่เหลี่ยมจัตุรัส และใบหน้าอยู่ตรงกลาง"
+
+#: templates/domain/people_form.html:159
+#: templates/domain/statement_form.html:306
 msgid "Status"
 msgstr "สถานะ"
 
-#: templates/domain/people_form.html:168
-#: templates/domain/statement_form.html:212
-#: templates/domain/statement_form.html:310
+#: templates/domain/people_form.html:181
+#: templates/domain/statement_form.html:221
+#: templates/domain/statement_form.html:327
 #: templates/domain/topic_inline_form.html:43
 msgid "Delete"
 msgstr "ลบ"
@@ -712,7 +748,7 @@ msgid "Meta Statement"
 msgstr "ข้อมูลคำพูด"
 
 #: templates/domain/statement_detail.html:84
-#: templates/domain/statement_form.html:115
+#: templates/domain/statement_form.html:121
 msgid "Source"
 msgstr "ที่มา"
 
@@ -737,12 +773,12 @@ msgid "Related Statement"
 msgstr "คำพูดที่เกี่ยวข้อง"
 
 #: templates/domain/statement_detail.html:167
-#: templates/domain/statement_form.html:188
+#: templates/domain/statement_form.html:197
 msgid "About Statement"
 msgstr "เกี่ยวกับคำพูด"
 
 #: templates/domain/statement_detail.html:179
-#: templates/domain/statement_form.html:194
+#: templates/domain/statement_form.html:203
 msgid "References"
 msgstr "อ้างอิง"
 
@@ -755,45 +791,69 @@ msgstr "ดูตามสถานะ"
 msgid "Quote"
 msgstr "พูดว่า"
 
-#: templates/domain/statement_form.html:73
+#: templates/domain/statement_form.html:67
+msgid "This people said."
+msgstr "คำพูดของบุคคลนี้"
+
+#: templates/domain/statement_form.html:76
 msgid "Quote detail"
 msgstr "รายละเอียดคำพูด"
 
-#: templates/domain/statement_form.html:83
+#: templates/domain/statement_form.html:80
+msgid "This people didn't said but describe by you."
+msgstr "บุคคลนี้ไม่ได้พูด แต่อธิบายโดยคุณ"
+
+#: templates/domain/statement_form.html:89
 msgid "Quoted by"
 msgstr "พูดโดย"
 
-#: templates/domain/statement_form.html:88
-#: templates/domain/statement_form.html:138
+#: templates/domain/statement_form.html:94
+#: templates/domain/statement_form.html:147
 msgid "or"
 msgstr "หรือ"
 
-#: templates/domain/statement_form.html:90
+#: templates/domain/statement_form.html:96
 msgid "create people"
 msgstr "สร้างบุคคล"
 
-#: templates/domain/statement_form.html:91
-#: templates/domain/statement_form.html:141
+#: templates/domain/statement_form.html:97
+#: templates/domain/statement_form.html:150
 msgid "Add another"
 msgstr "เพิ่มอีก"
 
-#: templates/domain/statement_form.html:140
+#: templates/domain/statement_form.html:125
+msgid "For example <em> Thairath 4/6/2014 page 2. </em>"
+msgstr "ตัวอย่างเช่น <em> หนังสือพิมพ์จับเท็จ ฉบับวันที่ 4/6/2014 หน้า 2 </em>"
+
+#: templates/domain/statement_form.html:149
 msgid "create topic"
 msgstr "สร้างหัวข้อ"
 
-#: templates/domain/statement_form.html:219
+#: templates/domain/statement_form.html:228
 msgid "Add More"
 msgstr "เพิ่มอีก"
 
-#: templates/domain/statement_form.html:241
+#: templates/domain/statement_form.html:243
+msgid "Separate by comma, space, tab or enter"
+msgstr "แบ่งโดย ลูกน้ำ เว้นวรรค ย่อหน้า หรือ ขึ้นบรรทัดใหม่"
+
+#: templates/domain/statement_form.html:252
 msgid "Relate Statements"
 msgstr "คำพูดที่เกี่ยวข้อง"
 
-#: templates/domain/statement_form.html:252
+#: templates/domain/statement_form.html:256
+msgid "Display relate statements on the bottom of this statement detail page."
+msgstr "แสดงคำพูดที่เกี่ยวข้องนี้ ที่ส่วนล่างของหน้ารายละเอียดคำพูดนี้"
+
+#: templates/domain/statement_form.html:266
 msgid "Relate Peoples"
 msgstr "ผู้คนที่เกี่ยวข้อง"
 
-#: templates/domain/statement_form.html:262
+#: templates/domain/statement_form.html:270
+msgid "Display this statement on detail page of relate people."
+msgstr "แสดงคำพูดนี้ ที่หน้ารายละเอียดของบุคคลที่เกี่ยวข้อง"
+
+#: templates/domain/statement_form.html:279
 msgid "Front page settings"
 msgstr "ตั้งค่าหน้าแรก"
 
@@ -830,8 +890,8 @@ msgstr "ลบ"
 msgid "Are you sure you want to delete this item?"
 msgstr "คุณแน่ใจใช่หรือไม่ว่าต้องการลบสิ่งนี้จริงๆ"
 
-msgid "email"
-msgstr "อีเมล"
+#~ msgid "email"
+#~ msgstr "อีเมล"
 
-msgid "permalink"
-msgstr "ลิงก์ถาวร"
+#~ msgid "permalink"
+#~ msgstr "ลิงก์ถาวร"
