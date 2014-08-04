@@ -1177,11 +1177,7 @@ input + .errors {
 /* line 802, ../sass/style.scss */
 .polygraph-list-block .block-content.float-right-img {
   padding-right: 270px;
-}
-/* line 804, ../sass/style.scss */
-.polygraph-list-block .block-content.float-right-img img {
-  width: 40px;
-  height: 40px;
+  /* img { width: 40px; height: 40px; } */
 }
 /* line 807, ../sass/style.scss */
 .polygraph-list-block .meter-md {
