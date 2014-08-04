@@ -9,8 +9,11 @@ class TopicRevisionInline(admin.TabularInline):
 class TopicAdmin(admin.ModelAdmin):
     inlines = [ TopicRevisionInline, ]
 
+class MeterAdmin(admin.ModelAdmin):
+    list_display = ('image_small', 'title')
+
 admin.site.register(PeopleCategory)
 admin.site.register(People)
 admin.site.register(Topic, TopicAdmin)
-admin.site.register(Meter)
+admin.site.register(Meter, MeterAdmin)
 admin.site.register(Statement)
