@@ -160,7 +160,7 @@ a:hover { text-decoration: underline; }
 
 .navbar-default {
 	background-color: $base_orange;
-	.container { margin-bottom: 0; }
+	.container { margin-bottom: 0; position: relative; }
 	.navbar-toggle {
 		border: none;
 		&:hover { background-color: $hover_orange; }
@@ -180,7 +180,6 @@ a:hover { text-decoration: underline; }
 	}
 	.navbar-nav {
 		// border-left: 1px solid $border_orange;
-		margin-top: 60px;
 		&.navbar-right:last-child {	margin-right: 0;}
 		&>li { position: relative; }
 		&>li>a {
@@ -214,9 +213,7 @@ a:hover { text-decoration: underline; }
 @media (max-width: 767px) {
 	.navbar-default {
 		// padding-bottom: 5em;
-		.navbar-header img {
-			width: 65%;
-		}
+
 		.navbar-nav { 
 			border: none;
 			margin-top: 0;
@@ -265,7 +262,18 @@ a:hover { text-decoration: underline; }
 .navbar { background-color: $base_orange; }
 
 .navbar-header h1 {margin: 0;}
-.navbar-brand { height: auto; }
+.navbar-brand {
+    height: auto;
+    img {
+        height: 100%;
+        width: auto;
+        position: absolute;
+        padding: 8px 0;
+        margin-left: 15px;
+        top: 0;
+        left: 0;
+    }
+}
 .form-action {
 	margin-top: 10px;
   	margin-bottom: 10px;
