@@ -42,8 +42,8 @@ class MultipleColum(tables.Column):
 class StatementTable(tables.Table):
     created_by = tables.Column(accessor='created_by.get_full_name', verbose_name=_('Writer'))
     quote = SafeLinkColumn('statement_edit', args=[A('id')])
-    topic = SafeLinkColumn('topic_edit', args=[A('topic.id')], accessor='topic.title')
-    quoted_by = SafeLinkColumn('people_edit', args=[A('quoted_by.id')], accessor='quoted_by.get_full_name', verbose_name=_('Said by'))
+    topic = SafeLinkColumn('topic_edit', args=[A('topic.id')], accessor='topic.title', order_by='topic.topicrevision.title')
+    quoted_by = SafeLinkColumn('people_edit', args=[A('quoted_by.id')], accessor='quoted_by.get_full_name', verbose_name=_('Said by'), order_by='quoted_by.first_name')
     meter = tables.Column(accessor='meter.title', verbose_name=_('Meter'))
     status = StatusColumn()
     created = DateColumn()

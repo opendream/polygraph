@@ -183,8 +183,8 @@
                             <span class="sr-only">{{ SITE_NAME }}</span>
                         </a>
                     </div>
-                    <div class="col-md-3 col-md-offset-5 col-xs-12 footer-menu">
-                        <div class="row footer-menu">
+                    <div class="footer-menu">
+                        <div class="footer-menu-inner">
                             {% for static_page in static_page_list %}
                             <div class="footer-menu-item"><a{% ifactive static_page.url_name %} class="active"{% endifactive %} href="{% url static_page.url_name %}">{{ static_page.title }}</a></div>
                             {% endfor %}
