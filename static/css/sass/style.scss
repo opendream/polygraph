@@ -38,13 +38,13 @@ body.request-popup {
     padding-top: 0;
 }
 
-h1, h2, h3, h4 {
+h1, h2, h3, h4, .nav, .footer-menu {
     font-family: "Boon-0.6";
     font-style: normal;
-    font-weight: 700;
+    font-weight: 700 !important;
 
 }
-.block-quote, body .quote, .nav a, .footer-menu a{
+.block-quote, body .quote{
     font-family: "Boon-0.6";
     font-style: normal;
     font-weight: 300 !important;
@@ -52,10 +52,6 @@ h1, h2, h3, h4 {
     strong {
         font-weight: 700 !important;
     }
-}
-
-.nav .active a, .footer-menu a.active {
-    font-weight: 700 !important;
 }
 
 .col-no-padding { padding: 0; }
