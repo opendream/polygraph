@@ -176,12 +176,17 @@
 
         <footer>
             <div class="container">
-                <div class="row">
-                    <div class="col-md-4 col-xs-12 footer-logo">[{{ SITE_NAME }}]</div>
+                <div class="row footer-content">
+                    <div class="col-md-4 col-xs-12 footer-logo">
+                        <a class="navbar-brand" href="{% url 'home' %}">
+                            <img src="{{ SITE_LOGO_URL }}" alt="{{ SITE_NAME }}" title="Site Logo" />
+                            <span class="sr-only">{{ SITE_NAME }}</span>
+                        </a>
+                    </div>
                     <div class="col-md-3 col-md-offset-5 col-xs-12 footer-menu">
-                        <div class="row">
+                        <div class="row footer-menu">
                             {% for static_page in static_page_list %}
-                            <div class="col-md-6 col-xs-6"><a{% ifactive static_page.url_name %} class="active"{% endifactive %} href="{% url static_page.url_name %}">{{ static_page.title }}</a></div>
+                            <div class="footer-menu-item"><a{% ifactive static_page.url_name %} class="active"{% endifactive %} href="{% url static_page.url_name %}">{{ static_page.title }}</a></div>
                             {% endfor %}
                         </div>
                     </div>
