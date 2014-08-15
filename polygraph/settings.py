@@ -12,7 +12,8 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 import os, sys
 
 BASE_PATH = os.path.abspath(os.path.dirname('.'))
-#BASE_PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)), os.path.pardir)
+if 'collectstatic' in sys.argv:
+    BASE_PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)), os.path.pardir)
 
 
 # Quick-start development settings - unsuitable for production
