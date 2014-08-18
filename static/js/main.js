@@ -340,6 +340,11 @@ $(document).ready(function () {
         $('.first .tabable').tab('show');
     }
 
+    // Ifram responsive
+    $('.statement-detail iframe').each(function () {
+        $(this).parent().addClass('inline-media');
+    });
+
     $('.dropdown-menu').on('click', 'li a', function(){
         $('#meter-tab-drop .text').text($(this).text());
     });
@@ -374,19 +379,6 @@ $(document).ready(function () {
                 }
             });
 
-
-
-            ev.editor.dataProcessor.htmlFilter.addRules({
-               elements: {
-                   $: function (element) {
-                       // Add inline-media class name to embedded media
-                       if (element.name == 'div' && element.children[0].name == 'iframe') {
-                           element.attributes.class = 'inline-media';
-                           return element;
-                       }
-                   }
-               }
-            });
 
         });
 

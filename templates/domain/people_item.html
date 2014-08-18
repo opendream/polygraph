@@ -1,0 +1,12 @@
+{% load common_tags %}
+<div class="block block-no-border">
+    <div class="media block-content">
+        <a class="pull-left" href="{% url 'people_detail' people.permalink %}">
+            {% image_render people.image '122x122' people.get_full_name 'center' %}
+        </a>
+        <div class="media-body">
+            <h3><a href="{% url 'people_detail' people.permalink %}" class="media-heading">{{ people.get_full_name }}</a></h3>
+            <p>{{ people.occupation }}<p>
+        </div>
+    </div>
+</div>

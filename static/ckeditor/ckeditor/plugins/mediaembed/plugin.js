@@ -42,9 +42,16 @@
                           }
                        ],
                   onOk: function() {
-                        var div = instance.document.createElement('div');
-                        div.setHtml(this.getContentElement('iframe', 'embedArea').getValue());
-                        instance.insertElement(div);
+                        //var div = instance.document.createElement('div');
+                        //div.addClass('inline-media')
+                        //div.setHtml(this.getContentElement('iframe', 'embedArea').getValue());
+
+                        var p = instance.document.createElement('p');
+                        var frame = this.getContentElement('iframe', 'embedArea').getValue();
+                        //console.log('<div class="inline-media">' + frame + '</div>');
+                        p.setHtml(frame);
+
+                        instance.insertElement(p);
                   }
               };
            } );

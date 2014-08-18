@@ -10,3 +10,21 @@ python manage.py initial
 
 # optional
 python manage.py makesample
+
+# import cv2
+
+pip install numpy
+
+## Mac
+brew tap homebrew/science
+brew install opencv
+
+## Linux
+apt-get install cmake libopencv-dev python-opencv
+
+
+## localhost (virtualenv wrapper)
+ln -s /usr/local/lib/python2.7/site-packages/cv2.so /usr/local/lib/python2.7/site-packages/cv.py ~/.virtualenvs/polygraph/lib/python2.7/site-packages
+
+## production (virtualenv)
+ln -s /usr/lib/pymodules/python2.7/cv2.so /usr/lib/pymodules/python2.7/cv.py /web/polygraph/lib/python2.7/site-packages

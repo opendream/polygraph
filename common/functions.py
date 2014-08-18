@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import reverse
 from django.utils.html import strip_tags
 from django.utils.translation import ugettext_lazy as _
@@ -94,17 +95,24 @@ def topic_render_reference(topic, display_edit_link=True, field_name='topic'):
     return html
 
 
-def image_render(image, size, alt=''):
+def image_render(image, size, alt='', crop=None):
 
     thumbnail = False
-    if image:
-        try:
-            thumbnail = getattr(image, 'thumbnail_tag_%s' % size)()
-            if 'alt=' not in thumbnail:
-                thumbnail = thumbnail.replace('/>', 'alt="%s" />' % alt)
 
-        except:
-            pass
+    if image:
+
+        upscale = crop and True
+        facerecognition = crop and True
+
+        thumbnail = getattr(image, 'thumbnail_tag_%s' % size)(opts={
+            'scale_and_crop': crop,
+            'upscale': upscale,
+            'facerecognition': facerecognition
+        })
+
+
+        if 'alt=' not in thumbnail:
+            thumbnail = thumbnail.replace('/>', 'alt="%s" />' % alt)
 
     if not thumbnail:
         width, height = size.split('x')

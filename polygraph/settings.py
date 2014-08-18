@@ -179,8 +179,6 @@ CKEDITOR_CONFIGS = {
         'removePlugins': 'resize',
         'extraPlugins': 'autogrow,mediaembed',
         'forcePasteAsPlainText': True,
-
-
     },
     'minimal': {
         'toolbar': [
@@ -218,6 +216,12 @@ FILES_WIDGET_TEMP_DIR = 'temp/files_widget/'
 #FILES_WIDGET_JQUERY_UI_PATH = 'libs/jquery-ui/js/jquery-ui-1.10.4.min.js'
 
 DEFAULT_IMAGE = '%simages/default.png' % STATIC_URL
+
+try:
+    import cv2
+    THUMBNAIL_ENGINE = 'solr_facerecognition.engines.FaceRecognitionEngine'
+except ImportError:
+    pass
 
 GREATEST_FUNCTION = 'GREATEST'
 

@@ -9,6 +9,10 @@ def statement_item(statement, style='normal'):
     return render_to_string('domain/statement_item_%s.html' % style, {'statement': statement})
 
 @register.filter
+def people_item(people):
+    return render_to_string('domain/people_item.html', {'people': people})
+
+@register.filter
 def meter_count(meter_statement_count):
 
     total = 0

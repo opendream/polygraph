@@ -154,6 +154,7 @@ class ImagePath(FilePath):
         all_attrs.update(attrs)
         key = hash(frozenset(all_attrs))
 
+
         if not key in self._thumbnails:
             #self._thumbnails[key] = get_thumbnail(self._get_local_path_or_file(), size, **attrs)
             self._thumbnails[key] = get_thumbnail(self.local_path, size, **attrs)
