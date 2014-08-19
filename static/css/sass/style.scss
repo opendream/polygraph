@@ -38,13 +38,13 @@ body.request-popup {
     padding-top: 0;
 }
 
-h1, h2, h3, h4, .nav, .footer-menu {
+h1, h2, h3, h4, .nav, .footer-menu{
     font-family: "Boon-0.6";
     font-style: normal;
     font-weight: 700 !important;
 
 }
-.block-quote, body .quote{
+.block-quote, body .quote, .statement-item .media-heading{
     font-family: "Boon-0.6";
     font-style: normal;
     font-weight: 300 !important;
@@ -537,7 +537,8 @@ input + .errors{
 	position: relative;
 	display: block;
 	border-left: 0;
-	padding: 20px 25px 0 25px;
+	padding: 0px 35px;
+	margin: 12px 10px;
 	word-wrap: break-word;
 	&:before,
 	&:after {
@@ -549,11 +550,11 @@ input + .errors{
 		z-index: 1;
 	}
 	&:before {
-		top: 0; left: 0;
+		top: 12px; left: 0;
 	}
 	&:after {
 		background-position: -23px 0;
-		bottom: 0; right: 0;
+		bottom: 12px; right: 0;
 	}
 }
 .block-quote-alt {
@@ -830,17 +831,6 @@ input + .errors{
 	}
 	.polygraph-list-block {
 		position: relative;
-		.block-content > span {
-			display: block;
-			padding: 5px 0;
-			color: #FFF;
-			font-size: 75%;
-			background-color: $bright_orange;
-			width: 80px;
-			text-align: center;
-			text-transform: uppercase;
-			margin: 0 0 10px -20px;
-		}
 		&.updated span {
 			background-color: $hover_orange;
 		}
@@ -862,92 +852,23 @@ input + .errors{
 }
 .polygraph-list.statement-list {
 	.block-content {
-		padding-bottom: 0;
-		border-bottom: 85px solid #F2F2F2;
 		position: initial;
 		.quote {
 			font-size: 18px;
 		}
-		.media {
-			position: absolute;
-			bottom: 10px;
-			width: 100%;
-			padding-right: 160px;
-		}
+
 	}
 	.meter-md {
 		right: 20px;
 		bottom: 0px;
 	}
 }
-@media (max-width: 991px) {
-	.statement-list {
-		.polygraph-list-block {
-			.meter-md {
-				position: absolute;
-				bottom: 0px;
-				right: 20px;
-				img {
-					height: 100%;
-				}
-			}
-		}
-	}
-}
 
-@media (max-width: 991px) {
-	.polygraph-list-block {
-		.block-content {
-			&.float-right-img {
-				padding-right: 20px;
-				padding-bottom: 150px;
-			}
-			.media {
-				position: absolute;
-				bottom: 20px;
-				width: 100%;
-				padding-right: 160px;
-			}
-		}
-		.meter-md {
-			position: absolute;
-			bottom: 0px;
-			right: 0;
-			img {
-				height: 150px;
-				width: auto;
-			}
-		}
-	}
-}
 
-@media (max-width: 767px) {
-	.polygraph-list-block {
-		.block-content {
-			&.float-right-img {
-				padding-bottom: 110px;
-			}
-		}
-		.meter-md {
-			right: 20px;
-			img {
-				height: 100px;
-			}
-		}
-	}
-}
-@media (max-width: 460px) {
-	.statement-list .polygraph-list-block {
-		.block-content { 
-			border-bottom: 125px solid #F2F2F2; 
-		}
-		.block-content .media { 
-			position: relative;
-			padding-right: 0;
-			bottom: 0;
-			margin-bottom: 15px;
-		}
-	} 
+@media (max-width: 540px) {
+    .statement-item .media-body {
+
+    }
 }
 .btn-group-custom {
 	position: absolute;
@@ -1078,6 +999,8 @@ footer {
 }
 
 //####################################################
+
+
 
 .autocomplete-light-widget {
 	.deck>span[data-value] {
@@ -1314,6 +1237,96 @@ ul.nav-tabs li.first .caret { border-bottom-color: #FFF; }
 .polygraph-list .polygraph-list-block .quote {
     min-height: 140px;
 
+}
+
+.vignette {
+    display: block;
+    position: relative;
+    height: 100%;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto 100%;
+
+    &:after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+
+        background-image: url('../images/vignette.png');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100% 100%;
+    }
+}
+
+.statement-item {
+
+    .media {
+        margin: -20px -20px 0 -20px;
+        position: relative;
+        height: 210px;
+    }
+
+    .media-body, .meter-md, .statement-status {
+        position: absolute;
+        z-index: 2;
+    }
+    .media-body {
+        bottom: 10px;
+        margin: 30px;
+        max-width: 40%;
+
+    }
+    .media-heading {
+        color: #fe6625;
+        font-size: 1.25em;
+    }
+
+    .meter-md {
+        max-width: 40%;
+        min-width: 120px;
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    }
+
+
+    .statement-status {
+        display: block;
+        padding: 5px 0;
+        color: #FFF;
+        font-size: 75%;
+        background-color: $bright_orange;
+        width: 80px;
+        text-align: center;
+        text-transform: uppercase;
+        top: 18px;
+        color: #333;
+    }
+
+    .people-occupation {
+        color: #FFF;
+        font-size: 0.9em;
+        font-weight: lighter;
+    }
+
+    .submit {
+        margin: 0 48px;
+        font-size: 0.8em;
+        color: #555;
+    }
+}
+
+@media (max-width: 480px) {
+    .statement-item {
+        .block-content {
+            padding-left: 2%;
+            padding-right: 2%;
+        }
+    }
 }
 
 td.quote {

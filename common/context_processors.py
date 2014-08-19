@@ -27,7 +27,7 @@ def helper(request):
         'SITE_FAVICON_URL': settings.SITE_FAVICON_URL,
         'STATUS_PUBLISHED': STATUS_PUBLISHED,
         'STATUS_PENDING': STATUS_PENDING,
-        'STATUS_DRAFT': STATUS_DRAFT
+        'STATUS_DRAFT': STATUS_DRAFT,
     }
 
     return context

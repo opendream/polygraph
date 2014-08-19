@@ -29,6 +29,6 @@ class FaceRecognitionEngine(Engine):
                 a = face[0]
                 x1,y1,x2,y2=a[0],a[1],a[0]+a[2],a[1]+a[3]
                 x_per = int((x1/float(img.width))*100)
-                y_per = int((y1/float(img.height))*100)
+                y_per = int((y1/float(img.height))*160)
                 options['crop'] = str(x_per)+"% "+str(y_per)+"%"
         return image,options

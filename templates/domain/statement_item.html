@@ -1,0 +1,36 @@
+{% load i18n %}
+{% load common_tags %}
+<article class="row block block-no-border statement-item polygraph-list-block{% if statement.uptodate_status %} {{ statement.uptodate_status.code }}{% endif %}">
+    <div class="block-content col-lg-12">
+        <div class="media">
+            {% if statement.uptodate_status %}<span class="statement-status">{{ statement.uptodate_status.text }}</span>{% endif %}
+
+            <a
+                    class="vignette"
+                    href="{% url 'people_detail' statement.quoted_by.permalink %}"
+                    style="background-image: url('{% image_render statement.quoted_by.image '750x250' statement.quoted_by.get_full_name 'center' 1 %}');"
+            >
+
+            </a>
+            <div class="media-body">
+                <a href="{% url 'people_detail' statement.quoted_by.permalink %}" class="media-heading">
+                    {{ statement.quoted_by.get_full_name }}
+                </a>
+                <div class="people-occupation">
+                    {{ statement.quoted_by.occupation }}
+                </div>
+            </div>
+            <div class="meter-md">
+                {% image_render statement.meter.image_small_text '200x107' statement.meter.title %}
+            </div>
+        </div>
+        <div class="text-brown block-quote lead">
+            <a href="{% url 'statement_detail' statement.permalink %}">{{ statement.quote|removetags:'p'|safe }}</a>
+        </div>
+        <div class="submit">
+            <strong>{% trans "Source" %}&nbsp;&nbsp;</strong>{{ statement.source }}
+        </div>
+
+    </div>
+
+</article>

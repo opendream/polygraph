@@ -37,9 +37,9 @@ def do_topic_render_reference(topic_id):
 
 
 @register.simple_tag(name="image_render")
-def do_image_render(image, size, alt='no alt', crop=None):
+def do_image_render(image, size, alt='no alt', crop=None, url=False):
 
-    return image_render(image, size, alt, crop)
+    return image_render(image, size, alt, crop, url)
 
 
 @register.filter(name='format_date')
