@@ -34,9 +34,19 @@
                     </div>
                     {% endif %}
 
-                    <span class="pull-left">
-                        {% image_render people.image '120x120' people.get_full_name %}
-                    </span>
+                    <div class="statement-item">
+                        <div class="media">
+
+                            <div
+                                    class="vignette"
+                                    style="background-image: url('{% image_render people.image '750x250' people.get_full_name 'center' 1 %}');"
+                            >
+
+                            </div>
+
+                        </div>
+                    </div>
+
 
                     <div class="media-body people-summary">
                     	<p>{{ people.summary|linebreaksbr|default:people.occupation }}</p>
@@ -49,6 +59,7 @@
                 {% endif %}
             </div>
         </section>
+
 
         {% if statement_list %}
         <div id="main"></div>

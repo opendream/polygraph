@@ -13,7 +13,7 @@
 
             </a>
             <div class="media-body">
-                <a href="{% url 'people_detail' statement.quoted_by.permalink %}" class="media-heading">
+                <a href="{% url 'people_detail' statement.quoted_by.permalink %}" class="media-heading lead">
                     {{ statement.quoted_by.get_full_name }}
                 </a>
                 <div class="people-occupation">
