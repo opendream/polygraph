@@ -252,7 +252,7 @@ def people_list(request):
     people_list = QuerySet(query=query, model=People)
 
 
-    people_list = pagination_build_query(request, people_list, 10)
+    people_list = pagination_build_query(request, people_list, 9)
 
 
 

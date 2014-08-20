@@ -1,12 +1,26 @@
 {% load common_tags %}
-<div class="block block-no-border">
-    <div class="media block-content">
-        <a class="pull-left" href="{% url 'people_detail' people.permalink %}">
-            {% image_render people.image '122x122' people.get_full_name 'center' %}
+<div class="people-item">
+    <div class="media">
+        <a      class="people-item-image"
+                href="{% url 'people_detail' people.permalink %}"
+                style="background-image: url('{% image_render people.image '600x250' people.get_full_name 'center' 1 %}')"
+        >
+
         </a>
         <div class="media-body">
             <h3><a href="{% url 'people_detail' people.permalink %}" class="media-heading">{{ people.get_full_name }}</a></h3>
             <p>{{ people.occupation }}<p>
         </div>
     </div>
+    <div class="people-meter-count">
+        <ul>
+            {% for meter, count in people.meter_statement_count %}
+            <li>
+                <div class="meter-title">{{ meter.title }}</div>
+                <div class="meter-count"><strong>{{ count }}</strong></div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
 </div>

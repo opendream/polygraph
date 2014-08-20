@@ -1236,7 +1236,7 @@ input + .errors {
 /* line 861, ../sass/style.scss */
 .polygraph-list.statement-list .meter-md {
   right: 20px;
-  bottom: 0px;
+  bottom: -20px;
 }
 
 /* line 873, ../sass/style.scss */
@@ -1720,13 +1720,14 @@ ul.nav-tabs li.first .caret {
   margin: -20px -20px 0 -20px;
   position: relative;
   height: 210px;
+  overflow: visible;
 }
-/* line 1275, ../sass/style.scss */
+/* line 1276, ../sass/style.scss */
 .statement-item .media-body, .statement-item .meter-md, .statement-item .statement-status {
   position: absolute;
   z-index: 2;
 }
-/* line 1279, ../sass/style.scss */
+/* line 1280, ../sass/style.scss */
 .statement-item .media-body {
   bottom: 10px;
   margin: 30px;
@@ -1779,45 +1780,66 @@ ul.nav-tabs li.first .caret {
     padding-right: 2%;
   }
 }
-/* line 1334, ../sass/style.scss */
+/* line 1335, ../sass/style.scss */
+.people-item {
+  height: 380px;
+}
+/* line 1338, ../sass/style.scss */
+.people-item .people-item-image {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 210px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+@media (max-width: 600px) {
+  /* line 1351, ../sass/style.scss */
+  .people-list li {
+    width: 100%;
+  }
+}
+/* line 1356, ../sass/style.scss */
 td.quote {
   width: 40%;
 }
 
-/* line 1337, ../sass/style.scss */
+/* line 1359, ../sass/style.scss */
 td.created {
   min-width: 90px;
 }
 
-/* line 1340, ../sass/style.scss */
+/* line 1362, ../sass/style.scss */
 td.status {
   min-width: 200px;
 }
 
-/* line 1343, ../sass/style.scss */
+/* line 1365, ../sass/style.scss */
 td.meter {
   min-width: 55px;
 }
 
-/* line 1346, ../sass/style.scss */
+/* line 1368, ../sass/style.scss */
 .statement-detail img {
   max-width: 100%;
   height: auto !important;
 }
 
-/* line 1352, ../sass/style.scss */
+/* line 1374, ../sass/style.scss */
 #id_permalink_readonly {
   display: inline-block;
   margin-right: -50px;
   padding-right: 60px;
 }
 
-/* line 1358, ../sass/style.scss */
+/* line 1380, ../sass/style.scss */
 #edit-permalink {
   position: relative;
 }
 
-/* line 1363, ../sass/style.scss */
+/* line 1385, ../sass/style.scss */
 .inline-media {
   position: relative;
   padding-bottom: 56.25%;
@@ -1825,7 +1847,7 @@ td.meter {
   height: 0;
   overflow: hidden;
 }
-/* line 1369, ../sass/style.scss */
+/* line 1391, ../sass/style.scss */
 .inline-media iframe, .inline-media object, .inline-media embed {
   position: absolute;
   top: 0;
@@ -1834,7 +1856,7 @@ td.meter {
   height: 100%;
 }
 
-/* line 1378, ../sass/style.scss */
+/* line 1400, ../sass/style.scss */
 .reference-wrapper .glyphicon {
   color: #65BF61;
 }
