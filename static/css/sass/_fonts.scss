@@ -1,0 +1,33 @@
+@font-face {
+  src: url("../fonts/woff/boon-300.woff") format("woff");
+  font-family: "Boon-0.6";
+  font-style: normal;
+  font-weight: 300;
+}
+
+@font-face {
+  src: url("../fonts/woff/boon-700.woff") format("woff");
+  font-family: "Boon-0.6";
+  font-style: normal;
+  font-weight: 700;
+}
+
+h1, h2, h3, h4,
+.nav,
+.footer-menu {
+  font-family: "Boon-0.6";
+  font-style: normal;
+  font-weight: 700 !important;
+}
+
+.block-quote,
+body .quote,
+.statement-item .media-heading {
+  font-family: "Boon-0.6";
+  font-style: normal;
+  font-weight: 300 !important;
+
+  strong {
+    font-weight: 700 !important;
+  }
+}

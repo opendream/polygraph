@@ -1,0 +1,24 @@
+@import "fonts.scss";
+@import "elements.scss";
+
+@import "compass/css3/box-sizing";
+@import "compass/css3/border-radius";
+
+$base_orange : #cd5e26; // base orange
+$hover_orange : #ff9933; // hover orange
+$border_orange : #a34b21; // border orange
+$bright_orange : #fe6625; // bright orange
+$soft_orange : #ffc092;
+$text_hover : #4C0000; // text hover (dark brown)
+$text_brown : #7f5d3d; // text brown
+$block_border : #CCCCCC;
+
+body {
+  padding-top: 95px;
+  background: url(../images/body-bg.png);
+  position: relative;
+}
+
+body.request-popup {
+    padding-top: 0;
+}
