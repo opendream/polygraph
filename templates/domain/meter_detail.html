@@ -99,6 +99,7 @@
                         </li>
                         {% endfor %}
                     </ul>
+                    <a href="{% url 'people_list' %}" class="btn btn-default">{% trans "See all peoples" %} <span class="glyphicon glyphicon-chevron-right"></span></a>
                     {% else %}
                     {% if user.is_authenticated %}
                     <div class="text-center">
