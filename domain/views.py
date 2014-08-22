@@ -223,21 +223,13 @@ def people_detail(request, people_permalink):
     })
 
 
-def people_list(request):
-
-    # Force MYSQL Distinct
-    query = People.objects.all().order_by('-quoted_by__created').query
-    query_str = query.__str__()
-    query_str = query_str.replace('SELECT', 'SELECT DISTINCT')
-
-    people_list = People.objects.raw(query_str)
+def people_query_base(category=None):
 
 
     people_list = People.objects.all().order_by('-quoted_by__created')
 
-    category = None
-    if request.GET.get('category'):
-        category = get_object_or_404(PeopleCategory, permalink=request.GET.get('category'))
+    if category:
+        category = get_object_or_404(PeopleCategory, permalink=category)
         people_list = people_list.filter(categories=category)
 
 
@@ -249,12 +241,15 @@ def people_list(request):
 
     query.order_by.reverse()
 
-    people_list = QuerySet(query=query, model=People)
+    return QuerySet(query=query, model=People)
 
 
+def people_list(request):
+
+    category = request.GET.get('category')
+
+    people_list = people_query_base(category)
     people_list = pagination_build_query(request, people_list, 9)
-
-
 
     category_list = PeopleCategory.objects.all()
 
@@ -285,12 +280,22 @@ def meter_detail(request, meter_permalink=None):
     statement_list = statement_list.filter(meter=meter).order_by('-uptodate')
 
     statement_list = pagination_build_query(request, statement_list, 10)
+    people_statement_list = [statement.quoted_by.id for statement in statement_list]
+    people_statement_list = list(set(people_statement_list))
+
+    people_list = people_query_base()
+    people_list = people_list.exclude(id__in=people_statement_list)
+
+    people_limit = min(3, len(statement_list))
+    people_list = people_list[0:people_limit]
+
 
 
     return render(request, 'domain/meter_detail.html', {
         'request_meter': meter,
         'meter_list': meter_list,
-        'statement_list': statement_list
+        'statement_list': statement_list,
+        'people_list': people_list
     })
 
 
