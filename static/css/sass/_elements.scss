@@ -1,0 +1,28 @@
+// Default font size
+
+body { 
+  font-size: 16px;
+}
+
+// Heading Color
+
+h1, h2, h3, h4, h5, h6,
+p {
+  color: #333;
+}
+
+// Text Color Brown
+
+.text-brown,
+.text-brown p,
+a,
+a:hover { 
+  color: #7f5d3d;;
+}
+
+a:hover { text-decoration: underline; }
+
+p.border-bt { 
+  padding-bottom: 20px;
+  border-bottom: 2px solid #CCC;
+}
