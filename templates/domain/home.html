@@ -9,113 +9,14 @@
 
 <div class="region row">
 
-	<section class="col-md-8" >
-
-        <header>
-			<h2><span class="dialog-ic-color"></span>{% trans "Highlight statement" %}</h2>
-		</header>
-		<article class="block block-highlight-statement">
-
-            {% if hilight_statement %}
-			<section class="highlight-statement front-highlight-statement block-content">
-				<header>
-					<h3 class="hidden">{% trans "statement" %}</h3>
-				</header>
-				<div class="block-quote lead front-block-quote">
-                    <a href="{% url 'statement_detail' hilight_statement.permalink %}">
-                        {{ hilight_statement.quote|safe }}
-                    </a>
-				</div>
-				<span class="triangle"></span>
-			</section>
-			<section class="who-said block-content">
-				<header>
-					<h3 class="hidden">{% trans "Who's said??" %}</h3>
-				</header>
-
-    	        <div class="media col-lg-8 col-xs-8">
-    	            <a class="pull-left" href="{% url 'people_detail' hilight_statement.quoted_by.permalink %}">
-                        {% image_render hilight_statement.quoted_by.image '160x80' hilight_statement.quoted_by.get_full_name %}
-    	            </a>
-    	            <div class="media-body">
-    	                <a href="{% url 'people_detail' hilight_statement.quoted_by.permalink %}" class="media-heading">{{ hilight_statement.quoted_by.get_full_name }}</a>
-    	                <p>{{ hilight_statement.quoted_by.occupation }}</p>
-    	            </div>
-    	        </div>
-
-				<div class="meter col-lg-4 col-xs-4">
-					<h4 class="hidden">{{ hilight_statement.meter.title }}</h4>
-					<figure>
-                        {% image_render hilight_statement.meter.image_small_text '212x152' hilight_statement.meter.title %}
-					</figure>
-				</div>
-			</section>
-
-            {% else %}
-
-			<section class="highlight-statement front-highlight-statement block-content">
-				<header>
-					<h3 class="hidden">{% trans "statement" %}</h3>
-				</header>
-				<div class="block-quote lead front-block-quote">
-
-
-                    {% if user.is_authenticated %}
-                    <div class="text-center">
-                        <a class="btn btn-primary text-center" href="{% url 'statement_create' %}">
-                            <span class="glyphicon glyphicon-pencil"></span> {% trans "Create Highlight Statement" %}
-                        </a>
-                    </div>
-                    {% else %}
-                    <div class="text-center">{% trans "No Highlight Statement" %}</div>
-                    {% endif %}
-
-                </div>
-            </section>
-            <section class="who-said block-content front-no-highlight-statement">
-				<header>
-					<h3 class="hidden">{% trans "Who's said??" %}</h3>
-				</header>
-
-    	        <div class="media col-lg-8 col-xs-8">
-    	            <span class="pull-left"">
-                        {% image_render None '80x80' '-' %}
-    	            </span>
-    	        </div>
-
-				<div class="meter col-lg-4 col-xs-4">
-					<figure>
-                        {% image_render None '212x152' '-' %}
-					</figure>
-				</div>
-			</section>
-
-            {% endif %}
-
-		</article>
-
-
-	</section >
-
-	<section class="col-md-4 summary">
-		<header>
-			<h2>{% trans "Summary" %}</h2>
-		</header>
-		<div class="block block-bg-transparent">
-            {{ meter_statement_count|meter_count }}
-		</div>
-	</section>
-</div>
-
-<div class="region row">
-
-    <section class="polygraph-list col-md-12" >
+    <section class="polygraph-list col-md-8" >
 
 		<header class="row">
-			<div class="col-md-4">
-				<h2><span class="dialog-ic-bw"></span>{% trans "Polygraph" %}</h2>
-			</div>
-			<div class="col-md-8 col-xs-12">
+
+            <header>
+			    <h2><span class="dialog-ic-color"></span>{% trans "Highlight statement" %}</h2>
+		    </header>
+			<div class="col-md-12 col-xs-12">
 				<ul class="nav nav-tabs nav-pills nav-color full-width" role="tablist">
                     {% for meter, meter_statement in meter_statement_list %}
 				  	<li class="hidden-xs{% if forloop.first %} first{% endif %}{% if forloop.last %} last{% endif %}">
@@ -231,7 +132,17 @@
 
 
 
-	</section>
+        </section>
+
+            <section class="col-md-4 summary">
+            <header>
+                <h2>{% trans "Summary" %}</h2>
+            </header>
+            <div class="block block-bg-transparent">
+                {{ meter_statement_count|meter_count }}
+            </div>
+        </section>
+
 
 </div>
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-22 05:02+0000\n"
+"POT-Creation-Date: 2014-08-22 08:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -209,31 +209,31 @@ msgstr "%s ของคุณ ได้ถูกลบเรียบร้อ�
 msgid "Latest"
 msgstr "ล่าสุด"
 
-#: domain/views.py:614
+#: domain/views.py:622
 msgid "Manage My Statements"
 msgstr "จัดการคำพูดที่ฉันสร้าง"
 
-#: domain/views.py:624
+#: domain/views.py:632
 msgid "Manage Pending Statements"
 msgstr "จัดการคำพูดที่กำลังอยู่ในการพิจารณา"
 
-#: domain/views.py:634
+#: domain/views.py:642
 msgid "Manage Highlight Statements"
 msgstr "จัดการคำพูดไฮไลต์"
 
-#: domain/views.py:644
+#: domain/views.py:652
 msgid "Manage Promote Statements"
 msgstr "จัดการคำพูดที่กำลังอยู่ในการพิจารณา"
 
-#: domain/views.py:654
+#: domain/views.py:662
 msgid "Manage All Statements"
 msgstr "จัดการคำพูดทั้งหมด"
 
-#: domain/views.py:664
+#: domain/views.py:672
 msgid "Manage My People"
 msgstr "จัดการผู้คนที่ฉันสร้าง"
 
-#: domain/views.py:674
+#: domain/views.py:682
 msgid "Manage All People"
 msgstr "จัดการผู้คนทั้งหมด"
 
@@ -650,6 +650,7 @@ msgid "No Tags"
 msgstr "ไม่มีแท็ก"
 
 #: templates/domain/meter_detail.html:102
+#: templates/domain/people_detail.html:131
 msgid "See all peoples"
 msgstr "ดูผู้คนทั้งหมด"
 

@@ -1117,7 +1117,7 @@ input + .errors {
   background-color: #cd5e26;
 }
 
-@media (min-width: 992px) {
+@media (min-width: 1200px) {
   /* line 767, ../sass/style.scss */
   .nav-color {
     float: right;
