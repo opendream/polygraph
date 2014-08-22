@@ -285,7 +285,9 @@ def meter_detail(request, meter_permalink=None):
 
     people_list = people_query_base()
     people_list = people_list.exclude(id__in=people_statement_list)
-    people_list = people_list[0:3]
+
+    people_limit = min(3, len(statement_list))
+    people_list = people_list[0:people_limit]
 
 
 
