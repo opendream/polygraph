@@ -280,8 +280,12 @@ def meter_detail(request, meter_permalink=None):
     statement_list = statement_list.filter(meter=meter).order_by('-uptodate')
 
     statement_list = pagination_build_query(request, statement_list, 10)
+    people_statement_list = [statement.quoted_by.id for statement in statement_list]
+    people_statement_list = list(set(people_statement_list))
 
-    people_list = people_query_base()[0:3]
+    people_list = people_query_base()
+    people_list = people_list.exclude(id__in=people_statement_list)
+    people_list = people_list[0:3]
 
 
 
