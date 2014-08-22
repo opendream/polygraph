@@ -76,7 +76,7 @@
                     </div>
                 </section>
 
-                <section class="col-md-12">
+                <section class="col-md-8">
                     <div id="main"></div>
                     <header>
                         <h3 class="hidden">{% trans "Polygraph List Item" %}</h3>
@@ -88,6 +88,32 @@
 
 
                 </section>
+
+                <section class="people-list col-md-4">
+
+                    {% if people_list %}
+                    <ul class="list-unstyled">
+                        {% for people in people_list %}
+                        <li>
+                            {{ people|people_item }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    {% if user.is_authenticated %}
+                    <div class="text-center">
+                        <a class="btn btn-primary text-center" href="{% url 'people_create' %}">
+                            <span class="glyphicon glyphicon-pencil"></span> {% trans "Create People" %}
+                        </a>
+                    </div>
+                    {% else %}
+                    <div class="text-center">{% trans "No People" %}</div>
+                    {% endif %}
+                    {% endif %}
+
+
+                </section>
+
 
 			</div>
         </div>    

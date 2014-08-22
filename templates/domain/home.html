@@ -180,7 +180,7 @@
                     <div class="row">
 
                         <a href="{% if meter.id %}{% url 'meter_detail' meter.permalink %}{% else %}{% url 'statement_list' %}{% endif %}" class="btn btn-default">
-                            {% trans "See all" %} "{{ meter.title }}" {% trans "statements" %}<span class="glyphicon glyphicon-chevron-right"></span>
+                            {% blocktrans with meter.title as meter_title %}See all {{ meter_title }} statements{% endblocktrans %}<span class="glyphicon glyphicon-chevron-right"></span>
                         </a>
                     </div>
 
@@ -198,10 +198,10 @@
 
                                 {% if user.is_authenticated %}
                                 <a class="btn btn-primary text-center" href="{% url 'statement_create' %}">
-                                    <span class="glyphicon glyphicon-pencil"></span> {% trans "Create" %} {{ meter.title }} {% trans "Statement" %}
+                                    <span class="glyphicon glyphicon-pencil"></span> {% blocktrans with meter.title as meter_title %}Create {{ meter_title }} Statement{% endblocktrans %}
                                 </a>
                                 {% else %}
-                                <p>{% trans "No" %} {{ meter.title }} {% trans "Statement" %}</p>
+                                <p>{% blocktrans with meter.title as meter_title  %}No {{ meter_title }} Statement{% endblocktrans %}</p>
                                 {% endif %}
 
                             </div>
