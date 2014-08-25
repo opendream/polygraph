@@ -33,12 +33,16 @@ $hover_orange : #baaa96; // hover orange
 
 
 body {
-  padding-top: 85px;
+  padding-top: 98px;
   background: url(../images/body-bg.png);
   font-size: 16px;
   position: relative;
 }
 
+@media (max-width: 767px) {
+
+  body { padding-top: 80px; }
+}
 body.request-popup {
     padding-top: 0;
 }
