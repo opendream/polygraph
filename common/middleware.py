@@ -1,5 +1,6 @@
 import threading
-
+from django.utils import translation
+from django.conf import settings
 
 evil_threadlocals = threading.local()
 
@@ -25,5 +26,8 @@ class ForceDefaultLanguageMiddleware(object):
     namely django.middleware.locale.LocaleMiddleware
     """
     def process_request(self, request):
+
+        translation.activate(settings.LANGUAGE_CODE)
+
         if request.META.has_key('HTTP_ACCEPT_LANGUAGE'):
             del request.META['HTTP_ACCEPT_LANGUAGE']

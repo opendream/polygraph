@@ -61,9 +61,9 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'common.middleware.ForceDefaultLanguageMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    'common.middleware.ForceDefaultLanguageMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',

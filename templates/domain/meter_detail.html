@@ -20,7 +20,7 @@
 			<div class="col-md-4 hidden">
 				<h2 class="hidden"><span class="dialog-ic-bw"></span>{% trans "Polygraph" %}</h2>
 			</div>
-			<div class="col-md-8 col-xs-12 pull-right">
+			<div class="col-xs-8 pull-right">
 				<ul class="nav nav-pills nav-color full-width" role="tablist">
 
                     {% for meter in meter_list %}
@@ -48,12 +48,12 @@
 				</ul>				
 			</div>
 		</header>
-		<div class="tab-content">
-            
-            <div class="tab-pane active">
 
-				<section class="col-md-12 col-no-padding">
-                    <header>
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <header>
                         <h3 class="hidden">{% trans "Meter Description" %}</h3>
                     </header>
                     <div class="block block-bg-grey polygraph-list-before">
@@ -61,7 +61,7 @@
                             <div class="col-md-12 col-no-padding">
                                 <div class="col-lg-8 col-md-8 col-xs-8 text-left meter-title">
                                     <h4 class="block-quote-alt">{{ request_meter.title }}</h4>
-                                </div>
+                                </div><div class="row">
                                 <div class="col-lg-8 col-md-8 col-xs-7 text-left desc">
                                     <span>{% trans "Description" %} :</span>
                                     {{ request_meter.description|safe }}
@@ -70,31 +70,37 @@
                                     <figure>
                                         {% image_render request_meter.image_large_text '300x329' request_meter.title %}
                                     </figure>
-                                </div>
+                                </div></div>
                             </div>
                         </div>
                     </div>
-                </section>
 
-                <section class="col-md-8">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+
                     <div id="main"></div>
                     <header>
-                        <h3 class="hidden">{% trans "Polygraph List Item" %}</h3>
+                        <h3>{% blocktrans with request_meter.title as meter_title %}All {{ meter_title }} Statements{% endblocktrans %}</h3>
                     </header>
+
+
 
                     {% for statement in statement_list %}
                     {{ statement|statement_item:'wide' }}
                     {% endfor %}
 
+            </div>
+            <div class="col-md-4">
 
-                </section>
-
-                <section class="people-list col-md-4">
-
+                <header>
+                        <h3>{% trans "People" %}</h3>
+                    </header>
                     {% if people_list %}
-                    <ul class="list-unstyled">
+                    <ul class="list-unstyled row">
                         {% for people in people_list %}
-                        <li>
+                        <li class="col-xs-6 col-md-12">
                             {{ people|people_item }}
                         </li>
                         {% endfor %}
@@ -112,12 +118,8 @@
                     {% endif %}
                     {% endif %}
 
-
-                </section>
-
-
-			</div>
-        </div>    
+            </div>
+        </div>
 
 	</section>
 

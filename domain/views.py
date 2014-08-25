@@ -90,7 +90,8 @@ def home(request):
 
     statement_list = statement_query_base(is_anonymous=True)
 
-    hilight_statement = statement_list.order_by('-hilight', '-promote', '-uptodate')[0:1]
+    #hilight_statement = statement_list.order_by('-hilight', '-promote', '-uptodate')[0:1]
+    hilight_statement = []
 
     meter_list = Meter.objects.all().order_by('order')
 
@@ -106,7 +107,7 @@ def home(request):
     meter_statement_list = [({'title': _('Latest'), 'permalink': 'latest'}, statement_list[0:4])]
     for meter in meter_list:
 
-        meter_statement = statement_list.filter(meter=meter)[0:3]
+        meter_statement = statement_list.filter(meter=meter)[0:5]
         meter_statement_list.append((meter, meter_statement))
 
     tags_list = Tag.objects.usage_for_model(Statement, counts=True)
@@ -114,11 +115,20 @@ def home(request):
     tags_list = tags_list[0:15]
 
 
+    people_statement_list = [statement.quoted_by.id for statement in statement_list]
+    people_statement_list = list(set(people_statement_list))
+
+    people_list = people_query_base()
+    #people_list = people_list.exclude(id__in=people_statement_list)
+
+    people_list = people_list[0:4]
+
     return render(request, 'domain/home.html', {
         'hilight_statement': hilight_statement,
         'meter_statement_count': meter_statement_count,
         'meter_statement_list': meter_statement_list,
         'tags_list': tags_list,
+        'people_list': people_list,
         'contact_footer': render_to_string('contact_footer.txt')
     })
 
@@ -239,7 +249,7 @@ def people_detail(request, people_permalink):
     people_list = people_query_base()
     people_list = people_list.exclude(id=people.id)
 
-    people_list = people_list[0:3]
+    people_list = people_list[0:2]
 
 
     return render(request, 'domain/people_detail.html', {
@@ -293,6 +303,7 @@ def meter_detail(request, meter_permalink=None):
     people_list = people_list.exclude(id__in=people_statement_list)
 
     people_limit = min(3, len(statement_list))
+    people_limit = people_limit - (people_limit % 2)
     people_list = people_list[0:people_limit]
 
 
@@ -678,6 +689,11 @@ def manage_people(request):
     item_list = People.objects.all().order_by('-created', '-id').exclude(status=STATUS_DRAFT)
     table = PeopleTable(item_list)
     RequestConfig(request).configure(table)
+
+    from django.utils import translation
+
+    print translation.get_language()
+    print _('Manage All People')
 
     return render(request, 'manage.html', {'table': table, 'page_title': _('Manage All People')})
 

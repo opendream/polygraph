@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-22 08:13+0000\n"
+"POT-Creation-Date: 2014-08-22 09:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -205,35 +205,35 @@ msgstr "ชื่อ"
 msgid "Your %s has been deleted."
 msgstr "%s ของคุณ ได้ถูกลบเรียบร้อยแล้ว"
 
-#: domain/views.py:106 templates/domain/home.html:130
+#: domain/views.py:107 templates/domain/home.html:31
 msgid "Latest"
 msgstr "ล่าสุด"
 
-#: domain/views.py:622
+#: domain/views.py:632
 msgid "Manage My Statements"
 msgstr "จัดการคำพูดที่ฉันสร้าง"
 
-#: domain/views.py:632
+#: domain/views.py:642
 msgid "Manage Pending Statements"
 msgstr "จัดการคำพูดที่กำลังอยู่ในการพิจารณา"
 
-#: domain/views.py:642
+#: domain/views.py:652
 msgid "Manage Highlight Statements"
 msgstr "จัดการคำพูดไฮไลต์"
 
-#: domain/views.py:652
+#: domain/views.py:662
 msgid "Manage Promote Statements"
 msgstr "จัดการคำพูดที่กำลังอยู่ในการพิจารณา"
 
-#: domain/views.py:662
+#: domain/views.py:672
 msgid "Manage All Statements"
 msgstr "จัดการคำพูดทั้งหมด"
 
-#: domain/views.py:672
+#: domain/views.py:682
 msgid "Manage My People"
 msgstr "จัดการผู้คนที่ฉันสร้าง"
 
-#: domain/views.py:682
+#: domain/views.py:692
 msgid "Manage All People"
 msgstr "จัดการผู้คนทั้งหมด"
 
@@ -262,7 +262,8 @@ msgid "Edit %s"
 msgstr "แก้ไข %s"
 
 #: domain/tests/test_view.py:91 domain/tests/test_view.py:276
-#: templates/base.html:132 templates/domain/people_detail.html:9
+#: templates/base.html:132 templates/domain/home.html:147
+#: templates/domain/meter_detail.html:94 templates/domain/people_detail.html:9
 #: templates/domain/people_form.html:20 templates/domain/people_list.html:6
 #: templates/domain/people_list.html:9
 msgid "People"
@@ -306,7 +307,6 @@ msgstr "หัวข้อ"
 
 #: domain/tests/test_view.py:562 domain/tests/test_view.py:563
 #: domain/tests/test_view.py:824 domain/tests/test_view.py:825
-#: templates/domain/home.html:22 templates/domain/home.html.py:58
 msgid "statement"
 msgstr "คำพูด"
 
@@ -365,7 +365,7 @@ msgstr "รูปภาพได้ถูกลบเรียบร้อยแ
 msgid "About Us"
 msgstr "เกี่ยวกับเรา"
 
-#: page/contact.html:4 page/contact.html.py:5 templates/domain/home.html:262
+#: page/contact.html:4 page/contact.html.py:5 templates/domain/home.html:188
 msgid "Contact Us"
 msgstr "ติดต่อเรา"
 
@@ -373,7 +373,7 @@ msgstr "ติดต่อเรา"
 msgid "Create Statement"
 msgstr "สร้างคำพูด"
 
-#: templates/base.html:74 templates/domain/meter_detail.html:107
+#: templates/base.html:74 templates/domain/meter_detail.html:109
 #: templates/domain/people_list.html:48
 msgid "Create People"
 msgstr "สร้างคน"
@@ -427,8 +427,8 @@ msgid "Invite"
 msgstr "เชิญชวน"
 
 #: templates/base.html:124 templates/base.html.py:133
-#: templates/domain/home.html:116 templates/domain/meter_detail.html:6
-#: templates/domain/meter_detail.html:9 templates/domain/meter_detail.html:21
+#: templates/domain/meter_detail.html:6 templates/domain/meter_detail.html:9
+#: templates/domain/meter_detail.html:21
 #: templates/domain/statement_form.html:107
 msgid "Polygraph"
 msgstr "เครื่องจับเท็จ"
@@ -473,7 +473,7 @@ msgstr "นามสกุล"
 msgid "Occupation"
 msgstr "อาชีพ"
 
-#: templates/account/edit.html:115 templates/domain/home.html:160
+#: templates/account/edit.html:115 templates/domain/home.html:61
 #: templates/domain/meter_detail.html:66 templates/domain/people_form.html:118
 #: templates/domain/topic_inline_form.html:15
 msgid "Description"
@@ -585,76 +585,66 @@ msgid ""
 msgstr ""
 "คุณได้รับอีเมล์ฉบับนี้ เนื่องจากคุณส่งคำร้องขอเปลี่ยนรหัสผ่านสำหรับบัญชีผู้ใช้ของคุณที่ %(site_name)s"
 
-#: templates/domain/home.html:15
+#: templates/domain/home.html:17
 msgid "Highlight statement"
 msgstr "คำพูดไฮไลต์"
 
-#: templates/domain/home.html:33 templates/domain/home.html.py:77
-#: templates/domain/statement_detail.html:58
-msgid "Who's said??"
-msgstr "ใครเป็นคนพูด"
-
-#: templates/domain/home.html:66
-msgid "Create Highlight Statement"
-msgstr "สร้างคำพูดไฮไลต์"
-
-#: templates/domain/home.html:70
-msgid "No Highlight Statement"
-msgstr "ไม่มีคำพูดไฮไลต์"
-
-#: templates/domain/home.html:102 templates/domain/people_detail.html:112
-#: templates/domain/people_form.html:105 templates/domain/topic_detail.html:94
-msgid "Summary"
-msgstr "สรุป"
-
-#: templates/domain/home.html:151 templates/domain/meter_detail.html:57
+#: templates/domain/home.html:52 templates/domain/meter_detail.html:57
 msgid "Meter Description"
 msgstr "รายละเอียดตัววัด"
 
-#: templates/domain/home.html:173 templates/domain/meter_detail.html:82
-#: templates/domain/statement_list.html:23
+#: templates/domain/home.html:74 templates/domain/statement_list.html:23
 msgid "Polygraph List Item"
 msgstr "รายการของเครื่องจับเท็จ"
 
-#: templates/domain/home.html:183
+#: templates/domain/home.html:84
 #, python-format
 msgid "See all %(meter_title)s statements"
 msgstr "ดูคำพูด %(meter_title)s ทั้งหมด"
 
-#: templates/domain/home.html:201
+#: templates/domain/home.html:102
 #, python-format
 msgid "Create %(meter_title)s Statement"
 msgstr "สร้างคำพูด %(meter_title)s"
 
-#: templates/domain/home.html:204
+#: templates/domain/home.html:105
 #, python-format
 msgid "No %(meter_title)s Statement"
 msgstr "ไม่มีคำพูด %(meter_title)s"
 
-#: templates/domain/home.html:240
+#: templates/domain/home.html:137 templates/domain/people_detail.html:112
+#: templates/domain/people_form.html:105 templates/domain/topic_detail.html:94
+msgid "Summary"
+msgstr "สรุป"
+
+#: templates/domain/home.html:156 templates/domain/meter_detail.html:104
+#: templates/domain/people_detail.html:131
+msgid "See all peoples"
+msgstr "ดูผู้คนทั้งหมด"
+
+#: templates/domain/home.html:166
 msgid "Other Information"
 msgstr "ข้อมูลอื่นๆ"
 
-#: templates/domain/home.html:244 templates/domain/statement_detail.html:199
+#: templates/domain/home.html:170 templates/domain/statement_detail.html:199
 #: templates/domain/statement_form.html:238
 #: templates/domain/statement_list.html:74
 msgid "Tags"
 msgstr "แท็ก"
 
-#: templates/domain/home.html:253
+#: templates/domain/home.html:179
 msgid "Create Statement with Tags"
 msgstr "สร้างคำพูดพร้อมแท็ก"
 
-#: templates/domain/home.html:255
+#: templates/domain/home.html:181
 msgid "No Tags"
 msgstr "ไม่มีแท็ก"
 
-#: templates/domain/meter_detail.html:102
-#: templates/domain/people_detail.html:131
-msgid "See all peoples"
-msgstr "ดูผู้คนทั้งหมด"
+#: templates/domain/meter_detail.html:82
+msgid "All %(meter_title)s Statements"
+msgstr "คำพูด %(meter_title)s ทั้งหมด"
 
-#: templates/domain/meter_detail.html:111 templates/domain/people_list.html:52
+#: templates/domain/meter_detail.html:113 templates/domain/people_list.html:52
 msgid "No People"
 msgstr "ไม่มีผู้คน"
 
@@ -743,6 +733,10 @@ msgstr "ทั้งหมด"
 #: templates/domain/statement_list.html:14
 msgid "Statements"
 msgstr "คำพูด"
+
+#: templates/domain/statement_detail.html:58
+msgid "Who's said??"
+msgstr "ใครเป็นคนพูด"
 
 #: templates/domain/statement_detail.html:79
 msgid "Meta Statement"
@@ -900,6 +894,12 @@ msgstr "ลบ"
 #: templates/domain/topic_inline_form.html:116
 msgid "Are you sure you want to delete this item?"
 msgstr "คุณแน่ใจใช่หรือไม่ว่าต้องการลบสิ่งนี้จริงๆ"
+
+msgid "Create Highlight Statement"
+msgstr "สร้างคำพูดไฮไลต์"
+
+msgid "No Highlight Statement"
+msgstr "ไม่มีคำพูดไฮไลต์"
 
 msgid "Statement detail"
 msgstr "รายละเอียดคำพูด"

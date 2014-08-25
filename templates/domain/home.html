@@ -69,7 +69,7 @@
 
 
                 {% if meter_statement %}
-                <section class="col-md-12">
+                <section>
                     <header>
                         <h3 class="hidden">{% trans "Polygraph List Item" %}</h3>
                     </header>
@@ -130,11 +130,11 @@
 
 		</div>	
 
+    </section>
 
+    <aside class="col-md-4 front-helper">
 
-        </section>
-
-            <section class="col-md-4 summary">
+        <section class="summary col-md-12">
             <header>
                 <h2>{% trans "Summary" %}</h2>
             </header>
@@ -142,6 +142,26 @@
                 {{ meter_statement_count|meter_count }}
             </div>
         </section>
+
+        {% if people_list %}
+        <section class="people-list">
+            <header class="col-md-12">
+                <h2>{% trans "People" %}</h2>
+            </header>
+            <ul class="list-unstyled">
+                {% for people in people_list %}
+                <li class="col-xs-6 col-md-12">
+                    {{ people|people_item }}
+                </li>
+                {% endfor %}
+            </ul>
+            <a href="{% url 'people_list' %}" class="btn btn-default">{% trans "See all peoples" %} <span class="glyphicon glyphicon-chevron-right"></span></a>
+
+        </section>
+        {% endif %}
+
+    </aside>
+
 
 
 </div>

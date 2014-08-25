@@ -34,13 +34,13 @@ h1, h2, h3, h4, .nav, .footer-menu {
 }
 
 /* line 47, ../sass/style.scss */
-.block-quote, body .quote, .statement-item .media-heading {
+.block-quote, body .quote, .statement-item .media-heading, .people-item .media-heading {
   font-family: "Boon-0.6";
   font-style: normal;
   font-weight: 300 !important;
 }
 /* line 52, ../sass/style.scss */
-.block-quote strong, body .quote strong, .statement-item .media-heading strong {
+.block-quote strong, body .quote strong, .statement-item .media-heading strong, .people-item .media-heading strong {
   font-weight: 700 !important;
 }
 
@@ -1117,7 +1117,7 @@ input + .errors {
   background-color: #cd5e26;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 768px) {
   /* line 770, ../sass/style.scss */
   .nav-color {
     float: right;
@@ -1586,7 +1586,7 @@ footer .footer-menu-item {
 }
 /* line 1145, ../sass/style.scss */
 .people-list ul.list-unstyled li {
-  margin: 15px 0;
+  margin-bottom: 15px;
 }
 
 @media (max-width: 479px) {
@@ -1780,11 +1780,7 @@ ul.nav-tabs li.first .caret {
     padding-right: 2%;
   }
 }
-/* line 1339, ../sass/style.scss */
-.people-item {
-  height: 380px;
-}
-/* line 1342, ../sass/style.scss */
+/* line 1344, ../sass/style.scss */
 .people-item .people-item-image {
   display: block;
   position: relative;
@@ -1794,52 +1790,128 @@ ul.nav-tabs li.first .caret {
   background-position: center;
   background-size: cover;
 }
+/* line 1355, ../sass/style.scss */
+.people-item .media-body {
+  padding: 10px 15px;
+  background-color: #000;
+}
+/* line 1358, ../sass/style.scss */
+.people-item .media-body .media-heading {
+  color: #fe6625;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: block;
+  white-space: nowrap;
+}
+/* line 1365, ../sass/style.scss */
+.people-item .media-body p {
+  color: #AAA;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: block;
+  white-space: nowrap;
+}
+/* line 1374, ../sass/style.scss */
+.people-item .people-meter-count {
+  display: table;
+  width: 100%;
+}
+/* line 1377, ../sass/style.scss */
+.people-item .people-meter-count ul {
+  list-style: none;
+  padding: 0;
+  display: table-row;
+}
+/* line 1382, ../sass/style.scss */
+.people-item .people-meter-count ul li {
+  margin: 3px;
+  display: table-cell;
+  min-width: 3.2em;
+}
+/* line 1389, ../sass/style.scss */
+.people-item .people-meter-count .meter-wrapper {
+  text-align: center;
+  margin-top: 25px;
+  float: left;
+  width: 100%;
+  border-right: 1px solid #cccccc;
+}
+/* line 1398, ../sass/style.scss */
+.people-item .people-meter-count li:last-child .meter-wrapper {
+  border-right: 0px none;
+}
+/* line 1404, ../sass/style.scss */
+.people-item .people-meter-count .meter-inner {
+  margin-top: -18px;
+}
+/* line 1407, ../sass/style.scss */
+.people-item .people-meter-count .meter-title {
+  font-family: "Boon-0.6";
+  font-weight: 700;
+}
+/* line 1411, ../sass/style.scss */
+.people-item .people-meter-count .meter-count {
+  font-size: 1.5em;
+  padding: 5px 2px 8px 2px;
+}
+
+/* line 1419, ../sass/style.scss */
+.people-list .btn {
+  margin-left: 15px;
+}
 
 @media (max-width: 600px) {
-  /* line 1355, ../sass/style.scss */
-  .people-list li {
+  /* line 1425, ../sass/style.scss */
+  .people-list > ul > li {
     width: 100%;
   }
 }
-/* line 1360, ../sass/style.scss */
+/* line 1430, ../sass/style.scss */
+.front-helper section {
+  margin-left: -15px;
+  margin-right: -15px;
+  box-sizing: content-box;
+}
+
+/* line 1436, ../sass/style.scss */
 td.quote {
   width: 40%;
 }
 
-/* line 1363, ../sass/style.scss */
+/* line 1439, ../sass/style.scss */
 td.created {
   min-width: 90px;
 }
 
-/* line 1366, ../sass/style.scss */
+/* line 1442, ../sass/style.scss */
 td.status {
   min-width: 200px;
 }
 
-/* line 1369, ../sass/style.scss */
+/* line 1445, ../sass/style.scss */
 td.meter {
   min-width: 55px;
 }
 
-/* line 1372, ../sass/style.scss */
+/* line 1448, ../sass/style.scss */
 .statement-detail img {
   max-width: 100%;
   height: auto !important;
 }
 
-/* line 1378, ../sass/style.scss */
+/* line 1454, ../sass/style.scss */
 #id_permalink_readonly {
   display: inline-block;
   margin-right: -50px;
   padding-right: 60px;
 }
 
-/* line 1384, ../sass/style.scss */
+/* line 1460, ../sass/style.scss */
 #edit-permalink {
   position: relative;
 }
 
-/* line 1389, ../sass/style.scss */
+/* line 1465, ../sass/style.scss */
 .inline-media {
   position: relative;
   padding-bottom: 56.25%;
@@ -1847,7 +1919,7 @@ td.meter {
   height: 0;
   overflow: hidden;
 }
-/* line 1395, ../sass/style.scss */
+/* line 1471, ../sass/style.scss */
 .inline-media iframe, .inline-media object, .inline-media embed {
   position: absolute;
   top: 0;
@@ -1856,7 +1928,7 @@ td.meter {
   height: 100%;
 }
 
-/* line 1404, ../sass/style.scss */
+/* line 1480, ../sass/style.scss */
 .reference-wrapper .glyphicon {
   color: #65BF61;
 }

@@ -1,6 +1,6 @@
 {% load i18n %}
 {% load common_tags %}
-<article class="row block block-no-border statement-item polygraph-list-block{% if statement.uptodate_status %} {{ statement.uptodate_status.code }}{% endif %}">
+<article class="block block-no-border statement-item polygraph-list-block{% if statement.uptodate_status %} {{ statement.uptodate_status.code }}{% endif %}">
     <div class="block-content col-lg-12">
         <div class="media">
             {% if statement.uptodate_status %}<span class="statement-status">{{ statement.uptodate_status.text }}</span>{% endif %}
