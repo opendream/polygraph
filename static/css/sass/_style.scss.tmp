@@ -11,70 +11,6 @@ $text_brown : #7f5d3d; // text brown
 $text_normal : #333333; // text normal
 $block_border : #CCCCCC;
 
-$navbar : #333; // base orange
-$navbar-a-separate : #565656;
-$navbar-a-hover : #000; // text hover (dark brown)
-$hover_orange : #baaa96; // hover orange
-
-@font-face {
-  src: url("../fonts/woff/boon-300.woff") format("woff");
-  font-family: "Boon-0.6";
-  font-style: normal;
-  font-weight: 300;
-}
-
-@font-face {
-  src: url("../fonts/woff/boon-700.woff") format("woff");
-  font-family: "Boon-0.6";
-  font-style: normal;
-  font-weight: 700;
-}
-
-
-
-body {
-  padding-top: 85px;
-  background: url(../images/body-bg.png);
-  font-size: 16px;
-  position: relative;
-}
-
-body.request-popup {
-    padding-top: 0;
-}
-
-h1, h2, h3, h4, .nav, .footer-menu{
-    font-family: "Boon-0.6";
-    font-style: normal;
-    font-weight: 700 !important;
-
-}
-.block-quote, body .quote, .statement-item .media-heading{
-    font-family: "Boon-0.6";
-    font-style: normal;
-    font-weight: 300 !important;
-
-    strong {
-        font-weight: 700 !important;
-    }
-}
-
-.col-no-padding { padding: 0; }
-
-h1, h2, h3, h4, h5, h6,
-p {
-	color: $text_normal;
-}
-
-p.border-bt { padding-bottom: 20px; border-bottom: 2px solid $block_border; }
-
-.text-brown,
-.text-brown p { color: $text_brown; }
-
-a,
-a:hover { color: $text_brown; }
-a:hover { text-decoration: underline; }
-
 .text-large { font-size: 40px; font-weight: bold; }
 .align-right { text-align: right; }
 @media (max-width: 768px) {
@@ -196,107 +132,10 @@ a:hover { text-decoration: underline; }
 	}
 }
 
-.navbar-default {
-  background-color: $navbar;
-  .container { margin-bottom: 0; position: relative; }
-  .navbar-toggle {
-    border: none;
-    &:hover { background-color: $hover_orange; }
-    .icon-bar { 
-      background-color: #FFF;
-      width: 30px;
-      height: 5px;
-      border-radius: 5px;
-    }
-  }
-  .navbar-collapse {border: none;}
-  .navbar-header a {
-    color: #FFF; 
-    font-size: inherit;
-    &:hover { color: #FFF; }
-    span { font-size: 14px; margin-left: 1em; line-height: 1em; }
-  }
-  .navbar-nav {
-    &.navbar-right:last-child { margin-right: 0;}
-    &>li { position: relative; }
-    &>li>a {
-      color: #FFF;
-      border-right: 1px solid $navbar-a-separate;
-      padding: 20px 30px;
-      font-weight: bold;
-      font-size: 18px;
-      &:hover {
-        color: #FFF;
-        text-decoration: underline;
-      }     
-    }
-
-    &>.active>a,
-    &>.active>a:hover {
-      color: $navbar-a-hover;
-      background-color: $hover_orange;
-    }
-
-    &>li.active:after {
-      border-color: $hover_orange $hover_orange transparent transparent ;
-      border-width: 10px;
-      border-style: solid;
-      content: "";
-      display: inline-block;
-      position: absolute;
-      bottom: -20px;
-      left: 50%;
-      margin-left: -10px;     
-    }
-  }
-}
-@media (max-width: 767px) {
-  .navbar-default {
-    .navbar-nav { 
-      border: none;
-      margin-top: 0;
-      margin-bottom: 0;
-      &>li.active:after {
-        display: none;
-      }
-    }
-    .navbar-collapse { 
-      max-height: 100%;
-      li a { 
-        padding: 15px 15px;
-        border-right: none;
-      }
-    }
-  }
-  .navbar-brand {
-      img {
-          width: auto;
-          height: 57px;
-          position: absolute;
-          padding: 0; 
-          margin-left: 15px;
-          top: 0;
-          left: 0;
-      }
-  }
-}
-
-.navbar-header h1 {margin: 0;}
-.navbar-brand {
-    img {
-        position: absolute;
-        padding: 0; 
-        margin-left: 15px;
-        top: 0;
-        left: 0;
-    }
-}
-
 .form-action {
 	margin-top: 10px;
   	margin-bottom: 10px;
 }
-
 .headroom {
     transition: transform 200ms linear;
 }
@@ -895,44 +734,44 @@ input + .errors{
 }
 
 footer {
-  height: 60px;
-  background-color: $navbar;
-  * {color: #FFF; line-height: 60px;}
-  .container { margin-bottom: 0; }
-  .footer-logo {
-      height: 60px;
-      img { height: 100%; }
-  }
-  .footer-menu {
-    div {
-      text-align: right;
-      a:hover { color: #FFF; }
-    }
-  }
-  a.active {
-      text-decoration: underline;
-  }
+	background-color: $base_orange;
+	* {color: #FFF; line-height: 60px;}
+	.container { margin-bottom: 0; }
+	.footer-logo {
+	    font-size: 30px;
+	    position: absolute;
+	    height: 100%;
+	}
+	.footer-menu {
+		div {
+			text-align: right;
+			a:hover { color: $text_hover; }
+		}
+	}
+	a.active {
+	    text-decoration: underline;
+	}
 
-  .footer-content {
-      position: relative;
-  }
+	.footer-content {
+	    position: relative;
+	}
     .footer-menu-inner {
         float: right;
         padding-right: 10px;
     }
-  .footer-menu-item {
+	.footer-menu-item {
         float: left;
         margin: 0 15px;
-  }
+	}
 }
 @media (max-width: 767px) {
-  footer {
-    .footer-menu {
-      div {
-        text-align: left;
-      }
-    }
-  }
+	footer {
+		.footer-menu {
+			div {
+				text-align: left;
+			}
+		}
+	}
 }
 
 //############# Form Create Statement

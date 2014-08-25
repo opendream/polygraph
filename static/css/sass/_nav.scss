@@ -1,0 +1,142 @@
+
+$navbar : #333; // base orange
+$navbar-a-separate : #565656;
+$navbar-a-hover : #000; // text hover (dark brown)
+$hover_orange : #baaa96; // hover orange
+
+.navbar-header h1 {margin: 0;}
+.navbar-brand {
+    img {
+        position: absolute;
+        padding: 0; 
+        margin-left: 15px;
+        top: 0;
+        left: 0;
+    }
+}
+
+.navbar-default {
+  background-color: $navbar;
+  .container { margin-bottom: 0; position: relative; }
+  .navbar-toggle {
+    border: none;
+    &:hover { background-color: $hover_orange; }
+    .icon-bar { 
+      background-color: #FFF;
+      width: 30px;
+      height: 5px;
+      border-radius: 5px;
+    }
+  }
+  .navbar-collapse {border: none;}
+  .navbar-header a {
+    color: #FFF; 
+    font-size: inherit;
+    &:hover { color: #FFF; }
+    span { font-size: 14px; margin-left: 1em; line-height: 1em; }
+  }
+  .navbar-nav {
+    &.navbar-right:last-child { margin-right: 0;}
+    &>li { position: relative; }
+    &>li>a {
+      color: #FFF;
+      border-right: 1px solid $navbar-a-separate;
+      padding: 20px 30px;
+      font-weight: bold;
+      font-size: 18px;
+      &:hover {
+        color: #FFF;
+        text-decoration: underline;
+      }     
+    }
+
+    &>.active>a,
+    &>.active>a:hover {
+      color: $navbar-a-hover;
+      background-color: $hover_orange;
+    }
+
+    &>li.active:after {
+      border-color: $hover_orange $hover_orange transparent transparent ;
+      border-width: 10px;
+      border-style: solid;
+      content: "";
+      display: inline-block;
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      margin-left: -10px;     
+    }
+  }
+}
+@media (max-width: 767px) {
+  .navbar-default {
+    .navbar-nav { 
+      border: none;
+      margin-top: 0;
+      margin-bottom: 0;
+      &>li.active:after {
+        display: none;
+      }
+    }
+    .navbar-collapse { 
+      max-height: 100%;
+      li a { 
+        padding: 15px 15px;
+        border-right: none;
+      }
+    }
+  }
+  .navbar-brand {
+      img {
+          width: auto;
+          height: 57px;
+          position: absolute;
+          padding: 0; 
+          margin-left: 15px;
+          top: 0;
+          left: 0;
+      }
+  }
+}
+
+footer {
+  height: 60px;
+  background-color: $navbar;
+  * {color: #FFF; line-height: 60px;}
+  .container { margin-bottom: 0; }
+  .footer-logo {
+      height: 60px;
+      img { height: 100%; }
+  }
+  .footer-menu {
+    div {
+      text-align: right;
+      a:hover { color: #FFF; }
+    }
+  }
+  a.active {
+      text-decoration: underline;
+  }
+
+  .footer-content {
+      position: relative;
+  }
+    .footer-menu-inner {
+        float: right;
+        padding-right: 10px;
+    }
+  .footer-menu-item {
+        float: left;
+        margin: 0 15px;
+  }
+}
+@media (max-width: 767px) {
+  footer {
+    .footer-menu {
+      div {
+        text-align: left;
+      }
+    }
+  }
+}
