@@ -201,28 +201,6 @@ def people_edit(request, people_id=None):
     return people_create(request, people)
 
 
-@statistic
-def people_detail(request, people_permalink):
-
-    people = get_object_or_404(People, permalink=people_permalink)
-
-    meter_list = Meter.objects.all().order_by('order')
-    meter_statement_count = [(meter, meter.statement_set.filter(status=STATUS_PUBLISHED, quoted_by=people).count()) for meter in meter_list]
-
-    statement_list = statement_query_base(request.user.is_anonymous(), request.user.is_staff, request.user)
-    statement_list = statement_list.filter(Q(quoted_by=people)|Q(relate_peoples=people)).order_by('-uptodate')
-
-
-    statement_list = pagination_build_query(request, statement_list, 5)
-
-
-    return render(request, 'domain/people_detail.html', {
-        'people': people,
-        'meter_statement_count': meter_statement_count,
-        'statement_list': statement_list
-    })
-
-
 def people_query_base(category=None):
 
 
@@ -242,6 +220,34 @@ def people_query_base(category=None):
     query.order_by.reverse()
 
     return QuerySet(query=query, model=People)
+
+
+@statistic
+def people_detail(request, people_permalink):
+
+    people = get_object_or_404(People, permalink=people_permalink)
+
+    meter_list = Meter.objects.all().order_by('order')
+    meter_statement_count = [(meter, meter.statement_set.filter(status=STATUS_PUBLISHED, quoted_by=people).count()) for meter in meter_list]
+
+    statement_list = statement_query_base(request.user.is_anonymous(), request.user.is_staff, request.user)
+    statement_list = statement_list.filter(Q(quoted_by=people)|Q(relate_peoples=people)).order_by('-uptodate')
+
+
+    statement_list = pagination_build_query(request, statement_list, 5)
+
+    people_list = people_query_base()
+    people_list = people_list.exclude(id=people.id)
+
+    people_list = people_list[0:3]
+
+
+    return render(request, 'domain/people_detail.html', {
+        'people': people,
+        'meter_statement_count': meter_statement_count,
+        'statement_list': statement_list,
+        'people_list': people_list
+    })
 
 
 def people_list(request):

@@ -117,4 +117,21 @@
 		</section>
 	</div>
 
+    {% if people_list %}
+    <div class="row">
+        <div class="people-list col-md-12">
+
+            <ul class="list-unstyled">
+                {% for people in people_list %}
+                <li>
+                    {{ people|people_item }}
+                </li>
+                {% endfor %}
+            </ul>
+            <a href="{% url 'people_list' %}" class="btn btn-default">{% trans "See all peoples" %} <span class="glyphicon glyphicon-chevron-right"></span></a>
+
+        </div>
+    </div>
+    {% endif %}
+
 {% endblock %}

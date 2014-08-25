@@ -749,11 +749,12 @@ input + .errors{
 	}
 }
 
-@media (min-width: 992px) {
+@media (min-width: 1200px) {
 	.nav-color {
 		float: right;
 	}
 }
+
 @media (max-width: 768px) {
 	.nav.full-width {
 		margin: 15px 0;
