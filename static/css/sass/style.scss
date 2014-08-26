@@ -293,6 +293,7 @@ a:hover { text-decoration: underline; }
         margin-left: 15px;
         top: 0;
         left: 0;
+        background-color: #a97c50;
     }
 }
 
@@ -391,15 +392,6 @@ input + .errors{
 			.item-inner {
 				padding: 10px 5px 0 15px;
 			}
-			&.shuffle-bg {
-				li .item-inner { border: none; }
-				li,
-				li + li + li + li { background-color: $hover_orange; }
-				li + li,
-				li + li + li + li + li { background-color: #e78c30; }
-				li + li + li,
-				li + li + li + li + li + li { background-color: #ffaf4c; }
-			}
 			li.first { 
 				.item-inner {
 					padding-top: 10px;
@@ -457,6 +449,9 @@ input + .errors{
 			border-bottom: 1px dotted #333333;
 			&.no-border-bottom { border-bottom: none; }
 		}
+    &:last-child .item-inner {
+      border-bottom: none;
+    }
 	}
 	&.icon-list { 
 		.item-inner a { display: block; padding-left: 25px; margin-top: -22px; }
@@ -484,7 +479,7 @@ input + .errors{
 }
 .amount {
 	height: 10px;
-	background-color: $base_orange;
+	background-color: #a97c50;
 	@include border-radius(5px);
 }
 .amount-wrapper {
@@ -910,8 +905,6 @@ footer {
   .footer-menu {
     div {
       a { color: #FFF; line-height: 60px; }
-      // text-align: right;
-      // a:hover { color: #FFF; }
     }
   }
   a.active {
