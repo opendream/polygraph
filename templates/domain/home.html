@@ -78,7 +78,7 @@
                     {{ statement|statement_item:'wide' }}
                     {% endfor %}
 
-                    <div class="row">
+                    <div class="read-more">
 
                         <a href="{% if meter.id %}{% url 'meter_detail' meter.permalink %}{% else %}{% url 'statement_list' %}{% endif %}" class="btn btn-default">
                             {% blocktrans with meter.title as meter_title %}See all {{ meter_title }} statements{% endblocktrans %}<span class="glyphicon glyphicon-chevron-right"></span>
@@ -132,34 +132,35 @@
 
     </section>
 
-    <aside class="col-md-4 front-helper">
+    <aside class="col-md-4">
+        <div class="row">
+            <section class="summary col-md-12">
+                <header>
+                    <h2>{% trans "Summary" %}</h2>
+                </header>
+                <div class="block">
+                    {{ meter_statement_count|meter_count }}
+                </div>
+            </section>
 
-        <section class="summary col-md-12">
-            <header>
-                <h2>{% trans "Summary" %}</h2>
-            </header>
-            <div class="block">
-                {{ meter_statement_count|meter_count }}
-            </div>
-        </section>
-
-        {% if people_list %}
-        <section class="people-list">
-            <header class="col-md-12">
-                <h2>{% trans "People" %}</h2>
-            </header>
-            <ul class="list-unstyled">
-                {% for people in people_list %}
-                <li class="col-xs-6 col-md-12">
-                    {{ people|people_item }}
-                </li>
-                {% endfor %}
-            </ul>
-            <a href="{% url 'people_list' %}" class="btn btn-default">{% trans "See all peoples" %} <span class="glyphicon glyphicon-chevron-right"></span></a>
-
-        </section>
-        {% endif %}
-
+            {% if people_list %}
+            <section class="people-list">
+                <header class="col-md-12">
+                    <h2>{% trans "People" %}</h2>
+                </header>
+                <ul class="list-unstyled">
+                    {% for people in people_list %}
+                    <li class="col-xs-6 col-md-12">
+                        {{ people|people_item }}
+                    </li>
+                    {% endfor %}
+                </ul>
+                <div class="col-md-12">
+                    <a href="{% url 'people_list' %}" class="btn btn-default">{% trans "See all peoples" %} <span class="glyphicon glyphicon-chevron-right"></span></a>
+                </div>
+            </section>
+            {% endif %}
+        </div>
     </aside>
 
 
