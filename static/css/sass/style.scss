@@ -902,7 +902,6 @@ input + .errors{
 footer {
   height: 60px;
   background-color: $navbar;
-  * {color: #FFF; line-height: 60px;}
   .container { margin-bottom: 0; }
   .footer-logo {
       height: 60px;
@@ -910,8 +909,9 @@ footer {
   }
   .footer-menu {
     div {
-      text-align: right;
-      a:hover { color: #FFF; }
+      a { color: #FFF; line-height: 60px; }
+      // text-align: right;
+      // a:hover { color: #FFF; }
     }
   }
   a.active {
@@ -1081,11 +1081,12 @@ footer {
 }
 
 .people-list {
+  position: relative;
 	.dropdown {
 		position: absolute;
-		top: 10px;
-		right: 0;
-		width: 250px;
+		top: -2.75em;
+		right: 15px;
+		width: 200px;
 		.btn {
 			width: 100%;
 			text-align: left;
@@ -1138,9 +1139,9 @@ footer {
 @media (max-width: 479px) {
 	.people-list {
 		.dropdown {
-			position: relative;
-			margin-left: 15px;
-			top: auto;
+			// position: relative;
+			// margin-left: 15px;
+			// top: auto;
 		}
 	}
 }
@@ -1401,10 +1402,6 @@ ul.nav-tabs li.first .caret { border-bottom-color: #FFF; }
 
         }
     }
-}
-
-.people-list .btn {
-    margin-left: 15px;
 }
 
 

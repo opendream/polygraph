@@ -1,0 +1,36 @@
+$base_orange : #cd5e26; // base orange
+$hover_orange : #ff9933; // hover orange
+$border_orange : #a34b21; // border orange
+$bright_orange : #fe6625; // bright orange
+$soft_orange : #ffc092;
+$text_hover : #4C0000; // text hover (dark brown)
+$text_brown : #7f5d3d; // text brown
+$block_border : #CCCCCC;
+
+$text_normal : #333333; // text normal
+$navbar : #333; // base orange
+$navbar-a-separate : #565656;
+$navbar-a-hover : #000; // text hover (dark brown)
+$btn-bg-hover : #baaa96; // hover orange
+$main-color : #a97c50; // main color
+
+.btn-primary {
+  color: #FFF;
+  background-color: $main-color;
+  border-color: $main-color;
+  &:hover { 
+    background-color: $btn-bg-hover;
+    border-color: $btn-bg-hover;
+  }
+}
+.btn-color {
+  color: $text_normal;
+  background-color: $soft_orange;
+  &:hover {
+    color: $text_normal;
+    background-color: $soft_orange;
+  }
+}
+.btn-delete {
+    float: right;
+}
