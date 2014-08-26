@@ -76,6 +76,15 @@ p.border-bt { padding-bottom: 20px; border-bottom: 2px solid $block_border; }
 .text-brown,
 .text-brown p { color: $text_brown; }
 
+.see-all a { 
+  color: $text_brown;
+  &:hover {
+    color: $text_brown;
+    background-color: #FFF;
+    text-decoration: underline;
+  }
+}
+
 a,
 a:hover { color: $text_brown; }
 a:hover { text-decoration: underline; }
@@ -436,15 +445,6 @@ input + .errors{
 		}
 	}
 }
-@media (max-width: 992px) {
-	.block {
-		ul.block-content {
-			li {
-				.item-inner { border: none; }
-			}
-		}
-	}
-}
 
 .item-list {
 	list-style: none;
@@ -504,13 +504,12 @@ input + .errors{
 }
 
 .highlight-statement {
-	border-bottom: 3px solid #ffb07d;
 	position: relative;
 	.triangle {
-		width: 25px;
-		height: 25px;
+		width: 23px;
+		height: 22px;
 		position: absolute;
-		bottom: -25px;
+		bottom: -20px;
 		left: 60px;
 		z-index: 2;
 		background: url(../images/triangle.png) no-repeat 0 0;
@@ -542,7 +541,7 @@ input + .errors{
 		z-index: 1;
 	}
 	&:before {
-		top: 12px; left: 0;
+		top: 5px; left: 0;
 	}
 	&:after {
 		background-position: -23px 0;
@@ -571,63 +570,63 @@ input + .errors{
 	.block-quote-alt { font-size: 2.8em; }
 }
 
-.who-said {
-	position: relative;
-	overflow: hidden;
-	background-color: $soft_orange;
-	&.block-content { padding: 15px 20px 0 20px; }
-	.media {
-		overflow: hidden;
-		margin-top: 20px;
-		.media-body { margin-top: 30px; }
-	}
-	.meter {
-		text-align: right;
-		padding-right: 0;
-		margin-top: 20px;
-	}
-}
-@media (max-width: 600px) {
-	.who-said {
-		&.block-content { padding: 25px 20px 0 20px; }
-		.media { margin-top: 10px; }
-		.meter { margin-top: 0; }
-	}
-}
-@media (max-width: 540px) {
-	.who-said {
-		.media {
-			padding-left: 0;
-			a.pull-left {
-				width: 75px;
-				img { width: 100% }
-			}
-			.media-body {
-				margin-top: 0;
-				font-size: 95%;
-			}
-		}
-	}
-}
-// hilight statement landscape iPhone
-@media (max-width: 479px) {
-	.highlight-statement {
-		.block-quote {
-			padding: 30px 0 30px;
-			* { line-height: 1.5; }
-		}
-	}
-	.who-said {
-		.media { 
-			width: 100%;
-			padding: 0 15px 15px 0; }
-		.meter { 
-			width: 100%; 
-			padding-left: 0;
-			text-align: center;
-		}
-	}
-}
+// .who-said {
+// 	position: relative;
+// 	overflow: hidden;
+// 	background-color: $soft_orange;
+// 	&.block-content { padding: 15px 20px 0 20px; }
+// 	.media {
+// 		overflow: hidden;
+// 		margin-top: 20px;
+// 		.media-body { margin-top: 30px; }
+// 	}
+// 	.meter {
+// 		text-align: right;
+// 		padding-right: 0;
+// 		margin-top: 20px;
+// 	}
+// }
+// @media (max-width: 600px) {
+// 	.who-said {
+// 		&.block-content { padding: 25px 20px 0 20px; }
+// 		.media { margin-top: 10px; }
+// 		.meter { margin-top: 0; }
+// 	}
+// }
+// @media (max-width: 540px) {
+// 	.who-said {
+// 		.media {
+// 			padding-left: 0;
+// 			a.pull-left {
+// 				width: 75px;
+// 				img { width: 100% }
+// 			}
+// 			.media-body {
+// 				margin-top: 0;
+// 				font-size: 95%;
+// 			}
+// 		}
+// 	}
+// }
+// // hilight statement landscape iPhone
+// @media (max-width: 479px) {
+// 	.highlight-statement {
+// 		.block-quote {
+// 			padding: 30px 0 30px;
+// 			* { line-height: 1.5; }
+// 		}
+// 	}
+// 	.who-said {
+// 		.media { 
+// 			width: 100%;
+// 			padding: 0 15px 15px 0; }
+// 		.meter { 
+// 			width: 100%; 
+// 			padding-left: 0;
+// 			text-align: center;
+// 		}
+// 	}
+// }
 
 .statement-meta {
 	border-bottom: 2px solid #D8D8D8;
@@ -665,111 +664,115 @@ input + .errors{
 	.right { padding-left: 140px; }
 }
 
-// .nav-color {
-// 	padding-top: 15px;
-// 	li {
-// 		padding: 0 10px; margin: 0;
-// 		text-align: center;
-// 		.caret {
-// 			border-top: none;
-// 			border-bottom: 12px solid #F2F2F2;
-// 			border-right: 12px solid transparent;
-// 			border-left: 12px solid transparent;
-// 			margin-bottom: -8px;
-// 		}
-// 		&.last,
-// 		&.dropdown {
-// 			padding-right: 0;
-// 			&:after { display: none; }
-// 		}
-// 	}
-// 	> li:after {
-// 		content: "•";
-// 		position: absolute;
-// 		top: 0.8em;
-// 		right: -3px;
-// 	}
-// 	li a {
-// 		@include border-radius(20px);
-// 		background-color: transparent;
-// 		padding: 10px 20px;
-// 		&:hover {
-// 			background-color: $soft_orange;
-// 			color: $text_brown;
-// 		}
-// 	}
-// 	li.active a {
-// 		background-color: $bright_orange;
-// 		color: #FFFFFF;
-// 		border-color: $bright_orange;
-// 		&:hover {
-// 			background-color: $bright_orange;
-// 			border-color: $bright_orange;
-// 		}
-// 	}
-// }
-
-// .nav.full-width {
-// 	border-bottom: 0;
-// 	li.dropdown {
-// 		width: 100%;
-// 		@include border-radius(5px);
-// 		padding: 0;
-// 		margin: 0;
-// 		a {
-// 			@include border-radius(5px);
-// 			background-color: #FFF;
-// 			border: 1px solid #CCC;
-// 			margin: 0;
-// 			text-align: left;
-// 			&:hover { background-color: #FFF; border: 1px solid #CCC; } 
-// 			&.dropdown-toggle { font-size: 1.5em; }
-// 			.caret {
-// 				position: absolute;
-// 				right: 15px;
-// 				top: 50%;
-// 				margin-top: -4px;
-// 				border-top: 8px solid $text-brown;
-// 				border-right: 8px solid transparent;
-// 				border-left: 8px solid transparent;
-// 				border-bottom: 0 solid transparent;
-// 			}
-// 		}
-// 		&.open a { border: 1px solid #CCC; color: $text-brown; }
-// 		ul.dropdown-menu {
-// 			width: 100%;
-// 			z-index: 2;
-// 			li { 
-// 				padding: 0; 
-// 			}
-// 			li a { @include border-radius(0); border: none; } 
-// 			li.active,
-// 			li:hover {
-// 				a { 
-// 					color: #FFF;
-// 					background-color: $base_orange;
-// 				}
-// 			} 
-// 		}
-// 	}
-// }
-
-@media (min-width: 768px) {
-	.nav-color {
-		float: right;
+.nav-color {
+	padding-top: 15px;
+	li {
+		padding: 0 10px; margin: 0;
+		text-align: center;
+		.caret {
+			border-top: none;
+			border-bottom: 12px solid #F2F2F2;
+			border-right: 12px solid transparent;
+			border-left: 12px solid transparent;
+			margin-bottom: -8px;
+		}
+		&.last,
+		&.dropdown {
+			padding-right: 0;
+			&:after { display: none; }
+		}
+	}
+	> li:after {
+		content: "•";
+		position: absolute;
+		top: 0.8em;
+		right: -3px;
+	}
+	li a {
+		@include border-radius(20px);
+		background-color: transparent;
+		padding: 10px 20px;
+		&:hover {
+			background-color: $soft_orange;
+			color: $text_brown;
+		}
+	}
+	li.active a {
+		background-color: $bright_orange;
+		color: #FFFFFF;
+		border-color: $bright_orange;
+		&:hover {
+			background-color: $bright_orange;
+			border-color: $bright_orange;
+		}
 	}
 }
 
-@media (max-width: 768px) {
-	.nav.full-width {
-		margin: 15px 0;
-		> li.active {
-			a { 
-				color: $text-brown;
+.nav.full-width {
+	border-bottom: 0;
+	li.dropdown {
+		width: 100%;
+		@include border-radius(5px);
+		padding: 0;
+		margin: 0;
+		a {
+			@include border-radius(5px);
+			background-color: #FFF;
+			border: 1px solid #CCC;
+			margin: 0;
+			text-align: left;
+			&:hover { background-color: #FFF; border: 1px solid #CCC; } 
+			&.dropdown-toggle { font-size: 1.5em; }
+			.caret {
+				position: absolute;
+				right: 15px;
+				top: 50%;
+				margin-top: -4px;
+				border-top: 8px solid $text-brown;
+				border-right: 8px solid transparent;
+				border-left: 8px solid transparent;
+				border-bottom: 0 solid transparent;
+			}
+		}
+		&.open a { border: 1px solid #CCC; color: $text-brown; }
+		ul.dropdown-menu {
+			width: 100%;
+			z-index: 2;
+			li { 
+				padding: 0; 
+			}
+			li a { 
+        @include border-radius(0); 
+        border: none; 
+        font-size: 16px;
+      } 
+			li.active,
+			li:hover {
+				a { 
+					color: #FFF;
+					background-color: $base_orange;
+				}
 			} 
 		}
 	}
 }
+
+// @media (min-width: 768px) {
+// 	.nav-color {
+// 		float: right;
+// 	}
+// }
+
+// @media (max-width: 768px) {
+// 	.nav.full-width {
+// 		margin: 15px 0;
+// 		> li.active {
+// 			a { 
+// 				color: $text-brown;
+// 			} 
+// 		}
+// 	}
+// }
 
 .polygraph-list.single {
 	.nav-color {
@@ -837,7 +840,7 @@ input + .errors{
 	}
 	.meter-md {
 		position: absolute;
-		top: -65px;
+		top: -60px;
 		right: 20px;
 	}
 }
@@ -1146,6 +1149,9 @@ footer {
 
 .people-detail {
 	.media.block-content { background-color: #f5f5f5; }
+  .statement-item .media {
+    margin: -20px -20px 0 -20px;
+  }
 	.people-summary {
 	    margin-top: 20px;
 	}
@@ -1311,6 +1317,25 @@ ul.nav-tabs li.first .caret { border-bottom-color: #FFF; }
         font-size: 0.8em;
         color: #555;
     }
+}
+.who-said {
+  position: relative;
+  .media {
+    margin: -20px -20px 0 -20px;
+  }
+  .meter-md {
+    position: absolute;
+    top: -60px;
+    right: 15px;
+  }
+}
+.highlight-statement {
+  .submit {
+    margin: 0 48px;
+    padding-right: 100px;
+    font-size: 0.8em;
+    color: #555;
+  }
 }
 
 @media (max-width: 480px) {

@@ -50,40 +50,47 @@
                 <h2 class="hidden">{% trans "Statement" %}</h2>
             </header>
             <div class="block-quote lead">{{ statement.quote|safe }}</div>
+            <div class="submit">
+                <strong>{% trans "Source" %}&nbsp;&nbsp;</strong>{{ statement.source }}
+            </div>
+
             <span class="triangle"></span>
         </section>
 
-        <section class="who-said block-content">
+        <section class="who-said block-content statement-item">
             <header>
                 <h2 class="hidden">{% trans "Who's said??" %}</h2>
             </header>
-            <div class="media col-lg-7 col-xs-7">
 
-                <a class="pull-left" href="{% url 'people_detail' statement.quoted_by.permalink %}">
-                    {% image_render statement.quoted_by.image '82x82' statement.quoted_by.get_full_name %}
+            <div class="media">
+                {% if statement.uptodate_status %}<span class="statement-status">{{ statement.uptodate_status.text }}</span>{% endif %}
+
+                <a
+                    class="vignette"
+                    href="{% url 'people_detail' statement.quoted_by.permalink %}"
+                    style="background-image: url('{% image_render statement.quoted_by.image '750x250' statement.quoted_by.get_full_name 'center' 1 %}');"
+                >
+
                 </a>
                 <div class="media-body">
-                    <a href="{% url 'people_detail' statement.quoted_by.permalink %}" class="media-heading">{{ statement.quoted_by.get_full_name }}</a>
-                    <p>{{ statement.quoted_by.occupation }}</p>
+                    <a href="{% url 'people_detail' statement.quoted_by.permalink %}" class="media-heading lead">
+                        {{ statement.quoted_by.get_full_name }}
+                    </a>
+                    <div class="people-occupation">
+                        {{ statement.quoted_by.occupation }}
+                    </div>
                 </div>
+                <div class="meter-md">
+                    {% image_render statement.meter.image_small_text '200x107' statement.meter.title %}
+                </div>
+            </div>
 
-            </div>
-            <div class="meter col-lg-5 col-xs-5">
-                <h3 class="hidden">{{ statement.meter.title }}</h3>
-                <figure>{% image_render statement.meter.image_small_text '212x152' statement.meter.title %}</figure>
-            </div>
         </section>
 
         <section class="statement-meta block-content">
             <header>
                 <h3 class="hidden">{% trans "Meta Statement" %}</h3>
             </header>
-
-            {% if statement.source %}
-            <div class="submit">
-                <p><strong>{% trans "Source" %}&nbsp;&nbsp;</strong>{{ statement.source }}</p>
-            </div>
-            {% endif %}
 
             <div class="share-btn pull-left">
                 <div class="fb-share-button" data-href="{% url 'statement_detail' statement.permalink %}" data-type="button_count"></div>

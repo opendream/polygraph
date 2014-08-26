@@ -20,18 +20,10 @@
 			<div class="col-md-4 hidden">
 				<h2 class="hidden"><span class="dialog-ic-bw"></span>{% trans "Polygraph" %}</h2>
 			</div>
-			<div class="col-xs-8 pull-right">
+			<div class="col-xs-12 col-md-4 pull-right">
 				<ul class="nav nav-pills nav-color full-width" role="tablist">
 
-                    {% for meter in meter_list %}
-				  	<li class="hidden-xs{% if forloop.first %} first{% endif %}{% if forloop.last %} last{% endif %}{% if meter == request_meter %} active{% endif %}">
-                        <a href="{% url 'meter_detail' meter.permalink %}">
-                            {{ meter.title }}
-                        </a>
-                    </li>
-                    {% endfor %}
-
-					<li class="dropdown visible-xs">
+					<li class="dropdown">
         				<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ request_meter.title }} <span class="caret"></span></a>
         				<ul class="dropdown-menu" role="menu" aria-labelledby="meter-tab-drop">
 
@@ -47,6 +39,21 @@
       				</li>
 				</ul>				
 			</div>
+
+            <div class="col-xs-12 col-md-4 pull-right dropdown">
+                <button class="btn btn-default dropdown-toggle" tyle="button" href="#" class="dropdown-toggle" data-toggle="dropdown">{{ request_meter.title }} <span class="caret"></span></button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="meter-tab-drop">
+
+                    {% for meter in meter_list %}
+                    <li role="presentation" class="{% if forloop.first %} first{% endif %}{% if forloop.last %} last{% endif %}{% if meter == request_meter %} active{% endif %}">
+                        <a role="menuitem" href="{% url 'meter_detail' meter.permalink %}" tabindex="-1">
+                            {{ meter.title }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                            
+                </ul>            
+            </div>
 		</header>
 
 
@@ -54,14 +61,15 @@
             <div class="col-md-12">
 
                 <header>
-                        <h3 class="hidden">{% trans "Meter Description" %}</h3>
-                    </header>
-                    <div class="block block-bg-grey polygraph-list-before">
-                        <div class="block-content">
-                            <div class="col-md-12 col-no-padding">
-                                <div class="col-lg-8 col-md-8 col-xs-8 text-left meter-title">
-                                    <h4 class="block-quote-alt">{{ request_meter.title }}</h4>
-                                </div><div class="row">
+                    <h3 class="hidden">{% trans "Meter Description" %}</h3>
+                </header>
+                <div class="block block-bg-grey polygraph-list-before">
+                    <div class="block-content">
+                        <div class="col-md-12 col-no-padding">
+                            <div class="col-lg-8 col-md-8 col-xs-8 text-left meter-title">
+                                <h4 class="block-quote-alt">{{ request_meter.title }}</h4>
+                            </div>
+                            <div class="row">
                                 <div class="col-lg-8 col-md-8 col-xs-7 text-left desc">
                                     <span>{% trans "Description" %} :</span>
                                     {{ request_meter.description|safe }}
@@ -70,10 +78,11 @@
                                     <figure>
                                         {% image_render request_meter.image_large_text '300x329' request_meter.title %}
                                     </figure>
-                                </div></div>
-                            </div>
+                                </div>
+                            </div>    
                         </div>
                     </div>
+                </div>
 
             </div>
         </div>
@@ -105,7 +114,9 @@
                         </li>
                         {% endfor %}
                     </ul>
-                    <a href="{% url 'people_list' %}" class="btn btn-default">{% trans "See all peoples" %} <span class="glyphicon glyphicon-chevron-right"></span></a>
+                    <div class="see-all">
+                        <a href="{% url 'people_list' %}" class="btn btn-default">{% trans "See all peoples" %} <span class="glyphicon glyphicon-chevron-right"></span></a>
+                    </div>
                     {% else %}
                     {% if user.is_authenticated %}
                     <div class="text-center">

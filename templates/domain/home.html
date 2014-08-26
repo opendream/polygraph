@@ -78,7 +78,7 @@
                     {{ statement|statement_item:'wide' }}
                     {% endfor %}
 
-                    <div class="read-more">
+                    <div class="see-all">
 
                         <a href="{% if meter.id %}{% url 'meter_detail' meter.permalink %}{% else %}{% url 'statement_list' %}{% endif %}" class="btn btn-default">
                             {% blocktrans with meter.title as meter_title %}See all {{ meter_title }} statements{% endblocktrans %}<span class="glyphicon glyphicon-chevron-right"></span>
@@ -155,7 +155,7 @@
                     </li>
                     {% endfor %}
                 </ul>
-                <div class="col-md-12">
+                <div class="col-md-12 see-all">
                     <a href="{% url 'people_list' %}" class="btn btn-default">{% trans "See all peoples" %} <span class="glyphicon glyphicon-chevron-right"></span></a>
                 </div>
             </section>

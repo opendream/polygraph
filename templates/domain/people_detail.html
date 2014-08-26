@@ -111,7 +111,7 @@
 			<header>
 				<h2>{% trans "Summary" %}</h2>
 			</header>
-			<div class="block block-bg-transparent">
+			<div class="block">
                 {{ meter_statement_count|meter_count }}
 			</div>
 		</section>
@@ -130,7 +130,9 @@
                 </li>
                 {% endfor %}
             </ul>
-            <a href="{% url 'people_list' %}" class="btn btn-default">{% trans "See all peoples" %} <span class="glyphicon glyphicon-chevron-right"></span></a>
+            <div class="col-md-12 see-all">
+                <a href="{% url 'people_list' %}" class="btn btn-default">{% trans "See all peoples" %} <span class="glyphicon glyphicon-chevron-right"></span></a>
+            </div>
 
 
         </div>
