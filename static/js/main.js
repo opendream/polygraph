@@ -389,7 +389,7 @@ $(document).ready(function () {
 
     // navigation scroll
     if (window.location.href.indexOf('edit')  == -1 && window.location.href.indexOf('create') == -1) {
-        $('#navbar-scroll-up-show, .navbar-brand img').headroom({
+        $('#navbar-scroll-up-show, .navbar-scroll-up-show .navbar-brand img').headroom({
             'tolerance': 5,
             'offset': 205
 
