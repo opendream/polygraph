@@ -1,7 +1,15 @@
 {% load i18n %}
 {% load common_tags %}
-<article class="block block-no-border statement-item polygraph-list-block{% if statement.uptodate_status %} {{ statement.uptodate_status.code }}{% endif %}">
+<article class="block statement-item polygraph-list-block{% if statement.uptodate_status %} {{ statement.uptodate_status.code }}{% endif %}">
     <div class="block-content col-lg-12">
+        
+        <div class="text-brown block-quote lead">
+            <a href="{% url 'statement_detail' statement.permalink %}">{{ statement.quote|removetags:'p'|safe }}</a>
+        </div>
+        <div class="submit">
+            <strong>{% trans "Source" %}&nbsp;&nbsp;</strong>{{ statement.source }}
+        </div>
+
         <div class="media">
             {% if statement.uptodate_status %}<span class="statement-status">{{ statement.uptodate_status.text }}</span>{% endif %}
 
@@ -23,12 +31,6 @@
             <div class="meter-md">
                 {% image_render statement.meter.image_small_text '200x107' statement.meter.title %}
             </div>
-        </div>
-        <div class="text-brown block-quote lead">
-            <a href="{% url 'statement_detail' statement.permalink %}">{{ statement.quote|removetags:'p'|safe }}</a>
-        </div>
-        <div class="submit">
-            <strong>{% trans "Source" %}&nbsp;&nbsp;</strong>{{ statement.source }}
         </div>
 
     </div>

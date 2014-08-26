@@ -17,17 +17,17 @@
 			    <h2></span>{% trans "Highlight statement" %}</h2>
 		    </header>
 			<div class="col-md-12 col-xs-12">
-				<ul class="nav nav-tabs nav-pills nav-color full-width" role="tablist">
+				<ul class="nav nav-tabs full-width" role="tablist">
                     {% for meter, meter_statement in meter_statement_list %}
-				  	<li class="hidden-xs{% if forloop.first %} first{% endif %}{% if forloop.last %} last{% endif %}">
+				  	<li class="sr-only hidden-xs{% if forloop.first %} first{% endif %}{% if forloop.last %} last{% endif %}">
                         <a class="tabable" href="#meter-{{ meter.permalink }}" role="tab" data-toggle="tab">
                             {{ meter.title }}
+                            <span class="caret"></span>
                         </a>
-                        <span class="caret"></span>
                     </li>
                     {% endfor %}
 
-					<li class="dropdown visible-xs">
+					<li class="dropdown">
         				<a href="#" id="meter-tab-drop" class="dropdown-toggle" data-toggle="dropdown"><span class="text">{% trans "Latest" %}</span> <span class="caret"></span></a>
         				<ul class="dropdown-menu" role="menu" aria-labelledby="meter-tab-drop">
                             {% for meter, meter_statement in meter_statement_list %}
