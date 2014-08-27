@@ -75,7 +75,7 @@
                     </header>
 
                     {% for statement in meter_statement %}
-                    {{ statement|statement_item:'wide' }}
+                    {{ statement|statement_item:user }}
                     {% endfor %}
 
                     <div class="see-all">

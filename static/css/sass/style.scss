@@ -1317,7 +1317,28 @@ ul.nav-tabs li.first .caret { border-bottom-color: #FFF; }
         font-size: 0.8em;
         color: #555;
     }
+
+    .triangle {
+		width: 23px;
+		height: 22px;
+		position: absolute;
+		top: 0px;
+		left: 60px;
+		z-index: 2;
+		background: url(../images/triangle.png) no-repeat 0 0;
+	}
 }
+
+.no-border .block {
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    -ms-border-radius: 0px;
+    -o-border-radius: 0px;
+    border-radius: 0px;
+
+    border: none 0px;
+}
+
 .who-said {
   position: relative;
   .media {

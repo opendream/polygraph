@@ -5,12 +5,12 @@ from django.template.loader import render_to_string
 register = template.Library()
 
 @register.filter
-def statement_item(statement, style='normal'):
-    return render_to_string('domain/statement_item.html', {'statement': statement})
+def statement_item(statement, user=None):
+    return render_to_string('domain/statement_item.html', {'statement': statement, 'user': user})
 
 @register.filter
-def people_item(people):
-    return render_to_string('domain/people_item.html', {'people': people})
+def people_item(people, user=None):
+    return render_to_string('domain/people_item.html', {'people': people, 'user': user})
 
 @register.filter
 def meter_count(meter_statement_count):

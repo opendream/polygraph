@@ -24,7 +24,7 @@
                 </header>
                 {% if statement_list %}
                 {% for statement in statement_list %}
-                {{ statement|statement_item }}
+                {{ statement|statement_item:user }}
                 {% endfor %}
                 {% else %}
                 {% if user.is_authenticated %}
