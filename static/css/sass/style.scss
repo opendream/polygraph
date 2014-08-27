@@ -838,11 +838,6 @@ input + .errors{
 			padding-right: 270px;
 		}
 	}
-	.meter-md {
-		position: absolute;
-		top: -60px;
-		right: 20px;
-	}
 }
 .polygraph-list.statement-list {
 	.block-content {
@@ -1285,9 +1280,57 @@ ul.nav-tabs li.first .caret { border-bottom-color: #FFF; }
     .meter-md {
         max-width: 40%;
         min-width: 120px;
+		position: absolute;
+		top: 38px;
+		right: 20px;
+
         img {
-            max-width: 100%;
-            height: auto;
+            display: block;
+            right: 8%;
+            bottom: 0;
+            position: absolute;
+        }
+        .meter-img-wrapper, .meter-img-real {
+
+            position: absolute;
+            width: 80%;
+            padding-top: 80%;
+            height: 0px;
+            right: -8%;
+            bottom: 0;
+        }
+        .meter-img-wrapper {
+            -webkit-border-bottom-right-radius: 50%;
+            -webkit-border-bottom-left-radius: 50%;
+            -moz-border-radius-bottomright: 50%;
+            -moz-border-radius-bottomleft: 50%;
+            border-bottom-right-radius: 50%;
+            border-bottom-left-radius: 50%;
+            overflow: hidden;
+        }
+        .meter-img-real {
+            height: 200px;
+            width: 200%;
+            overflow: hidden;
+            bottom: 20px;
+            img {
+                right: 3%;
+                bottom: -20px;
+            }
+        }
+        .meter-bg {
+            background-color: #baaa96;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 0;
+            right: -8%;
+            z-index: -1;
+            width: 80%;
+            padding-top: 80%;
         }
     }
 
