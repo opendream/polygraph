@@ -218,6 +218,7 @@ a:hover { text-decoration: underline; }
 
 .navbar-default {
   background-color: $navbar;
+  &.navbar-fixed-top { border-bottom: none; }
   .container { margin-bottom: 0; position: relative; }
   .navbar-toggle {
     border: none;
