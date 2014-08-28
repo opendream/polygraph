@@ -104,6 +104,9 @@ def image_render(image, size, alt='', crop=None, url=False):
         upscale = crop and True
         facerecognition = crop and True
 
+        if '.' in alt:
+            facerecognition = False
+
 
         if url:
             thumbnail = getattr(image, 'thumbnail_%s' % size)(**{
