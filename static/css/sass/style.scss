@@ -570,64 +570,6 @@ input + .errors{
 	.block-quote-alt { font-size: 2.8em; }
 }
 
-// .who-said {
-// 	position: relative;
-// 	overflow: hidden;
-// 	background-color: $soft_orange;
-// 	&.block-content { padding: 15px 20px 0 20px; }
-// 	.media {
-// 		overflow: hidden;
-// 		margin-top: 20px;
-// 		.media-body { margin-top: 30px; }
-// 	}
-// 	.meter {
-// 		text-align: right;
-// 		padding-right: 0;
-// 		margin-top: 20px;
-// 	}
-// }
-// @media (max-width: 600px) {
-// 	.who-said {
-// 		&.block-content { padding: 25px 20px 0 20px; }
-// 		.media { margin-top: 10px; }
-// 		.meter { margin-top: 0; }
-// 	}
-// }
-// @media (max-width: 540px) {
-// 	.who-said {
-// 		.media {
-// 			padding-left: 0;
-// 			a.pull-left {
-// 				width: 75px;
-// 				img { width: 100% }
-// 			}
-// 			.media-body {
-// 				margin-top: 0;
-// 				font-size: 95%;
-// 			}
-// 		}
-// 	}
-// }
-// // hilight statement landscape iPhone
-// @media (max-width: 479px) {
-// 	.highlight-statement {
-// 		.block-quote {
-// 			padding: 30px 0 30px;
-// 			* { line-height: 1.5; }
-// 		}
-// 	}
-// 	.who-said {
-// 		.media { 
-// 			width: 100%;
-// 			padding: 0 15px 15px 0; }
-// 		.meter { 
-// 			width: 100%; 
-// 			padding-left: 0;
-// 			text-align: center;
-// 		}
-// 	}
-// }
-
 .statement-meta {
 	border-bottom: 2px solid #D8D8D8;
 	position: relative;
