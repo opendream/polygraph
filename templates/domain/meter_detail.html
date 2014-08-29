@@ -20,40 +20,33 @@
 			<div class="col-md-4 hidden">
 				<h2 class="hidden"><span class="dialog-ic-bw"></span>{% trans "Polygraph" %}</h2>
 			</div>
-			<div class="col-xs-12 col-md-4 pull-right">
-				<ul class="nav nav-pills nav-color full-width" role="tablist">
-
-					<li class="dropdown">
-        				<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ request_meter.title }} <span class="caret"></span></a>
-        				<ul class="dropdown-menu" role="menu" aria-labelledby="meter-tab-drop">
-
-                            {% for meter in meter_list %}
-        			  		<li class="{% if forloop.first %} first{% endif %}{% if forloop.last %} last{% endif %}{% if meter == request_meter %} active{% endif %}">
-                                <a href="{% url 'meter_detail' meter.permalink %}" tabindex="-1">
-                                    {{ meter.title }}
-                                </a>
-                            </li>
-                            {% endfor %}
-                            
-        				</ul>
-      				</li>
-				</ul>				
-			</div>
-
-            <div class="col-xs-12 col-md-4 pull-right dropdown">
-                <button class="btn btn-default dropdown-toggle" tyle="button" href="#" class="dropdown-toggle" data-toggle="dropdown">{{ request_meter.title }} <span class="caret"></span></button>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="meter-tab-drop">
+			<div class="select-meter col-xs-12 col-md-6 pull-right">
+				<ul class="nav nav-pills show-as-pill pull-right">
 
                     {% for meter in meter_list %}
-                    <li role="presentation" class="{% if forloop.first %} first{% endif %}{% if forloop.last %} last{% endif %}{% if meter == request_meter %} active{% endif %}">
-                        <a role="menuitem" href="{% url 'meter_detail' meter.permalink %}" tabindex="-1">
+        			<li class="hidden-xs {% if forloop.first %} first{% endif %}{% if forloop.last %} last{% endif %}{% if meter == request_meter %} active{% endif %}">
+                        <a href="{% url 'meter_detail' meter.permalink %}">
                             {{ meter.title }}
                         </a>
                     </li>
                     {% endfor %}
-                            
-                </ul>            
-            </div>
+
+				</ul>
+                <div class="visible-xs dropdown show-as-list pull-right">
+                        <a href="#" id="meter-tab-drop" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="text">{{ request_meter.title }}</span> <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="meter-tab-drop">
+
+                            {% for meter in meter_list %}
+                            <li class="{% if forloop.first %} first{% endif %}{% if forloop.last %} last{% endif %}{% if meter == request_meter %} active{% endif %}">
+                                <a href="{% url 'meter_detail' meter.permalink %}">
+                                    {{ meter.title }}
+                                </a>
+                            </li>
+                            {% endfor %}
+
+                        </ul>
+                </div>
+			</div>
 		</header>
 
 

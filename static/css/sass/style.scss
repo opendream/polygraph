@@ -521,7 +521,6 @@ input + .errors{
 .block-quote * { 
 	color: $text_brown;
 	margin: 0;
-	line-height: 1.8;
 }
 .block-quote,
 .block-quote-alt {
@@ -665,122 +664,102 @@ input + .errors{
 	.right { padding-left: 140px; }
 }
 
-.nav-color {
-	padding-top: 15px;
-	li {
-		padding: 0 10px; margin: 0;
-		text-align: center;
-		.caret {
-			border-top: none;
-			border-bottom: 12px solid #F2F2F2;
-			border-right: 12px solid transparent;
-			border-left: 12px solid transparent;
-			margin-bottom: -8px;
-		}
-		&.last,
-		&.dropdown {
-			padding-right: 0;
-			&:after { display: none; }
-		}
-	}
-	> li:after {
-		content: "•";
-		position: absolute;
-		top: 0.8em;
-		right: -3px;
-	}
-	li a {
-		@include border-radius(20px);
-		background-color: transparent;
-		padding: 10px 20px;
-		&:hover {
-			background-color: $soft_orange;
-			color: $text_brown;
-		}
-	}
-	li.active a {
-		background-color: $bright_orange;
-		color: #FFFFFF;
-		border-color: $bright_orange;
-		&:hover {
-			background-color: $bright_orange;
-			border-color: $bright_orange;
-		}
-	}
+//#######################################
+
+.select-meter {
+  margin-bottom: 15px;
 }
 
-.nav.full-width {
-	border-bottom: 0;
-	li.dropdown {
-		width: 100%;
-		@include border-radius(5px);
-		padding: 0;
-		margin: 0;
-		a {
-			@include border-radius(5px);
-			background-color: #FFF;
-			border: 1px solid #CCC;
-			margin: 0;
-			text-align: left;
-			&:hover { background-color: #FFF; border: 1px solid #CCC; } 
-			&.dropdown-toggle { font-size: 1.5em; }
-			.caret {
-				position: absolute;
-				right: 15px;
-				top: 50%;
-				margin-top: -4px;
-				border-top: 8px solid $text-brown;
-				border-right: 8px solid transparent;
-				border-left: 8px solid transparent;
-				border-bottom: 0 solid transparent;
-			}
-		}
-		&.open a { border: 1px solid #CCC; color: $text-brown; }
-		ul.dropdown-menu {
-			width: 100%;
-			z-index: 2;
-			li { 
-				padding: 0; 
-			}
-			li a { 
-        @include border-radius(0); 
-        border: none; 
-        font-size: 16px;
-      } 
-			li.active,
-			li:hover {
-				a { 
-					color: #FFF;
-					background-color: $base_orange;
-				}
-			} 
-		}
-	}
+.select-meter > .show-as-pill {
+  margin-top: -40px;
+  &>li.active>a,
+  &>li>a:hover,
+  &>li.active>a:focus {
+    color: #FFF;
+    background-color: $logo-img-background;
+  }
+  li {
+    margin-left: 10px;
+  }
+  li a {
+    color: $text_normal;
+    font-size: 1.2em;
+    font-weight: normal;
+    @include border-radius(20px);
+    padding: 5px 20px;
+  }
+}
+@media (max-width: 767px) {
+  .select-meter .pill-to-list {
+    margin-top: 5px;
+  }
+}
+@media (max-width: 600px) {
+  .select-meter .pill-to-list {
+    li {
+      float: none;
+    }
+  }
 }
 
-// @media (min-width: 768px) {
-// 	.nav-color {
-// 		float: right;
-// 	}
-// }
+//#######################################
 
-// @media (max-width: 768px) {
-// 	.nav.full-width {
-// 		margin: 15px 0;
-// 		> li.active {
-// 			a { 
-// 				color: $text-brown;
-// 			} 
-// 		}
-// 	}
-// }
+.select-meter > .show-as-list {
+  width: 200px;
+  .btn {
+    width: 100%;
+    text-align: left;
+    white-space: normal;
+    background-color: #f4f4f4;
+    border-color: #CCC;
+    @include border-radius(0);
+    .caret {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      margin-top: -4px;
+      border-top: 8px solid;
+      border-right: 5px solid transparent;
+      border-left: 5px solid transparent;
+    }
+  }
+
+  .dropdown-menu {
+    width: 100%;
+    right: 0;
+    left: auto;
+    margin-top: -1px;
+    padding: 0;
+    background-color: #f4f4f4;
+    border-color: #ccc;
+    @include border-radius(0);
+  }
+
+//     .dropdown-menu {
+//       width: 100%;
+//       right: 0;
+//       left: auto;
+//       margin-top: -1px;
+//       background-color: #f4f4f4;
+//       @include border-radius(0);
+//       li { margin-top: 10px; }
+//       li a {
+//         padding: 3px 12px;
+//         white-space: normal;
+//         &:hover {
+//           background-color: $base_orange;
+//           color: #FFF;
+//         }
+//       }
+//       li.active a {
+//         background-color: $base_orange;
+//         color: #FFF;
+//       }
+//     }
+
+}
 
 .polygraph-list.single {
-	.nav-color {
-		padding: 0;
-		margin-top: -45px;
-		margin-bottom: 30px;
-	}
 	.polygraph-list-before {
 		.block-quote-alt {max-width: 100%;}
 		.meter-image { margin-top: -80px; }
@@ -791,15 +770,7 @@ input + .errors{
 		}
 	}
 }
-@media (max-width: 991px) {
-	.polygraph-list.single {
-		.nav-color {
-			padding: 0;
-			margin-top: 15px;
-			margin-bottom: 15px;
-		}
-	}
-}
+
 @media (max-width: 480px) {
 	.polygraph-list.single {
 		.polygraph-list-before {
@@ -1125,16 +1096,6 @@ footer {
 	ul.list-unstyled {
 		li {
 			margin-bottom: 15px;
-		}
-	}
-}
-
-@media (max-width: 479px) {
-	.people-list {
-		.dropdown {
-			// position: relative;
-			// margin-left: 15px;
-			// top: auto;
 		}
 	}
 }
