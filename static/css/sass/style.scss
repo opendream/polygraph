@@ -716,6 +716,7 @@ input + .errors{
     border-color: #CCC;
     padding: 8px 12px;
     font-family: "Boon-0.6";
+    font-size: 1.2em;
     @include border-radius(0);
     .caret {
       position: absolute;
@@ -842,9 +843,10 @@ input + .errors{
 	}
 	.desc { margin-top: 20px; }
 }
-@media (max-width: 991px) {
-	.polygraph-list-before .desc { padding: 0; }
-}
+// @media (max-width: 991px) {
+// 	.polygraph-list-before .desc { padding: 0; }
+// }
+
 // ###########################
 
 .about-statement {
