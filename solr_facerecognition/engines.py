@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.conf import settings
 from sorl.thumbnail.engines.pil_engine import Engine
 import cv2.cv as cv
@@ -12,7 +13,7 @@ class FaceRecognitionEngine(Engine):
         return image
 
     def facerecognition(self, image, geometry, options):
-        if 'facerecognition' in options:
+        if 'facerecognition' in options and options['facerecognition']:
             img = cv.CreateImageHeader(image.size, cv.IPL_DEPTH_8U, 3)
             cv.SetData(img, image.tostring())
             grayscale = cv.CreateImage((img.width, img.height), 8, 1)
@@ -31,4 +32,5 @@ class FaceRecognitionEngine(Engine):
                 x_per = int((x1/float(img.width))*100)
                 y_per = int((y1/float(img.height))*160)
                 options['crop'] = str(x_per)+"% "+str(y_per)+"%"
+
         return image,options

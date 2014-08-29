@@ -217,13 +217,12 @@ FILES_WIDGET_TEMP_DIR = 'temp/files_widget/'
 
 DEFAULT_IMAGE = '%simages/default.png' % STATIC_URL
 
-'''
+
 try:
-    import cv2
+    #import cv2
     THUMBNAIL_ENGINE = 'solr_facerecognition.engines.FaceRecognitionEngine'
 except ImportError:
     pass
-'''
 
 GREATEST_FUNCTION = 'GREATEST'
 
