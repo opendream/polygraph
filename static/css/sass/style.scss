@@ -667,11 +667,14 @@ input + .errors{
 //#######################################
 
 .select-meter {
-  margin-bottom: 15px;
+  margin-top: 15px;
+  .nav-tabs {
+    border-bottom: none;
+  }
 }
 
-.select-meter > .show-as-pill {
-  margin-top: -40px;
+.select-meter .show-as-pill {
+  margin-top: -55px;
   &>li.active>a,
   &>li>a:hover,
   &>li.active>a:focus {
@@ -702,16 +705,17 @@ input + .errors{
   }
 }
 
-//#######################################
-
-.select-meter > .show-as-list {
+.select-meter .show-as-list {
   width: 200px;
+  margin-bottom: 15px;
   .btn {
     width: 100%;
     text-align: left;
     white-space: normal;
     background-color: #f4f4f4;
     border-color: #CCC;
+    padding: 8px 12px;
+    font-family: "Boon-0.6";
     @include border-radius(0);
     .caret {
       position: absolute;
@@ -733,30 +737,20 @@ input + .errors{
     background-color: #f4f4f4;
     border-color: #ccc;
     @include border-radius(0);
+    li a {
+      padding: 5px 12px;
+      white-space: normal;
+      font-family: "Boon-0.6";
+      &:hover {
+        background-color: $logo-img-background;
+        color: #FFF;
+      }
+    }
+    li.active a {
+      background-color: $logo-img-background;
+      color: #FFF;
+    }
   }
-
-//     .dropdown-menu {
-//       width: 100%;
-//       right: 0;
-//       left: auto;
-//       margin-top: -1px;
-//       background-color: #f4f4f4;
-//       @include border-radius(0);
-//       li { margin-top: 10px; }
-//       li a {
-//         padding: 3px 12px;
-//         white-space: normal;
-//         &:hover {
-//           background-color: $base_orange;
-//           color: #FFF;
-//         }
-//       }
-//       li.active a {
-//         background-color: $base_orange;
-//         color: #FFF;
-//       }
-//     }
-
 }
 
 .polygraph-list.single {

@@ -16,7 +16,7 @@
             <header class="col-md-4">
 			    <h2></span>{% trans "Highlight statement" %}</h2>
 		    </header>
-			<div class="col-md-8 col-xs-12 pull-right">
+			<div class="select-meter col-md-8 col-xs-12 pull-right">
 				<ul class="nav nav-tabs" role="tablist">
                     {% for meter, meter_statement in meter_statement_list %}
 				  	<li class="sr-only hidden-xs{% if forloop.first %} first{% endif %}{% if forloop.last %} last{% endif %}">
@@ -27,9 +27,10 @@
                     </li>
                     {% endfor %}
 
-					<li class="dropdown">
-        				<a href="#" id="meter-tab-drop" class="dropdown-toggle" data-toggle="dropdown"><span class="text">{% trans "Latest" %}</span> <span class="caret"></span></a>
+					<li class="dropdown show-as-list pull-right">
+        				<a href="#" id="meter-tab-drop" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="text">{% trans "Latest" %}</span> <span class="caret"></span></a>
         				<ul class="dropdown-menu" role="menu" aria-labelledby="meter-tab-drop">
+
                             {% for meter, meter_statement in meter_statement_list %}
         			  		<li{% if forloop.first %} class="first"{% endif %}{% if forloop.last %} class="last"{% endif %}>
                                 <a href="#meter-{{ meter.permalink }}" tabindex="-1" role="tab" data-toggle="tab">
@@ -37,9 +38,11 @@
                                 </a>
                             </li>
                             {% endfor %}
+                            
         				</ul>
       				</li>
-				</ul>				
+
+				</ul>	
 			</div>
 		</header>
 		<div class="tab-content">
