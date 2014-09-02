@@ -135,7 +135,7 @@
                         {% if static_page_list %}
                         <ul class="nav navbar-nav sec-menu visible-xs">
                             {% for static_page in static_page_list %}
-                            <li class="active"><a href="{% url static_page.url_name %}">{{ static_page.title }}</a></li>
+                            <li{% ifactive static_page.url_name %} class="active"{% endifactive %}><a href="{% url static_page.url_name %}">{{ static_page.title }}</a></li>
                             {% endfor %}
                         </ul>
                         {% endif %}
