@@ -1763,19 +1763,25 @@ td.meter {
   height: auto !important;
 }
 
-/* line 1421, ../sass/style.scss */
+/* line 1420, ../sass/style.scss */
+.latest-update {
+  font-size: 0.9em;
+  margin-bottom: 20px;
+}
+
+/* line 1425, ../sass/style.scss */
 #id_permalink_readonly {
   display: inline-block;
   margin-right: -50px;
   padding-right: 60px;
 }
 
-/* line 1427, ../sass/style.scss */
+/* line 1431, ../sass/style.scss */
 #edit-permalink {
   position: relative;
 }
 
-/* line 1432, ../sass/style.scss */
+/* line 1436, ../sass/style.scss */
 .inline-media {
   position: relative;
   padding-bottom: 56.25%;
@@ -1783,7 +1789,7 @@ td.meter {
   height: 0;
   overflow: hidden;
 }
-/* line 1438, ../sass/style.scss */
+/* line 1442, ../sass/style.scss */
 .inline-media iframe, .inline-media object, .inline-media embed {
   position: absolute;
   top: 0;
@@ -1792,7 +1798,7 @@ td.meter {
   height: 100%;
 }
 
-/* line 1448, ../sass/style.scss */
+/* line 1452, ../sass/style.scss */
 .reference-wrapper .glyphicon {
   color: #65BF61;
 }

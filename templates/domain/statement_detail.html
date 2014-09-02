@@ -52,6 +52,8 @@
                     <h2 class="hidden">{% trans "Statement Detail" %}</h2>
                 </header>
 
+                <div class="latest-update">{% trans "Latest update on" %} {{ statement.changed|format_abbr_date }}</div>
+
                 {{ statement.short_detail|safe }}
                 <p>&nbsp;</p>
 
@@ -171,21 +173,19 @@
         </header>
         <div class="block">
             <ul class="media-list item-list block-content row">
-
                 {% for meter in meter_list %}
                 <li class="media">
-                    <div class="item-inner">
-                        <a class="pull-left" href="{% url 'meter_detail' meter.permalink %}">
+                    <a href="{% url 'meter_detail' meter.permalink %}" class="item-inner">
+                        <span class="pull-left">
                             {% image_render meter.image_small '87x105' meter.title %}
-                        </a>
+                        </span>
                         <div class="media-body">
                             <h3 class="media-heading">{{ meter.title }}</h3>
-                            <a href="{% url 'meter_detail' meter.permalink %}">{% trans "See all" %} "{{ meter.title }}" {% trans "statements" %}</a>
+                            <span>{% blocktrans with meter.title as meter_title %}See all {{ meter_title }} statements{% endblocktrans %}</span>
                         </div>
-                    </div>
+                    </a>
                 </li>
                 {% endfor %}
-
             </ul>
         </div>
     </section>
