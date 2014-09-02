@@ -582,6 +582,7 @@ def statement_detail(request, statement_permalink):
         'meter_image': statement.meter.image_medium_text.thumbnail_500x500(upscale=True)
     })
 
+
 def statement_topicrevision_detail(request, statement_permalink, topicrevision_id):
 
     statement = get_object_or_404(Statement, permalink=statement_permalink)
