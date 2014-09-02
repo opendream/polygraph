@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-02 06:58+0000\n"
+"POT-Creation-Date: 2014-09-02 08:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -209,31 +209,31 @@ msgstr "%s ของคุณ ได้ถูกลบเรียบร้อ�
 msgid "Latest"
 msgstr "ล่าสุด"
 
-#: domain/views.py:637
+#: domain/views.py:638
 msgid "Manage My Statements"
 msgstr "จัดการคำพูดที่ฉันสร้าง"
 
-#: domain/views.py:647
+#: domain/views.py:648
 msgid "Manage Pending Statements"
 msgstr "จัดการคำพูดที่กำลังอยู่ในการพิจารณา"
 
-#: domain/views.py:657
+#: domain/views.py:658
 msgid "Manage Highlight Statements"
 msgstr "จัดการคำพูดไฮไลต์"
 
-#: domain/views.py:667
+#: domain/views.py:668
 msgid "Manage Promote Statements"
 msgstr "จัดการคำพูดที่กำลังอยู่ในการพิจารณา"
 
-#: domain/views.py:677
+#: domain/views.py:678
 msgid "Manage All Statements"
 msgstr "จัดการคำพูดทั้งหมด"
 
-#: domain/views.py:687
+#: domain/views.py:688
 msgid "Manage My People"
 msgstr "จัดการผู้คนที่ฉันสร้าง"
 
-#: domain/views.py:700 domain/views.py:702
+#: domain/views.py:701 domain/views.py:703
 msgid "Manage All People"
 msgstr "จัดการผู้คนทั้งหมด"
 
@@ -264,8 +264,8 @@ msgstr "แก้ไข %s"
 #: domain/tests/test_view.py:91 domain/tests/test_view.py:276
 #: templates/base.html:132 templates/domain/home.html:153
 #: templates/domain/meter_detail.html:103
-#: templates/domain/people_detail.html:9
-#: templates/domain/people_detail.html:128
+#: templates/domain/people_detail.html:15
+#: templates/domain/people_detail.html:139
 #: templates/domain/people_form.html:20 templates/domain/people_list.html:6
 #: templates/domain/people_list.html:9
 msgid "People"
@@ -613,13 +613,13 @@ msgstr "สร้างคำพูด %(meter_title)s"
 msgid "No %(meter_title)s Statement"
 msgstr "ไม่มีคำพูด %(meter_title)s"
 
-#: templates/domain/home.html:143 templates/domain/people_detail.html:116
+#: templates/domain/home.html:143 templates/domain/people_detail.html:127
 #: templates/domain/people_form.html:105 templates/domain/topic_detail.html:94
 msgid "Summary"
 msgstr "สรุป"
 
 #: templates/domain/home.html:163 templates/domain/meter_detail.html:114
-#: templates/domain/people_detail.html:138
+#: templates/domain/people_detail.html:149
 msgid "See all peoples"
 msgstr "ดูผู้คนทั้งหมด"
 
@@ -650,11 +650,20 @@ msgstr "คำพูด %(meter_title)s ทั้งหมด"
 msgid "No People"
 msgstr "ไม่มีผู้คน"
 
-#: templates/domain/people_detail.html:20
+#: templates/domain/people_detail.html:8
+#, python-format
+msgid "%(meter_title)s statements of"
+msgstr "คำพูด %(meter_title)s ของ"
+
+#: templates/domain/people_detail.html:18
+msgid "%(meter_title)s statements"
+msgstr "คำพูด %(meter_title)s"
+
+#: templates/domain/people_detail.html:32
 msgid "People Detail"
 msgstr "รายละเอียดบุคคล"
 
-#: templates/domain/people_detail.html:30 templates/domain/people_form.html:9
+#: templates/domain/people_detail.html:42 templates/domain/people_form.html:9
 #: templates/domain/people_form.html:25
 #: templates/domain/statement_form.html:10
 #: templates/domain/statement_form.html:32
@@ -664,11 +673,7 @@ msgstr "รายละเอียดบุคคล"
 msgid "Edit"
 msgstr "แก้ไข"
 
-#: templates/domain/people_detail.html:70
-msgid "%(meter_title)s statements related or said by this people"
-msgstr "คำพูด %(meter_title)s ที่เกี่ยวข้องหรือพูดโดยบุคคลนี้"
-
-#: templates/domain/people_detail.html:72
+#: templates/domain/people_detail.html:82
 msgid "Statements related or said by this people"
 msgstr "คำพูดที่เกี่ยวข้องหรือพูดโดยบุคคลนี้"
 
@@ -824,7 +829,7 @@ msgid "Add another"
 msgstr "เพิ่มอีก"
 
 #: templates/domain/statement_form.html:121
-#: templates/domain/statement_item.html:23
+#: templates/domain/statement_item.html:29
 msgid "Source"
 msgstr "ที่มา"
 

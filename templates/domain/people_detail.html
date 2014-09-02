@@ -3,11 +3,22 @@
 {% load common_tags %}
 {% load domain_tags %}
 
-{% block title %}{{ people.get_full_name }}{% endblock %}
+{% block title %}
+{% if request_meter %}
+{% blocktrans with request_meter.title as meter_title %}{{ meter_title }} statements of{% endblocktrans %} {{ people.get_full_name }}
+{% else %}
+{{ people.get_full_name }}
+{% endif %}
+{% endblock %}
 
 {% block breadcrumb %}
 <li><a href="{% url 'people_list' %}">{% trans "People" %}</a></li>
+{% if request_meter %}
+<li><a href="{% url 'people_detail' people.permalink %}">{{ people.get_full_name }}</a></li>
+<li class="active">{% blocktrans with request_meter.title as meter_title %}{{ meter_title }} statements{% endblocktrans %}</li>
+{% else %}
 <li class="active">{{ people.get_full_name }}</li>
+{% endif %}
 {% endblock %}
 
 
@@ -15,6 +26,7 @@
 
     <div>
 
+        {% if not request_meter %}
         <section class="people-detail{% if user.is_staff or user == people.created_by %} can-edit{% endif %}">
             <header>
                 <h3 class="hidden">{% trans "People Detail" %}</h3>
@@ -59,19 +71,20 @@
                 {% endif %}
             </div>
         </section>
-
+        {% endif %}
 
         {% if statement_list %}
+        {% if not request_meter %}
         <div id="main"></div>
+        {% endif %}
         <section class="polygraph-list statement-list">
             <section>
+                {% if not request_meter %}
                 <header>
-                    {% if request_meter %}
-                    <h3>{% blocktrans with request_meter.title as meter_title %}{{ meter_title }} statements related or said by this people{% endblocktrans %}</h3>
-                    {% else %}
                     <h3>{% trans "Statements related or said by this people" %}</h3>
-                    {% endif %}
                 </header>
+                {% endif %}
+
                 {% for statement in statement_list %}
                 {{ statement|statement_item }}
                 {% endfor %}
