@@ -1,21 +1,21 @@
 @import "compass/css3/box-sizing";
 @import "compass/css3/border-radius";
 
-$base_orange : #cd5e26; // base orange
-$navbar-menu-active : #ff9933; // hover orange
-$border_orange : #a34b21; // border orange
-$bright_orange : #fe6625; // bright orange
-$soft_orange : #ffc092;
+$base_orange : #CD5E26; // base orange
+$navbar-menu-active : #FF9933; // hover orange
+$border_orange : #A34B21; // border orange
+$bright_orange : #FE6625; // bright orange
+$soft_orange : #FFC092;
 $text_hover : #4C0000; // text hover (dark brown)
-$text_brown : #7f5d3d; // text brown
+$text_brown : #7F5D3D; // text brown
 $text_normal : #333333; // text normal
 $block_border : #CCCCCC;
 
-$navbar : #333; // base orange
+$navbar : #333;
 $navbar-a-separate : #565656;
-$navbar-a-hover : #000; // text hover (dark brown)
-$navbar-menu-active : #baaa96; // hover orange
-$logo-img-background : #a97c50;
+$navbar-a-hover : #000;
+$navbar-menu-active : #BAAA96;
+$logo-img-background : #A97C50;
 
 @font-face {
   src: url("../fonts/woff/boon-300.woff") format("woff");
@@ -97,11 +97,11 @@ a:hover { text-decoration: underline; }
 
 .btn-primary {
 	color: #FFF;
-	background-color: $bright_orange;
-	border-color: $bright_orange;
+	background-color: $logo-img-background;
+	border-color: $logo-img-background;
 	&:hover { 
-		background-color: $base_orange;
-		border-color: $base_orange;
+		background-color: $navbar-menu-active;
+		border-color: $navbar-menu-active;
 	}
 }
 .btn-color {
@@ -606,12 +606,15 @@ input + .errors{
 	.right { padding-left: 140px; }
 }
 
-//#######################################
-
 .select-meter {
   margin-top: 15px;
   .nav-tabs {
     border-bottom: none;
+  }
+  .open>a, 
+  .open>a:hover, 
+  .open>a:focus {
+    border-color: #CCC;
   }
 }
 
@@ -660,6 +663,7 @@ input + .errors{
     font-family: "Boon-0.6";
     font-size: 1.2em;
     @include border-radius(0);
+    &.over 
     .caret {
       position: absolute;
       right: 15px;
@@ -985,48 +989,12 @@ footer {
 
 .people-list {
   position: relative;
-	.dropdown {
-		position: absolute;
-		top: -2.75em;
-		right: 15px;
-		width: 200px;
-		.btn {
-			width: 100%;
-			text-align: left;
-			white-space: normal;
-			@include border-radius(0);
-			.caret {
-				position: absolute;
-				right: 15px;
-				top: 50%;
-				margin-top: -4px;
-				border-top: 8px solid;
-				border-right: 5px solid transparent;
-				border-left: 5px solid transparent;
-			}
-		}
-		.dropdown-menu {
-			width: 100%;
-			right: 0;
-			left: auto;
-			margin-top: -1px;
-			background-color: #f4f4f4;
-			@include border-radius(0);
-			li { margin-top: 10px; }
-			li a {
-				padding: 3px 12px;
-				white-space: normal;
-				&:hover {
-					background-color: $base_orange;
-					color: #FFF;
-				}
-			}
-			li.active a {
-				background-color: $base_orange;
-				color: #FFF;
-			}
-		}
-	}
+  .select-meter {
+    margin-top: -40px;
+  }
+  .full-page {
+    float: left;
+  }
 	.pull-left {
 		margin-right: 20px;
 		height: 122px; overflow: hidden;
@@ -1038,7 +1006,13 @@ footer {
 		}
 	}
 }
-
+@media (max-width: 600px) {
+  .people-list {
+    .select-meter {
+      margin-top: 15px;
+    }
+  }
+}
 .people-detail {
 	.media.block-content { background-color: #f5f5f5; }
   .statement-item .media {

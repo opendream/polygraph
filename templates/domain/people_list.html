@@ -12,29 +12,32 @@
 {% block content %}
 
 	<div class="row people-list">
+        <div class="select-meter col-md-8 col-xs-12  pull-right">
 
-        {% if category_list %}
-		<div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-            {% if request_category %}
-            {{ request_category.title }}
-            {% else %}
-            {% trans "All" %}
+            {% if category_list %}
+            <div class="dropdown show-as-list pull-right">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                {% if request_category %}
+                {{ request_category.title }}
+                {% else %}
+                {% trans "All" %}
+                {% endif %}
+                <span class="caret"></span>
+                </button>
+
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                    <li role="presentation"{% if not request_category %} class="active"{% endif %}><a role="menuitem" tabindex="-1" href="{% url 'people_list' %}">{% trans "All" %}</a></li>
+                    {% for category in category_list %}
+                    <li role="presentation"{% if category.permalink == request_category.permalink %} class="active"{% endif %}><a role="menuitem" tabindex="-1" href="{% url 'people_list' %}?category={{ category.permalink }}">{{ category.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
             {% endif %}
-            <span class="caret"></span>
-            </button>
 
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                <li role="presentation"{% if not request_category %} class="active"{% endif %}><a role="menuitem" tabindex="-1" href="{% url 'people_list' %}">{% trans "All" %}</a></li>
-                {% for category in category_list %}
-                <li role="presentation"{% if category.permalink == request_category.permalink %} class="active"{% endif %}><a role="menuitem" tabindex="-1" href="{% url 'people_list' %}?category={{ category.permalink }}">{{ category.title }}</a></li>
-                {% endfor %}
-            </ul>
-		</div>
-        {% endif %}
+        </div>
 
         {% if people_list %}
-        <ul class="list-unstyled">
+        <ul class="list-unstyled full-page">
             {% for people in people_list %}
    			<li class="col-xs-6 col-md-4">
                 {{ people|people_item }}
