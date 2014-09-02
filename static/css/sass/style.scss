@@ -454,7 +454,8 @@ input + .errors{
 		.item-inner {
 			overflow: hidden;
 			padding: 10px 0;
-			border-bottom: 1px dotted #333333;
+			//border-bottom: 1px dotted #333333;
+			display: block;
 			&.no-border-bottom { border-bottom: none; }
 		}
     &:last-child .item-inner {
@@ -479,9 +480,13 @@ input + .errors{
 	}
 }
 
-.summary h3 {
-	.left {
+.summary {
+	h3 .left {
 		img { max-width: 80px; width: 100%; }
+	}
+
+	li.active {
+	    background-color: #baaa96;
 	}
 
 }
@@ -1199,7 +1204,6 @@ ul.nav-tabs li.first .caret { border-bottom-color: #FFF; }
             overflow: hidden;
         }
         .meter-img-real {
-            height: 200px;
             width: 200%;
             overflow: hidden;
             bottom: 20px;

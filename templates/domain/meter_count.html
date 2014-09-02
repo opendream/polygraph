@@ -1,23 +1,39 @@
 {% load common_tags %}
+{% load activelink %}
 <ul class="block-content item-list row">
     {% for meter, count, percent in meter_statement_count %}
-    <li class="item col-md-12 col-xs-6 first">
+    <li class="item col-md-12 col-xs-6{% if request_meter == meter %} active{% endif %}">
+
+        {% if people %}
+        {% if count %}
+        <a class="item-inner row" href="{% url 'people_meter' people.permalink meter.permalink %}">
+        {% else %}
         <div class="item-inner row">
+        {% endif %}
+        {% else %}
+        <a class="item-inner row" href="{% url 'meter_detail' meter.permalink %}">
+        {% endif %}
+
             <figure class="col-md-3 col-xs-3 left">
-                <a href="{% url 'meter_detail' meter.permalink %}">
-                    {% image_render meter.image_small '82x105' meter.title %}
-                </a>
+                {% image_render meter.image_small '82x105' meter.title %}
             </figure>
             <div class="col-md-9 col-xs-9 right">
                 <div class="amount-wrapper">
-                    <h3><a href="{% url 'meter_detail' meter.permalink %}">{{ meter.title }}</a></h3>
+                    <h3>
+                        {{ meter.title }}
+                    </h3>
                     <div class="amount-bar"><div class="amount" style="width:{{ percent }}%;"></div></div>
                 </div>
                 <div class="amount-num">
-                    <a href="{% url 'meter_detail' meter.permalink %}"><span class="text-large">{{ count }}</span></a>
+                    <span class="text-large">{{ count }}</span>
                 </div>
             </div>
-        </div>
+         {% if not people or count %}
+         </a>
+         {% else %}
+         </div>
+         {% endif %}
+
     </li>
     {% endfor %}
 </ul>

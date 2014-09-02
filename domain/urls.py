@@ -7,6 +7,7 @@ urlpatterns = patterns('domain.views',
     url(r'^people/(?P<people_id>\d+)/edit/$', 'people_edit', name='people_edit'),
     url(r'^people/(?P<people_permalink>[A-Za-z0-9-_.]+)/$', 'people_detail', name='people_detail'),
     url(r'^people/$', 'people_list', name='people_list'),
+    url(r'^people/(?P<people_permalink>[A-Za-z0-9-_.]+)/meter/(?P<meter_permalink>[A-Za-z0-9-_.]+)/$', 'people_detail', name='people_meter'),
 
     url(r'^topic/create/$', 'topic_create', name='topic_create'),
     url(r'^topic/(?P<topic_id>\d+)/edit/$', 'topic_edit', name='topic_edit'),

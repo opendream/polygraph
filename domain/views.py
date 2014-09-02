@@ -233,7 +233,7 @@ def people_query_base(category=None):
 
 
 @statistic
-def people_detail(request, people_permalink):
+def people_detail(request, people_permalink, meter_permalink=None):
 
     people = get_object_or_404(People, permalink=people_permalink)
 
@@ -243,6 +243,10 @@ def people_detail(request, people_permalink):
     statement_list = statement_query_base(request.user.is_anonymous(), request.user.is_staff, request.user)
     statement_list = statement_list.filter(Q(quoted_by=people)|Q(relate_peoples=people)).order_by('-uptodate')
 
+    request_meter = None
+    if meter_permalink:
+        request_meter = get_object_or_404(Meter, permalink=meter_permalink)
+        statement_list = statement_list.filter(meter=request_meter)
 
     statement_list = pagination_build_query(request, statement_list, 5)
 
@@ -256,7 +260,8 @@ def people_detail(request, people_permalink):
         'people': people,
         'meter_statement_count': meter_statement_count,
         'statement_list': statement_list,
-        'people_list': people_list
+        'people_list': people_list,
+        'request_meter': request_meter
     })
 
 

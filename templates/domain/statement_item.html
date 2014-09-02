@@ -17,7 +17,13 @@
 
         <div class="quote-wrapper">
             <div class="text-brown block-quote lead">
+
+                {% if no_link %}
+                {{ statement.quote|removetags:'p'|safe }}
+                {% else %}
                 <a href="{% url 'statement_detail' statement.permalink %}">{{ statement.quote|removetags:'p'|safe }}</a>
+                {% endif %}
+
             </div>
             <div class="submit">
                 <strong>{% trans "Source" %}&nbsp;&nbsp;</strong>{{ statement.source }}

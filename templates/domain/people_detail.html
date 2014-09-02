@@ -66,7 +66,11 @@
         <section class="polygraph-list statement-list">
             <section>
                 <header>
+                    {% if request_meter %}
+                    <h3>{% blocktrans with request_meter.title as meter_title %}{{ meter_title }} statements related or said by this people{% endblocktrans %}</h3>
+                    {% else %}
                     <h3>{% trans "Statements related or said by this people" %}</h3>
+                    {% endif %}
                 </header>
                 {% for statement in statement_list %}
                 {{ statement|statement_item }}
@@ -112,7 +116,7 @@
 				<h2>{% trans "Summary" %}</h2>
 			</header>
 			<div class="block">
-                {{ meter_statement_count|meter_count }}
+                {% people_meter_count meter_statement_count people request_meter %}
 			</div>
 		</section>
 	</div>
