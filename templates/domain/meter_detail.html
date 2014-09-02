@@ -3,6 +3,7 @@
 {% load common_tags %}
 {% load domain_tags %}
 
+{% block content_class %} filter-header{% endblock %}
 {% block title %}{% trans "Polygraph" %}{% endblock %}
 
 {% block breadcrumb %}
@@ -20,7 +21,7 @@
 			<div class="col-md-4 hidden">
 				<h2 class="hidden"><span class="dialog-ic-bw"></span>{% trans "Polygraph" %}</h2>
 			</div>
-			<div class="select-meter col-xs-12 col-md-6 pull-right">
+			<div class="select-meter col-xs-7 col-md-6 pull-right">
 				<ul class="nav nav-pills show-as-pill pull-right">
 
                     {% for meter in meter_list %}
@@ -79,6 +80,8 @@
 
             </div>
         </div>
+
+        {% if statement_list %}
         <div class="row">
             <div class="col-md-8">
 
@@ -124,6 +127,19 @@
 
             </div>
         </div>
+        {% else %}
+
+        <div class="col-md-12">
+            {% if user.is_authenticated %}
+            <a class="btn btn-primary text-center" href="{% url 'statement_create' %}">
+                <span class="glyphicon glyphicon-pencil"></span> {% blocktrans with meter.title as meter_title %}Create {{ meter_title }} Statement{% endblocktrans %}
+            </a>
+            {% else %}
+            <p>{% blocktrans with request_meter.title as meter_title  %}No {{ meter_title }} Statement{% endblocktrans %}</p>
+            {% endif %}
+        </div>
+
+        {% endif %}
 
 	</section>
 

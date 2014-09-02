@@ -898,7 +898,26 @@ footer {
 
 //####################################################
 
+.filter-header {
+    .page-title {
+        width: 41.66666667%;
+        min-width: 200px;
+        float: left;
+    }
+    .select-meter {
+        float: right;
+    }
+}
 
+
+@media (max-width: 768px) {
+
+    .filter-header {
+        .page-title {
+            width: 40%;
+        }
+    }
+}
 
 .autocomplete-light-widget {
 	.deck>span[data-value] {
