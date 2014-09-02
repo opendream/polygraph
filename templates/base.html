@@ -13,6 +13,8 @@
         {% captureas description_content %}{% block description %}{% endblock %}{% endcaptureas %}
         {% captureas image_content %}{% block image %}{% endblock %}{% endcaptureas %}
 
+
+        <meta property="og:url" content="{{ request.build_absolute_uri }}">
         <meta property="og:title" content="{{ title_content|striptags }}">
         <meta property="og:site_name" content="{{ SITE_NAME }}">
         {% if description_content %}
