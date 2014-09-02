@@ -579,7 +579,7 @@ def statement_detail(request, statement_permalink):
         'statement': statement,
         'topic': topicrevision,
         'meter_list': Meter.objects.all().order_by('order'),
-        'meter_image': statement.meter.image_medium_text.thumbnail_200x200()
+        'meter_image': statement.meter.image_medium_text.thumbnail_500x500(upscale=True)
     })
 
 def statement_topicrevision_detail(request, statement_permalink, topicrevision_id):
