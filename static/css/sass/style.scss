@@ -1142,6 +1142,26 @@ ul.nav-tabs li.first .caret { border-bottom-color: #FFF; }
 	}
 }
 
+@media (max-width: 520px) {
+  .statement-item {
+    .meter-md {
+      .meter-img-wrapper img,
+      .meter-img-real img {
+          width: auto;
+          height: 95%;
+      }      
+    }
+    .submit {
+      margin: 0 48px;
+      padding-right: 0;
+      font-size: 0.8em;
+      color: #555;
+      margin-bottom: 60px;
+    }
+  }
+}
+
+
 .no-border .block {
     -webkit-border-radius: 0px;
     -moz-border-radius: 0px;
