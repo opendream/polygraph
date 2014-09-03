@@ -1,0 +1,179 @@
+$text_normal : #333333;
+$logo-img-background : #A97C50;
+
+@font-face {
+  src: url("../fonts/woff/boon-300.woff") format("woff");
+  font-family: "Boon-0.6";
+  font-style: normal;
+  font-weight: 300;
+}
+
+@font-face {
+  src: url("../fonts/woff/boon-700.woff") format("woff");
+  font-family: "Boon-0.6";
+  font-style: normal;
+  font-weight: 700;
+}
+
+// ##############################
+// Default
+// ##############################
+
+.select-meter {
+  .nav-tabs {
+    border-bottom: none;
+  }
+  .open>a, 
+  .open>a:hover, 
+  .open>a:focus {
+    border-color: #CCC;
+  }
+}
+
+.select-meter .show-as-pill {
+  margin-top: -55px;
+  &>li.active>a,
+  &>li>a:hover,
+  &>li.active>a:focus {
+    color: #FFF;
+    background-color: $logo-img-background;
+  }
+  li {
+    margin-left: 10px;
+  }
+  li a {
+    color: $text_normal;
+    font-size: 1.2em;
+    font-weight: normal;
+    @include border-radius(20px);
+    padding: 5px 20px;
+  }
+}
+@media (max-width: 767px) {
+  .select-meter .pill-to-list {
+    margin-top: 5px;
+  }
+}
+@media (max-width: 600px) {
+  .select-meter .pill-to-list {
+    li {
+      float: none;
+    }
+  }
+}
+
+.select-meter .show-as-list {
+  width: 200px;
+  margin-bottom: 15px;
+  .btn {
+    width: 100%;
+    text-align: left;
+    white-space: normal;
+    background-color: #f4f4f4;
+    border-color: #CCC;
+    padding: 8px 12px;
+    font-family: "Boon-0.6";
+    font-size: 1.2em;
+    @include border-radius(0);
+    &.over 
+    .caret {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      margin-top: -4px;
+      border-top: 8px solid;
+      border-right: 5px solid transparent;
+      border-left: 5px solid transparent;
+    }
+  }
+
+  .dropdown-menu {
+    width: 100%;
+    right: 0;
+    left: auto;
+    margin-top: -1px;
+    padding: 0;
+    background-color: #f4f4f4;
+    border-color: #ccc;
+    @include border-radius(0);
+    li a {
+      padding: 5px 12px;
+      white-space: normal;
+      font-family: "Boon-0.6";
+      &:hover {
+        background-color: $logo-img-background;
+        color: #FFF;
+      }
+    }
+    li.active a {
+      background-color: $logo-img-background;
+      color: #FFF;
+    }
+  }
+}
+
+// ##############################
+// For Home page && Polygarph page
+// ##############################
+
+.filter-header {
+    .page-title {
+        width: 41.66666667%;
+        min-width: 200px;
+        float: left;
+    }
+    .select-meter {
+        margin-top: 15px;
+    }
+    .polygraph-list .select-meter {
+        margin-top: 0;
+    }
+}
+@media (max-width: 768px) {
+    .filter-header {
+        .page-title {
+            width: 40%;
+        }
+    }
+    .filter-header .polygraph-list .select-meter {
+        margin-top: 15px;
+    }
+}
+@media (max-width: 520px) {
+    .filter-header .select-meter,
+    .filter-header .select-meter .show-as-list {
+        width: 100%;
+    }
+}
+
+// ##############################
+// For People page
+// ##############################
+
+.people-list {
+  position: relative;
+  .select-meter {
+    margin-top: -60px;
+  }
+  .full-page {
+    width: 100%;
+    overflow: hidden;
+  }
+    .pull-left {
+        margin-right: 20px;
+        height: 122px; overflow: hidden;
+    }
+    .media-body h3 { margin-top: 0; }
+    ul.list-unstyled {
+        li {
+            margin-bottom: 15px;
+        }
+    }
+}
+@media (max-width: 600px) {
+  .people-list {
+    .select-meter {
+      margin-top: 15px;
+    }
+  }
+}
