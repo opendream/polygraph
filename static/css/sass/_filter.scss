@@ -122,11 +122,11 @@ $logo-img-background : #A97C50;
         min-width: 200px;
         float: left;
     }
-    .select-meter {
-        margin-top: 15px;
-    }
     .polygraph-list .select-meter {
         margin-top: 0;
+    }
+    .polygraph-list .select-meter.right-sidebar {
+        margin-top: 15px;
     }
 }
 @media (max-width: 768px) {
@@ -141,8 +141,11 @@ $logo-img-background : #A97C50;
 }
 @media (max-width: 520px) {
     .filter-header .select-meter,
-    .filter-header .select-meter .show-as-list {
+    .filter-header .select-meter .show-as-list,
+    .people-list .select-meter .show-as-list,
+    .filter-header .polygraph-list .select-meter.right-sidebar {
         width: 100%;
+        margin-top: 0;
     }
 }
 
@@ -170,10 +173,11 @@ $logo-img-background : #A97C50;
         }
     }
 }
-@media (max-width: 600px) {
+@media (max-width: 520px) {
   .people-list {
     .select-meter {
-      margin-top: 15px;
+        width: 100%;
+        margin-top: 0;
     }
   }
 }

@@ -132,12 +132,12 @@
   float: left;
 }
 /* line 125, ../sass/_filter.scss */
-.filter-header .select-meter {
-  margin-top: 15px;
-}
-/* line 128, ../sass/_filter.scss */
 .filter-header .polygraph-list .select-meter {
   margin-top: 0;
+}
+/* line 128, ../sass/_filter.scss */
+.filter-header .polygraph-list .select-meter.right-sidebar {
+  margin-top: 15px;
 }
 
 @media (max-width: 768px) {
@@ -152,44 +152,48 @@
   }
 }
 @media (max-width: 520px) {
-  /* line 144, ../sass/_filter.scss */
+  /* line 146, ../sass/_filter.scss */
   .filter-header .select-meter,
-  .filter-header .select-meter .show-as-list {
+  .filter-header .select-meter .show-as-list,
+  .people-list .select-meter .show-as-list,
+  .filter-header .polygraph-list .select-meter.right-sidebar {
     width: 100%;
+    margin-top: 0;
   }
 }
-/* line 153, ../sass/_filter.scss */
+/* line 156, ../sass/_filter.scss */
 .people-list {
   position: relative;
 }
-/* line 155, ../sass/_filter.scss */
+/* line 158, ../sass/_filter.scss */
 .people-list .select-meter {
   margin-top: -60px;
 }
-/* line 158, ../sass/_filter.scss */
+/* line 161, ../sass/_filter.scss */
 .people-list .full-page {
   width: 100%;
   overflow: hidden;
 }
-/* line 162, ../sass/_filter.scss */
+/* line 165, ../sass/_filter.scss */
 .people-list .pull-left {
   margin-right: 20px;
   height: 122px;
   overflow: hidden;
 }
-/* line 166, ../sass/_filter.scss */
+/* line 169, ../sass/_filter.scss */
 .people-list .media-body h3 {
   margin-top: 0;
 }
-/* line 168, ../sass/_filter.scss */
+/* line 171, ../sass/_filter.scss */
 .people-list ul.list-unstyled li {
   margin-bottom: 15px;
 }
 
-@media (max-width: 600px) {
-  /* line 175, ../sass/_filter.scss */
+@media (max-width: 520px) {
+  /* line 178, ../sass/_filter.scss */
   .people-list .select-meter {
-    margin-top: 15px;
+    width: 100%;
+    margin-top: 0;
   }
 }
 @font-face {
