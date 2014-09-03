@@ -123,6 +123,43 @@ a:hover { text-decoration: underline; }
 .btn-delete {
     float: right;
 }
+
+// ####################################
+// Auto complete style
+// ####################################
+
+ul.tagit li.tagit-choice .tagit-close { 
+  margin-top: -12px !important;
+}
+
+.topic-reference-wrapper,
+.quoted_by {
+  margin-bottom: 10px;
+  a {
+    color: #FFF;
+    background-color: $logo-img-background;
+    padding: 5px;
+    font-size: 0.8em;
+    @include border-radius(5px);
+  } 
+  .glyphicon {
+    color: #FFF;
+  }
+}
+
+.yourlabs-autocomplete .hilight {
+  background-color: $navbar-menu-active !important;
+  background-image: none !important;
+  .reference-wrapper {
+    color: #333;
+  }
+  .glyphicon {
+    color: #FFF;
+  }
+}
+
+// ####################################
+
 @media (max-width: 640px) {
 	.hidden-640 { display: none !important; }
 	aside .item-list li { width: 100%; }
@@ -1145,17 +1182,15 @@ ul.nav-tabs li.first .caret { border-bottom-color: #FFF; }
 @media (max-width: 520px) {
   .statement-item {
     .meter-md {
+      right: 32px;
       .meter-img-wrapper img,
       .meter-img-real img {
           width: auto;
-          height: 95%;
+          height: 85%;
       }      
     }
     .submit {
-      margin: 0 48px;
       padding-right: 0;
-      font-size: 0.8em;
-      color: #555;
       margin-bottom: 60px;
     }
   }
@@ -1337,6 +1372,6 @@ td.meter {
 }
 
 
-.reference-wrapper .glyphicon {
-    color: #65BF61;
-}
+// .reference-wrapper .glyphicon {
+//     color: #65BF61;
+// }
