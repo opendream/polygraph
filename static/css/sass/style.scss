@@ -746,9 +746,6 @@ input + .errors{
 	}
 	.polygraph-list-block {
 		position: relative;
-		&.updated span {
-			background-color: $navbar-menu-active;
-		}
 		.quote { line-height: 1.8em; }
 	}
 }
