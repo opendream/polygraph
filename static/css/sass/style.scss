@@ -4,7 +4,7 @@
 @import "filter.scss";
 
 $base_orange : #CD5E26; // base orange
-$navbar-menu-active : #FF9933; // hover orange
+$statement-status-new: #FF9933; // hover orange
 $border_orange : #A34B21; // border orange
 $bright_orange : #FE6625; // bright orange
 $soft_orange : #FFC092;
@@ -562,6 +562,13 @@ input + .errors{
 		bottom: 12px; right: 0;
 	}
 }
+.updated,
+.new {
+  .block-quote {
+    margin-top: 35px;
+  }
+}
+
 .block-quote-alt {
 	padding-top: 0;
 	display: inline-block;
@@ -1098,12 +1105,17 @@ ul.nav-tabs li.first .caret { border-bottom-color: #FFF; }
         padding: 5px 0;
         color: #FFF;
         font-size: 75%;
+        font-weight: bold;
         background-color: $bright_orange;
         width: 80px;
         text-align: center;
         text-transform: uppercase;
         top: 18px;
+        left: 0;
         color: #333;
+    }
+    &.updated .statement-status {
+      background-color: $statement-status-new;
     }
 
     .people-occupation {

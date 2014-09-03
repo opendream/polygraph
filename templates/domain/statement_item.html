@@ -16,6 +16,9 @@
         {% endif %}
 
         <div class="quote-wrapper">
+
+            {% if statement.uptodate_status %}<span class="statement-status">{{ statement.uptodate_status.text }}</span>{% endif %}
+            
             <div class="text-brown block-quote lead">
 
                 {% if no_link %}
@@ -33,7 +36,6 @@
         </div>
         <div class="media">
             <span class="triangle"></span>
-            {% if statement.uptodate_status %}<span class="statement-status">{{ statement.uptodate_status.text }}</span>{% endif %}
 
             <a
                     class="vignette"
