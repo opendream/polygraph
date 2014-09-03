@@ -572,19 +572,24 @@ def statement_detail(request, statement_permalink):
     except TopicRevision.DoesNotExist:
         topicrevision = None
 
+    if not statement.changed:
+        statement.changed = statement.created
 
     return render(request, 'domain/statement_detail.html', {
         'statement': statement,
         'topic': topicrevision,
         'meter_list': Meter.objects.all().order_by('order'),
-        'meter_image': statement.meter.image_small_text.thumbnail_200x200()
+        'meter_image': statement.meter.image_medium_text.thumbnail_500x500(upscale=True)
     })
+
 
 def statement_topicrevision_detail(request, statement_permalink, topicrevision_id):
 
     statement = get_object_or_404(Statement, permalink=statement_permalink)
     topicrevision = get_object_or_404(TopicRevision, id=topicrevision_id)
 
+    if not statement.changed:
+        statement.changed = statement.created
 
     return render(request, 'domain/statement_detail.html', {
         'statement': statement,

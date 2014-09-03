@@ -2,7 +2,7 @@
 {% load activelink %}
 {% load common_tags %}
 <!doctype html>
-<html>
+<html prefix="og: http://ogp.me/ns#">
 
     <head>
         <meta charset="utf-8">
@@ -13,10 +13,12 @@
         {% captureas description_content %}{% block description %}{% endblock %}{% endcaptureas %}
         {% captureas image_content %}{% block image %}{% endblock %}{% endcaptureas %}
 
-        <meta name="og:title" content="{{ title_content|striptags }}">
-        <meta name="og:site_name" content="{{ SITE_NAME }}">
+
+        <meta property="og:url" content="{{ request.build_absolute_uri }}">
+        <meta property="og:title" content="{{ title_content|striptags }}">
+        <meta property="og:site_name" content="{{ SITE_NAME }}">
         {% if description_content %}
-        <meta name="og:description" content="{{ description_content }}">
+        <meta property="og:description" content="{{ description_content }}">
         {% endif %}
         {% if image_content %}
         {{ image_content }}
