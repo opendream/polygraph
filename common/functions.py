@@ -108,27 +108,25 @@ def image_render(image, size, alt='', crop=None, url=False):
             facerecognition = False
 
 
-        thumbnail = False
-        try:
-            if url:
-                thumbnail = getattr(image, 'thumbnail_%s' % size)(**{
-                    'scale_and_crop': crop,
-                    'upscale': upscale,
-                    'facerecognition': facerecognition
-                })
-                thumbnail = thumbnail.url
-            else:
-                thumbnail = getattr(image, 'thumbnail_tag_%s' % size)(opts={
-                    'scale_and_crop': crop,
-                    'upscale': upscale,
-                    'facerecognition': facerecognition
-                })
+        if url:
+            thumbnail = getattr(image, 'thumbnail_%s' % size)(**{
+                'scale_and_crop': crop,
+                'upscale': upscale,
+                'facerecognition': facerecognition
+            })
+            thumbnail = thumbnail.url
 
-                if 'alt=' not in thumbnail:
-                    thumbnail = thumbnail.replace('/>', 'alt="%s" />' % alt)
+        else:
+            thumbnail = getattr(image, 'thumbnail_tag_%s' % size)(opts={
+                'scale_and_crop': crop,
+                'upscale': upscale,
+                'facerecognition': facerecognition
+            })
 
-        except:
-            pass
+
+
+        if not url and thumbnail and 'alt=' not in thumbnail:
+            thumbnail = thumbnail.replace('/>', 'alt="%s"/>' % alt)
 
     if not thumbnail:
         if url:
