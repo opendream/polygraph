@@ -170,6 +170,7 @@ ul.tagit li.tagit-choice .tagit-close {
 .region {margin-bottom: 30px;}
 
 .container { margin-bottom: 30px; }
+.container.messages { margin-bottom: 0; }
 .content-inner { position: relative; }
 .content-thin {
   	max-width: 350px;
@@ -604,7 +605,7 @@ input + .errors{
 .new,
 .pending {
   .block-quote {
-    margin-top: 35px;
+    margin-top: 50px;
   }
 }
 
