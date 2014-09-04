@@ -1,5 +1,9 @@
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import resolve
+
+from django.utils.decorators import decorator_from_middleware_with_args
+from django.middleware.cache import CacheMiddleware
+
 from common.models import StatisitcAccess
 
 from functools import wraps

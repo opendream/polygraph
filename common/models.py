@@ -1,5 +1,6 @@
 from uuid import uuid1
 from django.core import validators
+from django.core.cache import cache
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
@@ -55,6 +56,11 @@ class CommonModel(models.Model):
 class CommonTrashModel(models.Model):
     is_deleted  = models.BooleanField(default=False)
     objects = CommonTrashManager()
+
+    def save(self, *args, **kwargs):
+
+        cache.clear()
+        super(CommonTrashModel, self).save(*args, **kwargs)
 
     def trash(self, *args, **kwargs):
 

@@ -53,6 +53,9 @@ INSTALLED_APPS = (
     'activelink',
     'bootstrap3',
     'django_tables2',
+    'debug_toolbar',
+    'debug_toolbar_line_profiler',
+    'template_timings_panel',
 
     # Project
     'common',
@@ -61,7 +64,9 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'common.middleware.ForceDefaultLanguageMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -70,7 +75,10 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'common.middleware.EvilMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
 )
+
+
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
@@ -217,7 +225,6 @@ FILES_WIDGET_TEMP_DIR = 'temp/files_widget/'
 
 DEFAULT_IMAGE = '%simages/default.png' % STATIC_URL
 
-
 try:
     #import cv2
     THUMBNAIL_ENGINE = 'solr_facerecognition.engines.FaceRecognitionEngine'
@@ -229,6 +236,30 @@ GREATEST_FUNCTION = 'GREATEST'
 TAGGING_AUTOCOMPLETE_JQUERY_UI_FILE = 'libs/jquery-ui/js/jquery-ui-1.10.4.min.js'
 TAGGING_AUTOCOMPLETE_MAX_TAGS = 9999
 
+DEBUG_TOOLBAR_PANELS = [
+    'debug_toolbar.panels.versions.VersionsPanel',
+    'debug_toolbar.panels.timer.TimerPanel',
+    'debug_toolbar.panels.settings.SettingsPanel',
+    'debug_toolbar.panels.headers.HeadersPanel',
+    'debug_toolbar.panels.request.RequestPanel',
+    'debug_toolbar.panels.sql.SQLPanel',
+    'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+    'debug_toolbar.panels.templates.TemplatesPanel',
+    'debug_toolbar.panels.cache.CachePanel',
+    'debug_toolbar.panels.signals.SignalsPanel',
+    'debug_toolbar.panels.logging.LoggingPanel',
+    'debug_toolbar.panels.redirects.RedirectsPanel',
+    'debug_toolbar_line_profiler.panel.ProfilingPanel',
+    'template_timings_panel.panels.TemplateTimings.TemplateTimings',
+]
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+        'TIMEOUT': 7*24*60*60,
+    }
+}
 
 # CUSTOM POLYGRAPH PROJECT #############################
 

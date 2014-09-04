@@ -40,8 +40,13 @@ if settings.DEBUG:
             'document_root': settings.MEDIA_ROOT,
         }),
         url(r'^robots\.txt$', lambda r: HttpResponse("User-agent: *\nDisallow: /", mimetype="text/plain")),
-
     )
+
+    import debug_toolbar
+    urlpatterns += patterns('',
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    )
+
 else:
     urlpatterns += patterns('',
         url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt')),

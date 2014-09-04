@@ -11,10 +11,13 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from django.views.decorators.vary import vary_on_cookie
+
 from django_tables2 import RequestConfig
 from tagging.models import Tag, TaggedItem
 from common.constants import STATUS_PUBLISHED, STATUS_DRAFT, STATUS_PENDING
 from common.decorators import statistic
+from django.views.decorators.cache import never_cache
 from common.functions import people_render_reference, topic_render_reference, statement_render_reference, process_status, \
     get_success_message, image_render
 from domain.forms import PeopleEditForm, TopicEditForm, StatementEditForm, ReferenceForm
@@ -27,6 +30,7 @@ from domain.models import People, Topic, Statement, Meter, PeopleCategory, Topic
 from domain.tables import StatementTable, MyStatementTable, PeopleTable, MyPeopleTable
 
 
+@never_cache
 @login_required
 def domain_delete(request, inst_name, id):
 
@@ -62,6 +66,8 @@ def statement_query_base(is_anonymous=True, is_staff=False, user=None):
 
         statement_list = statement_list.extra(select={'uptodate': '%s(COALESCE(created_raw, "1000-01-01"), COALESCE(created, "1000-01-01"), COALESCE(changed, "1000-01-01"))' % settings.GREATEST_FUNCTION})
 
+    statement_list = statement_list.prefetch_related('quoted_by', 'created_by', 'meter')
+
     return statement_list
 
 
@@ -86,6 +92,7 @@ def pagination_build_query(request, item_list, ipp=10):
 # Home
 # =============================
 
+@vary_on_cookie
 def home(request):
 
     statement_list = statement_query_base(is_anonymous=True)
@@ -93,7 +100,7 @@ def home(request):
     #hilight_statement = statement_list.order_by('-hilight', '-promote', '-uptodate')[0:1]
     hilight_statement = []
 
-    meter_list = Meter.objects.all().order_by('order')
+    meter_list = Meter.objects.prefetch_related('statement_set').order_by('order')
 
     meter_statement_count = [(meter, meter.statement_set.filter(status=STATUS_PUBLISHED).count()) for meter in meter_list]
 
@@ -115,9 +122,6 @@ def home(request):
     tags_list = tags_list[0:15]
 
 
-    people_statement_list = [statement.quoted_by.id for statement in statement_list]
-    people_statement_list = list(set(people_statement_list))
-
     people_list = people_query_base()
     #people_list = people_list.exclude(id__in=people_statement_list)
 
@@ -137,6 +141,7 @@ def home(request):
 # People
 # =============================
 
+@never_cache
 @login_required
 def people_create(request, people=None):
 
@@ -204,6 +209,7 @@ def people_create(request, people=None):
     })
 
 
+@never_cache
 @login_required
 def people_edit(request, people_id=None):
 
@@ -214,7 +220,7 @@ def people_edit(request, people_id=None):
 def people_query_base(category=None):
 
 
-    people_list = People.objects.all().order_by('-quoted_by__created')
+    people_list = People.objects.order_by('-quoted_by__created')
 
     if category:
         category = get_object_or_404(PeopleCategory, permalink=category)
@@ -233,6 +239,7 @@ def people_query_base(category=None):
 
 
 @statistic
+@vary_on_cookie
 def people_detail(request, people_permalink, meter_permalink=None):
 
     people = get_object_or_404(People, permalink=people_permalink)
@@ -265,6 +272,7 @@ def people_detail(request, people_permalink, meter_permalink=None):
     })
 
 
+@vary_on_cookie
 def people_list(request):
 
     category = request.GET.get('category')
@@ -288,6 +296,7 @@ def people_list(request):
 # =============================
 
 @statistic
+@vary_on_cookie
 def meter_detail(request, meter_permalink=None):
 
     meter_list = Meter.objects.all().order_by('order')
@@ -325,6 +334,7 @@ def meter_detail(request, meter_permalink=None):
 # Topic
 # =============================
 
+@never_cache
 @login_required
 def topic_create(request, topic=None):
 
@@ -382,6 +392,7 @@ def topic_create(request, topic=None):
     })
 
 
+@never_cache
 @login_required
 def topic_edit(request, topic_id=None):
 
@@ -389,6 +400,7 @@ def topic_edit(request, topic_id=None):
     return topic_create(request, topic)
 
 
+@never_cache
 @login_required
 def topic_edit_from_statement(request, topic_id, statement_id):
 
@@ -403,6 +415,7 @@ def topic_edit_from_statement(request, topic_id, statement_id):
 
 
 @statistic
+@vary_on_cookie
 def topic_detail(request, topic_id, topicrevision_id=False):
 
     origin = get_object_or_404(Topic, id=topic_id)
@@ -430,6 +443,7 @@ def topic_detail(request, topic_id, topicrevision_id=False):
     })
 
 
+@vary_on_cookie
 def topic_list(request):
     return HttpResponse('Fixed me !!')
 
@@ -438,6 +452,7 @@ def topic_list(request):
 # Topic Revision
 # =============================
 
+@vary_on_cookie
 def topicrevision_detail(request, topic_id, topicrevision_id):
     return topic_detail(request, topic_id, topicrevision_id)
 
@@ -454,6 +469,7 @@ def topicrevision_edit(request, topic_id, topicrevision_id):
 # Statement
 # =============================
 
+@never_cache
 @login_required
 def statement_create(request, statement=None):
 
@@ -556,6 +572,7 @@ def statement_create(request, statement=None):
     })
 
 
+@never_cache
 @login_required
 def statement_edit(request, statement_id=None):
 
@@ -564,6 +581,7 @@ def statement_edit(request, statement_id=None):
 
 
 @statistic
+@vary_on_cookie
 def statement_detail(request, statement_permalink):
 
     statement = get_object_or_404(Statement, permalink=statement_permalink)
@@ -583,6 +601,7 @@ def statement_detail(request, statement_permalink):
     })
 
 
+@vary_on_cookie
 def statement_topicrevision_detail(request, statement_permalink, topicrevision_id):
 
     statement = get_object_or_404(Statement, permalink=statement_permalink)
@@ -598,6 +617,7 @@ def statement_topicrevision_detail(request, statement_permalink, topicrevision_i
     })
 
 
+@vary_on_cookie
 def statement_list(request, tags_id=None):
 
     statement_list = statement_query_base(request.user.is_anonymous(), request.user.is_staff, request.user)
@@ -620,6 +640,7 @@ def statement_list(request, tags_id=None):
     })
 
 
+@vary_on_cookie
 def statement_tags_detail(request, tags_id):
 
     return statement_list(request, tags_id)
@@ -628,11 +649,14 @@ def statement_tags_detail(request, tags_id):
 # =============================
 # Manage
 # =============================
+
+@never_cache
 @login_required
 def manage(request):
     raise Http404('No Implement Yet.')
 
 
+@never_cache
 @login_required
 def manage_my_statement(request):
 
@@ -643,6 +667,7 @@ def manage_my_statement(request):
     return render(request, 'manage.html', {'table': table, 'page_title': _('Manage My Statements')})
 
 
+@never_cache
 @staff_member_required
 def manage_pending_statement(request):
 
@@ -653,6 +678,7 @@ def manage_pending_statement(request):
     return render(request, 'manage.html', {'table': table, 'page_title': _('Manage Pending Statements')})
 
 
+@never_cache
 @staff_member_required
 def manage_hilight_statement(request):
 
@@ -673,6 +699,7 @@ def manage_promote_statement(request):
     return render(request, 'manage.html', {'table': table, 'page_title': _('Manage Promote Statements')})
 
 
+@never_cache
 @staff_member_required
 def manage_statement(request):
 
@@ -683,6 +710,7 @@ def manage_statement(request):
     return render(request, 'manage.html', {'table': table, 'page_title': _('Manage All Statements')})
 
 
+@never_cache
 @login_required
 def manage_my_people(request):
 
@@ -693,6 +721,7 @@ def manage_my_people(request):
     return render(request, 'manage.html', {'table': table, 'page_title': _('Manage My People')})
 
 
+@never_cache
 @staff_member_required
 def manage_people(request):
 
