@@ -133,11 +133,10 @@ ul.tagit li.tagit-choice .tagit-close {
 }
 
 .topic-reference-wrapper,
-.quoted_by {
+.autocomplete-light-widget.quoted_by {
   margin-bottom: 10px;
   a {
     color: #333;
-    // background-color: $logo-img-background;
     background-color: #FFF;
     border: 1px solid #CCC;
     padding: 2px 5px;
@@ -602,7 +601,8 @@ input + .errors{
 	}
 }
 .updated,
-.new {
+.new,
+.pending {
   .block-quote {
     margin-top: 35px;
   }
@@ -1141,12 +1141,11 @@ ul.nav-tabs li.first .caret { border-bottom-color: #FFF; }
 
     .statement-status {
         display: block;
-        padding: 5px 0;
+        padding: 5px 10px;
         color: #FFF;
         font-size: 75%;
         font-weight: bold;
         background-color: $bright_orange;
-        width: 80px;
         text-align: center;
         text-transform: uppercase;
         top: 18px;
