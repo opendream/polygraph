@@ -71,6 +71,37 @@ def statement_query_base(is_anonymous=True, is_staff=False, user=None):
     return statement_list
 
 
+def people_query_base(category=None, is_anonymous=True, is_staff=False, user=None):
+
+
+    people_list = People.objects.all().order_by('-quoted_by__created')
+
+    if category:
+        category = get_object_or_404(PeopleCategory, permalink=category)
+        people_list = people_list.filter(categories=category)
+
+    if is_anonymous:
+        people_list = people_list.exclude(status__in=[STATUS_DRAFT, STATUS_PENDING])
+
+    else:
+
+        if is_staff:
+            people_list = people_list.filter(Q(status__in=[STATUS_PUBLISHED, STATUS_PENDING])|Q(created_by=user))
+        else:
+            people_list = people_list.filter(Q(status__in=[STATUS_PUBLISHED])|Q(created_by=user, status__in=[STATUS_DRAFT, STATUS_PENDING]))
+
+
+    query = people_list.query
+    query.group_by = ['id']
+
+    # SQL injection hack by developer for order MAX uptodate
+    query.order_by.append('-is_deleted`, MAX(%s(COALESCE(`domain_statement.created, "1000-01-01"), COALESCE(domain_statement.changed, "1000-01-01")))' % settings.GREATEST_FUNCTION)
+
+    query.order_by.reverse()
+
+    return QuerySet(query=query, model=People)
+
+
 def pagination_build_query(request, item_list, ipp=10):
 
     paginator = Paginator(item_list, ipp)
@@ -122,7 +153,7 @@ def home(request):
     tags_list = tags_list[0:15]
 
 
-    people_list = people_query_base()
+    people_list = people_query_base(is_anonymous=True)
     #people_list = people_list.exclude(id__in=people_statement_list)
 
     people_list = people_list[0:4]
@@ -217,27 +248,6 @@ def people_edit(request, people_id=None):
     return people_create(request, people)
 
 
-def people_query_base(category=None):
-
-
-    people_list = People.objects.order_by('-quoted_by__created')
-
-    if category:
-        category = get_object_or_404(PeopleCategory, permalink=category)
-        people_list = people_list.filter(categories=category)
-
-
-    query = people_list.query
-    query.group_by = ['id']
-
-    # SQL injection hack by developer for order MAX uptodate
-    query.order_by.append('-is_deleted`, MAX(%s(COALESCE(`domain_statement.created, "1000-01-01"), COALESCE(domain_statement.changed, "1000-01-01")))' % settings.GREATEST_FUNCTION)
-
-    query.order_by.reverse()
-
-    return QuerySet(query=query, model=People)
-
-
 @statistic
 @vary_on_cookie
 def people_detail(request, people_permalink, meter_permalink=None):
@@ -257,7 +267,7 @@ def people_detail(request, people_permalink, meter_permalink=None):
 
     statement_list = pagination_build_query(request, statement_list, 5)
 
-    people_list = people_query_base()
+    people_list = people_query_base(is_anonymous=True)
     people_list = people_list.exclude(id=people.id)
 
     people_list = people_list[0:2]
@@ -277,7 +287,7 @@ def people_list(request):
 
     category = request.GET.get('category')
 
-    people_list = people_query_base(category)
+    people_list = people_query_base(category, request.user.is_anonymous(), request.user.is_staff, request.user)
     people_list = pagination_build_query(request, people_list, 9)
 
     category_list = PeopleCategory.objects.all()

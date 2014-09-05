@@ -1853,58 +1853,73 @@ ul.nav-tabs li.first .caret {
   font-size: 1.5em;
   padding: 5px 2px 8px 2px;
 }
+/* line 1330, ../sass/style.scss */
+.people-item .people-status {
+  display: block;
+  padding: 5px 10px;
+  color: #FFF;
+  font-size: 75%;
+  font-weight: bold;
+  background-color: #fe6625;
+  text-align: center;
+  text-transform: uppercase;
+  top: 18px;
+  left: 0;
+  color: #333;
+  position: absolute;
+}
 
 @media (max-width: 600px) {
-  /* line 1332, ../sass/style.scss */
+  /* line 1348, ../sass/style.scss */
   .people-list > ul > li {
     width: 100%;
   }
 }
-/* line 1337, ../sass/style.scss */
+/* line 1353, ../sass/style.scss */
 td.quote {
   width: 40%;
 }
 
-/* line 1340, ../sass/style.scss */
+/* line 1356, ../sass/style.scss */
 td.created {
   min-width: 90px;
 }
 
-/* line 1343, ../sass/style.scss */
+/* line 1359, ../sass/style.scss */
 td.status {
   min-width: 200px;
 }
 
-/* line 1346, ../sass/style.scss */
+/* line 1362, ../sass/style.scss */
 td.meter {
   min-width: 55px;
 }
 
-/* line 1349, ../sass/style.scss */
+/* line 1365, ../sass/style.scss */
 .statement-detail img {
   max-width: 100%;
   height: auto !important;
 }
 
-/* line 1354, ../sass/style.scss */
+/* line 1370, ../sass/style.scss */
 .latest-update {
   font-size: 0.9em;
   margin-bottom: 20px;
 }
 
-/* line 1359, ../sass/style.scss */
+/* line 1375, ../sass/style.scss */
 #id_permalink_readonly {
   display: inline-block;
   margin-right: -50px;
   padding-right: 60px;
 }
 
-/* line 1365, ../sass/style.scss */
+/* line 1381, ../sass/style.scss */
 #edit-permalink {
   position: relative;
 }
 
-/* line 1370, ../sass/style.scss */
+/* line 1386, ../sass/style.scss */
 .inline-media {
   position: relative;
   padding-bottom: 56.25%;
@@ -1912,7 +1927,7 @@ td.meter {
   height: 0;
   overflow: hidden;
 }
-/* line 1376, ../sass/style.scss */
+/* line 1392, ../sass/style.scss */
 .inline-media iframe, .inline-media object, .inline-media embed {
   position: absolute;
   top: 0;
