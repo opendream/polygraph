@@ -414,7 +414,8 @@ input + .errors{
   margin-top: 10px;
 }
 
-.controls .prettycheckbox label, .controls .prettyradio label {
+.controls .prettycheckbox label,
+.controls .prettyradio label {
   font-weight: normal;
   margin: 4px 5px;
 }
@@ -423,7 +424,8 @@ input + .errors{
   .autocomplete-light-widget {
     display: block;
   }
-  .autocomplete-light-widget input, .autocomplete-light-widget input:focus {
+  .autocomplete-light-widget input,
+  .autocomplete-light-widget input:focus {
     width: 100%;
   }
 }
@@ -594,18 +596,19 @@ input + .errors{
 		z-index: 1;
 	}
 	&:before {
-		top: 5px; left: 0;
+		top: 0; left: 0;
 	}
 	&:after {
 		background-position: -23px 0;
-		bottom: 12px; right: 0;
+		bottom: 0;
+    right: 0;
 	}
 }
 .updated,
 .new,
 .pending {
   .block-quote {
-    margin-top: 50px;
+    margin-top: 55px;
   }
 }
 
@@ -897,36 +900,42 @@ footer {
 .tagit-hidden-field {
     display: none;
 }
-.media-list .prettyradio {
-    display: table-row;
-}
-
-.media-list .prettyradio > * {
-    display: table-cell;
-}
 
 .statement-meter .radio {
     padding-left: 0;
 }
-.statement-meter .radio .image-wrapper {
-    margin-top: -11px;
-    margin-right: 5px;
-}
-
 .statement-meter .prettyradio {
-    padding-top: 11px;
     padding-left: 7px;
     padding-right: 3px;
     background-color: #FFF;
     border-radius: 25px 2px 2px 25px;
     border-right: solid 5px #ffc092;
     margin-right: 5px;
-
+    > a {
+      margin-top: 0.75em;
+    }
     label {
         margin-left: 2px;
     }
 }
-
+.statement-meter .prettyradio .item-inner {
+    display: table-row;
+    .image-wrapper,
+    .media-body {
+      display: table-cell;
+      vertical-align: middle;
+    }
+    .media-body .media-heading {
+      display: block;
+      float: left;
+      margin-bottom: 0;
+      margin-left: 5px;
+    }
+}
+.statement-meter .prettyradio .item-inner {
+    margin-top: -11px;
+    margin-right: 5px;
+}
 
 .staff-link-wrapper {
 
@@ -1372,8 +1381,3 @@ td.meter {
         height: 100%;
     }
 }
-
-
-// .reference-wrapper .glyphicon {
-//     color: #65BF61;
-// }
