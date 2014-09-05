@@ -1317,6 +1317,22 @@ ul.nav-tabs li.first .caret { border-bottom-color: #FFF; }
 
         }
     }
+
+    .people-status {
+        display: block;
+        padding: 5px 10px;
+        color: #FFF;
+        font-size: 75%;
+        font-weight: bold;
+        background-color: $bright_orange;
+        text-align: center;
+        text-transform: uppercase;
+        top: 18px;
+        left: 0;
+        color: #333;
+        position: absolute;
+        
+    }
 }
 
 @media (max-width: 600px) {
