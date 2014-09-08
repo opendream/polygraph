@@ -1,6 +1,11 @@
 {% extends 'base_single.html' %}
 {% load i18n %}
 
+{% block js %}
+<link href="{{ STATIC_URL }}libs/prettycheckable/css/prettycheckable.css" rel="stylesheet">
+<script type="text/javascript" src="{{ STATIC_URL }}libs/prettycheckable/js/prettycheckable.js"></script>
+{% endblock %}
+
 {% block title %}{% trans "Invite Staff" %}{% endblock %}
 
 {% block content_class %} content-thin{% endblock %}
