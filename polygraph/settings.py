@@ -262,6 +262,8 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
 COMPRESS_ENABLED = True
 #COMPRESS_OFFLINE = True
 

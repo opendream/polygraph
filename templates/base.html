@@ -40,19 +40,13 @@
 
         {% captureas js_content %}{% block js %}{% endblock %}{% endcaptureas %}
 
+        {% compress js %}
 
         {% if 'jquery.min.js' not in js_content %}
         <script type="text/javascript" src="{% static 'libs/jquery/jquery.min.js' %}"></script>
         {% endif %}
         {{ js_content }}
 
-
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-            <script type="text/javascript" src="{% static 'libs/html5shiv/html5shiv.js' %}"></script>
-            <script type="text/javascript" src="{% static 'libs/respond.js/respond.min.js' %}"></script>
-        <![endif]-->
-        {% compress js %}
 
         <script type="text/javascript" src="{% static 'libs/bootstrap/js/bootstrap.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'libs/jquery.popconfirm.js' %}"></script>
@@ -63,6 +57,13 @@
 
         <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
         {% endcompress %}
+
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script type="text/javascript" src="{% static 'libs/html5shiv/html5shiv.js' %}"></script>
+            <script type="text/javascript" src="{% static 'libs/respond.js/respond.min.js' %}"></script>
+        <![endif]-->
 
     </head>
 
