@@ -237,6 +237,10 @@ GREATEST_FUNCTION = 'GREATEST'
 TAGGING_AUTOCOMPLETE_JQUERY_UI_FILE = 'libs/jquery-ui/js/jquery-ui-1.10.4.min.js'
 TAGGING_AUTOCOMPLETE_MAX_TAGS = 9999
 
+DEBUG_TOOLBAR_CONFIG = {
+    'JQUERY_URL': '%slibs/jquery/jquery.min.js' % STATIC_URL
+}
+
 DEBUG_TOOLBAR_PANELS = [
     'debug_toolbar.panels.versions.VersionsPanel',
     'debug_toolbar.panels.timer.TimerPanel',
