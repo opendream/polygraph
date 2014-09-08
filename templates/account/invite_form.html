@@ -1,9 +1,13 @@
 {% extends 'base_single.html' %}
 {% load i18n %}
+{% load staticfiles %}
 
 {% block js %}
-<link href="{{ STATIC_URL }}libs/prettycheckable/css/prettycheckable.css" rel="stylesheet">
-<script type="text/javascript" src="{{ STATIC_URL }}libs/prettycheckable/js/prettycheckable.js"></script>
+<script type="text/javascript" src="{% static 'libs/prettycheckable/js/prettycheckable.js' %}"></script>
+{% endblock %}
+{% block css %}
+<link href="{% static 'libs/prettycheckable/css/prettycheckable.css' %}" type="text/css" rel="stylesheet">
+{{ form.media.css }}
 {% endblock %}
 
 {% block title %}{% trans "Invite Staff" %}{% endblock %}

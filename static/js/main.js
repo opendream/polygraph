@@ -239,7 +239,9 @@ $(document).ready(function () {
 
     // checknox radio style
     $('input[type=checkbox], input[type=radio]').each(function () {
-        $(this).prettyCheckable();
+        if (typeof($(this).prettyCheckable) == 'function') {
+            $(this).prettyCheckable();
+        }
     });
     
     // add more formset

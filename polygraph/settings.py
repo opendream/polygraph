@@ -53,6 +53,7 @@ INSTALLED_APPS = (
     'activelink',
     'bootstrap3',
     'django_tables2',
+    'compressor',
     'debug_toolbar',
     'debug_toolbar_line_profiler',
     'template_timings_panel',
@@ -260,6 +261,15 @@ CACHES = {
         'TIMEOUT': 7*24*60*60,
     }
 }
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # other finders..
+    'compressor.finders.CompressorFinder',
+)
+
+COMPRESS_ENABLED = True
 
 # CUSTOM POLYGRAPH PROJECT #############################
 

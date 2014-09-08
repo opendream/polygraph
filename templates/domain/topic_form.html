@@ -1,10 +1,14 @@
 {% extends 'base_single.html' %}
 {% load i18n %}
+{% load staticfiles %}
 
 {% block js %}
-{{ form.media }}
-<link href="{{ STATIC_URL }}libs/prettycheckable/css/prettycheckable.css" rel="stylesheet">
-<script type="text/javascript" src="{{ STATIC_URL }}libs/prettycheckable/js/prettycheckable.js"></script>
+{{ form.media.js }}
+<script type="text/javascript" src="{% static 'libs/prettycheckable/js/prettycheckable.js' %}"></script>
+{% endblock %}
+{% block css %}
+{{ form.media.css }}
+<link href="{% static 'libs/prettycheckable/css/prettycheckable.css' %}" type="text/css" rel="stylesheet">
 {% endblock %}
 
 {% block title %}
