@@ -3,3 +3,4 @@ python manage.py collectstatic
 python manage.py compilemessages
 service uwsgi restart
 service nginx restart
+service memcached restart

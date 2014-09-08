@@ -47,26 +47,29 @@ body {
   body { padding-top: 80px; }
 }
 body.request-popup {
-    padding-top: 0;
+  padding-top: 0;
 }
 
 h1, h2, h3, h4, .nav, .footer-menu{
-    font-family: "Boon-0.6";
-    font-style: normal;
+  font-family: "Boon-0.6";
+  font-style: normal;
+  font-weight: 700 !important;
+}
+.block-quote,
+body .quote,
+.statement-item .media-heading,
+.people-item .media-heading {
+  font-family: "Boon-0.6";
+  font-style: normal;
+  font-weight: 300 !important;
+  strong {
     font-weight: 700 !important;
-
-}
-.block-quote, body .quote, .statement-item .media-heading, .people-item .media-heading{
-    font-family: "Boon-0.6";
-    font-style: normal;
-    font-weight: 300 !important;
-
-    strong {
-        font-weight: 700 !important;
-    }
+  }
 }
 
-.col-no-padding { padding: 0; }
+.col-no-padding {
+  padding: 0;
+}
 
 h1, h2, h3, h4, h5, h6,
 p {
@@ -79,7 +82,10 @@ header {
   }
 }
 
-p.border-bt { padding-bottom: 20px; border-bottom: 2px solid $block_border; }
+p.border-bt {
+  padding-bottom: 20px;
+  border-bottom: 2px solid $block_border;
+}
 
 .text-brown,
 .text-brown p { color: $text_brown; }
@@ -98,6 +104,7 @@ a:hover { color: $text_brown; }
 a:hover { text-decoration: underline; }
 
 .text-large { font-size: 40px; font-weight: bold; }
+
 .align-right { text-align: right; }
 @media (max-width: 768px) {
 	.align-right { text-align: left; }
@@ -200,7 +207,9 @@ ul.tagit li.tagit-choice .tagit-close {
 	.media {
 		padding: 0 15px;
 		margin-top: 0;
-		img { margin-right: 10px; }
+		img { 
+      margin-right: 10px;
+    }
 		.media-heading { margin-top: 15px; }
 		&:last-child .item-inner { border-bottom: 0; }
 	}
@@ -337,33 +346,33 @@ ul.tagit li.tagit-choice .tagit-close {
     }
   }
   .navbar-brand {
-      img {
-          width: auto;
-          height: 57px;
-          position: absolute;
-          padding: 0; 
-          margin-left: 15px;
-          top: 0;
-          left: 0;
-      }
+    img {
+      width: auto;
+      height: 57px;
+      position: absolute;
+      padding: 0; 
+      margin-left: 15px;
+      top: 0;
+      left: 0;
+    }
   }
 }
 
 .navbar-header h1 {margin: 0;}
 .navbar-brand {
-    img {
-        position: absolute;
-        padding: 0; 
-        margin-left: 15px;
-        top: 0;
-        left: 0;
-        background-color: $logo-img-background;
-    }
+  img {
+    position: absolute;
+    padding: 0; 
+    margin-left: 15px;
+    top: 0;
+    left: 0;
+    background-color: $logo-img-background;
+  }
 }
 
 .form-action {
 	margin-top: 10px;
-  	margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .headroom {
@@ -504,7 +513,6 @@ input + .errors{
 		.item-inner {
 			overflow: hidden;
 			padding: 10px 0;
-			//border-bottom: 1px dotted #333333;
 			display: block;
 			&.no-border-bottom { border-bottom: none; }
 		}
@@ -685,10 +693,13 @@ input + .errors{
 @media (max-width: 480px) {
 	.polygraph-list.single {
 		.polygraph-list-before {
-			.meter-title, .desc, .meter-image {
+			.meter-title,
+      .desc,
+      .meter-image {
 				width: 100%;
 			}
-			.meter-title, .meter-image {
+			.meter-title,
+      .meter-image {
 				text-align: center;
 			}
 			.meter-image { margin-top: 20px; }
@@ -1252,10 +1263,6 @@ ul.nav-tabs li.first .caret { border-bottom-color: #FFF; }
 
 
 .people-item {
-
-    //height: 380px;
-
-
     .people-item-image {
         display: block;
         position: relative;
