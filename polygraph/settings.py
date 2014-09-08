@@ -254,13 +254,6 @@ DEBUG_TOOLBAR_PANELS = [
     'template_timings_panel.panels.TemplateTimings.TemplateTimings',
 ]
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': '127.0.0.1:11211',
-        'TIMEOUT': 7*24*60*60,
-    }
-}
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -270,6 +263,16 @@ STATICFILES_FINDERS = (
 )
 
 COMPRESS_ENABLED = True
+#COMPRESS_OFFLINE = True
+
+COMPRESS_CSS_FILTERS = [
+    'compressor.filters.css_default.CssAbsoluteFilter',
+    'compressor.filters.cssmin.CSSMinFilter'
+]
+COMPRESS_JS_FILTERS = [
+    'compressor.filters.jsmin.JSMinFilter'
+]
+
 
 # CUSTOM POLYGRAPH PROJECT #############################
 
@@ -278,10 +281,6 @@ SITE_LOGO_URL = '%simages/logo.png' % STATIC_URL
 SITE_NAME = 'Polygraph'
 SITE_FAVICON_URL = '%simages/favicon.ico' % STATIC_URL
 
-
-# DEBUG MODE ##################################################################
-if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Override Settings ###########################################################
 try:
@@ -299,3 +298,19 @@ if 'test' in sys.argv:
 
 if 'runserver' in sys.argv:
     DEBUG = True
+
+
+# DEBUG MODE ##################################################################
+
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    COMPRESS_ENABLED = False
+
+else:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+            'LOCATION': '127.0.0.1:11211',
+            'TIMEOUT': 7*24*60*60,
+        }
+    }
