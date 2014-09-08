@@ -1079,12 +1079,14 @@ ul.nav-tabs li.first .caret { border-bottom-color: #FFF; }
         overflow: visible;
     }
 
-    .media-body, .meter-md, .statement-status {
+    .media-body,
+    .meter-md,
+    .statement-status {
         position: absolute;
         z-index: 2;
     }
     .media-body {
-        bottom: 10px;
+        bottom: 0px;
         margin: 30px;
         max-width: 40%;
     }
@@ -1170,6 +1172,7 @@ ul.nav-tabs li.first .caret { border-bottom-color: #FFF; }
         color: #FFF;
         font-size: 0.9em;
         font-weight: lighter;
+        margin-top: 0.5em;
     }
 
     .submit {
