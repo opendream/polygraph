@@ -1,5 +1,14 @@
 {% extends 'base_single.html' %}
 {% load i18n %}
+{% load staticfiles %}
+
+{% block js %}
+<script type="text/javascript" src="{% static 'libs/prettycheckable/js/prettycheckable.js' %}"></script>
+{% endblock %}
+{% block css %}
+<link href="{% static 'libs/prettycheckable/css/prettycheckable.css' %}" type="text/css" rel="stylesheet">
+{{ form.media.css }}
+{% endblock %}
 
 {% block title %}{% trans "Please log in" %}{% endblock %}
 

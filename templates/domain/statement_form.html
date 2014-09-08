@@ -1,10 +1,18 @@
 {% extends 'base_sidebar.html' %}
 {% load i18n %}
+{% load staticfiles %}
 
 {% block js %}
-{{ form.media }}
+{{ form.media.js }}
 {% include 'autocomplete_light/static.html' %}
+<script type="text/javascript" src="{% static 'libs/prettycheckable/js/prettycheckable.js' %}"></script>
 {% endblock %}
+{% block css %}
+{{ form.media.css }}
+<link href="{% static 'libs/prettycheckable/css/prettycheckable.css' %}" type="text/css" rel="stylesheet">
+{% endblock %}
+
+
 
 {% block title %}
 {% if form.is_new %}{% trans "Create" %}{% else %}{% trans "Edit" %}{% endif %} {% trans form.inst.inst_name %}
