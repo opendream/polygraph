@@ -82,6 +82,15 @@ header {
   }
 }
 
+@media (max-width: 767px) {
+  .lead {
+    font-size: 18px;
+  }
+  .block-quote strong {
+    font-size: 1em;
+  }
+}
+
 p.border-bt {
   padding-bottom: 20px;
   border-bottom: 2px solid $block_border;
@@ -1277,6 +1286,10 @@ ul.nav-tabs li.first .caret { border-bottom-color: #FFF; }
     .media-body {
         padding: 10px 15px;
         background-color: #000;
+        h3 {
+          margin-top: 0;
+          margin-bottom: 0;
+        }
         .media-heading {
             color: #fe6625;
             text-overflow: ellipsis;
@@ -1290,6 +1303,9 @@ ul.nav-tabs li.first .caret { border-bottom-color: #FFF; }
             overflow: hidden;
             display: block;
             white-space: nowrap;
+            margin-top: 0.3em;
+            margin-bottom: 0.5em;
+            font-size: 0.9em;
         }
     }
 
