@@ -45,18 +45,15 @@
         {% if 'jquery.min.js' not in js_content %}
         <script type="text/javascript" src="{% static 'libs/jquery/jquery.min.js' %}"></script>
         {% endif %}
-        {{ js_content }}
-
-
         <script type="text/javascript" src="{% static 'libs/bootstrap/js/bootstrap.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'libs/jquery.popconfirm.js' %}"></script>
         <script type="text/javascript" src="{% static 'libs/scrolltofixed/jquery-scrolltofixed-min.js' %}"></script>
         <script type="text/javascript" src="{% static 'libs/headroom/headroom.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'libs/headroom/jquery.headroom.js' %}"></script>
 
-
         <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
         {% endcompress %}
+        {{ js_content }}
 
 
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
