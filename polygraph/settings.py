@@ -306,7 +306,7 @@ if 'runserver' in sys.argv:
 
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-    #COMPRESS_ENABLED = False
+    COMPRESS_ENABLED = False
 
 else:
     CACHES = {
