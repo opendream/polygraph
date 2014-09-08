@@ -279,6 +279,14 @@ COMPRESS_JS_FILTERS = [
     'compressor.filters.jsmin.JSMinFilter'
 ]
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+        'TIMEOUT': 7*24*60*60,
+    }
+}
+
 
 # CUSTOM POLYGRAPH PROJECT #############################
 
@@ -311,12 +319,3 @@ if 'runserver' in sys.argv:
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     COMPRESS_ENABLED = False
-
-else:
-    CACHES = {
-        'default': {
-            'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-            'LOCATION': '127.0.0.1:11211',
-            'TIMEOUT': 7*24*60*60,
-        }
-    }
