@@ -1,5 +1,6 @@
 {% load common_tags %}
 {% load activelink %}
+{% load i18n %}
 <ul class="block-content item-list row">
     {% for meter, count, percent in meter_statement_count %}
     <li class="item col-md-12 col-xs-6{% if request_meter == meter %} active{% endif %}">
@@ -25,7 +26,7 @@
                     <div class="amount-bar"><div class="amount" style="width:{{ percent }}%;"></div></div>
                 </div>
                 <div class="amount-num">
-                    <span class="text-large">{{ count }}</span>
+                    <span class="text-large">{{ count }}</span> {% trans 'statements' %}
                 </div>
             </div>
          {% if not people or count %}

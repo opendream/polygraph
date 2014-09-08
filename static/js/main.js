@@ -240,7 +240,7 @@ $(document).ready(function () {
     // checknox radio style
     $('input[type=checkbox], input[type=radio]').each(function () {
         if (typeof($(this).prettyCheckable) == 'function') {
-            $(this).prettyCheckable();
+        $(this).prettyCheckable();
         }
     });
     
@@ -396,6 +396,10 @@ $(document).ready(function () {
             'offset': 205
 
         });
+
+    }
+    else {
+        $('.navbar-brand img').height('100%');
     }
 
 });
