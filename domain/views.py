@@ -128,19 +128,11 @@ def home(request):
 
     statement_list = statement_query_base(is_anonymous=True)
 
-    #hilight_statement = statement_list.order_by('-hilight', '-promote', '-uptodate')[0:1]
-    hilight_statement = []
-
     meter_list = Meter.objects.prefetch_related('statement_set').order_by('order')
 
     meter_statement_count = [(meter, meter.statement_set.filter(status=STATUS_PUBLISHED).count()) for meter in meter_list]
 
-    statement_list = statement_list.exclude(id__in=[s.id for s in hilight_statement]).order_by('-promote', '-uptodate')
-
-    hilight_statement = list(hilight_statement)
-    hilight_statement.append(None)
-    hilight_statement = hilight_statement[0]
-
+    statement_list = statement_list.order_by('-hilight', '-promote', '-uptodate')
 
     meter_statement_list = [({'title': _('Latest'), 'permalink': 'latest'}, statement_list[0:4])]
     for meter in meter_list:
@@ -159,7 +151,6 @@ def home(request):
     people_list = people_list[0:4]
 
     return render(request, 'domain/home.html', {
-        'hilight_statement': hilight_statement,
         'meter_statement_count': meter_statement_count,
         'meter_statement_list': meter_statement_list,
         'tags_list': tags_list,
