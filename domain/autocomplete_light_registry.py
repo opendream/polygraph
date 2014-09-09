@@ -2,6 +2,7 @@ import autocomplete_light
 from django.core import urlresolvers
 from django.core.exceptions import ImproperlyConfigured
 from django.db.models.query import QuerySet
+from common.constants import STATUS_PUBLISHED
 
 from common.functions import people_render_reference, topic_render_reference, statement_render_reference
 from models import People, Topic, TopicRevision, Statement
@@ -9,7 +10,7 @@ from models import People, Topic, TopicRevision, Statement
 
 class PeopleAutocomplete(autocomplete_light.AutocompleteModelBase):
 
-    choices = People.objects.all().order_by('-id')
+    choices = People.objects.filter(status=STATUS_PUBLISHED).order_by('-id')
     search_fields = ['first_name', 'last_name', 'permalink']
 
     def choice_label(self, choice):
