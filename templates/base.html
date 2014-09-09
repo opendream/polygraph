@@ -12,12 +12,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         {% captureas title_content %}{% block title %}{% endblock %}{% endcaptureas %}
+        {% captureas title_share_content %}{% block title_share %}{% endblock %}{% endcaptureas %}
         {% captureas description_content %}{% block description %}{% endblock %}{% endcaptureas %}
         {% captureas image_content %}{% block image %}{% endblock %}{% endcaptureas %}
 
 
         <meta property="og:url" content="{{ request.build_absolute_uri }}">
-        <meta property="og:title" content="{{ title_content|striptags }}">
+        <meta property="og:title" content="{% if title_share_content %}{{ title_share_content|striptags }}{% else %}{{ title_content|striptags }}{% endif %}">
         <meta property="og:site_name" content="{{ SITE_NAME }}">
         {% if description_content %}
         <meta property="og:description" content="{{ description_content }}">

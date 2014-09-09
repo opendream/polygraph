@@ -12,12 +12,23 @@
 <li class="active">{{ statement.quote|truncatewords_html:10|safe }}</li>
 {% endblock %}
 
+{% block title_share %}{% trans "Join for check statement of this people that truth or lie" %}{% endblock %}
 {% block description %}{{ statement.quoted_by.get_full_name }} : {{ statement.quote|striptags }}{% endblock %}
+
+{% comment %}
 {% block image %}
 <meta property="og:image" content="{{ BASE_URL }}{{ meter_image.url }}">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="{{ meter_image.width }}">
 <meta property="og:image:height" content="{{ meter_image.height }}">
+{% endblock %}
+{% endcomment %}
+
+{% block image %}
+<meta property="og:image" content="{{ BASE_URL }}{{ people_image.url }}">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="{{ people_image.width }}">
+<meta property="og:image:height" content="{{ people_image.height }}">
 {% endblock %}
 
 {% block content %}
