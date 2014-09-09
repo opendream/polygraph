@@ -10,6 +10,7 @@ $bright_orange : #FE6625; // bright orange
 $soft_orange : #FFC092;
 $text_hover : #4C0000; // text hover (dark brown)
 $text_brown : #7F5D3D; // text brown
+$text_drak_brown : #523D1D;
 $text_normal : #333333; // text normal
 $block_border : #CCCCCC;
 
@@ -591,7 +592,7 @@ input + .errors{
 
 .block-quote,
 .block-quote * { 
-	color: $text_brown;
+	color: $text_drak_brown !important;;
 	margin: 0;
 }
 .block-quote,
@@ -1167,6 +1168,19 @@ ul.nav-tabs li.first .caret { border-bottom-color: #FFF; }
             z-index: -1;
             width: 80%;
             padding-top: 80%;
+
+            &.meter-truth {
+                background-color: #8EBAA1;
+            }
+            &.meter-lie {
+                background-color: #82343D;
+            }
+            &.meter-half-truth {
+                background-color: #996675;
+            }
+            &.meter-unverifiable {
+                background-color: #D8984D;
+            }
         }
     }
 

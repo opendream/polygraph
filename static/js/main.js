@@ -402,6 +402,19 @@ $(document).ready(function () {
         $('.navbar-brand img').height('100%');
     }
 
+    // text fill font size
+
+    var updateTextFill = function () {
+        $('.text-fill').textfill({
+            'widthOnly': true,
+            'maxFontPixels': 24
+        });
+    };
+
+    updateTextFill();
+    setTimeout(updateTextFill, 1000);
+    $( window ).resize(updateTextFill);
+
 });
 
 
