@@ -17,7 +17,7 @@ from django_tables2 import RequestConfig
 from tagging.models import Tag, TaggedItem
 from common.constants import STATUS_PUBLISHED, STATUS_DRAFT, STATUS_PENDING
 from common.decorators import statistic
-from django.views.decorators.cache import never_cache
+from django.views.decorators.cache import never_cache, cache_page
 from common.functions import people_render_reference, topic_render_reference, statement_render_reference, process_status, \
     get_success_message, image_render
 from domain.forms import PeopleEditForm, TopicEditForm, StatementEditForm, ReferenceForm
@@ -123,6 +123,7 @@ def pagination_build_query(request, item_list, ipp=10):
 # Home
 # =============================
 
+@cache_page(None)
 @vary_on_cookie
 def home(request):
 
@@ -240,6 +241,7 @@ def people_edit(request, people_id=None):
 
 
 @statistic
+@cache_page(None)
 @vary_on_cookie
 def people_detail(request, people_permalink, meter_permalink=None):
 
@@ -273,6 +275,7 @@ def people_detail(request, people_permalink, meter_permalink=None):
     })
 
 
+@cache_page(None)
 @vary_on_cookie
 def people_list(request):
 
@@ -297,6 +300,7 @@ def people_list(request):
 # =============================
 
 @statistic
+@cache_page(None)
 @vary_on_cookie
 def meter_detail(request, meter_permalink=None):
 
@@ -415,6 +419,7 @@ def topic_edit_from_statement(request, topic_id, statement_id):
 
 
 @statistic
+@cache_page(None)
 @vary_on_cookie
 def topic_detail(request, topic_id, topicrevision_id=False):
 
@@ -443,6 +448,7 @@ def topic_detail(request, topic_id, topicrevision_id=False):
     })
 
 
+@cache_page(None)
 @vary_on_cookie
 def topic_list(request):
     return HttpResponse('Fixed me !!')
@@ -452,6 +458,7 @@ def topic_list(request):
 # Topic Revision
 # =============================
 
+@cache_page(None)
 @vary_on_cookie
 def topicrevision_detail(request, topic_id, topicrevision_id):
     return topic_detail(request, topic_id, topicrevision_id)
@@ -581,6 +588,7 @@ def statement_edit(request, statement_id=None):
 
 
 @statistic
+@cache_page(None)
 @vary_on_cookie
 def statement_detail(request, statement_permalink):
 
@@ -602,6 +610,7 @@ def statement_detail(request, statement_permalink):
     })
 
 
+@cache_page(None)
 @vary_on_cookie
 def statement_topicrevision_detail(request, statement_permalink, topicrevision_id):
 
@@ -618,6 +627,7 @@ def statement_topicrevision_detail(request, statement_permalink, topicrevision_i
     })
 
 
+@cache_page(None)
 @vary_on_cookie
 def statement_list(request, tags_id=None):
 
@@ -641,6 +651,7 @@ def statement_list(request, tags_id=None):
     })
 
 
+@cache_page(None)
 @vary_on_cookie
 def statement_tags_detail(request, tags_id):
 
@@ -731,9 +742,6 @@ def manage_people(request):
     RequestConfig(request).configure(table)
 
     from django.utils import translation
-
-    print translation.get_language()
-    print _('Manage All People')
 
     return render(request, 'manage.html', {'table': table, 'page_title': _('Manage All People')})
 
