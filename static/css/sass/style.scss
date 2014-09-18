@@ -1437,3 +1437,35 @@ td.meter {
         height: 100%;
     }
 }
+
+.page-not-found {
+  .media {
+    max-width: 480px;
+    margin: 0 auto;
+    .media-body {
+      margin-right: 30px;
+    }
+  }
+  .page-title {
+    .big {
+      font-size: 3em;
+      display: block;
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  .page-not-found {
+    .media {
+      width: 100%;
+      margin: 0;
+      .media-body {
+        margin-right: 0;
+      }
+      figure {
+        width: 100%;
+        float: left;
+      }
+    }
+  }
+}
