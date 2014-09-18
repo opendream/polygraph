@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-09 06:37+0000\n"
+"POT-Creation-Date: 2014-09-18 16:57+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -117,7 +117,7 @@ msgstr "อีเมลนี้ได้ถูกใช้งานแล้ว
 msgid "Published"
 msgstr "ตีพิมพ์"
 
-#: common/constants.py:11 templates/base.html:91
+#: common/constants.py:11 templates/base.html:92
 msgid "Pending Review"
 msgstr "อยู่ในระหว่างการตรวจสอบ"
 
@@ -221,35 +221,40 @@ msgstr "ชื่อ"
 msgid "Your %s has been deleted."
 msgstr "%s ของคุณ ได้ถูกลบเรียบร้อยแล้ว"
 
+#: domain/views.py:143 templates/base.html:93
+#: templates/domain/statement_form.html:290
+msgid "Highlight"
+msgstr "ไฮไลต์"
+
 #: domain/views.py:145 templates/domain/home.html:32
 msgid "Latest"
 msgstr "ล่าสุด"
 
-#: domain/views.py:677
+#: domain/views.py:687
 msgid "Manage My Statements"
 msgstr "จัดการคำพูดที่ฉันสร้าง"
 
-#: domain/views.py:688
+#: domain/views.py:698
 msgid "Manage Pending Statements"
 msgstr "จัดการคำพูดที่กำลังอยู่ในการพิจารณา"
 
-#: domain/views.py:699
+#: domain/views.py:709
 msgid "Manage Highlight Statements"
 msgstr "จัดการคำพูดไฮไลต์"
 
-#: domain/views.py:709
+#: domain/views.py:719
 msgid "Manage Promote Statements"
 msgstr "จัดการคำพูดที่กำลังอยู่ในการพิจารณา"
 
-#: domain/views.py:720
+#: domain/views.py:730
 msgid "Manage All Statements"
 msgstr "จัดการคำพูดทั้งหมด"
 
-#: domain/views.py:731
+#: domain/views.py:741
 msgid "Manage My People"
 msgstr "จัดการผู้คนที่ฉันสร้าง"
 
-#: domain/views.py:745 domain/views.py:747
+#: domain/views.py:754
 msgid "Manage All People"
 msgstr "จัดการผู้คนทั้งหมด"
 
@@ -265,7 +270,7 @@ msgid "Edit %s"
 msgstr "แก้ไข %s"
 
 #: domain/tests/test_view.py:91 domain/tests/test_view.py:276
-#: templates/base.html:140 templates/domain/home.html:153
+#: templates/base.html:141 templates/domain/home.html:153
 #: templates/domain/meter_detail.html:103
 #: templates/domain/people_detail.html:15
 #: templates/domain/people_detail.html:141
@@ -316,7 +321,7 @@ msgid "statement"
 msgstr "คำพูด"
 
 #: domain/tests/test_view.py:567 domain/tests/test_view.py:829
-#: templates/base.html:139 templates/domain/statement_detail.html:8
+#: templates/base.html:140 templates/domain/statement_detail.html:8
 msgid "Statement"
 msgstr "คำพูด"
 
@@ -373,71 +378,67 @@ msgstr "เกี่ยวกับเรา"
 msgid "Contact Us"
 msgstr "ติดต่อเรา"
 
-#: templates/base.html:81 templates/domain/statement_list.html:33
+#: templates/base.html:82 templates/domain/statement_list.html:33
 msgid "Create Statement"
 msgstr "สร้างคำพูด"
 
-#: templates/base.html:82 templates/domain/meter_detail.html:120
+#: templates/base.html:83 templates/domain/meter_detail.html:120
 #: templates/domain/people_list.html:51
 msgid "Create People"
 msgstr "สร้างคน"
 
-#: templates/base.html:84
+#: templates/base.html:85
 msgid "Manage"
 msgstr "จัดการ"
 
-#: templates/base.html:86
+#: templates/base.html:87
 msgid "My Statements"
 msgstr "คำพูดที่ฉันสร้าง"
 
-#: templates/base.html:87
+#: templates/base.html:88
 msgid "My Peoples"
 msgstr "ผู้คนที่ฉันสร้าง"
 
-#: templates/base.html:90 templates/base.html.py:107
+#: templates/base.html:91 templates/base.html.py:108
 msgid "Editor"
 msgstr "บรรณาธิการ"
 
-#: templates/base.html:92 templates/domain/statement_form.html:290
-msgid "Highlight"
-msgstr "ไฮไลต์"
-
-#: templates/base.html:93 templates/domain/statement_form.html:297
+#: templates/base.html:94 templates/domain/statement_form.html:297
 msgid "Promote"
 msgstr "นำเสนอ"
 
-#: templates/base.html:94
+#: templates/base.html:95
 msgid "All Statements"
 msgstr "คำพูดทั้งหมด"
 
-#: templates/base.html:95
+#: templates/base.html:96
 msgid "All Peoples"
 msgstr "ผู้คนทั้งหมด"
 
-#: templates/base.html:101
+#: templates/base.html:102
 msgid "Account"
 msgstr "บัญชีผู้ใช้"
 
-#: templates/base.html:103
+#: templates/base.html:104
 msgid "Settings"
 msgstr "ตั้งค่า"
 
-#: templates/base.html:104
+#: templates/base.html:105
 msgid "Logout"
 msgstr "ออกจากระบบ"
 
-#: templates/base.html:108 templates/account/invite_form.html:39
+#: templates/base.html:109 templates/account/invite_form.html:39
 msgid "Invite"
 msgstr "เชิญชวน"
 
-#: templates/base.html:132 templates/base.html.py:141
+#: templates/base.html:133 templates/base.html.py:142
 #: templates/domain/meter_detail.html:7 templates/domain/meter_detail.html:10
 #: templates/domain/meter_detail.html:22
 #: templates/domain/statement_form.html:115
 msgid "Polygraph"
 msgstr "เครื่องจับเท็จ"
 
-#: templates/base.html:138 templates/base.html.py:160
+#: templates/base.html:139 templates/base.html.py:161
 msgid "Home"
 msgstr "หน้าแรก"
 
@@ -649,7 +650,7 @@ msgstr "สร้างคำพูดพร้อมแท็ก"
 msgid "No Tags"
 msgstr "ไม่มีแท็ก"
 
-#: templates/domain/meter_count.html:29
+#: templates/domain/meter_count.html:31
 msgid "statements"
 msgstr "คำพูด"
 
@@ -911,7 +912,6 @@ msgstr "ลบ"
 #: templates/domain/topic_inline_form.html:116
 msgid "Are you sure you want to delete this item?"
 msgstr "คุณแน่ใจใช่หรือไม่ว่าต้องการลบสิ่งนี้จริงๆ"
-
 
 msgid "email"
 msgstr "อีเมล"

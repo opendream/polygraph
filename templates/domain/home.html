@@ -29,7 +29,7 @@
                     {% endfor %}
 
 					<li class="dropdown show-as-list pull-right">
-        				<a href="#" id="meter-tab-drop" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="text">{% trans "Latest" %}</span> <span class="caret"></span></a>
+        				<a href="#" id="meter-tab-drop" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="text">{{ meter_statement_list.0.0.title }}</span> <span class="caret"></span></a>
         				<ul class="dropdown-menu" role="menu" aria-labelledby="meter-tab-drop">
 
                             {% for meter, meter_statement in meter_statement_list %}

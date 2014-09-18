@@ -98,3 +98,10 @@ class StatementEditForm(PermalinkForm):
     status = forms.ChoiceField(required=False, widget=forms.RadioSelect(attrs={'id': 'id_status'}), choices=STATUS_CHOICES)
     hilight = forms.NullBooleanField(required=False, widget=forms.CheckboxInput(attrs={'id': 'id_hilight'}))
     promote = forms.NullBooleanField(required=False, widget=forms.CheckboxInput(attrs={'id': 'id_promote'}))
+
+class InformationForm(forms.Form):
+
+    highlight_label = forms.CharField(required=False, max_length=255, widget=forms.TextInput())
+    about = forms.CharField(required=False, widget=CKEditorWidget(config_name='default'))
+    contact = forms.CharField(required=False, widget=CKEditorWidget(config_name='default'))
+    contact_footer = forms.CharField(required=False, widget=CKEditorWidget(config_name='default'))

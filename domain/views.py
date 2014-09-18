@@ -19,8 +19,9 @@ from common.constants import STATUS_PUBLISHED, STATUS_DRAFT, STATUS_PENDING
 from common.decorators import statistic
 from django.views.decorators.cache import never_cache, cache_page
 from common.functions import people_render_reference, topic_render_reference, statement_render_reference, process_status, \
-    get_success_message, image_render
-from domain.forms import PeopleEditForm, TopicEditForm, StatementEditForm, ReferenceForm
+    get_success_message, image_render, set_default_value
+from common.models import Variable
+from domain.forms import PeopleEditForm, TopicEditForm, StatementEditForm, ReferenceForm, InformationForm
 from domain.models import People, Topic, Statement, Meter, PeopleCategory, TopicRevision
 
 
@@ -133,9 +134,19 @@ def home(request):
 
     meter_statement_count = [(meter, meter.statement_set.filter(status=STATUS_PUBLISHED).count()) for meter in meter_list]
 
-    statement_list = statement_list.order_by('-hilight', '-promote', '-uptodate')
+    hilight_statement_list = statement_list.filter(hilight=True).order_by('-uptodate')
 
-    meter_statement_list = [({'title': _('Latest'), 'permalink': 'latest'}, statement_list[0:4])]
+    statement_list = statement_list.order_by('-promote', '-uptodate')
+
+    meter_statement_list = []
+
+    if hilight_statement_list.count():
+        hilight_title, created = Variable.objects.get_or_create(name='highlight_label')
+        hilight_title = hilight_title.value or _('Highlight')
+        meter_statement_list.append(({'title': hilight_title, 'permalink': 'highlight'}, hilight_statement_list))
+
+    meter_statement_list.append(({'title': _('Latest'), 'permalink': 'latest'}, statement_list[0:4]))
+
     for meter in meter_list:
 
         meter_statement = statement_list.filter(meter=meter)[0:5]
@@ -745,4 +756,32 @@ def manage_people(request):
 
     return render(request, 'manage.html', {'table': table, 'page_title': _('Manage All People')})
 
+@never_cache
+@staff_member_required
+def manage_information(request):
 
+    if request.method == 'POST':
+        form = InformationForm(request.POST)
+        if form.is_valid():
+
+            set_default_value('highlight_label', form.cleaned_data['highlight_label'])
+            set_default_value('about', form.cleaned_data['about'])
+            set_default_value('contact', form.cleaned_data['contact'])
+            set_default_value('contact_footer', form.cleaned_data['contact_footer'])
+
+    else:
+
+        highlight_label, created = Variable.objects.get_or_create(name='highlight_label')
+        about, created           = Variable.objects.get_or_create(name='about')
+        contact, created         = Variable.objects.get_or_create(name='contact')
+        contact_footer, created  = Variable.objects.get_or_create(name='contact_footer')
+
+        initial = {
+            'highlight_label': highlight_label.value,
+            'about': about.value,
+            'contact': contact.value,
+            'contact_footer': contact_footer.value
+        }
+        form = InformationForm(initial=initial)
+
+    return render(request, 'manage_information.html', {'form': form})
