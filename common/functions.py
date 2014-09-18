@@ -13,6 +13,7 @@ from django.template.loader_tags import BlockNode, ExtendsNode
 from django.template import loader, Context
 
 from common.constants import STATUS_PUBLISHED, STATUS_PENDING
+from common.models import Variable
 
 register = template.Library()
 
@@ -207,3 +208,8 @@ def render_block_to_string(template_name, block, dictionary=None, context_instan
         context_instance = Context(dictionary)
     t.render(context_instance)
     return render_template_block(t, block, context_instance)
+
+def set_default_value(field, value):
+  obj, _created = Variable.objects.get_or_create(name=field)
+  obj.value = value
+  obj.save()

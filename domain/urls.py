@@ -39,6 +39,7 @@ urlpatterns = patterns('domain.views',
     url(r'^manage/promote-statement/$', 'manage_promote_statement', name='manage_promote_statement'),
     url(r'^manage/statement/$', 'manage_statement', name='manage_statement'),
     url(r'^manage/people/$', 'manage_people', name='manage_people'),
+    url(r'^manage/information/$', 'manage_information', name='manage_information'),
 
 
     url(r'^(?P<inst_name>[A-Za-z0-9-_.]+)/delete/(?P<id>\d+)/$', 'domain_delete', name='domain_delete'),

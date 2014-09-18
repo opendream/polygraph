@@ -1,0 +1,30 @@
+{% extends 'base_single.html' %}
+{% load i18n %}
+{% load staticfiles %}
+
+{% block title %}{% trans "Information Settings" %}{% endblock %}
+
+{% block js %}
+{{ form.media.js }}
+{% endblock %}
+{% block css %}
+{{ form.media.css }}
+{% endblock %}
+
+{% block content_class %} content-smart{% endblock %}
+
+
+{% block breadcrumb %}
+<li class="active">{% trans "Information Settings" %}</li>
+{% endblock %}
+
+
+{% block content %}
+<form method="post" class="form-horizontal" role="form">
+    {% csrf_token %}
+    <table>
+        {{ form.as_table }}
+    </table>
+    <button>Submit</button>
+</form>
+{% endblock %}
