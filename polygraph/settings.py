@@ -67,18 +67,19 @@ INSTALLED_APPS = (
 MIDDLEWARE_CLASSES = (
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    #'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'common.middleware.ForceDefaultLanguageMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'maintenancemode.middleware.MaintenanceModeMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'common.middleware.EvilMiddleware',
-    #'django.middleware.cache.FetchFromCacheMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
+    'maintenancemode.middleware.MaintenanceModeMiddleware',
 )
-
 
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -299,6 +300,10 @@ CACHES = {
     }
 }
 
+MAINTENANCE_MODE = True
+MAINTENANCE_IGNORE_URLS = (
+    r'^/account/.*',
+)
 
 # CUSTOM POLYGRAPH PROJECT #############################
 
