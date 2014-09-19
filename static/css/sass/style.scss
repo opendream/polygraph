@@ -619,7 +619,8 @@ input + .errors{
 	&:after {
 		background-position: -23px 0;
 		bottom: 0;
-    right: 0;
+    right: auto;
+    margin-left: 10px;
 	}
 }
 .updated,
