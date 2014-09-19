@@ -16,7 +16,6 @@ urlpatterns = patterns('',
     url(r'^autocomplete/', include('autocomplete_light.urls')),
     url(r'^account/', include('account.urls')),
     url(r'^tagging_autocomplete_tagit/', include('tagging_autocomplete_tagit.urls')),
-    url(r'^tagging_autocomplete_tagit/', include('tagging_autocomplete_tagit.urls')),
 
     url(r'', include('domain.urls', app_name='domain')),
 
@@ -54,3 +53,5 @@ else:
     urlpatterns += patterns('',
         url(r'^robots\.txt$', TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
     )
+
+handler503 = 'domain.views.maintenance_mode'

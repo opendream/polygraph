@@ -793,3 +793,6 @@ def manage_information(request):
         form = InformationForm(initial=initial)
 
     return render(request, 'manage_information.html', {'form': form})
+
+def maintenance_mode(request):
+    return render(request, 'maintenance_mode.html')
