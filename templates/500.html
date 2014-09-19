@@ -1,17 +1,15 @@
 {% extends 'base_single.html' %}
 
 {% block content %}
-    <div class="container login">
-        <div class="row">
-            <div class="col-md-6 col-xs-12">
-                <h1 class="page-title">Something wrong</h1>
-                <p>Please, try again or <a href="/" style="color: #fff; text-align: underline; text-decoration: underline;">Back to home page</a></p>
-            </div>
-            <div class="col-md-6 col-xs-12">
-                <figure>
-                    <img src="../../static/images/page-not-found.jpg" />
-                </figure>
-            </div>
-        </div>
+<div class="container row login error-page">
+  <div class="media">
+    <div class="media-body pull-left">
+      <h1 class="page-title"><span class="big">500</span>Something wrong</h1>
+      <p>Please, try again or <a href="/">Back to home page</a></p>
     </div>
+    <figure class="text-center pull-right">
+      <img class="media-object" src="../static/images/page-not-found.png" alt="page not found">
+    </figure>
+  </div>
+</div>
 {% endblock %}

@@ -1984,32 +1984,32 @@ td.meter {
 }
 
 /* line 1442, ../sass/style.scss */
-.page-not-found .media {
+.error-page .media {
   max-width: 480px;
   margin: 0 auto;
 }
 /* line 1445, ../sass/style.scss */
-.page-not-found .media .media-body {
+.error-page .media .media-body {
   margin-right: 30px;
 }
 /* line 1450, ../sass/style.scss */
-.page-not-found .page-title .big {
+.error-page .page-title .big {
   font-size: 3em;
   display: block;
 }
 
 @media (max-width: 320px) {
   /* line 1459, ../sass/style.scss */
-  .page-not-found .media {
+  .error-page .media {
     width: 100%;
     margin: 0;
   }
   /* line 1462, ../sass/style.scss */
-  .page-not-found .media .media-body {
+  .error-page .media .media-body {
     margin-right: 0;
   }
   /* line 1465, ../sass/style.scss */
-  .page-not-found .media figure {
+  .error-page .media figure {
     width: 100%;
     float: left;
   }

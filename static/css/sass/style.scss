@@ -1438,7 +1438,7 @@ td.meter {
     }
 }
 
-.page-not-found {
+.error-page {
   .media {
     max-width: 480px;
     margin: 0 auto;
@@ -1455,7 +1455,7 @@ td.meter {
 }
 
 @media (max-width: 320px) {
-  .page-not-found {
+  .error-page {
     .media {
       width: 100%;
       margin: 0;
