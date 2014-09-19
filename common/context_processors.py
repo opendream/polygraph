@@ -28,6 +28,7 @@ def helper(request):
         'STATUS_PUBLISHED': STATUS_PUBLISHED,
         'STATUS_PENDING': STATUS_PENDING,
         'STATUS_DRAFT': STATUS_DRAFT,
+        'GOOGLE_ANALYTICS_KEY': settings.GOOGLE_ANALYTICS_KEY
     }
 
     return context
