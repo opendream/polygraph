@@ -118,12 +118,12 @@ def image_render(image, size, alt='', crop=None, url=False):
             thumbnail = thumbnail.url
 
         else:
+
             thumbnail = getattr(image, 'thumbnail_tag_%s' % size)(opts={
                 'scale_and_crop': crop,
                 'upscale': upscale,
                 'facerecognition': facerecognition
             })
-
 
 
         if not url and thumbnail and 'alt=' not in thumbnail:

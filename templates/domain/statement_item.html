@@ -18,7 +18,7 @@
         <div class="quote-wrapper">
 
             {% if statement.uptodate_status %}<span class="statement-status">{{ statement.uptodate_status.text }}</span>{% endif %}
-            
+
             <div class="text-brown block-quote lead">
 
                 {% if no_link %}
@@ -53,13 +53,13 @@
                 </div>
             </div>
             <div class="meter-md">
-
                 <div class="meter-img-wrapper">
                     {% image_render statement.meter.image_medium_text '200x107' statement.meter.title %}
                 </div>
                 <div class="meter-bg meter-{{ statement.meter.permalink }}">
                 </div>
                 <div class="meter-img-real">
+
                     {% image_render statement.meter.image_medium_text '200x107' statement.meter.title %}
                 </div>
             </div>
