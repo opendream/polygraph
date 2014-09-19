@@ -1470,3 +1470,19 @@ td.meter {
     }
   }
 }
+
+.maintenance-mode {
+  text-align: center;
+  h1 { font-size: 40px; }
+  h2 { font-size: 30px; }
+  .block-quote { 
+    font-size: 22px;
+    max-width: 480px;
+    margin: 30px auto;
+    &:before {
+      left: auto;
+      margin-left: -35px;
+    }
+  }
+  img { max-width: 100%; }
+}
