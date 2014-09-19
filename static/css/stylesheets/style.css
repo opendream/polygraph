@@ -2015,3 +2015,30 @@ td.meter {
     float: left;
   }
 }
+/* line 1474, ../sass/style.scss */
+.maintenance-mode {
+  text-align: center;
+}
+/* line 1476, ../sass/style.scss */
+.maintenance-mode h1 {
+  font-size: 40px;
+}
+/* line 1477, ../sass/style.scss */
+.maintenance-mode h2 {
+  font-size: 30px;
+}
+/* line 1478, ../sass/style.scss */
+.maintenance-mode .block-quote {
+  font-size: 22px;
+  max-width: 480px;
+  margin: 30px auto;
+}
+/* line 1482, ../sass/style.scss */
+.maintenance-mode .block-quote:before {
+  left: auto;
+  margin-left: -35px;
+}
+/* line 1487, ../sass/style.scss */
+.maintenance-mode img {
+  max-width: 100%;
+}
