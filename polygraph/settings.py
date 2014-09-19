@@ -76,7 +76,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'common.middleware.EvilMiddleware',
-    'maintenancemode.middleware.MaintenanceModeMiddleware',
 )
 
 
@@ -167,7 +166,9 @@ AUTHENTICATION_BACKENDS = (
 
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/account/login/'
+
 SESSION_COOKIE_AGE = 60*60*24
+#SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 
@@ -280,6 +281,7 @@ COMPRESS_JS_FILTERS = [
     'compressor.filters.jsmin.JSMinFilter'
 ]
 
+'''
 CACHES = {
     'default': {
         'BACKEND': 'redis_cache.cache.RedisCache',
@@ -290,9 +292,17 @@ CACHES = {
         }
     }
 }
+'''
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+        'TIMEOUT': 7*24*60*60,
+    }
+}
 
-MAINTENANCE_MODE = True
+MAINTENANCE_MODE = False
 MAINTENANCE_IGNORE_URLS = (
     r'^/account/.*',
 )
@@ -331,10 +341,10 @@ if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
     COMPRESS_ENABLED = False
 
-    CACHES = {
-        'default': {
-            'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
-        }
-    }
+    #CACHES = {
+    #    'default': {
+    #        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    #    }
+    #}
 
     GOOGLE_ANALYTICS_KEY = ''
