@@ -54,7 +54,7 @@ def statement_query_base(is_anonymous=True, is_staff=False, user=None):
     if is_anonymous:
         statement_list = statement_list.exclude(status__in=[STATUS_DRAFT, STATUS_PENDING])
 
-        statement_list = statement_list.extra(select={'uptodate': '%s(COALESCE(created, "1000-01-01"), COALESCE(changed, "1000-01-01"))' % settings.GREATEST_FUNCTION})
+        statement_list = statement_list.extra(select={'uptodate': '%s(COALESCE(domain_statement.created, "1000-01-01"), COALESCE(domain_statement.changed, "1000-01-01"))' % settings.GREATEST_FUNCTION})
 
 
     else:
@@ -65,8 +65,9 @@ def statement_query_base(is_anonymous=True, is_staff=False, user=None):
         else:
             statement_list = statement_list.filter(Q(status__in=[STATUS_PUBLISHED])|Q(created_by=user, status__in=[STATUS_DRAFT, STATUS_PENDING]))
 
-        statement_list = statement_list.extra(select={'uptodate': '%s(COALESCE(created_raw, "1000-01-01"), COALESCE(created, "1000-01-01"), COALESCE(changed, "1000-01-01"))' % settings.GREATEST_FUNCTION})
+        statement_list = statement_list.extra(select={'uptodate': '%s(COALESCE(domain_statement.created_raw, "1000-01-01"), COALESCE(domain_statement.created, "1000-01-01"), COALESCE(domain_statement.changed, "1000-01-01"))' % settings.GREATEST_FUNCTION})
 
+    #statement_list = statement_list.select_related('quoted_by', 'created_by', 'meter')
     statement_list = statement_list.prefetch_related('quoted_by', 'created_by', 'meter')
 
     return statement_list
@@ -140,13 +141,12 @@ def home(request):
     meter_statement_count = [(meter, meter_statement_count.get(meter.id) or 0) for meter in meter_list]
 
     hilight_statement_list = statement_list.filter(hilight=True).order_by('-uptodate')
-    hilight_statement_list = list(hilight_statement_list)
 
     statement_list = statement_list.order_by('-promote', '-uptodate')
 
     meter_statement_list = []
 
-    if len(hilight_statement_list):
+    if hilight_statement_list.count():
         hilight_title, created = Variable.objects.get_or_create(name='highlight_label')
         hilight_title = hilight_title.value or _('Highlight')
         meter_statement_list.append(({'title': hilight_title, 'permalink': 'highlight'}, hilight_statement_list))

@@ -160,6 +160,8 @@ STATICFILES_DIRS = (
 
 AUTH_USER_MODEL = 'account.Staff'
 
+from  django.contrib.auth.backends import ModelBackend
+
 AUTHENTICATION_BACKENDS = (
     'account.backends.EmailOrUsernameModelBackend',
     'django.contrib.auth.backends.ModelBackend'
