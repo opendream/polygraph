@@ -82,13 +82,14 @@
                     {{ statement|statement_item:user }}
                     {% endfor %}
 
+                    {% if meter.permalink != 'highlight' %}
                     <div class="see-all">
 
                         <a href="{% if meter.id %}{% url 'meter_detail' meter.permalink %}{% else %}{% url 'statement_list' %}{% endif %}" class="btn btn-default">
                             {% blocktrans with meter.title as meter_title %}See all {{ meter_title }} statements{% endblocktrans %}<span class="glyphicon glyphicon-chevron-right"></span>
                         </a>
                     </div>
-
+                    {% endif %}
 
                 </section>
                 {% else %}

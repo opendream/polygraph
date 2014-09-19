@@ -130,33 +130,40 @@ def home(request):
 
     statement_list = statement_query_base(is_anonymous=True)
 
-    meter_list = Meter.objects.prefetch_related('statement_set').order_by('order')
+    meter_list = Meter.objects.order_by('order')
 
-    meter_statement_count = [(meter, meter.statement_set.filter(status=STATUS_PUBLISHED).count()) for meter in meter_list]
+
+    meter_statement_count = Statement.objects.filter(status=STATUS_PUBLISHED).values('meter_id').annotate(count=Count('id'))
+    meter_statement_count = dict([(meter['meter_id'], meter['count']) for meter in meter_statement_count])
+
+    meter_statement_count = [(meter, meter_statement_count[meter.id]) for meter in meter_list]
 
     hilight_statement_list = statement_list.filter(hilight=True).order_by('-uptodate')
+    hilight_statement_list = list(hilight_statement_list)
 
     statement_list = statement_list.order_by('-promote', '-uptodate')
 
     meter_statement_list = []
 
-    if hilight_statement_list.count():
+    if len(hilight_statement_list):
         hilight_title, created = Variable.objects.get_or_create(name='highlight_label')
         hilight_title = hilight_title.value or _('Highlight')
         meter_statement_list.append(({'title': hilight_title, 'permalink': 'highlight'}, hilight_statement_list))
 
     meter_statement_list.append(({'title': _('Latest'), 'permalink': 'latest'}, statement_list[0:4]))
 
+    # Q 27
     for meter in meter_list:
 
         meter_statement = statement_list.filter(meter=meter)[0:5]
         meter_statement_list.append((meter, meter_statement))
 
+    # Q 1
     tags_list = Tag.objects.usage_for_model(Statement, counts=True)
     tags_list.sort(key=Count, reverse=True)
     tags_list = tags_list[0:15]
 
-
+    # Q 24
     people_list = people_query_base(is_anonymous=True)
     #people_list = people_list.exclude(id__in=people_statement_list)
 

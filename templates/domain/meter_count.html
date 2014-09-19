@@ -16,7 +16,7 @@
         {% endif %}
 
             <figure class="col-md-3 col-xs-3 left">
-                {% image_render meter.image_small '65x90' meter.title %}
+                {{ meter.image_small.thumbnail_tag_65x90 }}
             </figure>
             <div class="col-md-9 col-xs-9 right">
                 <div class="amount-wrapper">
