@@ -134,9 +134,10 @@ def home(request):
 
 
     meter_statement_count = Statement.objects.filter(status=STATUS_PUBLISHED).values('meter_id').annotate(count=Count('id'))
-    meter_statement_count = dict([(int(meter['meter_id']), meter['count']) for meter in meter_statement_count])
+    meter_statement_count = dict([(meter['meter_id'], meter['count']) for meter in meter_statement_count])
 
-    meter_statement_count = [(meter, meter_statement_count[int(meter.id)]) for meter in meter_list]
+
+    meter_statement_count = [(meter, meter_statement_count.get(meter.id) or 0) for meter in meter_list]
 
     hilight_statement_list = statement_list.filter(hilight=True).order_by('-uptodate')
     hilight_statement_list = list(hilight_statement_list)
