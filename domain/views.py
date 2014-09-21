@@ -300,7 +300,8 @@ def people_list(request):
 
     category_list = PeopleCategory.objects.all()
 
-    category = PeopleCategory.objects.get(permalink=category)
+    if category and category.lower() != 'all'
+        category = PeopleCategory.objects.get(permalink=category)
 
     return render(request, 'domain/people_list.html', {
         'people_list': people_list,
