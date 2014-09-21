@@ -281,7 +281,7 @@ COMPRESS_JS_FILTERS = [
     'compressor.filters.jsmin.JSMinFilter'
 ]
 
-'''
+
 CACHES = {
     'default': {
         'BACKEND': 'redis_cache.cache.RedisCache',
@@ -292,8 +292,8 @@ CACHES = {
         }
     }
 }
-'''
 
+'''
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
@@ -301,6 +301,7 @@ CACHES = {
         'TIMEOUT': 7*24*60*60,
     }
 }
+'''
 
 MAINTENANCE_MODE = False
 MAINTENANCE_IGNORE_URLS = (

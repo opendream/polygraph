@@ -16,7 +16,7 @@ from django.views.decorators.vary import vary_on_cookie
 from django_tables2 import RequestConfig
 from tagging.models import Tag, TaggedItem
 from common.constants import STATUS_PUBLISHED, STATUS_DRAFT, STATUS_PENDING
-from common.decorators import statistic
+from common.decorators import statistic, scache
 from django.views.decorators.cache import never_cache, cache_page
 from common.functions import people_render_reference, topic_render_reference, statement_render_reference, process_status, \
     get_success_message, image_render, set_default_value
@@ -31,7 +31,6 @@ from domain.models import People, Topic, Statement, Meter, PeopleCategory, Topic
 from domain.tables import StatementTable, MyStatementTable, PeopleTable, MyPeopleTable
 
 
-@never_cache
 @login_required
 def domain_delete(request, inst_name, id):
 
@@ -125,8 +124,7 @@ def pagination_build_query(request, item_list, ipp=10):
 # Home
 # =============================
 
-@cache_page(None)
-@vary_on_cookie
+@scache
 def home(request):
 
     statement_list = statement_query_base(is_anonymous=True)
@@ -183,7 +181,6 @@ def home(request):
 # People
 # =============================
 
-@never_cache
 @login_required
 def people_create(request, people=None):
 
@@ -251,7 +248,6 @@ def people_create(request, people=None):
     })
 
 
-@never_cache
 @login_required
 def people_edit(request, people_id=None):
 
@@ -260,8 +256,7 @@ def people_edit(request, people_id=None):
 
 
 @statistic
-@cache_page(None)
-@vary_on_cookie
+@scache
 def people_detail(request, people_permalink, meter_permalink=None):
 
     people = get_object_or_404(People, permalink=people_permalink)
@@ -294,8 +289,7 @@ def people_detail(request, people_permalink, meter_permalink=None):
     })
 
 
-@cache_page(None)
-@vary_on_cookie
+@scache
 def people_list(request):
 
     category = request.GET.get('category')
@@ -319,8 +313,7 @@ def people_list(request):
 # =============================
 
 @statistic
-@cache_page(None)
-@vary_on_cookie
+@scache
 def meter_detail(request, meter_permalink=None):
 
     meter_list = Meter.objects.all().order_by('order')
@@ -357,7 +350,6 @@ def meter_detail(request, meter_permalink=None):
 # Topic
 # =============================
 
-@never_cache
 @login_required
 def topic_create(request, topic=None):
 
@@ -415,7 +407,6 @@ def topic_create(request, topic=None):
     })
 
 
-@never_cache
 @login_required
 def topic_edit(request, topic_id=None):
 
@@ -423,7 +414,6 @@ def topic_edit(request, topic_id=None):
     return topic_create(request, topic)
 
 
-@never_cache
 @login_required
 def topic_edit_from_statement(request, topic_id, statement_id):
 
@@ -438,8 +428,7 @@ def topic_edit_from_statement(request, topic_id, statement_id):
 
 
 @statistic
-@cache_page(None)
-@vary_on_cookie
+@scache
 def topic_detail(request, topic_id, topicrevision_id=False):
 
     origin = get_object_or_404(Topic, id=topic_id)
@@ -467,8 +456,7 @@ def topic_detail(request, topic_id, topicrevision_id=False):
     })
 
 
-@cache_page(None)
-@vary_on_cookie
+@scache
 def topic_list(request):
     return HttpResponse('Fixed me !!')
 
@@ -477,8 +465,7 @@ def topic_list(request):
 # Topic Revision
 # =============================
 
-@cache_page(None)
-@vary_on_cookie
+@scache
 def topicrevision_detail(request, topic_id, topicrevision_id):
     return topic_detail(request, topic_id, topicrevision_id)
 
@@ -495,7 +482,6 @@ def topicrevision_edit(request, topic_id, topicrevision_id):
 # Statement
 # =============================
 
-@never_cache
 @login_required
 def statement_create(request, statement=None):
 
@@ -598,7 +584,6 @@ def statement_create(request, statement=None):
     })
 
 
-@never_cache
 @login_required
 def statement_edit(request, statement_id=None):
 
@@ -607,8 +592,7 @@ def statement_edit(request, statement_id=None):
 
 
 @statistic
-@cache_page(None)
-@vary_on_cookie
+@scache
 def statement_detail(request, statement_permalink):
 
     statement = get_object_or_404(Statement, permalink=statement_permalink)
@@ -629,8 +613,7 @@ def statement_detail(request, statement_permalink):
     })
 
 
-@cache_page(None)
-@vary_on_cookie
+@scache
 def statement_topicrevision_detail(request, statement_permalink, topicrevision_id):
 
     statement = get_object_or_404(Statement, permalink=statement_permalink)
@@ -646,8 +629,7 @@ def statement_topicrevision_detail(request, statement_permalink, topicrevision_i
     })
 
 
-@cache_page(None)
-@vary_on_cookie
+@scache
 def statement_list(request, tags_id=None):
 
     statement_list = statement_query_base(request.user.is_anonymous(), request.user.is_staff, request.user)
@@ -670,8 +652,7 @@ def statement_list(request, tags_id=None):
     })
 
 
-@cache_page(None)
-@vary_on_cookie
+@scache
 def statement_tags_detail(request, tags_id):
 
     return statement_list(request, tags_id)
@@ -681,13 +662,11 @@ def statement_tags_detail(request, tags_id):
 # Manage
 # =============================
 
-@never_cache
 @login_required
 def manage(request):
     raise Http404('No Implement Yet.')
 
 
-@never_cache
 @login_required
 def manage_my_statement(request):
 
@@ -698,7 +677,6 @@ def manage_my_statement(request):
     return render(request, 'manage.html', {'table': table, 'page_title': _('Manage My Statements')})
 
 
-@never_cache
 @staff_member_required
 def manage_pending_statement(request):
 
@@ -709,7 +687,6 @@ def manage_pending_statement(request):
     return render(request, 'manage.html', {'table': table, 'page_title': _('Manage Pending Statements')})
 
 
-@never_cache
 @staff_member_required
 def manage_hilight_statement(request):
 
@@ -730,7 +707,6 @@ def manage_promote_statement(request):
     return render(request, 'manage.html', {'table': table, 'page_title': _('Manage Promote Statements')})
 
 
-@never_cache
 @staff_member_required
 def manage_statement(request):
 
@@ -741,7 +717,6 @@ def manage_statement(request):
     return render(request, 'manage.html', {'table': table, 'page_title': _('Manage All Statements')})
 
 
-@never_cache
 @login_required
 def manage_my_people(request):
 
@@ -752,7 +727,6 @@ def manage_my_people(request):
     return render(request, 'manage.html', {'table': table, 'page_title': _('Manage My People')})
 
 
-@never_cache
 @staff_member_required
 def manage_people(request):
 
@@ -764,7 +738,7 @@ def manage_people(request):
 
     return render(request, 'manage.html', {'table': table, 'page_title': _('Manage All People')})
 
-@never_cache
+
 @staff_member_required
 def manage_information(request):
 

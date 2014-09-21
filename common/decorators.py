@@ -1,4 +1,5 @@
 from django.contrib.contenttypes.models import ContentType
+from django.core.cache import cache
 from django.core.urlresolvers import resolve
 
 from django.utils.decorators import decorator_from_middleware_with_args
@@ -41,3 +42,28 @@ def statistic(view_func=None):
         return response
 
     return wraps(view_func)(_decorator)
+
+
+def scache(view_func=None):
+
+    def _decorator(request, *args, **kwargs):
+
+        path = request.path
+        user_id = request.user.id or 0
+
+        key = '%s--%s' % (user_id, path)
+
+        response = cache.get(key)
+        if response is not None:
+            return response
+
+        response = view_func(request, *args, **kwargs)
+        cache.set(key, response, None)
+
+        return response
+
+
+    return wraps(view_func)(_decorator)
+
+
+
