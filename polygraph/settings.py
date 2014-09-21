@@ -16,6 +16,10 @@ if 'collectstatic' in sys.argv:
     BASE_PATH = os.path.join(os.path.abspath(os.path.dirname(__file__)), os.path.pardir)
 
 
+import djcelery
+djcelery.setup_loader()
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
@@ -57,6 +61,7 @@ INSTALLED_APPS = (
     'debug_toolbar',
     'debug_toolbar_line_profiler',
     'template_timings_panel',
+    'djcelery',
 
     # Project
     'common',
@@ -293,20 +298,16 @@ CACHES = {
     }
 }
 
-'''
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': '127.0.0.1:11211',
-        'TIMEOUT': 7*24*60*60,
-    }
-}
-'''
+# Celery settings
+BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+
 
 MAINTENANCE_MODE = False
 MAINTENANCE_IGNORE_URLS = (
     r'^/account/.*',
 )
+
 
 
 # CUSTOM POLYGRAPH PROJECT #############################
