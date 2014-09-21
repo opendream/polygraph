@@ -651,7 +651,7 @@ def statement_list(request, tags_id=None):
     return render(request, 'domain/statement_list.html', {
         'statement_list': statement_list,
         'meter_list': Meter.objects.all().order_by('order'),
-        'tags_list': Tag.objects.all(),
+        'tags_list': Tag.objects.all()[0:30],
         'request_tags': tags
     })
 
