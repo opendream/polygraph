@@ -1,18 +1,18 @@
 from uuid import uuid1
 from django.core import validators
 from django.core.cache import cache
-from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
-from django.test.client import Client
+
 
 from ckeditor.fields import RichTextField
 
 import re
 from common.constants import NO_IP
 from common.middleware import get_request
+from common.tasks import warm_cache
 
 import files_widget
 import threading
@@ -56,16 +56,6 @@ class CommonModel(models.Model):
     class Meta:
         abstract = True
 
-def warm_cache():
-    client = Client()
-    client.get(reverse('home'))
-    client.get(reverse('statement_list'))
-    client.get(reverse('people_list'))
-    client.get(reverse('meter_detail_default'))
-
-    from domain.models import Meter
-    for meter in Meter.objects.all():
-        client.get(reverse('meter_detail', args=[meter.permalink]))
 
 
 class CommonTrashModel(models.Model):
@@ -78,9 +68,7 @@ class CommonTrashModel(models.Model):
         super(CommonTrashModel, self).save(*args, **kwargs)
 
         # Warm cache
-        thread = threading.Thread(target=warm_cache)
-        thread.start()
-
+        warm_cache.delay()
 
     def trash(self, *args, **kwargs):
 

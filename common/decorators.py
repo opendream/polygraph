@@ -53,6 +53,9 @@ def scache(view_func=None):
 
         key = '%s--%s' % (user_id, path)
 
+        print key
+        print 'cccccc'
+
         response = cache.get(key)
         if response is not None:
             return response
