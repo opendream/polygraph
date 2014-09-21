@@ -293,11 +293,14 @@ def people_detail(request, people_permalink, meter_permalink=None):
 def people_list(request):
 
     category = request.GET.get('category')
+  
 
     people_list = people_query_base(category, request.user.is_anonymous(), request.user.is_staff, request.user)
     people_list = pagination_build_query(request, people_list, 9)
 
     category_list = PeopleCategory.objects.all()
+
+    category = PeopleCategory.objects.get(permalink=category)
 
     return render(request, 'domain/people_list.html', {
         'people_list': people_list,

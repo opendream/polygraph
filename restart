@@ -5,3 +5,4 @@ service uwsgi restart
 service nginx restart
 service redis-server restart
 redis-cli FLUSHALL
+supervisorctl restart polygraph
