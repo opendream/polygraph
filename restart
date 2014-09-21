@@ -4,4 +4,4 @@ python manage.py compilemessages
 service uwsgi restart
 service nginx restart
 service redis-server restart
-service memcached restart
+redis-cli FLUSHALL
