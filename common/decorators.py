@@ -48,7 +48,7 @@ def scache(view_func=None):
 
     def _decorator(request, *args, **kwargs):
 
-        path = request.path
+        path = request.get_full_path()
         user_id = request.user.id or 0
 
         key = '%s--%s' % (user_id, path)
