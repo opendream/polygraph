@@ -90,10 +90,11 @@
                                     <li class="divider"></li>
                                     <li role="presentation" class="dropdown-header">{% trans "Editor" %}</li>
                                     <li{% ifactive 'manage_pending_statement' %} class="active"{% endifactive %}><a href="{% url 'manage_pending_statement' %}">{% trans "Pending Review" %}</a></li>
-                                    <li{% ifactive 'manage_hilight_statement' %} class="active"{% endifactive %}><a href="{% url 'manage_hilight_statement' %}">{% trans "Highlight" %}</a></li>
+                                    <li{% ifactive 'manage_hilight_statement' %} class="active"{% endifactive %}><a href="{% url 'manage_hilight_statement' %}">{{ hilight_label }}</a></li>
                                     <li{% ifactive 'manage_promote_statement' %} class="active"{% endifactive %}><a href="{% url 'manage_promote_statement' %}">{% trans "Promote" %}</a></li>
                                     <li{% ifactive 'manage_statement' %} class="active"{% endifactive %}><a href="{% url 'manage_statement' %}#">{% trans "All Statements" %}</a></li>
                                     <li{% ifactive 'manage_people' %} class="active"{% endifactive %}><a href="{% url 'manage_people' %}">{% trans "All Peoples" %}</a></li>
+                                    <li{% ifactive 'manage_people' %} class="active"{% endifactive %}><a href="{% url 'manage_information' %}">{% trans "Information" %}</a></li>
                                     {% endif %}
 
                                 </ul>

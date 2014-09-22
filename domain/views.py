@@ -568,7 +568,7 @@ def statement_create(request, statement=None):
             'tags': statement.tags,
             'meter': statement.meter_id or Meter.objects.get(permalink='unverifiable').id,
             'hilight': statement.hilight,
-            'promote': statement.promote
+            'promote': statement.promote,
         }
 
         if statement.id:
@@ -581,10 +581,13 @@ def statement_create(request, statement=None):
 
         reference_formset = ReferenceFormSet(initial=statement.references, prefix='references')
 
+    hilight_label, created = Variable.objects.get_or_create(name='highlight_label')
+    hilight_label = hilight_label.value or _('Highlight')
 
     return render(request, 'domain/statement_form.html', {
         'form': form,
         'reference_formset': reference_formset,
+        'hilight_label': hilight_label
     })
 
 

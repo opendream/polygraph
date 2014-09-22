@@ -24,7 +24,7 @@ class PeopleEditForm(PermalinkForm):
 
     occupation = forms.CharField(required=False, max_length=255, widget=forms.TextInput())
     summary = forms.CharField(required=False, widget=forms.Textarea())
-    description = forms.CharField(required=False, widget=CKEditorWidget(config_name='minimal'))
+    description = forms.CharField(required=False, widget=CKEditorWidget(config_name='default'))
     homepage_url = forms.CharField(required=False, max_length=255, widget=forms.TextInput())
 
     image = files_widget.forms.FilesFormField(required=False, fields=(forms.CharField(required=False), forms.CharField(required=False), forms.CharField(required=False), ), widget=files_widget.forms.widgets.ImageWidget())
