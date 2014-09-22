@@ -420,38 +420,28 @@ $(document).ready(function () {
     // Login link
 
     if ($('.staff-link').length) {
-        var login_show = false;
+        var login_show = 0;
         var login_show_timeout = false;
 
-        $(window).scroll(function() {
+
+
+        $(window).on('mousewheel', function(event) {
+
+            var scrolling = true;
+            if(event.deltaY > 0) {
+              $('.staff-link').slideUp();
+              login_show = 0;
+            }
+
             if($(window).scrollTop() + $(window).height() == $(document).height()) {
+                login_show++;
 
-
-                $(window).on('mousewheel', function(event) {
-                    if(event.deltaY > 0) {
-                      $('.staff-link').hide();
-                      login_show = false;
-                    }
-
-                    if($(window).scrollTop() + $(window).height() == $(document).height()) {
-
-                        login_show_timeout = setTimeout(function () {
-
-                            if($(window).scrollTop() + $(window).height() == $(document).height() && !login_show) {
-                                $('.staff-link').show();
-                                login_show = true;
-                                console.log(login_show);
-                            }
-                            else {
-                                login_show = false;
-                            }
-
-                        }, 2000);
-                    }
-
-                });
+                if (login_show > 50) {
+                    $('.staff-link').slideDown();
+                }
 
             }
+
         });
 
     }
