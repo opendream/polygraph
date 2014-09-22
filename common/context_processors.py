@@ -18,6 +18,7 @@ def helper(request):
                 'title': render_block_to_string(page, 'title')
             })
 
+    hilight_label = ''
     if request.user.is_staff:
         hilight_label, created = Variable.objects.get_or_create(name='highlight_label')
         hilight_label = hilight_label.value or _('Highlight')
