@@ -267,6 +267,10 @@ def people_detail(request, people_permalink, meter_permalink=None):
     statement_list = statement_query_base(request.user.is_anonymous(), request.user.is_staff, request.user)
     statement_list = statement_list.filter(Q(quoted_by=people)|Q(relate_peoples=people)).order_by('-uptodate')
 
+    query = statement_list.query
+    query.group_by = ['id']
+    statement_list = QuerySet(query=query, model=Statement)
+
     request_meter = None
     if meter_permalink:
         request_meter = get_object_or_404(Meter, permalink=meter_permalink)
