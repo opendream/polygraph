@@ -2025,3 +2025,19 @@ td.meter {
 .maintenance-mode img {
   max-width: 100%;
 }
+
+/* line 1493, ../sass/style.scss */
+.staff-link {
+  text-align: center;
+  background-color: #A97C50;
+  font-family: "Boon-0.6";
+  font-style: normal;
+  font-weight: 700 !important;
+  display: none;
+}
+/* line 1500, ../sass/style.scss */
+.staff-link a {
+  display: inline-block;
+  color: #FFF;
+  padding-bottom: 5px;
+}

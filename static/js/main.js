@@ -415,6 +415,47 @@ $(document).ready(function () {
     setTimeout(updateTextFill, 1000);
     $( window ).resize(updateTextFill);
 
+
+
+    // Login link
+
+    if ($('.staff-link').length) {
+        var login_show = false;
+        var login_show_timeout = false;
+
+        $(window).scroll(function() {
+            if($(window).scrollTop() + $(window).height() == $(document).height()) {
+
+
+                $(window).on('mousewheel', function(event) {
+                    if(event.deltaY > 0) {
+                      $('.staff-link').hide();
+                      login_show = false;
+                    }
+
+                    if($(window).scrollTop() + $(window).height() == $(document).height()) {
+
+                        login_show_timeout = setTimeout(function () {
+
+                            if($(window).scrollTop() + $(window).height() == $(document).height() && !login_show) {
+                                $('.staff-link').show();
+                                login_show = true;
+                                console.log(login_show);
+                            }
+                            else {
+                                login_show = false;
+                            }
+
+                        }, 2000);
+                    }
+
+                });
+
+            }
+        });
+
+    }
+
 });
 
 

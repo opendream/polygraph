@@ -55,6 +55,7 @@
         <script type="text/javascript" src="{% static 'libs/scrolltofixed/jquery-scrolltofixed-min.js' %}"></script>
         <script type="text/javascript" src="{% static 'libs/headroom/headroom.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'libs/headroom/jquery.headroom.js' %}"></script>
+        <script type="text/javascript" src="{% static 'libs/jquery.mousewheel.js' %}"></script>
 
         <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
         {% endcompress %}
@@ -202,6 +203,11 @@
                     </div>
                 </div>
             </div>
+            {% if user.is_anonymous %}
+            <div class="staff-link">
+                <a href="{% url 'account_login' %}">{% trans 'Login' %}</a>
+            </div>
+            {% endif %}
         </footer>
 
         {% endif %}

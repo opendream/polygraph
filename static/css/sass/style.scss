@@ -1489,3 +1489,18 @@ td.meter {
   }
   img { max-width: 100%; }
 }
+
+.staff-link {
+    text-align: center;
+    background-color: #A97C50;
+    font-family: "Boon-0.6";
+    font-style: normal;
+    font-weight: 700 !important;
+    display: none;
+    a {
+        display: inline-block;
+        color: #FFF;
+        padding-bottom: 5px;
+    }
+
+}
