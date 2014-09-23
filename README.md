@@ -2,6 +2,14 @@
 # username password dbname config in polygraph/settings.py or create polygraph/settings_local.py override
 mysql -u root -e "CREATE DATABASE polygraph DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci";
 
+apt-get redis-server supervisor python-qt4 libqt4-webkit xvfb
+# mkdir -p /web/polygraph/lib/python2.7/dist-packages
+# cp -R /usr/lib/python2.7/dist-packages/PyQt4 /web/polygraph/lib/python2.7/dist-packages/
+# cp /usr/lib/python2.7/dist-packages/sip.so /web/polygraph/lib/python2.7/dist-packages/
+# cp polygraph/supervisor.conf /etc/supervisor/conf.d/polygraph.conf 
+
+mkdir -p /web/polygraph/lib/python2.7/dist-packages/
+
 pip install -r requirements.txt
 python manage.py syncdb
 python manage.py migrate account
