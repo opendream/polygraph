@@ -1,0 +1,32 @@
+{% load staticfiles %}
+{% load domain_tags %}
+<!doctype html>
+<html prefix="og: http://ogp.me/ns#">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link href="{% static 'css/stylesheets/style.css' %}" type="text/css" rel="stylesheet">
+        <style>
+            body {
+                width: 500px;
+                padding: 0px !important;
+                margin: 0px !important;
+                background-image: none !important;
+                background-color: transparent !important;
+            }
+            .statement-status, #djDebug {
+                display: none !important;
+            }
+            .block-quote {
+                margin-top: 12px !important;
+            }
+        </style>
+
+    </head>
+    <body>
+        {{ statement|statement_item:0 }}
+    </body>
+</html>

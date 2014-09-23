@@ -623,6 +623,14 @@ def statement_detail(request, statement_permalink):
         'people_image': statement.quoted_by.image.thumbnail_500x500(upscale=True, crop='center')
     })
 
+@scache
+def statement_item(request, statement_id):
+
+    print [s.id for s in Statement.objects.all()]
+    statement = get_object_or_404(Statement, id=statement_id)
+
+    return render(request, 'share/statement_item.html', {'statement': statement})
+
 
 @scache
 def statement_topicrevision_detail(request, statement_permalink, topicrevision_id):
