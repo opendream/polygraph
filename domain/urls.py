@@ -27,6 +27,7 @@ urlpatterns = patterns('domain.views',
     url(r'^statement/(?P<statement_permalink>[A-Za-z0-9-_.]+)/topic-revision/(?P<topicrevision_id>\d+)/$', 'statement_topicrevision_detail', name='statement_topicrevision_detail'),
     url(r'^statement/$', 'statement_list', name='statement_list'),
     url(r'^statement/tags/(?P<tags_id>\d+)/$', 'statement_tags_detail', name='statement_tags_detail'),
+    url(r'^statement/(?P<statement_id>\d+)/item/$', 'statement_item', name='statement_item'),
 
     # Writer
     url(r'^manage/$', 'manage', name='manage'),
