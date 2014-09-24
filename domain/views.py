@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.core.urlresolvers import reverse
 from django.db.models import Q, Count, Max
 from django.db.models.query import QuerySet
 from django.forms.formsets import formset_factory
@@ -23,7 +24,7 @@ from common.functions import people_render_reference, topic_render_reference, st
 from common.models import Variable
 from domain.forms import PeopleEditForm, TopicEditForm, StatementEditForm, ReferenceForm, InformationForm
 from domain.models import People, Topic, Statement, Meter, PeopleCategory, TopicRevision
-
+from common.tasks import generate_statement_card
 
 # =============================
 # Global
@@ -558,6 +559,12 @@ def statement_create(request, statement=None):
 
 
             messages.success(request, message_success)
+
+
+            # Generate card from selenium capture screen
+            url = request.build_absolute_uri(reverse('statement_item', args=[statement.id]))
+            filename = 'statement-card-%s' % statement.id
+            generate_statement_card.delay(url, filename)
 
             return redirect('statement_edit', statement.id)
     else:

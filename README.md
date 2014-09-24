@@ -2,7 +2,11 @@
 # username password dbname config in polygraph/settings.py or create polygraph/settings_local.py override
 mysql -u root -e "CREATE DATABASE polygraph DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci";
 
-apt-get install redis-server supervisor xvfb xserver-xephyr
+apt-get install redis-server supervisor
+
+
+apt-get install xvfb xserver-xephyr
+# For OSX install XQuartz http://xquartz.macosforge.org/landing/
 
 # Add this line to your sources.list file
 # deb http://packages.linuxmint.com debian import
