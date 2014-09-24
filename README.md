@@ -8,6 +8,8 @@ apt-get install redis-server supervisor xvfb xserver-xephyr
 # deb http://packages.linuxmint.com debian import
 apt-get install firefox
 
+apt-get install xfonts-thai # append package for project language
+
 # cp polygraph/supervisor.conf /etc/supervisor/conf.d/polygraph.conf 
 
 mkdir -p /web/polygraph/lib/python2.7/dist-packages/
