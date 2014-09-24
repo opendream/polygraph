@@ -35,3 +35,6 @@ six==1.7.2
 sorl-thumbnail==11.12.1b
 sqlparse==0.1.11
 wsgiref==0.1.2
+PyVirtualDisplay==0.1.5
+selenium==2.43.0
+

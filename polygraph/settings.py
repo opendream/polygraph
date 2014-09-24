@@ -264,7 +264,9 @@ DEBUG_TOOLBAR_PANELS = [
     'debug_toolbar_line_profiler.panel.ProfilingPanel',
     'template_timings_panel.panels.TemplateTimings.TemplateTimings',
 ]
-
+DEBUG_TOOLBAR_CONFIG = {
+    'SHOW_TOOLBAR_CALLBACK': 'common.toolbar_stuff.custom_show_toolbar'
+}
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
