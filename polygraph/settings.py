@@ -58,9 +58,9 @@ INSTALLED_APPS = (
     'bootstrap3',
     'django_tables2',
     'compressor',
-    'debug_toolbar',
-    'debug_toolbar_line_profiler',
-    'template_timings_panel',
+    #'debug_toolbar',
+    #'debug_toolbar_line_profiler',
+    #'template_timings_panel',
     'djcelery',
 
     # Project
@@ -70,7 +70,7 @@ INSTALLED_APPS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    #'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'common.middleware.ForceDefaultLanguageMiddleware',
@@ -308,6 +308,7 @@ CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 MAINTENANCE_MODE = False
 MAINTENANCE_IGNORE_URLS = (
     r'^/account/.*',
+    r'^/statement/.*/item/',
 )
 
 CARD_WIDTH = 600

@@ -631,7 +631,7 @@ def statement_detail(request, statement_permalink):
 
     if not os.path.exists(path):
         url = request.build_absolute_uri(reverse('statement_item', args=[statement.id]))
-        generate_statement_card.delay(url, filename)
+        #generate_statement_card.delay(url, filename)
 
     return render(request, 'domain/statement_detail.html', {
         'statement': statement,

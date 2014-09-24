@@ -59,6 +59,9 @@ def generate_statement_card(url, filename):
         os.makedirs(card_dir)
 
     path = '%s/%s' % (card_dir, filename)
+    if os.path.exists(path):
+        os.remove(path)
+ 
     browser.save_screenshot(path)
     browser.quit()
 

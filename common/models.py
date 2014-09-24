@@ -68,7 +68,7 @@ class CommonTrashModel(models.Model):
         super(CommonTrashModel, self).save(*args, **kwargs)
 
         # Warm cache
-        warm_cache.delay()
+        #warm_cache.delay()
 
     def trash(self, *args, **kwargs):
 

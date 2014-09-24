@@ -5,5 +5,5 @@ service uwsgi restart
 service nginx restart
 service redis-server restart
 redis-cli FLUSHALL
-supervisorctl restart polygraph
-python manage.py warmcache
+#python manage.py celeryd_detach
+#python manage.py warmcache
