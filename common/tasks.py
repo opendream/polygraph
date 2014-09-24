@@ -39,21 +39,15 @@ def warm_cache():
 def generate_statement_card(url, filename):
     from pyvirtualdisplay import Display
     from selenium import webdriver
+    from easyprocess import EasyProcessCheckInstalledError
+
     import os
 
-
-    no_display = True
     try:
-        from easyprocess import EasyProcessCheckInstalledError
-    except ImportError:
-        no_display = False
-
-    display = False
-
-    if no_display:
         display = Display(visible=0, size=(settings.CARD_WIDTH, 200))
         display.start()
-
+    except EasyProcessCheckInstalledError:
+        pass
 
     browser = webdriver.Firefox()
     browser.window_handles

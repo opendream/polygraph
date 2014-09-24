@@ -8,7 +8,7 @@ apt-get install redis-server supervisor
 apt-get install xvfb xserver-xephyr
 # For OSX install XQuartz http://xquartz.macosforge.org/landing/
 
-# Add this line to your sources.list file
+# If no firefox found, add this line to your /etc/apt/sources.list file
 # deb http://packages.linuxmint.com debian import
 apt-get install firefox
 
