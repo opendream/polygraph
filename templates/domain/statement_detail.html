@@ -24,11 +24,19 @@
 {% endblock %}
 {% endcomment %}
 
+{% comment %}
 {% block image %}
 <meta property="og:image" content="{{ BASE_URL }}{{ people_image.url }}">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="{{ people_image.width }}">
 <meta property="og:image:height" content="{{ people_image.height }}">
+{% endblock %}
+{% endcomment %}
+
+{% block image %}
+<meta property="og:image" content="{{ card_image }}">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="{{ card_width }}">
 {% endblock %}
 
 {% block content %}

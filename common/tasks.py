@@ -1,9 +1,15 @@
-
+import os
+from django.conf import settings
 from celery import task
 from django.conf import settings
+from easyprocess import EasyProcessCheckInstalledError
+
 
 @task()
 def warm_cache():
+
+    if settings.MAINTENANCE_MODE or settings.DEBUG:
+        return False
 
     from django.test.client import Client
     from django.core.urlresolvers import reverse
@@ -32,20 +38,32 @@ def warm_cache():
         for people in People.objects.exclude(status__in=[STATUS_DRAFT, STATUS_PENDING]).order_by('-quoted_by__created')[0:20]:
             client.get(reverse('people_detail', args=[people.permalink]))
 
-
 @task()
 def generate_statement_card(url, filename):
     from pyvirtualdisplay import Display
     from selenium import webdriver
 
-    display = Display(visible=0, size=(500, 700))
-    display.start()
+    display = False
+
+    try:
+        display = Display(visible=0, size=(settings.CARD_WIDTH, 200))
+        display.start()
+    except EasyProcessCheckInstalledError:
+        pass
 
     browser = webdriver.Firefox()
+    browser.window_handles
+    browser.set_window_size(settings.CARD_WIDTH, 200)
     browser.get(url)
 
-    path = '%s/card/statement/%s' % (settings.MEDIA_ROOT, filename)
+    card_dir = '%s/card/statement' % settings.MEDIA_ROOT
+    if not os.path.isdir(card_dir):
+        os.makedirs(card_dir)
+
+    path = '%s/%s' % (card_dir, filename)
     browser.save_screenshot(path)
     browser.quit()
 
-    display.stop()
+    if display:
+        display.stop()
+

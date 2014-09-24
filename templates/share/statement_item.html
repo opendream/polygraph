@@ -12,7 +12,7 @@
 
         <style type="text/css">
             body {
-                width: 500px;
+                width: {{ card_width }}px;
                 padding: 0px !important;
                 margin: 0px !important;
                 background-image: none !important;
@@ -24,15 +24,19 @@
             .block-quote {
                 margin-top: 12px !important;
             }
-
+            a {
+                text-decoration: none !important;
+            }
+            .block {
+                -moz-border-radius: 0px;
+                -webkit-border-radius: 0px;
+                border-radius: 0px;
+            }
         </style>
 
 
     </head>
     <body>
-
         {{ statement|statement_item:0 }}
-
-
     </body>
 </html>

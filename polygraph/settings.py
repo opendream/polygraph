@@ -310,6 +310,8 @@ MAINTENANCE_IGNORE_URLS = (
     r'^/account/.*',
 )
 
+CARD_WIDTH = 600
+
 
 
 # CUSTOM POLYGRAPH PROJECT #############################

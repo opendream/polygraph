@@ -1,3 +1,4 @@
+import os
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
@@ -563,7 +564,7 @@ def statement_create(request, statement=None):
 
             # Generate card from selenium capture screen
             url = request.build_absolute_uri(reverse('statement_item', args=[statement.id]))
-            filename = 'statement-card-%s' % statement.id
+            filename = 'statement-card-%s.png' % statement.id
             generate_statement_card.delay(url, filename)
 
             return redirect('statement_edit', statement.id)
@@ -622,12 +623,24 @@ def statement_detail(request, statement_permalink):
     if not statement.changed:
         statement.changed = statement.created
 
+
+    # Generate card
+    card_dir = '%s/card/statement' % settings.MEDIA_ROOT
+    filename = 'statement-card-%s.png' % statement.id
+    path = '%s/%s' % (card_dir, filename)
+
+    if not os.path.exists(path):
+        url = request.build_absolute_uri(reverse('statement_item', args=[statement.id]))
+        generate_statement_card.delay(url, filename)
+
     return render(request, 'domain/statement_detail.html', {
         'statement': statement,
         'topic': topicrevision,
         'meter_list': Meter.objects.all().order_by('order'),
         'meter_image': statement.meter.image_medium_text.thumbnail_500x500(upscale=True),
-        'people_image': statement.quoted_by.image.thumbnail_500x500(upscale=True, crop='center')
+        'people_image': statement.quoted_by.image.thumbnail_500x500(upscale=True, crop='center'),
+        'card_image': request.build_absolute_uri('%scard/statement/%s' % (settings.MEDIA_URL, filename)),
+        'card_width': settings.CARD_WIDTH
     })
 
 @scache
@@ -636,7 +649,7 @@ def statement_item(request, statement_id):
     print [s.id for s in Statement.objects.all()]
     statement = get_object_or_404(Statement, id=statement_id)
 
-    return render(request, 'share/statement_item.html', {'statement': statement})
+    return render(request, 'share/statement_item.html', {'statement': statement, 'card_width': settings.CARD_WIDTH})
 
 
 @scache
