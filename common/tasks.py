@@ -1,9 +1,12 @@
-
+from django.conf import settings
 from celery import task
 
 
 @task()
 def warm_cache():
+
+    if settings.MAINTENANCE_MODE:
+        return False
 
     from django.test.client import Client
     from django.core.urlresolvers import reverse
