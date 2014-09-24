@@ -1,8 +1,5 @@
-import os
-from django.conf import settings
 from celery import task
 from django.conf import settings
-from easyprocess import EasyProcessCheckInstalledError
 
 
 @task()
@@ -42,14 +39,21 @@ def warm_cache():
 def generate_statement_card(url, filename):
     from pyvirtualdisplay import Display
     from selenium import webdriver
+    import os
+
+
+    no_display = True
+    try:
+        from easyprocess import EasyProcessCheckInstalledError
+    except ImportError:
+        no_display = False
 
     display = False
 
-    try:
+    if no_display:
         display = Display(visible=0, size=(settings.CARD_WIDTH, 200))
         display.start()
-    except EasyProcessCheckInstalledError:
-        pass
+
 
     browser = webdriver.Firefox()
     browser.window_handles
