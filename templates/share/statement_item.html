@@ -11,28 +11,49 @@
         <link href="{% static 'css/stylesheets/style.css' %}" type="text/css" rel="stylesheet">
 
         <style type="text/css">
-            body {
-                width: {{ card_width }}px;
-                padding: 0px !important;
-                margin: 0px !important;
-                background-image: none !important;
-                background-color: transparent !important;
-            }
-            .statement-status {
-                display: none !important;
-            }
-            .block-quote {
-                margin-top: 12px !important;
-            }
-            a {
-                text-decoration: none !important;
-            }
-            .block {
-                -moz-border-radius: 0px;
-                -webkit-border-radius: 0px;
-                border-radius: 0px;
-            }
+body {
+    width: {{ card_width }}px;
+    padding: 0px !important;
+    margin: 0px !important;
+    background-image: none !important;
+    background-color: transparent !important;
+}
+.statement-status {
+    display: none !important;
+}
+.statement-item .media {
+    height: 175px !important;
+}
+.quote-wrapper {
+    height: 118px;
+}
+.block-quote {
+    margin-top: 0px !important;
+    height: 80px;
+}
+a {
+    text-decoration: none !important;
+}
+.block {
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+}
         </style>
+
+        <script type="text/javascript" src="{% static 'libs/jquery/jquery.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'libs/jquery-textfill/js/jquery.textfill.min.js' %}"></script>
+        <script type="text/javascript">
+var updateTextFill = function () {
+    $('.block-quote').textfill({
+        //'widthOnly': true,
+        //'maxFontPixels': 24
+    });
+};
+
+updateTextFill();
+setTimeout(updateTextFill, 1000);
+        </script>
 
 
     </head>

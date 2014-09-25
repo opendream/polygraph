@@ -311,7 +311,7 @@ MAINTENANCE_IGNORE_URLS = (
     r'^/statement/.*/item/',
 )
 
-CARD_WIDTH = 600
+CARD_WIDTH = 680
 
 
 
