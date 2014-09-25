@@ -5,4 +5,4 @@ sudo service nginx restart
 sudo service redis-server restart
 sudo redis-cli FLUSHALL
 #python manage.py celeryd_detach
-#python manage.py warmcache
+python manage.py warmcache
