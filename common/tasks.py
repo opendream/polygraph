@@ -40,9 +40,14 @@ def generate_statement_card(url, filename):
     from pyvirtualdisplay import Display
     from selenium import webdriver
     from easyprocess import EasyProcessCheckInstalledError
+    from selenium.webdriver.common.by import By
+    from selenium.webdriver.support.ui import WebDriverWait
+    from selenium.webdriver.support import expected_conditions as EC
+    from selenium.common.exceptions import NoSuchElementException
 
     import os
 
+    display = False
     try:
         display = Display(visible=0, size=(settings.CARD_WIDTH, 200))
         display.start()
@@ -50,8 +55,8 @@ def generate_statement_card(url, filename):
         pass
 
     browser = webdriver.Firefox()
-    browser.window_handles
     browser.set_window_size(settings.CARD_WIDTH, 200)
+    browser.implicitly_wait(1)
     browser.get(url)
 
     card_dir = '%s/card/statement' % settings.MEDIA_ROOT
@@ -61,10 +66,23 @@ def generate_statement_card(url, filename):
     path = '%s/%s' % (card_dir, filename)
     if os.path.exists(path):
         os.remove(path)
- 
-    browser.save_screenshot(path)
-    browser.quit()
 
-    if display:
-        display.stop()
+
+    try:
+
+        success = browser.find_element_by_id("text-fill-success")
+
+        if success:
+            browser.save_screenshot(path)
+            browser.quit()
+
+        if display:
+            display.stop()
+
+    except NoSuchElementException:
+        browser.save_screenshot(path)
+        browser.quit()
+
+        if display:
+            display.stop()
 

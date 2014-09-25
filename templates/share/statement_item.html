@@ -47,8 +47,6 @@ a {
 
 var updateTextFill = function () {
     $('.block-quote').textfill({
-        //'widthOnly': true,
-        //'maxFontPixels': 24
         innerTag: 'a'
     });
 };
@@ -56,7 +54,10 @@ $(document).ready(function () {
     updateTextFill();
 });
 
-setTimeout(updateTextFill, 500);
+setTimeout(function () {
+    updateTextFill();
+    $('body').append('<div id="text-fill-success"></div>');
+}, 5000);
         </script>
 
 

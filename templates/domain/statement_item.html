@@ -22,7 +22,9 @@
             <div class="text-brown block-quote lead">
 
                 {% if no_link %}
+                <span>
                 {{ statement.quote|removetags:'p'|safe }}
+                </span>
                 {% else %}
                 <a href="{% url 'statement_detail' statement.permalink %}">{{ statement.quote|removetags:'p'|safe }}</a>
                 {% endif %}
