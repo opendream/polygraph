@@ -1,19 +1,20 @@
 import os
+import autocomplete_light
 from django.conf import settings
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.http import HttpResponse
 from django.views.generic import TemplateView
 
+autocomplete_light.autodiscover()
 admin.autodiscover()
 
 
 urlpatterns = patterns('',
-
+    url(r'^autocomplete/', include('autocomplete_light.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^ckeditor/', include('ckeditor.urls')),
     url(r'^files-widget/', include('files_widget.urls')),
-    url(r'^autocomplete/', include('autocomplete_light.urls')),
     url(r'^account/', include('account.urls')),
     url(r'^tagging_autocomplete_tagit/', include('tagging_autocomplete_tagit.urls')),
 
