@@ -12,8 +12,8 @@
 <li class="active">{{ statement.quote|truncatewords_html:10|safe }}</li>
 {% endblock %}
 
-{% block title_share %}{% trans "Join for check statement of this people that truth or lie" %}{% endblock %}
-{% block description %}{{ statement.quoted_by.get_full_name }} : {{ statement.quote|striptags }}{% endblock %}
+{% block title_share %}{{ SITE_NAME }}: {{ statement.quoted_by.get_full_name }}{% endblock %}
+{% block description %}{{ statement.description|striptags }}{% endblock %}
 
 {% comment %}
 {% block image %}
