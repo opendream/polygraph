@@ -1,5 +1,7 @@
 from django.core.management import BaseCommand
-from common.tasks import warm_cache
+from common.tasks import generate_statement_card
+from domain.models import Statement
+
 
 class Command(BaseCommand):
 
