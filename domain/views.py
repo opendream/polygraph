@@ -640,7 +640,8 @@ def statement_detail(request, statement_permalink):
         'meter_image': statement.meter.image_medium_text.thumbnail_500x500(upscale=True),
         'people_image': statement.quoted_by.image.thumbnail_500x500(upscale=True, crop='center'),
         'card_image': request.build_absolute_uri('%scard/statement/%s' % (settings.MEDIA_URL, filename)),
-        'card_width': settings.CARD_WIDTH
+        'card_width': settings.CARD_WIDTH,
+        'display_statement_revisions': settings.DISPLAY_STATEMENT_REVISIONS
     })
 
 @scache

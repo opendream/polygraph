@@ -78,7 +78,7 @@
 
                 {{ topic.description|safe }}
 
-                {% if statement.topic.topicrevision_set.all.count > 1 %}
+                {% if display_statement_revisions and statement.topic.topicrevision_set.all.count > 1 %}
                 <p>&nbsp;</p>
                 <section>
                     <header><h4>{% trans "Update" %}</h4></header>

@@ -42,17 +42,21 @@ a {
         </style>
 
         <script type="text/javascript" src="{% static 'libs/jquery/jquery.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'libs/jquery-textfill/js/jquery.textfill.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'libs/jquery-textfill/js/jquery.textfill.js' %}"></script>
         <script type="text/javascript">
+
 var updateTextFill = function () {
     $('.block-quote').textfill({
         //'widthOnly': true,
         //'maxFontPixels': 24
+        innerTag: 'a'
     });
 };
+$(document).ready(function () {
+    updateTextFill();
+});
 
-updateTextFill();
-setTimeout(updateTextFill, 1000);
+setTimeout(updateTextFill, 500);
         </script>
 
 

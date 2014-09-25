@@ -322,6 +322,7 @@ SITE_LOGO_URL = '%simages/logo.png' % STATIC_URL
 SITE_NAME = 'Polygraph'
 SITE_FAVICON_URL = '%simages/favicon.ico' % STATIC_URL
 GOOGLE_ANALYTICS_KEY = ''
+DISPLAY_STATEMENT_REVISIONS = True
 
 
 # Override Settings ###########################################################
