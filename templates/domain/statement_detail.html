@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block title_share %}{{ SITE_NAME }}: {{ statement.quoted_by.get_full_name }}{% endblock %}
-{% block description %}{{ statement.description|striptags }}{% endblock %}
+{% block description %}{{ statement.short_detail|striptags }}{% endblock %}
 
 {% comment %}
 {% block image %}
