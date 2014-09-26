@@ -7,4 +7,4 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-        warm_cache.delay()
+        warm_cache()

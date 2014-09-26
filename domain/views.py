@@ -77,7 +77,7 @@ def statement_query_base(is_anonymous=True, is_staff=False, user=None):
 def people_query_base(category=None, is_anonymous=True, is_staff=False, user=None):
 
 
-    people_list = People.objects.all().order_by('-quoted_by__created')
+    people_list = People.objects.all().order_by('-quoted_by__hilight', '-quoted_by__promote', '-quoted_by__changed', '-quoted_by__created')
 
     if category:
         category = get_object_or_404(PeopleCategory, permalink=category)
@@ -142,7 +142,7 @@ def home(request):
 
     hilight_statement_list = statement_list.filter(hilight=True).order_by('-uptodate')
 
-    statement_list = statement_list.order_by('-promote', '-uptodate')
+    statement_list = statement_list.exclude(hilight=True).order_by('-promote', '-uptodate')
 
     meter_statement_list = []
 
@@ -166,6 +166,7 @@ def home(request):
 
     # Q 24
     people_list = people_query_base(is_anonymous=True)
+    people_list = people_list.exclude(quoted_by__hilight=True)
     #people_list = people_list.exclude(id__in=people_statement_list)
 
     people_list = people_list[0:4]
