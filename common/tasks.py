@@ -5,7 +5,7 @@ from django.conf import settings
 @task()
 def warm_cache():
 
-    if settings.MAINTENANCE_MODE or settings.DEBUG:
+    if settings.MAINTENANCE_MODE:
         return False
 
     from django.test.client import Client
@@ -40,9 +40,6 @@ def generate_statement_card(url, filename):
     from pyvirtualdisplay import Display
     from selenium import webdriver
     from easyprocess import EasyProcessCheckInstalledError
-    from selenium.webdriver.common.by import By
-    from selenium.webdriver.support.ui import WebDriverWait
-    from selenium.webdriver.support import expected_conditions as EC
     from selenium.common.exceptions import NoSuchElementException
 
     import os
