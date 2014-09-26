@@ -230,7 +230,11 @@ def people_create(request, people=None):
 
             messages.success(request, message_success)
 
-            warm_cache.delay()
+            warm_cache.delay({
+                'SERVER_NAME': request.SERVER_NAME,
+                'SERVER_PORT': request.SERVER_PORT,
+                'wsgi.url_scheme': str('https')
+            })
 
             return redirect('people_edit', people.id)
     else:
@@ -398,7 +402,11 @@ def topic_create(request, topic=None):
             if request.GET.get('_popup'):
                 message_success = '<script type="text/javascript"> opener.dismissAddAnotherPopup(window, \'%s\', \'%s\'); </script>' % (topic.id, topic_render_reference(topic))
 
-            warm_cache.delay()
+            warm_cache.delay({
+                'SERVER_NAME': request.SERVER_NAME,
+                'SERVER_PORT': request.SERVER_PORT,
+                'wsgi.url_scheme': str('https')
+            })
 
             if request.GET.get('_inline') or request.POST.get('_inline'):
                 form.inst = topic
@@ -575,7 +583,11 @@ def statement_create(request, statement=None):
             url = request.build_absolute_uri(reverse('statement_item', args=[statement.id]))
             filename = 'statement-card-%s.png' % statement.id
             generate_statement_card.delay(url, filename)
-            warm_cache.delay()
+            warm_cache.delay({
+                'SERVER_NAME': request.SERVER_NAME,
+                'SERVER_PORT': request.SERVER_PORT,
+                'wsgi.url_scheme': str('https')
+            })
 
             return redirect('statement_edit', statement.id)
     else:

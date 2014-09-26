@@ -3,7 +3,10 @@ from django.conf import settings
 
 
 @task()
-def warm_cache():
+def warm_cache(**request):
+
+    if not request:
+        return False
 
     if settings.MAINTENANCE_MODE:
         return False
@@ -13,8 +16,10 @@ def warm_cache():
     from domain.models import Meter, Statement, People, PeopleCategory
     from common.constants import STATUS_DRAFT, STATUS_PENDING
 
+    SERVER_NAME = request.SERVER_NAME
 
-    client = Client()
+
+    client = Client(**request)
     client.get(reverse('home'))
     client.get(reverse('statement_list'))
     client.get(reverse('people_list'))
