@@ -176,7 +176,8 @@ def home(request):
         'meter_statement_list': meter_statement_list,
         'tags_list': tags_list,
         'people_list': people_list,
-        'contact_footer': render_to_string('contact_footer.txt')
+        'contact_footer': render_to_string('contact_footer.txt'),
+        'site_image': request.build_absolute_uri('%simages/site_image.jpg' % settings.STATIC_URL)
     })
 
 

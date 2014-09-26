@@ -3,6 +3,21 @@
 {% load common_tags %}
 {% load domain_tags %}
 
+{% block title_share %}{{ SITE_NAME }}{% endblock %}
+{% block description %}{% endblock %}
+
+{% block image %}
+<meta property="og:image" content="{{ site_image }}">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<meta name="twitter:card" content="{{ card_image }}">
+<meta name="twitter:image:src" content="{{ card_image }}">
+
+{% endblock %}
+
+
 {% block content_class %} filter-header{% endblock %}
 {% block base_content %}
 
