@@ -319,8 +319,7 @@ CARD_WIDTH = 665
 # CUSTOM POLYGRAPH PROJECT #############################
 
 UPTODATE_DAYS = 7
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SITE_URL = 'www.jabted.com'
+SITE_URL = 'https://www.jabted.com'
 SITE_LOGO_URL = '%simages/logo.png' % STATIC_URL
 SITE_NAME = 'Polygraph'
 SITE_FAVICON_URL = '%simages/favicon.ico' % STATIC_URL
