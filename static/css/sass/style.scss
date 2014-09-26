@@ -699,7 +699,8 @@ input + .errors{
 		img {
 			width: 100%;
 			height: auto;
-			max-width: 249px;
+			max-width: 160px;
+			margin-right: 50px;
 		}
 	}
 }
@@ -707,20 +708,16 @@ input + .errors{
 @media (max-width: 480px) {
 	.polygraph-list.single {
 		.polygraph-list-before {
-			.meter-title,
-      .desc,
-      .meter-image {
+		    .desc {
+		        padding-left: 30px;
+		    }
+			.meter-title, .desc, .meter-image {
 				width: 100%;
 			}
-			.meter-title,
-      .meter-image {
+			.meter-title, .meter-image {
 				text-align: center;
 			}
 			.meter-image { margin-top: 20px; }
-			img {
-				max-width: 175px;
-				margin-left: -35px;
-			}
 		}
 	}		
 }
@@ -731,7 +728,7 @@ input + .errors{
   &>.tab-content { position: relative; z-index: 1; }
 	.statement-list { overflow: hidden; }
 	.block {
-		margin-bottom: 1.2em;
+		margin-bottom: 2em;
 	}
 	.polygraph-list-block {
 		position: relative;
@@ -780,7 +777,10 @@ input + .errors{
 		margin-bottom: 10px;
 		display: block;
 	}
-	.desc { margin-top: 20px; }
+	.desc {
+	    margin-top: 20px;
+	    padding-left: 55px;
+	}
 }
 // @media (max-width: 991px) {
 // 	.polygraph-list-before .desc { padding: 0; }

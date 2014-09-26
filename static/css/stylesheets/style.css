@@ -1148,80 +1148,77 @@ input + .errors {
 .polygraph-list.single .polygraph-list-before img {
   width: 100%;
   height: auto;
-  max-width: 249px;
+  max-width: 160px;
+  margin-right: 50px;
 }
 
 @media (max-width: 480px) {
-  /* line 710, ../sass/style.scss */
-  .polygraph-list.single .polygraph-list-before .meter-title,
-  .polygraph-list.single .polygraph-list-before .desc,
-  .polygraph-list.single .polygraph-list-before .meter-image {
+  /* line 711, ../sass/style.scss */
+  .polygraph-list.single .polygraph-list-before .desc {
+    padding-left: 30px;
+  }
+  /* line 714, ../sass/style.scss */
+  .polygraph-list.single .polygraph-list-before .meter-title, .polygraph-list.single .polygraph-list-before .desc, .polygraph-list.single .polygraph-list-before .meter-image {
     width: 100%;
   }
-  /* line 715, ../sass/style.scss */
-  .polygraph-list.single .polygraph-list-before .meter-title,
-  .polygraph-list.single .polygraph-list-before .meter-image {
+  /* line 717, ../sass/style.scss */
+  .polygraph-list.single .polygraph-list-before .meter-title, .polygraph-list.single .polygraph-list-before .meter-image {
     text-align: center;
   }
-  /* line 719, ../sass/style.scss */
+  /* line 720, ../sass/style.scss */
   .polygraph-list.single .polygraph-list-before .meter-image {
     margin-top: 20px;
   }
-  /* line 720, ../sass/style.scss */
-  .polygraph-list.single .polygraph-list-before img {
-    max-width: 175px;
-    margin-left: -35px;
-  }
 }
-/* line 729, ../sass/style.scss */
+/* line 726, ../sass/style.scss */
 .polygraph-list > header {
   position: relative;
   z-index: 2;
   overflow: visible;
 }
-/* line 730, ../sass/style.scss */
+/* line 727, ../sass/style.scss */
 .polygraph-list > section, .polygraph-list > .tab-content {
   position: relative;
   z-index: 1;
 }
-/* line 732, ../sass/style.scss */
+/* line 729, ../sass/style.scss */
 .polygraph-list .statement-list {
   overflow: hidden;
 }
-/* line 733, ../sass/style.scss */
+/* line 730, ../sass/style.scss */
 .polygraph-list .block {
-  margin-bottom: 1.2em;
+  margin-bottom: 2em;
 }
-/* line 736, ../sass/style.scss */
+/* line 733, ../sass/style.scss */
 .polygraph-list .polygraph-list-block {
   position: relative;
 }
-/* line 738, ../sass/style.scss */
+/* line 735, ../sass/style.scss */
 .polygraph-list .polygraph-list-block .quote {
   line-height: 1.8em;
 }
 
-/* line 743, ../sass/style.scss */
+/* line 740, ../sass/style.scss */
 .polygraph-list-block .block-content.float-right-img {
   padding-right: 270px;
 }
 
-/* line 749, ../sass/style.scss */
+/* line 746, ../sass/style.scss */
 .polygraph-list.statement-list .block-content {
   position: initial;
 }
-/* line 751, ../sass/style.scss */
+/* line 748, ../sass/style.scss */
 .polygraph-list.statement-list .block-content .quote {
   font-size: 18px;
 }
 
-/* line 764, ../sass/style.scss */
+/* line 761, ../sass/style.scss */
 .btn-group-custom {
   position: absolute;
   top: -45px;
   right: 0;
 }
-/* line 768, ../sass/style.scss */
+/* line 765, ../sass/style.scss */
 .btn-group-custom .btn {
   -moz-border-radius: 0;
   -webkit-border-radius: 0;
@@ -1231,22 +1228,23 @@ input + .errors {
 /*
  *  Polygraph List Before Style.
  */
-/* line 776, ../sass/style.scss */
+/* line 773, ../sass/style.scss */
 .polygraph-list-before {
   width: 100%;
 }
-/* line 778, ../sass/style.scss */
+/* line 775, ../sass/style.scss */
 .polygraph-list-before .block-content {
   overflow: hidden;
 }
-/* line 779, ../sass/style.scss */
+/* line 776, ../sass/style.scss */
 .polygraph-list-before span {
   margin-bottom: 10px;
   display: block;
 }
-/* line 783, ../sass/style.scss */
+/* line 780, ../sass/style.scss */
 .polygraph-list-before .desc {
   margin-top: 20px;
+  padding-left: 55px;
 }
 
 /* line 792, ../sass/style.scss */
