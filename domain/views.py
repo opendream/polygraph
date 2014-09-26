@@ -644,7 +644,7 @@ def statement_detail(request, statement_permalink):
         'meter_list': Meter.objects.all().order_by('order'),
         'meter_image': statement.meter.image_medium_text.thumbnail_500x500(upscale=True),
         'people_image': statement.quoted_by.image.thumbnail_500x500(upscale=True, crop='center'),
-        'card_image': '%s%scard/statement/%s' % (settings.SITE_URL, settings.MEDIA_URL, filename),
+        'card_image': request.build_absolute_uri('%scard/statement/%s' % (settings.MEDIA_URL, filename)),
         'card_width': settings.CARD_WIDTH,
         'display_statement_revisions': settings.DISPLAY_STATEMENT_REVISIONS
     })
