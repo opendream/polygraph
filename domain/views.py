@@ -181,7 +181,7 @@ def home(request):
         'people_list': people_list,
         'contact_footer': render_to_string('contact_footer.txt'),
         'site_image': request.build_absolute_uri('%simages/site_image.jpg' % settings.STATIC_URL),
-        'site_description': about
+        'site_description': about.value
     })
 
 
