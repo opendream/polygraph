@@ -299,6 +299,7 @@ CACHES = {
         }
     }
 }
+CACHES_FOREVER = False
 
 # Celery settings
 BROKER_URL = 'redis://localhost:6379/0'
