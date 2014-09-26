@@ -1,4 +1,5 @@
 from uuid import uuid1
+from django.conf import settings
 from django.core import validators
 from django.core.cache import cache
 from django.db import models
@@ -64,7 +65,8 @@ class CommonTrashModel(models.Model):
 
     def save(self, *args, **kwargs):
 
-        cache.clear()
+        if not settings.CACHES_FOREVER:
+            cache.clear()
         super(CommonTrashModel, self).save(*args, **kwargs)
 
         # Warm cache
