@@ -417,17 +417,6 @@ $(document).ready(function () {
     setTimeout(updateTextFill, 1000);
     $( window ).resize(updateTextFill);
 
-    $('.block-quote').textfill({
-        'maxFontPixels': 21,
-        innerTag: 'a, span',
-        'success': function(me) {
-
-            var oldSize = $(me).children('a, span').css('font-size');
-            oldSize = parseInt(oldSize.replace('px', ''));
-            $(me).children('a, span').css('font-size', oldSize-1);
-        }
-    });
-
 
     // Login link
 

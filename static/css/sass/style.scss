@@ -604,7 +604,7 @@ input + .errors{
 	position: relative;
 	display: block;
 	border-left: 0;
-	padding: 0px 35px;
+	padding: 0px 30px 0 35px;
 	margin: 12px 10px 30px 10px;
 	word-wrap: break-word;
 	&:before,
@@ -728,7 +728,7 @@ input + .errors{
   &>.tab-content { position: relative; z-index: 1; }
 	.statement-list { overflow: hidden; }
 	.block {
-		margin-bottom: 2em;
+		margin-bottom: 3em;
 	}
 	.polygraph-list-block {
 		position: relative;
