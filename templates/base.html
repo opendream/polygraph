@@ -17,6 +17,7 @@
         {% captureas image_content %}{% block image %}{% endblock %}{% endcaptureas %}
 
 
+        <meta property="og:url" content="{{ SITE_URL }}">
         <meta property="og:title" content="{% if title_share_content %}{{ title_share_content|striptags }}{% else %}{{ title_content|striptags }}{% endif %}">
         <meta property="og:site_name" content="{{ SITE_NAME }}">
 
