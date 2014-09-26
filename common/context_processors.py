@@ -36,7 +36,8 @@ def helper(request):
         'STATUS_PENDING': STATUS_PENDING,
         'STATUS_DRAFT': STATUS_DRAFT,
         'GOOGLE_ANALYTICS_KEY': settings.GOOGLE_ANALYTICS_KEY,
-        'hilight_label': hilight_label
+        'hilight_label': hilight_label,
+        'FB_APP_ID': settings.FB_APP_ID
     }
 
     return context
