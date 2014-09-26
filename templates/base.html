@@ -22,8 +22,6 @@
         <meta property="og:site_name" content="{{ SITE_NAME }}">
 
         <meta name="twitter:title" content="{% if title_share_content %}{{ title_share_content|striptags }}{% else %}{{ title_content|striptags }}{% endif %}">
-
-        <meta name="twitter:card" content="summary_large_image">
         <meta name="twitter:site" content="{{ request.build_absolute_uri }}">
 
         {% if description_content %}
