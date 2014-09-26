@@ -4,7 +4,7 @@
 {% load domain_tags %}
 
 {% block title_share %}{{ SITE_NAME }}{% endblock %}
-{% block description %}{% endblock %}
+{% block description %}{{ site_description|striptags }}{% endblock %}
 
 {% block image %}
 <meta property="og:image" content="{{ site_image }}">

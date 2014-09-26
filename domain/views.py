@@ -171,13 +171,17 @@ def home(request):
 
     people_list = people_list[0:4]
 
+    about, created = Variable.objects.get_or_create(name='about')
+
+
     return render(request, 'domain/home.html', {
         'meter_statement_count': meter_statement_count,
         'meter_statement_list': meter_statement_list,
         'tags_list': tags_list,
         'people_list': people_list,
         'contact_footer': render_to_string('contact_footer.txt'),
-        'site_image': request.build_absolute_uri('%simages/site_image.jpg' % settings.STATIC_URL)
+        'site_image': request.build_absolute_uri('%simages/site_image.jpg' % settings.STATIC_URL),
+        'site_description': about
     })
 
 
