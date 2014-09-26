@@ -15,33 +15,19 @@
 {% block title_share %}{{ SITE_NAME }}: {{ statement.quoted_by.get_full_name }}{% endblock %}
 {% block description %}{{ statement.short_detail|striptags }}{% endblock %}
 
-{% comment %}
-{% block image %}
-<meta property="og:image" content="{{ BASE_URL }}{{ meter_image.url }}">
-<meta property="og:image:type" content="image/png">
-<meta property="og:image:width" content="{{ meter_image.width }}">
-<meta property="og:image:height" content="{{ meter_image.height }}">
-{% endblock %}
-{% endcomment %}
-
-{% comment %}
-{% block image %}
-<meta property="og:image" content="{{ BASE_URL }}{{ people_image.url }}">
-<meta property="og:image:type" content="image/png">
-<meta property="og:image:width" content="{{ people_image.width }}">
-<meta property="og:image:height" content="{{ people_image.height }}">
-{% endblock %}
-{% endcomment %}
-
 {% block image %}
 <meta property="og:image" content="{{ card_image }}">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="{{ card_width }}">
+
+<meta name="twitter:card" content="{{ card_image }}">
+<meta name="twitter:image:src" content="{{ card_image }}">
+
 {% endblock %}
 
 {% block content %}
     <div id="fb-root"></div>
-    <script>(function(d, s, id) {
+    <script type="text/javascript">(function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
       if (d.getElementById(id)) return;
       js = d.createElement(s); js.id = id;
@@ -49,7 +35,7 @@
       fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));</script>
 
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    <script type="text/javascript">!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
     <article class="block">
         <section class="no-border">

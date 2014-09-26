@@ -2044,3 +2044,8 @@ td.meter {
   color: #FFF;
   padding-bottom: 5px;
 }
+
+/* line 1512, ../sass/style.scss */
+.fb_iframe_widget iframe {
+  height: 20px !important;
+}
