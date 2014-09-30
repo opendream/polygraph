@@ -601,6 +601,7 @@ input + .errors{
 .block-quote,
 .block-quote-alt {
 	strong { font-size: 1.25em; font-weight: normal; }
+  a, span { position: relative; }
 	position: relative;
 	display: block;
 	border-left: 0;
@@ -608,7 +609,8 @@ input + .errors{
 	margin: 12px 10px 30px 10px;
 	word-wrap: break-word;
 	&:before,
-	&:after {
+	a:after,
+  span:after {
 		content: "";
 		width: 23px;
 		height: 18px;
@@ -619,11 +621,13 @@ input + .errors{
 	&:before {
 		top: 0; left: 0;
 	}
-	&:after {
+	a:after,
+  span:after {
 		background-position: -23px 0;
 		bottom: 0;
-    right: auto;
-    margin-left: 10px;
+    right: 0;
+    display: inline-block;
+    margin-right: -33px;
 	}
 }
 .updated,
