@@ -11,11 +11,19 @@
 {% endblock %}
 
 
+
+{% block title %}{{ page_title }}{% endblock %}
+
+
+{% block breadcrumb %}
+<li class="active">{{ page_title }}</li>
+{% endblock %}
+
+{% block content %}
+
 {% if sortable %}
-{% block js %}
 <script type="text/javascript" src="{% static 'libs/jquery-ui/js/jquery-ui-1.10.4.min.js' %}"></script>
 <script type="text/javascript">
-
     var update_order = function () {
         $('tbody tr').each(function (i, item) {
             var input = $(item).find('input');
@@ -37,18 +45,7 @@
 
 
 </script>
-{% endblock %}
 {% endif %}
-
-{% block title %}{{ page_title }}{% endblock %}
-
-
-{% block breadcrumb %}
-<li class="active">{{ page_title }}</li>
-{% endblock %}
-
-{% block content %}
-
 
 
 {% if table.page %}
@@ -56,7 +53,7 @@
 {% endif %}
 
 {% block table %}
-<div class="table-responsive{% if sortable %} table-sortable{% endif %}">
+<div class="table-responsive table-pain{% if sortable %} table-sortable{% endif %}">
 
 {% if sortable %}
 <form method="post">

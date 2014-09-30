@@ -2069,19 +2069,19 @@ td.meter {
 }
 
 /* line 1528, ../sass/style.scss */
-.table-sortable tr {
+.table-pain tr {
   border: transparent !important;
 }
 /* line 1531, ../sass/style.scss */
-.table-sortable td {
+.table-pain td {
   background-color: #FFF !important;
 }
 /* line 1534, ../sass/style.scss */
-.table-sortable .order input {
+.table-pain .order input {
   width: 30px;
   border: none 0px;
 }
 /* line 1538, ../sass/style.scss */
-.table-sortable .changed td, .table-sortable .changed input {
+.table-pain .changed td, .table-pain .changed input {
   background-color: #FFEECC !important;
 }

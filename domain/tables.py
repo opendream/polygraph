@@ -74,17 +74,26 @@ class MyStatementTable(StatementTable):
 
 
 class PeopleTable(tables.Table):
-    created_by = tables.Column(accessor='created_by.get_full_name', verbose_name=_('Writer'))
-    image = ImageColumn()
+    image = ImageColumn(verbose_name=_('Image'))
     name = SafeLinkColumn('people_edit', args=[A('id')], accessor='get_full_name', verbose_name=_('Name'))
-    categories = MultipleColum()
-    status = StatusColumn()
-    created = DateColumn()
+    categories = MultipleColum(verbose_name=_('Categories'))
+    status = StatusColumn(verbose_name=_('Status'))
+    created = DateColumn(verbose_name=_('Created'))
+    created_by = tables.Column(accessor='created_by.get_full_name', verbose_name=_('Writer'))
 
     class Meta:
         model = People
         fields = ('created_by', 'image', 'name', 'categories', 'status', 'created')
 
+class SortablePeopleTable(PeopleTable):
+    order = tables.Column(verbose_name=_('Order'))
+    id = tables.Column(visible=False)
+
+    class Meta:
+        fields = ('id', 'order', 'image', 'name', 'categories', 'status', 'created', 'created_by')
+
+    def render_order(self, value, bound_row, record):
+        return mark_safe('<input type="text" value="%s" name="order-id-%s" readonly /> ' % (value, bound_row['id']))
 
 class MyPeopleTable(PeopleTable):
 
