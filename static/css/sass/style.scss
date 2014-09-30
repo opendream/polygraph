@@ -1523,3 +1523,19 @@ td.meter {
 .fb_iframe_widget iframe {
   height: 20px !important;
 }
+
+.table-sortable {
+    tr {
+        border: transparent !important;
+    }
+    td {
+        background-color: #FFF !important;
+    }
+    .order input {
+        width: 30px;
+        border: none 0px;
+    }
+    .changed td, .changed input {
+        background-color: #FFEECC !important;
+    }
+}
