@@ -1,7 +1,7 @@
 {% extends 'base_single.html' %}
 {% load i18n %}
 {% load common_tags %}
-
+{% load staticfiles %}
 {% load querystring from django_tables2 %}
 {% load trans blocktrans from i18n %}
 {% load bootstrap3 %}
@@ -9,6 +9,8 @@
 {% block css %}
 <link rel="stylesheet" href="{{ STATIC_URL }}django_tables2/themes/paleblue/css/screen.css" />
 {% endblock %}
+
+
 
 {% block title %}{{ page_title }}{% endblock %}
 
@@ -19,6 +21,31 @@
 
 {% block content %}
 
+{% if sortable %}
+<script type="text/javascript" src="{% static 'libs/jquery-ui/js/jquery-ui-1.10.4.min.js' %}"></script>
+<script type="text/javascript">
+    var update_order = function () {
+        $('tbody tr').each(function (i, item) {
+            var input = $(item).find('input');
+            if (input) {
+                input.val(i+1);
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        $('tbody').sortable({
+            update: function(e, ui) {
+                update_order();
+                ui.item.addClass('changed');
+            }
+        });
+        update_order();
+    });
+
+
+</script>
+{% endif %}
 
 
 {% if table.page %}
@@ -26,7 +53,12 @@
 {% endif %}
 
 {% block table %}
-<div class="table-responsive">
+<div class="table-responsive table-pain{% if sortable %} table-sortable{% endif %}">
+
+{% if sortable %}
+<form method="post">
+{% csrf_token %}
+{% endif %}
 <table class="table table-striped"{% if table.attrs %} {{ table.attrs.as_html }}{% endif %}>
     {% block table.thead %}
     <thead>
@@ -64,6 +96,13 @@
     <tfoot></tfoot>
     {% endblock table.tfoot %}
 </table>
+
+{% if sortable %}
+<button class="btn btn-primary">{% trans "Save" %}</button>
+<a href="." class="btn">{% trans "Cancel" %}</a>
+</form>
+{% endif %}
+
 </div>
 {% endblock table %}
 

@@ -30,7 +30,8 @@ from common.tasks import generate_statement_card, warm_cache
 # =============================
 # Global
 # =============================
-from domain.tables import StatementTable, MyStatementTable, PeopleTable, MyPeopleTable
+from domain.tables import StatementTable, MyStatementTable, PeopleTable, MyPeopleTable, SortableStatementTable, \
+    SortablePeopleTable
 
 
 @login_required
@@ -140,9 +141,9 @@ def home(request):
 
     meter_statement_count = [(meter, meter_statement_count.get(meter.id) or 0) for meter in meter_list]
 
-    hilight_statement_list = statement_list.filter(hilight=True).order_by('-uptodate')
+    hilight_statement_list = statement_list.filter(hilight=True).order_by('order', '-uptodate')
 
-    statement_list = statement_list.exclude(hilight=True).order_by('-promote', '-uptodate')
+    statement_list = statement_list.exclude(hilight=True).order_by('-promote', 'order', '-uptodate')
 
     meter_statement_list = []
 
@@ -166,7 +167,7 @@ def home(request):
 
     # Q 24
     people_list = people_query_base(is_anonymous=True)
-    people_list = people_list.exclude(quoted_by__hilight=True)
+    people_list = people_list.order_by('order').exclude(quoted_by__hilight=True)
     #people_list = people_list.exclude(id__in=people_statement_list)
 
     people_list = people_list[0:4]
@@ -229,12 +230,12 @@ def people_create(request, people=None):
                 message_success = '<script type="text/javascript"> opener.dismissAddAnotherPopup(window, \'%s\', \'%s\'); </script>' % (people.id, people_render_reference(people))
 
             messages.success(request, message_success)
-
             warm_cache.delay({
-                'SERVER_NAME': request.SERVER_NAME,
-                'SERVER_PORT': request.SERVER_PORT,
-                'wsgi.url_scheme': str('https')
+                'SERVER_NAME': request.META['SERVER_NAME'],
+                'SERVER_PORT': request.META['SERVER_PORT'],
+                'wsgi.url_scheme': request.META['wsgi.url_scheme']
             })
+
 
             return redirect('people_edit', people.id)
     else:
@@ -314,6 +315,7 @@ def people_list(request):
   
 
     people_list = people_query_base(category, request.user.is_anonymous(), request.user.is_staff, request.user)
+    people_list = people_list.order_by('order')
     people_list = pagination_build_query(request, people_list, 9)
 
     category_list = PeopleCategory.objects.all()
@@ -402,10 +404,11 @@ def topic_create(request, topic=None):
             if request.GET.get('_popup'):
                 message_success = '<script type="text/javascript"> opener.dismissAddAnotherPopup(window, \'%s\', \'%s\'); </script>' % (topic.id, topic_render_reference(topic))
 
+
             warm_cache.delay({
-                'SERVER_NAME': request.SERVER_NAME,
-                'SERVER_PORT': request.SERVER_PORT,
-                'wsgi.url_scheme': str('https')
+                'SERVER_NAME': request.META['SERVER_NAME'],
+                'SERVER_PORT': request.META['SERVER_PORT'],
+                'wsgi.url_scheme': request.META['wsgi.url_scheme']
             })
 
             if request.GET.get('_inline') or request.POST.get('_inline'):
@@ -583,10 +586,11 @@ def statement_create(request, statement=None):
             url = request.build_absolute_uri(reverse('statement_item', args=[statement.id]))
             filename = 'statement-card-%s.png' % statement.id
             generate_statement_card.delay(url, filename)
+
             warm_cache.delay({
-                'SERVER_NAME': request.SERVER_NAME,
-                'SERVER_PORT': request.SERVER_PORT,
-                'wsgi.url_scheme': str('https')
+                'SERVER_NAME': request.META['SERVER_NAME'],
+                'SERVER_PORT': request.META['SERVER_PORT'],
+                'wsgi.url_scheme': request.META['wsgi.url_scheme']
             })
 
             return redirect('statement_edit', statement.id)
@@ -729,6 +733,26 @@ def manage(request):
     raise Http404('No Implement Yet.')
 
 
+def sortable_update(request, Inst, redirect_url_name):
+    for (name, value) in request.POST.items():
+        try:
+            id = int(name.replace('order-id-', ''))
+            order = int(value)
+            inst = Inst.objects.get(id=id)
+            inst.order = order
+            inst.save()
+        except ValueError:
+            pass
+    messages.success(request, _('Your %s settings has been updated.') % _('order'))
+
+    warm_cache.delay({
+        'SERVER_NAME': request.META['SERVER_NAME'],
+        'SERVER_PORT': request.META['SERVER_PORT'],
+        'wsgi.url_scheme': request.META['wsgi.url_scheme']
+    })
+
+    return redirect(redirect_url_name)
+
 @login_required
 def manage_my_statement(request):
 
@@ -752,19 +776,30 @@ def manage_pending_statement(request):
 @staff_member_required
 def manage_hilight_statement(request):
 
-    item_list = Statement.objects.all().order_by('-created', '-id').filter(hilight=True).exclude(status=STATUS_DRAFT)
-    table = StatementTable(item_list)
+    item_list = Statement.objects.all().order_by('order', '-created', '-id').filter(hilight=True).exclude(status=STATUS_DRAFT)
+    table = SortableStatementTable(item_list)
     RequestConfig(request).configure(table)
 
-    return render(request, 'manage.html', {'table': table, 'page_title': _('Manage Highlight Statements')})
+
+    if request.method == 'POST':
+        return sortable_update(request, Statement, 'manage_hilight_statement')
+
+    return render(request, 'manage.html', {
+        'table': table,
+        'page_title': _('Manage Highlight Statements'),
+        'sortable': True
+    })
 
 
 @staff_member_required
 def manage_promote_statement(request):
 
-    item_list = Statement.objects.all().order_by('-created', '-id').filter(promote=True).exclude(status=STATUS_DRAFT)
-    table = StatementTable(item_list)
+    item_list = Statement.objects.all().order_by('order', '-created', '-id').filter(promote=True).exclude(status=STATUS_DRAFT)
+    table = SortableStatementTable(item_list)
     RequestConfig(request).configure(table)
+
+    if request.method == 'POST':
+        return sortable_update(request, Statement, 'manage_promote_statement')
 
     return render(request, 'manage.html', {'table': table, 'page_title': _('Manage Promote Statements')})
 
@@ -792,13 +827,18 @@ def manage_my_people(request):
 @staff_member_required
 def manage_people(request):
 
-    item_list = People.objects.all().order_by('-created', '-id').exclude(status=STATUS_DRAFT)
-    table = PeopleTable(item_list)
+    item_list = People.objects.all().order_by('order', 'created', '-id').exclude(status=STATUS_DRAFT)
+    table = SortablePeopleTable(item_list)
     RequestConfig(request).configure(table)
 
-    from django.utils import translation
+    if request.method == 'POST':
+        return sortable_update(request, People, 'manage_people')
 
-    return render(request, 'manage.html', {'table': table, 'page_title': _('Manage All People')})
+    return render(request, 'manage.html', {
+        'table': table,
+        'page_title': _('Manage All People'),
+        'sortable': True
+    })
 
 
 @staff_member_required

@@ -2081,3 +2081,21 @@ td.meter {
 .fb_iframe_widget iframe {
   height: 20px !important;
 }
+
+/* line 1520, ../sass/style.scss */
+.table-pain tr {
+  border: transparent !important;
+}
+/* line 1523, ../sass/style.scss */
+.table-pain td {
+  background-color: #FFF !important;
+}
+/* line 1526, ../sass/style.scss */
+.table-pain .order input {
+  width: 30px;
+  border: none 0px;
+}
+/* line 1530, ../sass/style.scss */
+.table-pain .changed td, .table-pain .changed input {
+  background-color: #FFEECC !important;
+}

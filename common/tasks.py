@@ -3,7 +3,7 @@ from django.conf import settings
 
 
 @task()
-def warm_cache(**request):
+def warm_cache(request=None):
 
     if not request:
         return False
@@ -15,8 +15,6 @@ def warm_cache(**request):
     from django.core.urlresolvers import reverse
     from domain.models import Meter, Statement, People, PeopleCategory
     from common.constants import STATUS_DRAFT, STATUS_PENDING
-
-    SERVER_NAME = request.SERVER_NAME
 
 
     client = Client(**request)
