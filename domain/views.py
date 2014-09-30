@@ -744,6 +744,13 @@ def sortable_update(request, Inst, redirect_url_name):
         except ValueError:
             pass
     messages.success(request, _('Your %s settings has been updated.') % _('order'))
+
+    warm_cache.delay({
+        'SERVER_NAME': request.META['SERVER_NAME'],
+        'SERVER_PORT': request.META['SERVER_PORT'],
+        'wsgi.url_scheme': request.META['wsgi.url_scheme']
+    })
+
     return redirect(redirect_url_name)
 
 @login_required
