@@ -18,7 +18,6 @@
 
     var update_order = function () {
         $('tbody tr').each(function (i, item) {
-            console.log(i, item);
             var input = $(item).find('input');
             if (input) {
                 input.val(i+1);
