@@ -30,7 +30,7 @@ from common.tasks import generate_statement_card, warm_cache
 # =============================
 # Global
 # =============================
-from domain.tables import StatementTable, MyStatementTable, PeopleTable, MyPeopleTable
+from domain.tables import StatementTable, MyStatementTable, PeopleTable, MyPeopleTable, SortableStatementTable
 
 
 @login_required
@@ -752,11 +752,29 @@ def manage_pending_statement(request):
 @staff_member_required
 def manage_hilight_statement(request):
 
-    item_list = Statement.objects.all().order_by('-created', '-id').filter(hilight=True).exclude(status=STATUS_DRAFT)
-    table = StatementTable(item_list)
+    item_list = Statement.objects.all().order_by('order', '-created', '-id').filter(hilight=True).exclude(status=STATUS_DRAFT)
+    table = SortableStatementTable(item_list)
     RequestConfig(request).configure(table)
 
-    return render(request, 'manage.html', {'table': table, 'page_title': _('Manage Highlight Statements')})
+
+    if request.method == 'POST':
+        for (name, value) in request.POST.items():
+            try:
+                id = int(name.replace('order-id-', ''))
+                order = int(value)
+                statement = Statement.objects.get(id=id)
+                statement.order = order
+                statement.save()
+            except ValueError:
+                pass
+        messages.success(request, _('Your %s settings has been updated.') % _('order'))
+        return redirect('manage_hilight_statement')
+
+    return render(request, 'manage.html', {
+        'table': table,
+        'page_title': _('Manage Highlight Statements'),
+        'sortable': True
+    })
 
 
 @staff_member_required
