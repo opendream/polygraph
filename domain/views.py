@@ -140,7 +140,7 @@ def home(request):
 
     meter_statement_count = [(meter, meter_statement_count.get(meter.id) or 0) for meter in meter_list]
 
-    hilight_statement_list = statement_list.filter(hilight=True).order_by('-uptodate')
+    hilight_statement_list = statement_list.filter(hilight=True).order_by('order', '-uptodate')
 
     statement_list = statement_list.exclude(hilight=True).order_by('-promote', '-uptodate')
 
