@@ -646,8 +646,15 @@ input + .errors{
 	font-size: 3.5em;
 	font-weight: bold;
 	line-height: 1.38em;
-	&:after {
-		top: 0; right: 0;
+  &:after {
+    content: "";
+    width: 23px;
+    height: 18px;
+    background: url(../images/quote.png) transparent no-repeat -23px 0;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    right: 0;
 	}	
 }
 @media (max-width: 992px) {
