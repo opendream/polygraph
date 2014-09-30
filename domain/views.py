@@ -229,12 +229,12 @@ def people_create(request, people=None):
                 message_success = '<script type="text/javascript"> opener.dismissAddAnotherPopup(window, \'%s\', \'%s\'); </script>' % (people.id, people_render_reference(people))
 
             messages.success(request, message_success)
-
             warm_cache.delay({
-                'SERVER_NAME': request.SERVER_NAME,
-                'SERVER_PORT': request.SERVER_PORT,
-                'wsgi.url_scheme': str('https')
+                'SERVER_NAME': request.META['SERVER_NAME'],
+                'SERVER_PORT': request.META['SERVER_PORT'],
+                'wsgi.url_scheme': request.META['wsgi.url_scheme']
             })
+
 
             return redirect('people_edit', people.id)
     else:
@@ -402,10 +402,11 @@ def topic_create(request, topic=None):
             if request.GET.get('_popup'):
                 message_success = '<script type="text/javascript"> opener.dismissAddAnotherPopup(window, \'%s\', \'%s\'); </script>' % (topic.id, topic_render_reference(topic))
 
+
             warm_cache.delay({
-                'SERVER_NAME': request.SERVER_NAME,
-                'SERVER_PORT': request.SERVER_PORT,
-                'wsgi.url_scheme': str('https')
+                'SERVER_NAME': request.META['SERVER_NAME'],
+                'SERVER_PORT': request.META['SERVER_PORT'],
+                'wsgi.url_scheme': request.META['wsgi.url_scheme']
             })
 
             if request.GET.get('_inline') or request.POST.get('_inline'):
@@ -583,10 +584,11 @@ def statement_create(request, statement=None):
             url = request.build_absolute_uri(reverse('statement_item', args=[statement.id]))
             filename = 'statement-card-%s.png' % statement.id
             generate_statement_card.delay(url, filename)
+
             warm_cache.delay({
-                'SERVER_NAME': request.SERVER_NAME,
-                'SERVER_PORT': request.SERVER_PORT,
-                'wsgi.url_scheme': str('https')
+                'SERVER_NAME': request.META['SERVER_NAME'],
+                'SERVER_PORT': request.META['SERVER_PORT'],
+                'wsgi.url_scheme': request.META['wsgi.url_scheme']
             })
 
             return redirect('statement_edit', statement.id)
