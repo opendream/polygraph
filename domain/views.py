@@ -740,7 +740,12 @@ def sortable_update(request, Inst, redirect_url_name):
             order = int(value)
             inst = Inst.objects.get(id=id)
             inst.order = order
-            inst.save()
+            
+            try:
+                inst.save(not_changed=True)
+            except TypeError:
+                inst.save()
+
         except ValueError:
             pass
     messages.success(request, _('Your %s settings has been updated.') % _('order'))
