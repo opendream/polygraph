@@ -100,9 +100,6 @@ p.border-bt {
 .text-brown,
 .text-brown p { color: $text_brown; }
 
-.see-all {
-  z-index: -1;
-}
 .see-all a { 
   color: $text_brown;
   &:hover {
@@ -237,6 +234,7 @@ ul.tagit li.tagit-choice .tagit-close {
 	padding: 0;
 	background-color: transparent;
 	p { display: inline; color: #999; }
+	> li { display: inline;}
 }
 
 .pagination {
@@ -621,7 +619,7 @@ input + .errors{
 	&:before {
 		top: 0; left: 0;
 	}
-	a:after {
+	a:after, span:after {
 		background-position: -23px 0;
 		bottom: 0;
     right: 0;
@@ -785,9 +783,6 @@ input + .errors{
 	    padding-left: 55px;
 	}
 }
-// @media (max-width: 991px) {
-// 	.polygraph-list-before .desc { padding: 0; }
-// }
 
 // ###########################
 
@@ -1531,3 +1526,10 @@ td.meter {
         background-color: #FFEECC !important;
     }
 }
+
+/* Media Query block margin-top*/
+@media (max-width: 991px) {
+	aside .people-list {
+		margin-top: 50px;
+	}
+} 

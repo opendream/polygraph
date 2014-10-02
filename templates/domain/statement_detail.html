@@ -50,7 +50,7 @@
                 <div class="fb-share-button" data-href="{% url 'statement_detail' statement.permalink %}" data-type="button_count"></div>
                 <a href="https://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a>
             </div>
-            <div class="views-count pull-right"><span>{{ statement.total_views|intcomma }}</span> {% trans "Views" %}</div>
+            <div class="views-count pull-right"><span>{{ statement.total_views|intcomma:False }}</span> {% trans "Views" %}</div>
         </section>
         <section class="statement-detail block-content">
                 <header>
