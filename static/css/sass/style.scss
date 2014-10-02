@@ -648,6 +648,17 @@ input + .errors{
 		top: 0; right: 0;
 	}	
 }
+
+.polygraph-list-before {
+	.block-quote-alt:after {
+		content: "";
+		width: 23px;
+		height: 18px;
+		background: url(../images/quote.png) transparent no-repeat -23px 0;
+		position: absolute;
+	}
+}
+
 @media (max-width: 992px) {
 	.block-quote-alt {
 		max-width: 100%;
@@ -657,6 +668,28 @@ input + .errors{
 @media (max-width: 560px) {
 	.block-quote-alt { font-size: 2.8em; }
 }
+
+@media 
+only screen and (-webkit-min-device-pixel-ratio: 2), 
+only screen and (min-resolution: 192dpi) {
+	.block-quote, .block-quote-alt {
+		&:before {
+			background: url(../images/quote@2x.png) transparent no-repeat 4px 3px;
+			background-size: 46px;
+		}
+		a, span {
+			&:before, &:after {
+				background: url(../images/quote@2x.png) transparent no-repeat 0 0;
+				background-size: 46px;
+			}
+			&:after { background-position: -24px 0;}
+		}
+	}
+	.polygraph-list-before .block-quote-alt:after {
+		background: url(../images/quote@2x.png) transparent no-repeat -24px 3px;
+		background-size: 46px;
+	}
+} 
 
 .statement-meta {
 	border-bottom: 2px solid #D8D8D8;
@@ -707,6 +740,22 @@ input + .errors{
 	}
 }
 
+/*
+ *  Polygraph List Before Style.
+ */
+.polygraph-list-before {
+	width: 100%;
+	.block-content { overflow: hidden; }
+	span {
+		margin-bottom: 10px;
+		display: block;
+	}
+	.desc {
+	    margin-top: 20px;
+	    padding-left: 55px;
+	}
+}
+
 @media (max-width: 480px) {
 	.polygraph-list.single {
 		.polygraph-list-before {
@@ -722,6 +771,7 @@ input + .errors{
 			.meter-image { margin-top: 20px; }
 		}
 	}		
+	.polygraph-list-before .desc { padding-left: 15px;}
 }
 
 .polygraph-list {
@@ -766,22 +816,6 @@ input + .errors{
 	right: 0;
 	.btn {
 		@include border-radius(0);
-	}
-}
-
-/*
- *  Polygraph List Before Style.
- */
-.polygraph-list-before {
-	width: 100%;
-	.block-content { overflow: hidden; }
-	span {
-		margin-bottom: 10px;
-		display: block;
-	}
-	.desc {
-	    margin-top: 20px;
-	    padding-left: 55px;
 	}
 }
 
