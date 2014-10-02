@@ -235,6 +235,7 @@ ul.tagit li.tagit-choice .tagit-close {
 	background-color: transparent;
 	p { display: inline; color: #999; }
 	> li { display: inline;}
+	p strong { font-weight: normal;}
 }
 
 .pagination {
@@ -744,12 +745,12 @@ input + .errors{
 	}
 }
 .polygraph-list.statement-list {
+	h3 { line-height: 35px;}
 	.block-content {
 		position: initial;
 		.quote {
 			font-size: 18px;
 		}
-
 	}
 }
 
@@ -799,6 +800,7 @@ input + .errors{
 }
 
 footer {
+	clear: both;
   height: 60px;
   background-color: $logo-img-background;
   .container { margin-bottom: 0; }
@@ -1529,7 +1531,8 @@ td.meter {
 
 /* Media Query block margin-top*/
 @media (max-width: 991px) {
-	aside .people-list {
-		margin-top: 50px;
-	}
+	aside .people-list { margin-top: 50px;}
+	aside .tag-list { margin-bottom: 10px;}
+	aside .filter-by-status { margin-top: 30px;}
+	aside .about-statement { margin-bottom: 40px;}
 } 
