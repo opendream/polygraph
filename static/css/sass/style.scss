@@ -601,13 +601,13 @@ input + .errors{
 .block-quote,
 .block-quote-alt {
 	strong { font-size: 1.25em; font-weight: normal; }
-  a, span { position: relative; }
 	position: relative;
 	display: block;
 	border-left: 0;
 	padding: 0px 30px 0 35px;
 	margin: 12px 10px 30px 10px;
 	word-wrap: break-word;
+  a, span { position: relative; }
 	&:before,
 	a:after,
   span:after {
@@ -621,8 +621,7 @@ input + .errors{
 	&:before {
 		top: 0; left: 0;
 	}
-	a:after,
-  span:after {
+	a:after {
 		background-position: -23px 0;
 		bottom: 0;
     right: 0;
@@ -646,15 +645,8 @@ input + .errors{
 	font-size: 3.5em;
 	font-weight: bold;
 	line-height: 1.38em;
-  &:after {
-    content: "";
-    width: 23px;
-    height: 18px;
-    background: url(../images/quote.png) transparent no-repeat -23px 0;
-    position: absolute;
-    z-index: 1;
-    top: 0;
-    right: 0;
+	&:after {
+		top: 0; right: 0;
 	}	
 }
 @media (max-width: 992px) {
