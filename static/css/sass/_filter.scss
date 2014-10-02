@@ -47,7 +47,7 @@ $logo-img-background : #A97C50;
     color: $text_normal;
     font-size: 1.2em;
     font-weight: normal;
-    padding: 5px 20px;
+    padding: 7px 20px 2px;
   }
 }
 @media (max-width: 767px) {
@@ -189,4 +189,5 @@ $logo-img-background : #A97C50;
 /* Chrome Browser  */
 @media screen and (-webkit-min-device-pixel-ratio:0) {
 	.select-meter .show-as-list .btn { padding: 8px 12px;}
+	.select-meter .show-as-pill li a { padding: 5px 20px;}
 }
