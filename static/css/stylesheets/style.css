@@ -219,8 +219,7 @@
   }
 
   /* line 195, ../sass/_filter.scss */
-  .select-meter .show-as-list li a {
-    vertical-align: middle;
+  .select-meter .show-as-pill li a {
     padding: 0 20px;
   }
 }
