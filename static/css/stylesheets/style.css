@@ -51,26 +51,28 @@
   font-weight: normal;
   padding: 7px 20px 2px;
   height: 37px;
+  display: table-cell;
+  vertical-align: middle;
 }
 
 @media (max-width: 767px) {
-  /* line 55, ../sass/_filter.scss */
+  /* line 57, ../sass/_filter.scss */
   .select-meter .pill-to-list {
     margin-top: 5px;
   }
 }
 @media (max-width: 600px) {
-  /* line 61, ../sass/_filter.scss */
+  /* line 63, ../sass/_filter.scss */
   .select-meter .pill-to-list li {
     float: none;
   }
 }
-/* line 67, ../sass/_filter.scss */
+/* line 69, ../sass/_filter.scss */
 .select-meter .show-as-list {
   width: 200px;
   margin-bottom: 15px;
 }
-/* line 70, ../sass/_filter.scss */
+/* line 72, ../sass/_filter.scss */
 .select-meter .show-as-list .btn {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
@@ -90,7 +92,7 @@
   font-size: 1.2em;
   height: 46px;
 }
-/* line 83, ../sass/_filter.scss */
+/* line 85, ../sass/_filter.scss */
 .select-meter .show-as-list .btn.over
 .caret {
   position: absolute;
@@ -101,7 +103,7 @@
   border-right: 5px solid transparent;
   border-left: 5px solid transparent;
 }
-/* line 94, ../sass/_filter.scss */
+/* line 96, ../sass/_filter.scss */
 .select-meter .show-as-list .dropdown-menu {
   width: 100%;
   right: 0;
@@ -116,51 +118,51 @@
   -o-border-radius: 0;
   border-radius: 0;
 }
-/* line 103, ../sass/_filter.scss */
+/* line 105, ../sass/_filter.scss */
 .select-meter .show-as-list .dropdown-menu li a {
   padding: 5px 12px;
   white-space: normal;
   font-family: "Boon-0.6";
 }
-/* line 107, ../sass/_filter.scss */
+/* line 109, ../sass/_filter.scss */
 .select-meter .show-as-list .dropdown-menu li a:hover {
   background-color: #a97c50;
   color: #FFF;
 }
-/* line 112, ../sass/_filter.scss */
+/* line 114, ../sass/_filter.scss */
 .select-meter .show-as-list .dropdown-menu li.active a {
   background-color: #a97c50;
   color: #FFF;
 }
 
-/* line 124, ../sass/_filter.scss */
+/* line 126, ../sass/_filter.scss */
 .filter-header .page-title {
   width: 41.66666667%;
   min-width: 200px;
   float: left;
 }
-/* line 129, ../sass/_filter.scss */
+/* line 131, ../sass/_filter.scss */
 .filter-header .polygraph-list .select-meter {
   margin-top: 0;
 }
-/* line 132, ../sass/_filter.scss */
+/* line 134, ../sass/_filter.scss */
 .filter-header .polygraph-list .select-meter.right-sidebar {
   margin-top: 15px;
 }
 
 @media (max-width: 768px) {
-  /* line 138, ../sass/_filter.scss */
+  /* line 140, ../sass/_filter.scss */
   .filter-header .page-title {
     width: 40%;
   }
 
-  /* line 142, ../sass/_filter.scss */
+  /* line 144, ../sass/_filter.scss */
   .filter-header .polygraph-list .select-meter {
     margin-top: 15px;
   }
 }
 @media (max-width: 520px) {
-  /* line 150, ../sass/_filter.scss */
+  /* line 152, ../sass/_filter.scss */
   .filter-header .select-meter,
   .filter-header .select-meter .show-as-list,
   .people-list .select-meter .show-as-list,
@@ -169,41 +171,41 @@
     margin-top: 0;
   }
 
-  /* line 154, ../sass/_filter.scss */
+  /* line 156, ../sass/_filter.scss */
   .filter-header .polygraph-list .select-meter {
     margin-top: 0;
   }
 }
-/* line 161, ../sass/_filter.scss */
+/* line 163, ../sass/_filter.scss */
 .people-list {
   position: relative;
 }
-/* line 163, ../sass/_filter.scss */
+/* line 165, ../sass/_filter.scss */
 .people-list .select-meter {
   margin-top: -60px;
 }
-/* line 166, ../sass/_filter.scss */
+/* line 168, ../sass/_filter.scss */
 .people-list .full-page {
   width: 100%;
   overflow: hidden;
 }
-/* line 170, ../sass/_filter.scss */
+/* line 172, ../sass/_filter.scss */
 .people-list .pull-left {
   margin-right: 20px;
   height: 122px;
   overflow: hidden;
 }
-/* line 174, ../sass/_filter.scss */
+/* line 176, ../sass/_filter.scss */
 .people-list .media-body h3 {
   margin-top: 0;
 }
-/* line 176, ../sass/_filter.scss */
+/* line 178, ../sass/_filter.scss */
 .people-list ul.list-unstyled li {
   margin-bottom: 15px;
 }
 
 @media (max-width: 520px) {
-  /* line 183, ../sass/_filter.scss */
+  /* line 185, ../sass/_filter.scss */
   .people-list .select-meter {
     width: 100%;
     margin-top: 0;
@@ -211,14 +213,15 @@
 }
 /* Chrome Browser  */
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
-  /* line 192, ../sass/_filter.scss */
+  /* line 194, ../sass/_filter.scss */
   .select-meter .show-as-list .btn {
     padding: 8px 12px;
   }
 
-  /* line 193, ../sass/_filter.scss */
-  .select-meter .show-as-pill li a {
-    padding: 6px 20px;
+  /* line 195, ../sass/_filter.scss */
+  .select-meter .show-as-list li a {
+    vertical-align: middle;
+    padding: 0 20px;
   }
 }
 @font-face {

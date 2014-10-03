@@ -48,7 +48,9 @@ $logo-img-background : #A97C50;
     font-size: 1.2em;
     font-weight: normal;
     padding: 7px 20px 2px;
-    height: 37px;
+		height: 37px;
+		display: table-cell;
+		vertical-align: middle;
   }
 }
 @media (max-width: 767px) {
@@ -190,5 +192,8 @@ $logo-img-background : #A97C50;
 /* Chrome Browser  */
 @media screen and (-webkit-min-device-pixel-ratio:0) {
 	.select-meter .show-as-list .btn { padding: 8px 12px;}
-	.select-meter .show-as-pill li a { padding: 6px 20px;}
+	.select-meter .show-as-list li a {
+		vertical-align: middle;
+		padding: 0 20px;
+	}
 }
