@@ -740,7 +740,7 @@ def sortable_update(request, Inst, redirect_url_name):
             order = int(value)
             inst = Inst.objects.get(id=id)
             inst.order = order
-            
+
             try:
                 inst.save(not_changed=True)
             except TypeError:
