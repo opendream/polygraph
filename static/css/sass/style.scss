@@ -100,9 +100,6 @@ p.border-bt {
 .text-brown,
 .text-brown p { color: $text_brown; }
 
-.see-all {
-  z-index: -1;
-}
 .see-all a { 
   color: $text_brown;
   &:hover {
@@ -237,6 +234,8 @@ ul.tagit li.tagit-choice .tagit-close {
 	padding: 0;
 	background-color: transparent;
 	p { display: inline; color: #999; }
+	> li { display: inline;}
+	p strong { font-weight: normal;}
 }
 
 .pagination {
@@ -607,7 +606,7 @@ input + .errors{
 	padding: 0px 30px 0 35px;
 	margin: 12px 10px 30px 10px;
 	word-wrap: break-word;
-  a, span { position: relative; }
+  a, span { position: relative; display: inline-block;}
 	&:before,
 	a:after,
   span:after {
@@ -621,12 +620,12 @@ input + .errors{
 	&:before {
 		top: 0; left: 0;
 	}
-	a:after {
+	a:after, span:after {
 		background-position: -23px 0;
 		bottom: 0;
-    right: 0;
     display: inline-block;
     margin-right: -33px;
+    margin-left: 5px;
 	}
 }
 .updated,
@@ -649,6 +648,17 @@ input + .errors{
 		top: 0; right: 0;
 	}	
 }
+
+.polygraph-list-before {
+	.block-quote-alt:after {
+		content: "";
+		width: 23px;
+		height: 18px;
+		background: url(../images/quote.png) transparent no-repeat -23px 0;
+		position: absolute;
+	}
+}
+
 @media (max-width: 992px) {
 	.block-quote-alt {
 		max-width: 100%;
@@ -658,6 +668,28 @@ input + .errors{
 @media (max-width: 560px) {
 	.block-quote-alt { font-size: 2.8em; }
 }
+
+@media 
+only screen and (-webkit-min-device-pixel-ratio: 2), 
+only screen and (min-resolution: 192dpi) {
+	.block-quote, .block-quote-alt {
+		&:before {
+			background: url(../images/quote@2x.png) transparent no-repeat 4px 3px;
+			background-size: 46px;
+		}
+		a, span {
+			&:before, &:after {
+				background: url(../images/quote@2x.png) transparent no-repeat 0 0;
+				background-size: 46px;
+			}
+			&:after { background-position: -24px 0;}
+		}
+	}
+	.polygraph-list-before .block-quote-alt:after {
+		background: url(../images/quote@2x.png) transparent no-repeat -24px 3px;
+		background-size: 46px;
+	}
+} 
 
 .statement-meta {
 	border-bottom: 2px solid #D8D8D8;
@@ -708,6 +740,22 @@ input + .errors{
 	}
 }
 
+/*
+ *  Polygraph List Before Style.
+ */
+.polygraph-list-before {
+	width: 100%;
+	.block-content { overflow: hidden; }
+	span {
+		margin-bottom: 10px;
+		display: block;
+	}
+	.desc {
+	    margin-top: 20px;
+	    padding-left: 55px;
+	}
+}
+
 @media (max-width: 480px) {
 	.polygraph-list.single {
 		.polygraph-list-before {
@@ -723,6 +771,7 @@ input + .errors{
 			.meter-image { margin-top: 20px; }
 		}
 	}		
+	.polygraph-list-before .desc { padding-left: 15px;}
 }
 
 .polygraph-list {
@@ -746,12 +795,12 @@ input + .errors{
 	}
 }
 .polygraph-list.statement-list {
+	h3 { line-height: 35px;}
 	.block-content {
 		position: initial;
 		.quote {
 			font-size: 18px;
 		}
-
 	}
 }
 
@@ -770,25 +819,6 @@ input + .errors{
 	}
 }
 
-/*
- *  Polygraph List Before Style.
- */
-.polygraph-list-before {
-	width: 100%;
-	.block-content { overflow: hidden; }
-	span {
-		margin-bottom: 10px;
-		display: block;
-	}
-	.desc {
-	    margin-top: 20px;
-	    padding-left: 55px;
-	}
-}
-// @media (max-width: 991px) {
-// 	.polygraph-list-before .desc { padding: 0; }
-// }
-
 // ###########################
 
 .about-statement {
@@ -804,6 +834,7 @@ input + .errors{
 }
 
 footer {
+	clear: both;
   height: 60px;
   background-color: $logo-img-background;
   .container { margin-bottom: 0; }
@@ -1530,4 +1561,23 @@ td.meter {
     .changed td, .changed input {
         background-color: #FFEECC !important;
     }
+}
+
+/* Media Query block margin-top*/
+@media (max-width: 991px) {
+	aside .people-list { margin-top: 50px;}
+	aside .tag-list { margin-bottom: 10px;}
+	aside .filter-by-status { margin-top: 30px;}
+	aside .about-statement { margin-bottom: 40px;}
+} 
+
+/* Chrome Browser  */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	.block-quote {
+		a, span { display: inline;}
+		a:after, span:after {
+			right: 0;
+			margin-left: 10px;
+		}
+	} 
 }

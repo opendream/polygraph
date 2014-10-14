@@ -42,11 +42,15 @@ $logo-img-background : #A97C50;
     margin-left: 10px;
   }
   li a {
+    @include border-radius(20px);
+    @include box-sizing(border-box);
     color: $text_normal;
     font-size: 1.2em;
     font-weight: normal;
-    @include border-radius(20px);
-    padding: 5px 20px;
+    padding: 7px 20px 2px;
+		height: 37px;
+		display: table-cell;
+		vertical-align: middle;
   }
 }
 @media (max-width: 767px) {
@@ -66,15 +70,17 @@ $logo-img-background : #A97C50;
   width: 200px;
   margin-bottom: 15px;
   .btn {
+    @include border-radius(0);
+    @include box-sizing(border-box);
     width: 100%;
     text-align: left;
     white-space: normal;
     background-color: #f4f4f4;
     border-color: #CCC;
-    padding: 8px 12px;
+    padding: 10px 12px;
     font-family: "Boon-0.6";
     font-size: 1.2em;
-    @include border-radius(0);
+    height: 46px;
     &.over 
     .caret {
       position: absolute;
@@ -147,6 +153,7 @@ $logo-img-background : #A97C50;
         width: 100%;
         margin-top: 0;
     }
+    .filter-header .polygraph-list .select-meter { margin-top: 0;}
 }
 
 // ##############################
@@ -180,4 +187,12 @@ $logo-img-background : #A97C50;
         margin-top: 0;
     }
   }
+}
+
+/* Chrome Browser  */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	.select-meter .show-as-list .btn { padding: 8px 12px;}
+	.select-meter .show-as-pill li a {
+		padding: 3px 20px 0;
+	}
 }
