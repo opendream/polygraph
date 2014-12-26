@@ -277,7 +277,7 @@ STATICFILES_FINDERS = (
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-COMPRESS_ENABLED = True
+COMPRESS_ENABLED = False
 #COMPRESS_OFFLINE = True
 
 COMPRESS_CSS_FILTERS = [

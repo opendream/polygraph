@@ -574,6 +574,9 @@ def statement_create(request, statement=None):
                 statement.relate_peoples.add(relate_people)
 
             message_success = get_success_message(statement, is_new)
+            
+            current_url = request.build_absolute_uri(reverse('statement_detail', args=[statement.permalink]))
+            message_success += '<script type="text/javascript">$.post("https://graph.facebook.com", {id:"%s", scrape: true});</script>' % current_url
 
             if request.GET.get('_popup'):
                 message_success = '<script type="text/javascript"> opener.dismissAddAnotherPopup(window, \'%s\', \'%s\'); </script>' % (statement.id, statement_render_reference(statement))
